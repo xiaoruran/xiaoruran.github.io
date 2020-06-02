@@ -71,7 +71,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.2k</span>
+            <span class="post-count">1.3k</span>
         </span>
     </span>
 
@@ -105,7 +105,7 @@
       
 
       
-      <p>[TOC]</p>
+      <p>[TOC]<br>由于hexo采用的编辑器不同，里面的两个大括号我都用一个代替</p>
 <h3 id="之前学的总结"><a href="#之前学的总结" class="headerlink" title="之前学的总结"></a>之前学的总结</h3><ul>
 <li><p>如何定义一个Vue代码结构</p>
 </li>
@@ -149,10 +149,10 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;v-model 不需要像v-bind一样 v-bind:value=&quot;msg&quot;</span><br><span class="line">+ v-model既可以实现从M自动绑定到V，也可以实现从V自动绑定到M中</span><br><span class="line">&gt; 注意：只能运用到表单元素中 表单元素有： input(radio、text、address、email) select checkbox textarea等</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### Javascript中的eval(String)方法</span><br><span class="line">+ 投机取巧方式，正式开发中尽量少用</span><br><span class="line">+ 参数是一个字符串</span><br><span class="line">+ 该函数的执行过程是解析字符串的过程</span><br><span class="line">+ 返回结果是解析字符串并计算相应的语句，返回一个值（如果有的话）</span><br></pre></td></tr></table></figure>
 
 <p>   var result=eval(‘3’+’*’+’5’)<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   &gt;执行结果是 result=15</span><br><span class="line"></span><br><span class="line">### Vue指令之v-for</span><br><span class="line">   + 循环遍历普通数组</span><br></pre></td></tr></table></figure></p>
-<pre><code>&lt;li v-for=&quot;item in list&quot;&gt;{% raw %}{{item}}{% endraw %}&lt;/li&gt;
+<pre><code>&lt;li v-for=&quot;item in list&quot;&gt;{item}&lt;/li&gt;
 data:{list:[1,2,3,4,5]}</code></pre>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 若要拿到索引,则： v-for=&quot;(item,index) in list&quot; 此时的index为for循环的索引</span><br><span class="line">+ 循环遍历对象数组</span><br></pre></td></tr></table></figure>
 
-   <li v-for="item in objlist">{{item.id}}+{{item.name}}</li>
+   <li v-for="item in objlist">{item.id}+{item.name}</li>
     data:{
         objlist:[
             {id:1,name:'xixi'},
@@ -161,7 +161,7 @@ data:{list:[1,2,3,4,5]}</code></pre>   <figure class="highlight plain"><table><t
     }
    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ 遍历对象</span><br></pre></td></tr></table></figure>
 
-   <li v-for="(val,key) in obj">{{val} + {% raw %}{{key}}{% endraw %}}</li>
+   <li v-for="(val,key) in obj">{val} +{key}</li>
    data:{
        obj:{
            id:1,
@@ -171,11 +171,11 @@ data:{list:[1,2,3,4,5]}</code></pre>   <figure class="highlight plain"><table><t
    }
    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 注意：在遍历对象身上的（val，key）时，再第三个位置还有一个索引， 索引永远在最后一位 例如（val,key，index）,(item,index)，索引用的不多</span><br><span class="line">+ 迭代数字</span><br></pre></td></tr></table></figure>
 
-   <li v-for="count in 10">{% raw %}{{count}}{% endraw %}</li>
+   <li v-for="count in 10">{count}</li>
    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   &gt; 可以直接循环迭代数字，直接将数字写在in后面，表示迭代多少次 从1开始</span><br><span class="line">### v-for使用注意事项</span><br><span class="line">1. 在2.2.0+的版本里，当在组件中使用v-for时或者在一些特殊情况中，如果v-for有问题，必须在使用v-for的同时，指定唯一的number或者string类型的:key值。种种情况下，`key`是必须的</span><br></pre></td></tr></table></figure>
 
   <li v-for="item in objlist" v-bind:key="item.id">
-    {% raw %}{{item.id}}{% endraw %}+ {% raw %}{{item.name}}{% endraw %}
+   {item.id}+ {item.name}
   </li>
    data:{
         objlist:[

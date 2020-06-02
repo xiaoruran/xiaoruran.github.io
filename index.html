@@ -152,7 +152,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 :style=&quot;&#123;color:&apos;red&apos;,&apos;font-size&apos;:200px&#125;&quot;&gt;这是一个标题&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>将样式对像，定义到data中，并直接应用到:style中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 :style=&quot;Objstyle&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  data:&#123;Objstyle:&#123;color:&apos;red&apos;,&apos;font-size&apos;:200px&#123;% raw %&#125;&#125;&#125;&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 :style=&quot;Objstyle&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  data:&#123;Objstyle:&#123;color:&apos;red&apos;,&apos;font-size&apos;:200px&#125;</span><br></pre></td></tr></table></figure>
 
 
 </li>
@@ -228,7 +228,7 @@
       
 
       
-      <p>[TOC]</p>
+      <p>[TOC]<br>由于hexo采用的编辑器不同，里面的两个大括号我都用一个代替</p>
 <h3 id="之前学的总结"><a href="#之前学的总结" class="headerlink" title="之前学的总结"></a>之前学的总结</h3><ul>
 <li><p>如何定义一个Vue代码结构</p>
 </li>
@@ -272,10 +272,10 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;v-model 不需要像v-bind一样 v-bind:value=&quot;msg&quot;</span><br><span class="line">+ v-model既可以实现从M自动绑定到V，也可以实现从V自动绑定到M中</span><br><span class="line">&gt; 注意：只能运用到表单元素中 表单元素有： input(radio、text、address、email) select checkbox textarea等</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### Javascript中的eval(String)方法</span><br><span class="line">+ 投机取巧方式，正式开发中尽量少用</span><br><span class="line">+ 参数是一个字符串</span><br><span class="line">+ 该函数的执行过程是解析字符串的过程</span><br><span class="line">+ 返回结果是解析字符串并计算相应的语句，返回一个值（如果有的话）</span><br></pre></td></tr></table></figure>
 
 <p>   var result=eval(‘3’+’*’+’5’)<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   &gt;执行结果是 result=15</span><br><span class="line"></span><br><span class="line">### Vue指令之v-for</span><br><span class="line">   + 循环遍历普通数组</span><br></pre></td></tr></table></figure></p>
-<pre><code>&lt;li v-for=&quot;item in list&quot;&gt;{% raw %}{{item}}{% endraw %}&lt;/li&gt;
+<pre><code>&lt;li v-for=&quot;item in list&quot;&gt;{item}&lt;/li&gt;
 data:{list:[1,2,3,4,5]}</code></pre>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 若要拿到索引,则： v-for=&quot;(item,index) in list&quot; 此时的index为for循环的索引</span><br><span class="line">+ 循环遍历对象数组</span><br></pre></td></tr></table></figure>
 
-   <li v-for="item in objlist">{{item.id}}+{{item.name}}</li>
+   <li v-for="item in objlist">{item.id}+{item.name}</li>
     data:{
         objlist:[
             {id:1,name:'xixi'},
@@ -284,7 +284,7 @@ data:{list:[1,2,3,4,5]}</code></pre>   <figure class="highlight plain"><table><t
     }
    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ 遍历对象</span><br></pre></td></tr></table></figure>
 
-   <li v-for="(val,key) in obj">{{val} + {% raw %}{{key}}{% endraw %}}</li>
+   <li v-for="(val,key) in obj">{val} +{key}</li>
    data:{
        obj:{
            id:1,
@@ -294,11 +294,11 @@ data:{list:[1,2,3,4,5]}</code></pre>   <figure class="highlight plain"><table><t
    }
    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 注意：在遍历对象身上的（val，key）时，再第三个位置还有一个索引， 索引永远在最后一位 例如（val,key，index）,(item,index)，索引用的不多</span><br><span class="line">+ 迭代数字</span><br></pre></td></tr></table></figure>
 
-   <li v-for="count in 10">{% raw %}{{count}}{% endraw %}</li>
+   <li v-for="count in 10">{count}</li>
    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   &gt; 可以直接循环迭代数字，直接将数字写在in后面，表示迭代多少次 从1开始</span><br><span class="line">### v-for使用注意事项</span><br><span class="line">1. 在2.2.0+的版本里，当在组件中使用v-for时或者在一些特殊情况中，如果v-for有问题，必须在使用v-for的同时，指定唯一的number或者string类型的:key值。种种情况下，`key`是必须的</span><br></pre></td></tr></table></figure>
 
   <li v-for="item in objlist" v-bind:key="item.id">
-    {% raw %}{{item.id}}{% endraw %}+ {% raw %}{{item.name}}{% endraw %}
+   {item.id}+ {item.name}
   </li>
    data:{
         objlist:[
@@ -519,105 +519,6 @@ data:{list:[1,2,3,4,5]}</code></pre>   <figure class="highlight plain"><table><t
 
 </article>
     
-    <article id="post-第一个博客" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2019/07/19/第一个博客/"
-    >搭建hexo博客</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2019/07/19/第一个博客/" class="article-date">
-  <time datetime="2019-07-18T20:19:27.000Z" itemprop="datePublished">2019-07-18</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <h3 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h3><h4 id="步骤1-搭建各种电脑环境"><a href="#步骤1-搭建各种电脑环境" class="headerlink" title="*步骤1 搭建各种电脑环境"></a>*步骤1 搭建各种电脑环境</h4><blockquote>
-<p>第一步<br>   <strong>* 1 下载nodejs 可能会添加环境变量<br>第二步<br>   *</strong> 2 下载git 并搭建git环境（并将git的bin加入环境变量path中）</p>
-</blockquote>
-<blockquote>
-<p>第三步<br>   *** 3 创建github账户 并创建一个仓库 并命名为自己的 用户名+github.io（必须要这个名字）</p>
-</blockquote>
-<blockquote>
-<p>第四步<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh #检查本机已存在的ssh密钥</span><br><span class="line"> 如果提示No such file or directory 说明是第一次用git</span><br><span class="line">  ssh-keygen -t rsa -C &quot;邮件地址&quot;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>   连续三次回车 会生成 </p>
-<blockquote>
-<p>C:\Users\ASUS.ssh\id_rsa.pub<br>   打开这个文件 复制全部内容<br>第五步<br>打开github主页 在右上方找到setting，在其中找到SSH and GPG keys -&gt; New SSH key，将内容复制进去<br>第六步（测试是否成功）<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com <span class="comment"># 注意邮箱地址不用改</span></span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p> 若提示—&gt; Hi xiaoruran! You’ve successfully authenticated, but GitHub does not provide shell access. 说明SSH配置成功</p>
-<blockquote>
-<p>第七步（配置git的个人信息）<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"xiaoruran"</span>// 你的github用户名，非昵称</span><br><span class="line">git config --global user.email  <span class="string">"xxx@qq.com"</span>// 填写你的github注册邮箱</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>第八步 hexo的相关操作<br>   ***下载hexo </p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo</span><br></pre></td></tr></table></figure>
-
-<p> *** 初始化<br>   在电脑中创建一个目录 作为你的站点目录<br>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br><span class="line">hexo g <span class="comment">#生成</span></span><br><span class="line">hexo s <span class="comment">#启动服务（一般默认是4000端口）</span></span><br><span class="line">hexo s -p 5000 <span class="comment">#将默认端口改为5000</span></span><br></pre></td></tr></table></figure></p>
-<p> ***上传到github<br>  配置主目录底下的_config.yml中的deploy部分<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repository: git@github.com:xiaoruran/xiaoruran.github.io.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure></p>
-<p>  ***可能要下载一个插件<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>第九步 （写自己的博客）<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &apos;my-first-blog&apos;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>第十步 （修改配置文件 达到自己的效果 也可以更换主题）</p>
-</blockquote>
-<p>[参考链接]<br>（<a href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html" target="_blank" rel="noopener">https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html</a> ）<br>（<a href="https://blog.csdn.net/gsl9d1p04f6x2ts3c9/article/details/81024330" target="_blank" rel="noopener">https://blog.csdn.net/gsl9d1p04f6x2ts3c9/article/details/81024330</a> ）<br>（<a href="https://www.cnblogs.com/trista222/p/8017300.html）" target="_blank" rel="noopener">https://www.cnblogs.com/trista222/p/8017300.html）</a></p>
-
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/idea/">idea</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/think/">think</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-  
-  
-
-</article>
-    
     <article id="post-vue简介笔记" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -708,6 +609,105 @@ data:{list:[1,2,3,4,5]}</code></pre>   <figure class="highlight plain"><table><t
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-第一个博客" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2019/07/19/第一个博客/"
+    >搭建hexo博客</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2019/07/19/第一个博客/" class="article-date">
+  <time datetime="2019-07-18T20:19:27.000Z" itemprop="datePublished">2019-07-18</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h3 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h3><h4 id="步骤1-搭建各种电脑环境"><a href="#步骤1-搭建各种电脑环境" class="headerlink" title="*步骤1 搭建各种电脑环境"></a>*步骤1 搭建各种电脑环境</h4><blockquote>
+<p>第一步<br>   <strong>* 1 下载nodejs 可能会添加环境变量<br>第二步<br>   *</strong> 2 下载git 并搭建git环境（并将git的bin加入环境变量path中）</p>
+</blockquote>
+<blockquote>
+<p>第三步<br>   *** 3 创建github账户 并创建一个仓库 并命名为自己的 用户名+github.io（必须要这个名字）</p>
+</blockquote>
+<blockquote>
+<p>第四步<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh #检查本机已存在的ssh密钥</span><br><span class="line"> 如果提示No such file or directory 说明是第一次用git</span><br><span class="line">  ssh-keygen -t rsa -C &quot;邮件地址&quot;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>   连续三次回车 会生成 </p>
+<blockquote>
+<p>C:\Users\ASUS.ssh\id_rsa.pub<br>   打开这个文件 复制全部内容<br>第五步<br>打开github主页 在右上方找到setting，在其中找到SSH and GPG keys -&gt; New SSH key，将内容复制进去<br>第六步（测试是否成功）<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com <span class="comment"># 注意邮箱地址不用改</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p> 若提示—&gt; Hi xiaoruran! You’ve successfully authenticated, but GitHub does not provide shell access. 说明SSH配置成功</p>
+<blockquote>
+<p>第七步（配置git的个人信息）<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"xiaoruran"</span>// 你的github用户名，非昵称</span><br><span class="line">git config --global user.email  <span class="string">"xxx@qq.com"</span>// 填写你的github注册邮箱</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>第八步 hexo的相关操作<br>   ***下载hexo </p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo</span><br></pre></td></tr></table></figure>
+
+<p> *** 初始化<br>   在电脑中创建一个目录 作为你的站点目录<br>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br><span class="line">hexo g <span class="comment">#生成</span></span><br><span class="line">hexo s <span class="comment">#启动服务（一般默认是4000端口）</span></span><br><span class="line">hexo s -p 5000 <span class="comment">#将默认端口改为5000</span></span><br></pre></td></tr></table></figure></p>
+<p> ***上传到github<br>  配置主目录底下的_config.yml中的deploy部分<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repository: git@github.com:xiaoruran/xiaoruran.github.io.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure></p>
+<p>  ***可能要下载一个插件<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>第九步 （写自己的博客）<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &apos;my-first-blog&apos;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>第十步 （修改配置文件 达到自己的效果 也可以更换主题）</p>
+</blockquote>
+<p>[参考链接]<br>（<a href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html" target="_blank" rel="noopener">https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html</a> ）<br>（<a href="https://blog.csdn.net/gsl9d1p04f6x2ts3c9/article/details/81024330" target="_blank" rel="noopener">https://blog.csdn.net/gsl9d1p04f6x2ts3c9/article/details/81024330</a> ）<br>（<a href="https://www.cnblogs.com/trista222/p/8017300.html）" target="_blank" rel="noopener">https://www.cnblogs.com/trista222/p/8017300.html）</a></p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/idea/">idea</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/think/">think</a></li></ul>
 
 
     </footer>
