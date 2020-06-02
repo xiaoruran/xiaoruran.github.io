@@ -19,6 +19,46 @@
 ]]></content>
   </entry>
   <entry>
+    <title>博客Markdown的写法</title>
+    <url>/2020/01/17/my-second-blog/</url>
+    <content><![CDATA[<h4 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h4><pre><code># 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+注意：#后面要加空格 一级标题下面有一条横线 正常是需要闭合的这些标签</code></pre><h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><ul>
+<li><p>无序列表</p>
+<blockquote>
+<p>* 1<br>* 2<br>* 3<br>* 4</p>
+<blockquote>
+<p>注意 在*后面也要一个空格 用在线编辑器看实际上是转换承了 ul&gt;li</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p>有序列表</p>
+<blockquote>
+<ol>
+<li>列表一</li>
+<li>列表二</li>
+<li>列表三<blockquote>
+<p>注意：数字后面必须是英文的点，有序列表的序号是根据第一行列表的数字顺序来的</p>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p>比如说，你想对某个部分的内容做一些说明或者引用等，可以使用&gt;<br>‘&gt;’</p>
+<h4 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h4><p>使用四个缩进空格 表示代码块</p>
+<h4 id="加强的代码块"><a href="#加强的代码块" class="headerlink" title="加强的代码块"></a>加强的代码块</h4><p>支持四十一种编程语言的语法高亮显示，行号显示，使用&lt;!–￼0–&gt;</p>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>步骤</tag>
+        <tag>语法</tag>
+        <tag>方法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>第一个博客（心得体会）</title>
     <url>/2019/07/19/%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h3 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h3><h4 id="步骤1-搭建各种电脑环境"><a href="#步骤1-搭建各种电脑环境" class="headerlink" title="*步骤1 搭建各种电脑环境"></a>*步骤1 搭建各种电脑环境</h4><blockquote>
@@ -57,46 +97,6 @@
       <tags>
         <tag>think</tag>
         <tag>idea</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>博客Markdown的写法</title>
-    <url>/2020/01/17/my-second-blog/</url>
-    <content><![CDATA[<h4 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h4><pre><code># 一级标题
-## 二级标题
-### 三级标题
-#### 四级标题
-##### 五级标题
-注意：#后面要加空格 一级标题下面有一条横线 正常是需要闭合的这些标签</code></pre><h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><ul>
-<li><p>无序列表</p>
-<blockquote>
-<p>* 1<br>* 2<br>* 3<br>* 4</p>
-<blockquote>
-<p>注意 在*后面也要一个空格 用在线编辑器看实际上是转换承了 ul&gt;li</p>
-</blockquote>
-</blockquote>
-</li>
-<li><p>有序列表</p>
-<blockquote>
-<ol>
-<li>列表一</li>
-<li>列表二</li>
-<li>列表三<blockquote>
-<p>注意：数字后面必须是英文的点，有序列表的序号是根据第一行列表的数字顺序来的</p>
-</blockquote>
-</li>
-</ol>
-</blockquote>
-<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p>比如说，你想对某个部分的内容做一些说明或者引用等，可以使用&gt;<br>‘&gt;’</p>
-<h4 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h4><p>使用四个缩进空格 表示代码块</p>
-<h4 id="加强的代码块"><a href="#加强的代码块" class="headerlink" title="加强的代码块"></a>加强的代码块</h4><p>支持四十一种编程语言的语法高亮显示，行号显示，使用&lt;!–￼0–&gt;</p>
-</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>步骤</tag>
-        <tag>语法</tag>
-        <tag>方法</tag>
       </tags>
   </entry>
 </search>
