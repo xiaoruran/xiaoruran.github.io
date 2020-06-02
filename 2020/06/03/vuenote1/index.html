@@ -71,7 +71,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.3k</span>
+            <span class="post-count">1.5k</span>
         </span>
     </span>
 
@@ -80,7 +80,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">4 min</span>
+            <span class="post-count">6 min</span>
         </span>
     </span>
 </div>
@@ -122,71 +122,115 @@
 <li>程序员只需要关心数据，不需要关注如何渲染数据</li>
 </ul>
 <p>注意：在vue实例中想要调用data上的数据或调用methods上的方法，必须通过this.数据属性名或this.方法名来进行访问</p>
-<h4 id="改造箭头函数"><a href="#改造箭头函数" class="headerlink" title="改造箭头函数"></a>改造箭头函数</h4><ul>
-<li>例如<figure class="highlight plain"><figcaption><span>setInterval(()</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#### 箭头函数的作用</span><br><span class="line">+ 可以使得 内部this指向外部this</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 事件修饰符(修饰符是可以串联的)</span><br><span class="line"> + `stop` 阻止冒泡：`冒泡`是指在原生机制中由于包裹关系，最里面的触发click事件时，外面的也会触发事件</span><br></pre></td></tr></table></figure></li>
-</ul>
-<div class="box" @click="big">
-           <input type="button" value="按钮" @click.stop="small">
-</div>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    &gt;这样可以阻止原生冒泡</span><br><span class="line">+ `prevent` 事件的默认行为 使用.prevent 来阻止默认行为 默认行为有</span><br><span class="line">   1. link中的默认行为是点击跳转到链接地址</span><br><span class="line">   2. 表单中的submit默认行为是提交表单</span><br><span class="line">+ `capture` 添加事件侦听器时使用事件捕获模式 例如</span><br></pre></td></tr></table></figure>
-
-<div class="box" @click.capture="big">
-           <input type="button" value="按钮" @click="small">
-</div>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   &gt; 默认是使用冒泡模式，而一旦使用了capture就会变成从外到里开始捕获事件</span><br><span class="line">   &gt;注意：是给外层div加上.capture</span><br><span class="line"></span><br><span class="line">+ `self` 阻止冒泡或者捕获来执行的事件，只有点击当前元素时，才能触发事件处理函数，例如</span><br></pre></td></tr></table></figure>
-
-<div class="box" @click.self="big">
-           <input type="button" value="按钮" @click="small">
-</div>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">   &gt;只有点击box才能触发big事件，点击small对上层的box没有影响</span><br><span class="line">+ `once` 只能触发一次事件 例如</span><br></pre></td></tr></table></figure>
-
-<p>&lt;a href=”<a href="http://www.baidu.com&quot;" target="_blank" rel="noopener">http://www.baidu.com&quot;</a> @click.prevent.once=”linkclick”&gt;baidu</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   &gt; 结果：防止了a标签的默认事件（即进入链接地址），但由于once的存在只会阻止一次并执行一侧linkclick事件，第二次就会执行默认事件（即进入链接地址）</span><br><span class="line"></span><br><span class="line">### Vue指令之v-model</span><br><span class="line">#### `v-model`指令实现双向数据绑定</span><br><span class="line">+ 表单元素双向绑定</span><br><span class="line">+ v-bind只能绑定属性，实现数据的单向绑定（从Model自动绑定到View）</span><br></pre></td></tr></table></figure>
+<h4 id="改造箭头函数"><a href="#改造箭头函数" class="headerlink" title="改造箭头函数"></a>改造箭头函数</h4><p>例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setInterval(function()&#123;&#125;,1000)可以改造成 setInterval(()=&gt;&#123;&#125;,1000)</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<input type="text" v-model="msg">
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;v-model 不需要像v-bind一样 v-bind:value=&quot;msg&quot;</span><br><span class="line">+ v-model既可以实现从M自动绑定到V，也可以实现从V自动绑定到M中</span><br><span class="line">&gt; 注意：只能运用到表单元素中 表单元素有： input(radio、text、address、email) select checkbox textarea等</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### Javascript中的eval(String)方法</span><br><span class="line">+ 投机取巧方式，正式开发中尽量少用</span><br><span class="line">+ 参数是一个字符串</span><br><span class="line">+ 该函数的执行过程是解析字符串的过程</span><br><span class="line">+ 返回结果是解析字符串并计算相应的语句，返回一个值（如果有的话）</span><br></pre></td></tr></table></figure>
+<h4 id="箭头函数的作用"><a href="#箭头函数的作用" class="headerlink" title="箭头函数的作用"></a>箭头函数的作用</h4><ul>
+<li>可以使得 内部this指向外部this</li>
+</ul>
+<h3 id="事件修饰符-修饰符是可以串联的"><a href="#事件修饰符-修饰符是可以串联的" class="headerlink" title="事件修饰符(修饰符是可以串联的)"></a>事件修饰符(修饰符是可以串联的)</h3><ul>
+<li><p><code>stop</code> 阻止冒泡：<code>冒泡</code>是指在原生机制中由于包裹关系，最里面的触发click事件时，外面的也会触发事件</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> &lt;div class=&quot;box&quot; @click=&quot;big&quot;&gt;</span><br><span class="line">            &lt;input type=&quot;button&quot; value=&quot;按钮&quot; @click.stop=&quot;small&quot;&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 
-<p>   var result=eval(‘3’+’*’+’5’)<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   &gt;执行结果是 result=15</span><br><span class="line"></span><br><span class="line">### Vue指令之v-for</span><br><span class="line">   + 循环遍历普通数组</span><br></pre></td></tr></table></figure></p>
-<pre><code>&lt;li v-for=&quot;item in list&quot;&gt;{item}&lt;/li&gt;
-data:{list:[1,2,3,4,5]}</code></pre>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 若要拿到索引,则： v-for=&quot;(item,index) in list&quot; 此时的index为for循环的索引</span><br><span class="line">+ 循环遍历对象数组</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这样可以阻止原生冒泡</p>
+<ul>
+<li><code>prevent</code> 事件的默认行为 使用.prevent 来阻止默认行为 默认行为有</li>
+</ul>
+<ol>
+<li>link中的默认行为是点击跳转到链接地址</li>
+<li>表单中的submit默认行为是提交表单</li>
+</ol>
+<ul>
+<li><code>capture</code> 添加事件侦听器时使用事件捕获模式 例如</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;box&quot; @click.capture=&quot;big&quot;&gt;</span><br><span class="line">            &lt;input type=&quot;button&quot; value=&quot;按钮&quot; @click=&quot;small&quot;&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 
-   <li v-for="item in objlist">{item.id}+{item.name}</li>
-    data:{
-        objlist:[
-            {id:1,name:'xixi'},
-            {id:2,name:'haha'}
-        ]
-    }
-   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ 遍历对象</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>默认是使用冒泡模式，而一旦使用了capture就会变成从外到里开始捕获事件<br>注意：是给外层div加上.capture</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p><code>self</code> 阻止冒泡或者捕获来执行的事件，只有点击当前元素时，才能触发事件处理函数，例如</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;box&quot; @click.self=&quot;big&quot;&gt;</span><br><span class="line">            &lt;input type=&quot;button&quot; value=&quot;按钮&quot; @click=&quot;small&quot;&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 
-   <li v-for="(val,key) in obj">{val} +{key}</li>
-   data:{
-       obj:{
-           id:1,
-           name:'tony',
-           address:'beijing'
-       }
-   }
-   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 注意：在遍历对象身上的（val，key）时，再第三个位置还有一个索引， 索引永远在最后一位 例如（val,key，index）,(item,index)，索引用的不多</span><br><span class="line">+ 迭代数字</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>只有点击box才能触发big事件，点击small对上层的box没有影响</p>
+</blockquote>
+</li>
+<li><p><code>once</code> 只能触发一次事件 例如</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;http://www.baidu.com&quot; @click.prevent.once=&quot;linkclick&quot;&gt;baidu&lt;/a&gt;</span><br></pre></td></tr></table></figure>
 
-   <li v-for="count in 10">{count}</li>
-   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   &gt; 可以直接循环迭代数字，直接将数字写在in后面，表示迭代多少次 从1开始</span><br><span class="line">### v-for使用注意事项</span><br><span class="line">1. 在2.2.0+的版本里，当在组件中使用v-for时或者在一些特殊情况中，如果v-for有问题，必须在使用v-for的同时，指定唯一的number或者string类型的:key值。种种情况下，`key`是必须的</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>结果：防止了a标签的默认事件（即进入链接地址），但由于once的存在只会阻止一次并执行一侧linkclick事件，第二次就会执行默认事件（即进入链接地址）</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Vue指令之v-model"><a href="#Vue指令之v-model" class="headerlink" title="Vue指令之v-model"></a>Vue指令之v-model</h3><h4 id="v-model指令实现双向数据绑定"><a href="#v-model指令实现双向数据绑定" class="headerlink" title="v-model指令实现双向数据绑定"></a><code>v-model</code>指令实现双向数据绑定</h4><ul>
+<li>表单元素双向绑定</li>
+<li>v-bind只能绑定属性，实现数据的单向绑定（从Model自动绑定到View） <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;text&quot; v-model=&quot;msg&quot;&gt;</span><br></pre></td></tr></table></figure>
 
-  <li v-for="item in objlist" v-bind:key="item.id">
-   {item.id}+ {item.name}
-  </li>
-   data:{
-        objlist:[
-            {id:1,name:'xixi'},
-            {id:2,name:'haha'}
-        ]
-```
-> 需要使用`v-bind:key="item.id"`来绑定key，这样才能使得这一项是唯一确定的
->这个 key属性值只能使用number或者string,必须使用v-bind 属性绑定的形式，指定key的值
+</li>
+</ul>
+<blockquote>
+<p>v-model 不需要像v-bind一样 v-bind:value=”msg”</p>
+<ul>
+<li>v-model既可以实现从M自动绑定到V，也可以实现从V自动绑定到M中<br>注意：只能运用到表单元素中 表单元素有： input(radio、text、address、email) select checkbox textarea等</li>
+</ul>
+</blockquote>
+<h4 id="Javascript中的eval-String-方法"><a href="#Javascript中的eval-String-方法" class="headerlink" title="Javascript中的eval(String)方法"></a>Javascript中的eval(String)方法</h4><ul>
+<li><p>投机取巧方式，正式开发中尽量少用</p>
+</li>
+<li><p>参数是一个字符串</p>
+</li>
+<li><p>该函数的执行过程是解析字符串的过程</p>
+</li>
+<li><p>返回结果是解析字符串并计算相应的语句，返回一个值（如果有的话）</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var result=eval(&apos;3&apos;+&apos;*&apos;+&apos;5&apos;)</span><br></pre></td></tr></table></figure>
 
+<blockquote>
+<p>执行结果是 result=15</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Vue指令之v-for"><a href="#Vue指令之v-for" class="headerlink" title="Vue指令之v-for"></a>Vue指令之v-for</h3><ul>
+<li><p>循环遍历普通数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;li v-for=&quot;item in list&quot;&gt;&#123;item&#125;&lt;/li&gt;</span><br><span class="line">data:&#123;list:[1,2,3,4,5]&#125;</span><br></pre></td></tr></table></figure>
 
+<blockquote>
+<p>若要拿到索引,则： v-for=”(item,index) in list” 此时的index为for循环的索引</p>
+</blockquote>
+</li>
+<li><p>循环遍历对象数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;li v-for=&quot;item in objlist&quot;&gt;&#123;item.id&#125;+&#123;item.name&#125;&lt;/li&gt;</span><br><span class="line"> data:&#123;</span><br><span class="line">     objlist:[</span><br><span class="line">         &#123;id:1,name:&apos;xixi&apos;&#125;,</span><br><span class="line">         &#123;id:2,name:&apos;haha&apos;&#125;</span><br><span class="line">     ]</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>遍历对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;li v-for=&quot;(val,key) in obj&quot;&gt;&#123;val&#125; +&#123;key&#125;&lt;/li&gt;</span><br><span class="line">data:&#123;</span><br><span class="line">    obj:&#123;</span><br><span class="line">        id:1,</span><br><span class="line">        name:&apos;tony&apos;,</span><br><span class="line">        address:&apos;beijing&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：在遍历对象身上的（val，key）时，再第三个位置还有一个索引， 索引永远在最后一位 例如（val,key，index）,(item,index)，索引用的不多</p>
+</blockquote>
+</li>
+<li><p>迭代数字</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;li v-for=&quot;count in 10&quot;&gt;&#123;count&#125;&lt;/li&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>可以直接循环迭代数字，直接将数字写在in后面，表示迭代多少次 从1开始</p>
+</blockquote>
+<h3 id="v-for使用注意事项"><a href="#v-for使用注意事项" class="headerlink" title="v-for使用注意事项"></a>v-for使用注意事项</h3><ol>
+<li>在2.2.0+的版本里，当在组件中使用v-for时或者在一些特殊情况中，如果v-for有问题，必须在使用v-for的同时，指定唯一的number或者string类型的:key值。种种情况下，<code>key</code>是必须的<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;li v-for=&quot;item in objlist&quot; v-bind:key=&quot;item.id&quot;&gt;</span><br><span class="line"> &#123;item.id&#125;+ &#123;item.name&#125;</span><br><span class="line">&lt;/li&gt;</span><br><span class="line"> data:&#123;</span><br><span class="line">      objlist:[</span><br><span class="line">          &#123;id:1,name:&apos;xixi&apos;&#125;,</span><br><span class="line">          &#123;id:2,name:&apos;haha&apos;&#125;</span><br><span class="line">      ]</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>需要使用<code>v-bind:key=&quot;item.id&quot;</code>来绑定key，这样才能使得这一项是唯一确定的<br>这个 key属性值只能使用number或者string,必须使用v-bind 属性绑定的形式，指定key的值</p>
+</blockquote>
 <h3 id="Vue指令之v-if和v-show"><a href="#Vue指令之v-if和v-show" class="headerlink" title="Vue指令之v-if和v-show"></a>Vue指令之v-if和v-show</h3><ul>
 <li>使用<code>v-if</code>和<code>v-Show</code>时展示的效果是一样的，使其元素可见和不可见</li>
 <li>查看原代码时，会发现使用v-if时 若v-if=”flag” flag= false，此时这个元素相当于没有<pre><code>而使用v-show时，若 v-show=&quot;flag&quot; flag=false，此时元素并没有消失，只是style=&quot;dispaly=none&quot;</code></pre></li>
