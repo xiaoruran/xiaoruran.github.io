@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hello World</title>
+    <url>/2019/07/18/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>博客Markdown的写法</title>
+    <url>/2020/01/17/my-second-blog/</url>
+    <content><![CDATA[<h4 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h4><pre><code># 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+注意：#后面要加空格 一级标题下面有一条横线 正常是需要闭合的这些标签</code></pre><h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><ul>
+<li><p>无序列表</p>
+<blockquote>
+<p>* 1<br>* 2<br>* 3<br>* 4</p>
+<blockquote>
+<p>注意 在*后面也要一个空格 用在线编辑器看实际上是转换承了 ul&gt;li</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p>有序列表</p>
+<blockquote>
+<ol>
+<li>列表一</li>
+<li>列表二</li>
+<li>列表三<blockquote>
+<p>注意：数字后面必须是英文的点，有序列表的序号是根据第一行列表的数字顺序来的</p>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p>比如说，你想对某个部分的内容做一些说明或者引用等，可以使用&gt;<br>‘&gt;’</p>
+<h4 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h4><p>使用四个缩进空格 表示代码块</p>
+<h4 id="加强的代码块"><a href="#加强的代码块" class="headerlink" title="加强的代码块"></a>加强的代码块</h4><p>支持四十一种编程语言的语法高亮显示，行号显示，使用&lt;!–￼0–&gt;</p>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>步骤</tag>
+        <tag>语法</tag>
+        <tag>方法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第一个博客（心得体会）</title>
+    <url>/2019/07/19/%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h3 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h3><h4 id="步骤1-搭建各种电脑环境"><a href="#步骤1-搭建各种电脑环境" class="headerlink" title="*步骤1 搭建各种电脑环境"></a>*步骤1 搭建各种电脑环境</h4><blockquote>
+<p>第一步<br>   <strong>* 1 下载nodejs 可能会添加环境变量<br>第二步<br>   *</strong> 2 下载git 并搭建git环境（并将git的bin加入环境变量path中）</p>
+</blockquote>
+<blockquote>
+<p>第三步<br>   *** 3 创建github账户 并创建一个仓库 并命名为自己的 用户名+github.io（必须要这个名字）</p>
+</blockquote>
+<blockquote>
+<p>第四步<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd ~/.ssh #检查本机已存在的ssh密钥</span><br><span class="line"> 如果提示No such file or directory 说明是第一次用git</span><br><span class="line">  ssh-keygen -t rsa -C &quot;邮件地址&quot;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>   连续三次回车 会生成 </p>
+<blockquote>
+<p>C:\Users\ASUS.ssh\id_rsa.pub<br>   打开这个文件 复制全部内容<br>第五步<br>打开github主页 在右上方找到setting，在其中找到SSH and GPG keys -&gt; New SSH key，将内容复制进去<br>第六步（测试是否成功）<br> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com <span class="comment"># 注意邮箱地址不用改</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p> 若提示—&gt; Hi xiaoruran! You’ve successfully authenticated, but GitHub does not provide shell access. 说明SSH配置成功</p>
+<blockquote>
+<p>第七步（配置git的个人信息）<br>  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">"xiaoruran"</span>// 你的github用户名，非昵称</span><br><span class="line">git config --global user.email  <span class="string">"xxx@qq.com"</span>// 填写你的github注册邮箱</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>第八步 hexo的相关操作<br>   ***下载hexo </p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo</span><br></pre></td></tr></table></figure>
+
+<p> *** 初始化<br>   在电脑中创建一个目录 作为你的站点目录<br>   <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo init</span><br><span class="line">hexo g <span class="comment">#生成</span></span><br><span class="line">hexo s <span class="comment">#启动服务（一般默认是4000端口）</span></span><br><span class="line">hexo s -p 5000 <span class="comment">#将默认端口改为5000</span></span><br></pre></td></tr></table></figure></p>
+<p> ***上传到github<br>  配置主目录底下的_config.yml中的deploy部分<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repository: git@github.com:xiaoruran/xiaoruran.github.io.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure></p>
+<p>  ***可能要下载一个插件<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>第九步 （写自己的博客）<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new &apos;my-first-blog&apos;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>第十步 （修改配置文件 达到自己的效果 也可以更换主题）</p>
+</blockquote>
+<p>[参考链接]<br>（<a href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html" target="_blank" rel="noopener">https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html</a> ）<br>（<a href="https://blog.csdn.net/gsl9d1p04f6x2ts3c9/article/details/81024330" target="_blank" rel="noopener">https://blog.csdn.net/gsl9d1p04f6x2ts3c9/article/details/81024330</a> ）<br>（<a href="https://www.cnblogs.com/trista222/p/8017300.html）" target="_blank" rel="noopener">https://www.cnblogs.com/trista222/p/8017300.html）</a></p>
+]]></content>
+      <tags>
+        <tag>think</tag>
+        <tag>idea</tag>
+      </tags>
+  </entry>
+</search>
