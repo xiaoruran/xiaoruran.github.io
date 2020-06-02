@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-01-17T03:03:17.711Z</updated>
+  <updated>2020-06-02T09:28:13.960Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2020/01/17/my-second-blog/"/>
     <id>http://yoursite.com/2020/01/17/my-second-blog/</id>
     <published>2020-01-17T09:40:14.000Z</published>
-    <updated>2020-01-17T03:03:17.711Z</updated>
+    <updated>2020-06-02T09:28:13.960Z</updated>
     
     <summary type="html">
     
@@ -30,10 +30,10 @@
     </summary>
     
     
+      <category term="技术" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF/"/>
     
-      <category term="步骤" scheme="http://yoursite.com/tags/%E6%AD%A5%E9%AA%A4/"/>
     
-      <category term="语法" scheme="http://yoursite.com/tags/%E8%AF%AD%E6%B3%95/"/>
+      <category term="技术" scheme="http://yoursite.com/tags/%E6%8A%80%E6%9C%AF/"/>
     
       <category term="方法" scheme="http://yoursite.com/tags/%E6%96%B9%E6%B3%95/"/>
     
