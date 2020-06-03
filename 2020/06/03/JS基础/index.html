@@ -135,21 +135,27 @@
 <li>字符串是不可变的，一旦字符串被创建，就无法改变它，但可以通过+ 运算符的连接来创建新的字符串</li>
 </ul>
 <h4 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h4><ul>
-<li>顺序，选择，循环语句</li>
-<li>一个编译单元包含一组可执行的语句。在浏览器中，script标签提供一个被编译且立即执行的编译单元。</li>
-<li>由于缺少链接器，js将它们一起抛到一个公共的全局命名空间中</li>
-<li>在JS中 false、null、undefined、空字符串、数字0、数字 NaN都被当成假，其它所有的值都是真的，包括true,’false’,以及所有的对象</li>
-<li>注意:<code>for</code>语句<ol>
+<li><p>顺序，选择，循环语句</p>
+</li>
+<li><p>一个编译单元包含一组可执行的语句。在浏览器中，script标签提供一个被编译且立即执行的编译单元。</p>
+</li>
+<li><p>由于缺少链接器，js将它们一起抛到一个公共的全局命名空间中</p>
+</li>
+<li><p>在JS中 false、null、undefined、空字符串、数字0、数字 NaN都被当成假，其它所有的值都是真的，包括true,’false’,以及所有的对象</p>
+</li>
+<li><p>注意:<code>for</code>语句</p>
+<ol>
 <li>一种是常见的三个参数（初始化从句、条件从句、增量从句）</li>
 <li>另一种形式是<code>for in</code>语句，枚举一个对象的所有属性名，每次循环后，object的下一个属性名字符串会赋给variable<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for(attr in obj)&#123;</span><br><span class="line"> if(obj.hasOwnProperty(attr))&#123;</span><br><span class="line"> </span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
 </li>
 </ol>
+<blockquote>
+<p>一般需要通过检测obj.hasOwnProperty(attr)来判断这个属性名是这个对象的成员，还是来自<strong>原型链</strong></p>
+</blockquote>
 </li>
-</ul>
-<pre><code>&gt;一般需要通过检测obj.hasOwnProperty(attr)来判断这个属性名是这个对象的成员，还是来自**原型链**</code></pre><ul>
-<li>try语句<ol>
+<li><p>try语句</p>
+<ol>
 <li>try语句执行一个代码块，并捕获该代码块抛出的任何异常。</li>
 <li>catch从句定义一个新的变量variable来接受抛出的异常对象</li>
 <li>throw语句抛出一个异常，若该语句在try代码块中，控制流将会跳转到catch从句中。若throw语句在函数中，则该函数调用被放弃，控制流调用该函数的try语句中的catch从句</li>

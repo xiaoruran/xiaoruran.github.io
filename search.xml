@@ -1,43 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>JS之JSLint</title>
-    <url>/2020/06/03/JSLint/</url>
-    <content><![CDATA[<h3 id="JSLint"><a href="#JSLint" class="headerlink" title="JSLint"></a>JSLint</h3><p>JS是一门能力很强的语言，现在已经被应用与一些大型项目中。但对于大型项目而言，很多本意事希望提高这门语言易用性的特性却成了麻烦。于时催生出一个针对JS的lint:JSLint,一个JS语法检查器和校验器<br>它是JS的一个代码质量工具。它读取源文本并进行扫描，如果发现问题，会返回一个消息描述该问题并指明该问题在源文件中的大概位置</p>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS之JSON</title>
-    <url>/2020/06/03/JSON/</url>
-    <content><![CDATA[<h3 id="JSON-JavaScript对象表示法"><a href="#JSON-JavaScript对象表示法" class="headerlink" title="JSON(JavaScript对象表示法)"></a>JSON(JavaScript对象表示法)</h3><p>这是一种轻量级的数据交换格式。基于JavaScript对象字面量表示法，那是JS最精华的部分之一。尽管只是JS的一个子集，但与语言无关。<br>现代编程语言写的程序，都可以用它来交换数据。它是一种文本格式，所以可以被人和机器阅读。<br>它易于实现且易于使用</p>
-<h4 id="JSON语法"><a href="#JSON语法" class="headerlink" title="JSON语法"></a>JSON语法</h4><ul>
-<li>JSON对象是一个相当于”key-value”的无序集合。名字可以是任何字符串，值可以是任何类型的JSON值，包括数组和对象</li>
-<li>JSON有六种类型的值：对象、数组、字符串、布尔类型、数字、和特殊值null</li>
-<li>JSON数字与JS数字类似，整数的首位不允许为0，因为一些语言用它来表示八进制数<h4 id="安全的使用JSON"><a href="#安全的使用JSON" class="headerlink" title="安全的使用JSON"></a>安全的使用JSON</h4></li>
-<li>使用eval函数可以把一段JSON文本转换为一个有用的数据结构，但是eval函数有着极其可怕的安全问题。</li>
-<li>可以使用<code>JSON.parse()</code>方法代替eval函数，能避免危险。如果文本中包含任何危险数据JSON.parse()会抛出一个异常，为防止服务器出现漏洞，建议总是用JSON.parse代替eval。</li>
-<li>在外部数据与innerHTML进行交互式还存在另一种危险。一种常见的Ajax模式是把服务器端发送过来的一个HTML文本赋值给某个HTML元素的innerHTML属性。这是一个非常糟糕的习观，如果这个HTML中包含一个&lt;\script&gt;标签或者其等价物，那么一个恶意脚本将被执行，这也可以是因为服务器端存在漏洞<blockquote>
-<p>如果一个恶意脚本在你的页面上被运行，它就有权访问这个页面的所有状态和执行该页面能做的所有操作.他能与服务器进行交互，而服务器并不能区分恶意请求。恶意脚本还能访问全局对象，这使得它有权访问用户能看到的一切，这个恶意脚本还拥有和用户对话的能力。document对象还能给该恶意脚本授权访问网络，允许它下载更多的恶意脚本，或者是在你的防火墙内探测站点，或者是把它已经窃取的隐私内容发送给世界上的任何一个服务器。这是JS全局变量的一个直接后果。</p>
-</blockquote>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JS之原型链理解</title>
     <url>/2020/06/03/JS%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%90%86%E8%A7%A3/</url>
     <content><![CDATA[<p>###JS原型及原型链<br>JavaScript中没有子类和父类的概念，也没有类和实例（instance）的区分,全靠一种称为”原型(prototype)链”的模式，来实现继承</p>
@@ -83,6 +46,43 @@
 <li>原型链是通过_proto_形成的而非prototype</li>
 </ol>
 <p><img src="https://img-blog.csdn.net/2018030222305858" alt="avatar"><br>参考博客：<br> <a href="https://blog.csdn.net/yucihent/article/details/79424506" target="_blank" rel="noopener">深入javascript之原型和原型链</a><br><a href="https://blog.csdn.net/qq_42019025/article/details/80708446" target="_blank" rel="noopener">JS原型和原型链是什么？</a>  </p>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS之JSON</title>
+    <url>/2020/06/03/JSON/</url>
+    <content><![CDATA[<h3 id="JSON-JavaScript对象表示法"><a href="#JSON-JavaScript对象表示法" class="headerlink" title="JSON(JavaScript对象表示法)"></a>JSON(JavaScript对象表示法)</h3><p>这是一种轻量级的数据交换格式。基于JavaScript对象字面量表示法，那是JS最精华的部分之一。尽管只是JS的一个子集，但与语言无关。<br>现代编程语言写的程序，都可以用它来交换数据。它是一种文本格式，所以可以被人和机器阅读。<br>它易于实现且易于使用</p>
+<h4 id="JSON语法"><a href="#JSON语法" class="headerlink" title="JSON语法"></a>JSON语法</h4><ul>
+<li>JSON对象是一个相当于”key-value”的无序集合。名字可以是任何字符串，值可以是任何类型的JSON值，包括数组和对象</li>
+<li>JSON有六种类型的值：对象、数组、字符串、布尔类型、数字、和特殊值null</li>
+<li>JSON数字与JS数字类似，整数的首位不允许为0，因为一些语言用它来表示八进制数<h4 id="安全的使用JSON"><a href="#安全的使用JSON" class="headerlink" title="安全的使用JSON"></a>安全的使用JSON</h4></li>
+<li>使用eval函数可以把一段JSON文本转换为一个有用的数据结构，但是eval函数有着极其可怕的安全问题。</li>
+<li>可以使用<code>JSON.parse()</code>方法代替eval函数，能避免危险。如果文本中包含任何危险数据JSON.parse()会抛出一个异常，为防止服务器出现漏洞，建议总是用JSON.parse代替eval。</li>
+<li>在外部数据与innerHTML进行交互式还存在另一种危险。一种常见的Ajax模式是把服务器端发送过来的一个HTML文本赋值给某个HTML元素的innerHTML属性。这是一个非常糟糕的习观，如果这个HTML中包含一个&lt;\script&gt;标签或者其等价物，那么一个恶意脚本将被执行，这也可以是因为服务器端存在漏洞<blockquote>
+<p>如果一个恶意脚本在你的页面上被运行，它就有权访问这个页面的所有状态和执行该页面能做的所有操作.他能与服务器进行交互，而服务器并不能区分恶意请求。恶意脚本还能访问全局对象，这使得它有权访问用户能看到的一切，这个恶意脚本还拥有和用户对话的能力。document对象还能给该恶意脚本授权访问网络，允许它下载更多的恶意脚本，或者是在你的防火墙内探测站点，或者是把它已经窃取的隐私内容发送给世界上的任何一个服务器。这是JS全局变量的一个直接后果。</p>
+</blockquote>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS之JSLint</title>
+    <url>/2020/06/03/JSLint/</url>
+    <content><![CDATA[<h3 id="JSLint"><a href="#JSLint" class="headerlink" title="JSLint"></a>JSLint</h3><p>JS是一门能力很强的语言，现在已经被应用与一些大型项目中。但对于大型项目而言，很多本意事希望提高这门语言易用性的特性却成了麻烦。于时催生出一个针对JS的lint:JSLint,一个JS语法检查器和校验器<br>它是JS的一个代码质量工具。它读取源文本并进行扫描，如果发现问题，会返回一个消息描述该问题并指明该问题在源文件中的大概位置</p>
 ]]></content>
       <categories>
         <category>前端</category>
@@ -180,6 +180,140 @@ setTimeout2           process2
       </tags>
   </entry>
   <entry>
+    <title>About Me</title>
+    <url>/2020/06/03/about/</url>
+    <content><![CDATA[<blockquote>
+<p>A Student, Now live in Nanning, China.</p>
+</blockquote>
+<p>姓名：曹涵<br>现居：暂时没有<br>GitHub: <a href="https://github.com/xiaoruran/xiaoruran.github.io" target="_blank" rel="noopener">Cao_Han</a><br>QQ: 3314508022<br>微信: ch18325622987</p>
+<a id="more"></a>
+
+<!-- ![avatar.jpg](https://i.loli.net/2019/12/02/Hw5WJIMKzi1YrU8.jpg) -->
+
+<img src="https://pic.downk.cc/item/5e739676e83c3a1e3ab4b361.jpg" alt="avatar" width="300" style="border-radius:50%">
+]]></content>
+      <tags>
+        <tag>自我介绍</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>博客Markdown的写法</title>
+    <url>/2020/01/17/my-second-blog/</url>
+    <content><![CDATA[<h4 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h4><pre><code># 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+注意：#后面要加空格 一级标题下面有一条横线 正常是需要闭合的这些标签</code></pre><h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><ul>
+<li><p>无序列表</p>
+<blockquote>
+<p>* 1<br>* 2<br>* 3<br>* 4</p>
+<blockquote>
+<p>注意 在*后面也要一个空格 用在线编辑器看实际上是转换承了 ul&gt;li</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p>有序列表</p>
+<blockquote>
+<ol>
+<li>列表一</li>
+<li>列表二</li>
+<li>列表三<blockquote>
+<p>注意：数字后面必须是英文的点，有序列表的序号是根据第一行列表的数字顺序来的</p>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p>比如说，你想对某个部分的内容做一些说明或者引用等，可以使用&gt;<br>‘&gt;’</p>
+<h4 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h4><p>使用四个缩进空格 表示代码块</p>
+<h4 id="加强的代码块"><a href="#加强的代码块" class="headerlink" title="加强的代码块"></a>加强的代码块</h4><p>支持四十一种编程语言的语法高亮显示，行号显示，使用&lt;!–￼0–&gt;</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
+        <tag>方法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS之闭包理解</title>
+    <url>/2020/06/01/JS%E9%97%AD%E5%8C%85/</url>
+    <content><![CDATA[<h3 id="JS闭包理解"><a href="#JS闭包理解" class="headerlink" title="JS闭包理解"></a>JS闭包理解</h3><h4 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a>立即执行函数</h4><p>作用： 创建一个独立的作用域。这个作用域的变量外面访问不到（避免变量污染）</p>
+<ol>
+<li><p><code>(function foo(){}())</code><br>如果直接写function foo(){}()解释器会报错。<em>立即执行函数的调用方式是将函数表达式、调用操作符、分组操作符放到一个括号内，来告诉解释器这里有一个需要解释器立即执行的函数</em>。否则通常情况下，解析器遇到function关键子，都会把它当成一个函数声明，而不是个函数表达式</p>
+<ul>
+<li>立即执行函数的写法</li>
+<li>相当于 function foo(){};foo();</li>
+<li>相当于先定义一个函数，然后调用执行它</li>
+<li>在最后面的括号里面可以直接写传递的参数<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function foo(n1,n2)&#123;</span><br><span class="line">    console.log(n1+n2);</span><br><span class="line">&#125;(3,5));  //8</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><code>(function foo(){})()</code><br>总的语法和上面的一致</p>
+<blockquote>
+<p>注意：当在不需要表达式的场景下，就不需要用括号括起来了</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void function foo()&#123;&#125;()</span><br><span class="line">var foo =function()&#123;&#125;();</span><br><span class="line">true &amp;&amp; function()&#123;&#125;();</span><br><span class="line">0,function()&#123;&#125;();</span><br><span class="line">//以上都是作为函数表达式，所以不需要用括号括起来了</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<blockquote>
+<p>对于立即执行函数，也可以给他们传入参数，在最后一个括号里传</p>
+</blockquote>
+<ol start="3">
+<li>像常见的<code>(function($){}(jQuery))</code>;就是将实参jQuery作为实参传入到函数function($){}中，通过形参$接受</li>
+<li><code>$(function(){})</code><ul>
+<li>需要引入jQuery包</li>
+<li>是$(document).ready(function(){})的简写，两者效果完全一样</li>
+</ul>
+</li>
+<li>可以在function(){}()的前面加上!、+、-、~也可以使变成函数表达式，变成立即执行函数</li>
+</ol>
+<h4 id="是时候理解一波了"><a href="#是时候理解一波了" class="headerlink" title="是时候理解一波了"></a>是时候理解一波了</h4><p>我的理解：</p>
+<ul>
+<li>js中函数内部可以读取到全局变量，而函数外部不能读取函数内部的局部变量。此时闭包就是为了能使得从外部访问函数内部的变量。</li>
+<li>为了让某些变量始终保持在内存中，但同时也可能导致内存消耗的问题</li>
+<li>方便调用上下文的局部变量，利于代码封装<br>两个方面：<ol>
+<li>函数作为返回值<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> function a()&#123;</span><br><span class="line">  var name=&apos;hh&apos;;</span><br><span class="line">  return function()&#123;</span><br><span class="line">      return name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">var b=a();</span><br><span class="line">//将返回的匿名函数赋值给b，此时b相当于a内部的匿名函数，可以访问到a内部的变量</span><br><span class="line">console.log(b());</span><br><span class="line"> //通过b(),执行a内部的匿名函数，最后返回a函数内部的变量</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>这段代码实现了全局变量b可以获取到a方法下的局部变量name的值<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   function f1()&#123;</span><br><span class="line">    var num=12;</span><br><span class="line">    return function()&#123;</span><br><span class="line">        var n=0;</span><br><span class="line">        console.log(++num);</span><br><span class="line">        console.log(++n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var fn=f1();</span><br><span class="line">fn();  //13 1</span><br><span class="line">//第一次调用f1里的匿名函数</span><br><span class="line">fn();  //14 1</span><br><span class="line">//第二次调用f1里的匿名函数</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>上述代码中在fn执行完后，就应该连同它里面的变量以同销毁，但在此case中，匿名函数作为f1的返回值被赋给了fn，这时候就相当于fn=function(var n=0;…){},并且匿名函数内部引用这f1里面的变量num，所以变量num无法被销毁，但每次每次n是重新创建的，这里就产生了内存消耗的问题（num）<br>再来一个case:依次输出1到5<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> (function()&#123;</span><br><span class="line">var i=1;</span><br><span class="line">for(i=0;i&lt;5;i++)&#123;</span><br><span class="line">    setTimeout(function()&#123;</span><br><span class="line">     console.log(i);</span><br><span class="line">    &#125;,100)</span><br><span class="line">&#125;</span><br><span class="line">&#125;());  //5，5，5，5，5</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>这是会发现出现了5个5，与预期不同。我们来分析一下，首先由于js是单线程语言，遇到setTimeout函数，这是一个异步函数，将之放入异步函数队列，等到主线程运行完。好！主线程运行完了，即5个循环运行结束，这是的i为5。此时运行异步队列中的线程，此时i为5，所以打印的都是5。我们可以采用一下立即执行函数来解决这个问题<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line"> var i=0;</span><br><span class="line"> for(i=0;i&lt;5;++i)&#123;</span><br><span class="line">     (function(i)&#123;</span><br><span class="line">         setTimeout(function()&#123;</span><br><span class="line">             console.log(i);</span><br><span class="line">            &#125;,100)</span><br><span class="line">     &#125;(i));</span><br><span class="line"> &#125;</span><br><span class="line">&#125;()); //0,1,2,3,4</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>此时已完成预期效果。这里通过闭包来保存变量i，将setTimeout函数放入立即执行函数中，将for循环中的i作为参数传递，通过立即执行函数，相当于将i固定保存在匿名函数中（这就是立即执行函数的魅力），100毫秒后打印出0、1、2、3、4<br>    若要在隔100毫秒在输出，可以<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line"> var i=0;</span><br><span class="line"> for(i=0;i&lt;5;++i)&#123;</span><br><span class="line">     (function(i)&#123;</span><br><span class="line">         setTimeout(function()&#123;</span><br><span class="line">             console.log(i);</span><br><span class="line">            &#125;,i*100)</span><br><span class="line">     &#125;(i));</span><br><span class="line"> &#125;</span><br><span class="line">&#125;()); //0,1,2,3,4</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<ol start="2">
+<li><p>闭包作为参数传递<br>将(function(){}()) 中最后一个括号里面传函数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   var num = 15</span><br><span class="line">var f1=function(x)&#123;</span><br><span class="line">  if(x&gt; num)&#123;</span><br><span class="line">      console.log(x);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 加上void 变成立即执行函数</span><br><span class="line">void function(fn)&#123;</span><br><span class="line"> var num=100;</span><br><span class="line"> fn(30)</span><br><span class="line">&#125;(f1)    //30</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>解释：这里首先有一个立即执行函数，直接执行，实参为f1对应的匿名方法，将之传给fn，在执行这个匿名函数，在执行这个匿名函数时，访问的num就是最上面的全局变量num（15）了</p>
+</blockquote>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JS之毒瘤</title>
     <url>/2020/06/03/jS%E7%BC%BA%E7%82%B9/</url>
     <content><![CDATA[<h3 id="JS毒瘤"><a href="#JS毒瘤" class="headerlink" title="JS毒瘤"></a>JS毒瘤</h3><ul>
@@ -262,140 +396,6 @@ setTimeout2           process2
       </tags>
   </entry>
   <entry>
-    <title>About Me</title>
-    <url>/2020/06/03/about/</url>
-    <content><![CDATA[<blockquote>
-<p>A Student, Now live in Nanning, China.</p>
-</blockquote>
-<p>姓名：曹涵<br>现居：暂时没有<br>GitHub: <a href="https://github.com/xiaoruran/xiaoruran.github.io" target="_blank" rel="noopener">Cao_Han</a><br>QQ: 3314508022<br>微信: ch18325622987</p>
-<a id="more"></a>
-
-<!-- ![avatar.jpg](https://i.loli.net/2019/12/02/Hw5WJIMKzi1YrU8.jpg) -->
-
-<img src="https://pic.downk.cc/item/5e739676e83c3a1e3ab4b361.jpg" alt="avatar" width="300" style="border-radius:50%">
-]]></content>
-      <tags>
-        <tag>自我介绍</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS之闭包理解</title>
-    <url>/2020/06/01/JS%E9%97%AD%E5%8C%85/</url>
-    <content><![CDATA[<h3 id="JS闭包理解"><a href="#JS闭包理解" class="headerlink" title="JS闭包理解"></a>JS闭包理解</h3><h4 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a>立即执行函数</h4><p>作用： 创建一个独立的作用域。这个作用域的变量外面访问不到（避免变量污染）</p>
-<ol>
-<li><p><code>(function foo(){}())</code><br>如果直接写function foo(){}()解释器会报错。<em>立即执行函数的调用方式是将函数表达式、调用操作符、分组操作符放到一个括号内，来告诉解释器这里有一个需要解释器立即执行的函数</em>。否则通常情况下，解析器遇到function关键子，都会把它当成一个函数声明，而不是个函数表达式</p>
-<ul>
-<li>立即执行函数的写法</li>
-<li>相当于 function foo(){};foo();</li>
-<li>相当于先定义一个函数，然后调用执行它</li>
-<li>在最后面的括号里面可以直接写传递的参数<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function foo(n1,n2)&#123;</span><br><span class="line">    console.log(n1+n2);</span><br><span class="line">&#125;(3,5));  //8</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p><code>(function foo(){})()</code><br>总的语法和上面的一致</p>
-<blockquote>
-<p>注意：当在不需要表达式的场景下，就不需要用括号括起来了</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void function foo()&#123;&#125;()</span><br><span class="line">var foo =function()&#123;&#125;();</span><br><span class="line">true &amp;&amp; function()&#123;&#125;();</span><br><span class="line">0,function()&#123;&#125;();</span><br><span class="line">//以上都是作为函数表达式，所以不需要用括号括起来了</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<blockquote>
-<p>对于立即执行函数，也可以给他们传入参数，在最后一个括号里传</p>
-</blockquote>
-<ol start="3">
-<li>像常见的<code>(function($){}(jQuery))</code>;就是将实参jQuery作为实参传入到函数function($){}中，通过形参$接受</li>
-<li><code>$(function(){})</code><ul>
-<li>需要引入jQuery包</li>
-<li>是$(document).ready(function(){})的简写，两者效果完全一样</li>
-</ul>
-</li>
-<li>可以在function(){}()的前面加上!、+、-、~也可以使变成函数表达式，变成立即执行函数</li>
-</ol>
-<h4 id="是时候理解一波了"><a href="#是时候理解一波了" class="headerlink" title="是时候理解一波了"></a>是时候理解一波了</h4><p>我的理解：</p>
-<ul>
-<li>js中函数内部可以读取到全局变量，而函数外部不能读取函数内部的局部变量。此时闭包就是为了能使得从外部访问函数内部的变量。</li>
-<li>为了让某些变量始终保持在内存中，但同时也可能导致内存消耗的问题</li>
-<li>方便调用上下文的局部变量，利于代码封装<br>两个方面：<ol>
-<li>函数作为返回值<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> function a()&#123;</span><br><span class="line">  var name=&apos;hh&apos;;</span><br><span class="line">  return function()&#123;</span><br><span class="line">      return name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">var b=a();</span><br><span class="line">//将返回的匿名函数赋值给b，此时b相当于a内部的匿名函数，可以访问到a内部的变量</span><br><span class="line">console.log(b());</span><br><span class="line"> //通过b(),执行a内部的匿名函数，最后返回a函数内部的变量</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-</li>
-</ul>
-<blockquote>
-<p>这段代码实现了全局变量b可以获取到a方法下的局部变量name的值<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   function f1()&#123;</span><br><span class="line">    var num=12;</span><br><span class="line">    return function()&#123;</span><br><span class="line">        var n=0;</span><br><span class="line">        console.log(++num);</span><br><span class="line">        console.log(++n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var fn=f1();</span><br><span class="line">fn();  //13 1</span><br><span class="line">//第一次调用f1里的匿名函数</span><br><span class="line">fn();  //14 1</span><br><span class="line">//第二次调用f1里的匿名函数</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>上述代码中在fn执行完后，就应该连同它里面的变量以同销毁，但在此case中，匿名函数作为f1的返回值被赋给了fn，这时候就相当于fn=function(var n=0;…){},并且匿名函数内部引用这f1里面的变量num，所以变量num无法被销毁，但每次每次n是重新创建的，这里就产生了内存消耗的问题（num）<br>再来一个case:依次输出1到5<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> (function()&#123;</span><br><span class="line">var i=1;</span><br><span class="line">for(i=0;i&lt;5;i++)&#123;</span><br><span class="line">    setTimeout(function()&#123;</span><br><span class="line">     console.log(i);</span><br><span class="line">    &#125;,100)</span><br><span class="line">&#125;</span><br><span class="line">&#125;());  //5，5，5，5，5</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>这是会发现出现了5个5，与预期不同。我们来分析一下，首先由于js是单线程语言，遇到setTimeout函数，这是一个异步函数，将之放入异步函数队列，等到主线程运行完。好！主线程运行完了，即5个循环运行结束，这是的i为5。此时运行异步队列中的线程，此时i为5，所以打印的都是5。我们可以采用一下立即执行函数来解决这个问题<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line"> var i=0;</span><br><span class="line"> for(i=0;i&lt;5;++i)&#123;</span><br><span class="line">     (function(i)&#123;</span><br><span class="line">         setTimeout(function()&#123;</span><br><span class="line">             console.log(i);</span><br><span class="line">            &#125;,100)</span><br><span class="line">     &#125;(i));</span><br><span class="line"> &#125;</span><br><span class="line">&#125;()); //0,1,2,3,4</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>此时已完成预期效果。这里通过闭包来保存变量i，将setTimeout函数放入立即执行函数中，将for循环中的i作为参数传递，通过立即执行函数，相当于将i固定保存在匿名函数中（这就是立即执行函数的魅力），100毫秒后打印出0、1、2、3、4<br>    若要在隔100毫秒在输出，可以<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line"> var i=0;</span><br><span class="line"> for(i=0;i&lt;5;++i)&#123;</span><br><span class="line">     (function(i)&#123;</span><br><span class="line">         setTimeout(function()&#123;</span><br><span class="line">             console.log(i);</span><br><span class="line">            &#125;,i*100)</span><br><span class="line">     &#125;(i));</span><br><span class="line"> &#125;</span><br><span class="line">&#125;()); //0,1,2,3,4</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<ol start="2">
-<li><p>闭包作为参数传递<br>将(function(){}()) 中最后一个括号里面传函数</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   var num = 15</span><br><span class="line">var f1=function(x)&#123;</span><br><span class="line">  if(x&gt; num)&#123;</span><br><span class="line">      console.log(x);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 加上void 变成立即执行函数</span><br><span class="line">void function(fn)&#123;</span><br><span class="line"> var num=100;</span><br><span class="line"> fn(30)</span><br><span class="line">&#125;(f1)    //30</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>解释：这里首先有一个立即执行函数，直接执行，实参为f1对应的匿名方法，将之传给fn，在执行这个匿名函数，在执行这个匿名函数时，访问的num就是最上面的全局变量num（15）了</p>
-</blockquote>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>博客Markdown的写法</title>
-    <url>/2020/01/17/my-second-blog/</url>
-    <content><![CDATA[<h4 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h4><pre><code># 一级标题
-## 二级标题
-### 三级标题
-#### 四级标题
-##### 五级标题
-注意：#后面要加空格 一级标题下面有一条横线 正常是需要闭合的这些标签</code></pre><h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><ul>
-<li><p>无序列表</p>
-<blockquote>
-<p>* 1<br>* 2<br>* 3<br>* 4</p>
-<blockquote>
-<p>注意 在*后面也要一个空格 用在线编辑器看实际上是转换承了 ul&gt;li</p>
-</blockquote>
-</blockquote>
-</li>
-<li><p>有序列表</p>
-<blockquote>
-<ol>
-<li>列表一</li>
-<li>列表二</li>
-<li>列表三<blockquote>
-<p>注意：数字后面必须是英文的点，有序列表的序号是根据第一行列表的数字顺序来的</p>
-</blockquote>
-</li>
-</ol>
-</blockquote>
-<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p>比如说，你想对某个部分的内容做一些说明或者引用等，可以使用&gt;<br>‘&gt;’</p>
-<h4 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h4><p>使用四个缩进空格 表示代码块</p>
-<h4 id="加强的代码块"><a href="#加强的代码块" class="headerlink" title="加强的代码块"></a>加强的代码块</h4><p>支持四十一种编程语言的语法高亮显示，行号显示，使用&lt;!–￼0–&gt;</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>技术</tag>
-        <tag>方法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Vue之样式</title>
     <url>/2020/06/03/vue2node/</url>
     <content><![CDATA[<p>[TOC]</p>
@@ -444,42 +444,6 @@ setTimeout2           process2
       <tags>
         <tag>前端</tag>
         <tag>vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS之对象说明符</title>
-    <url>/2020/06/02/%E5%AF%B9%E8%B1%A1%E8%AF%B4%E6%98%8E%E7%AC%A6/</url>
-    <content><![CDATA[<h3 id="对象说明符（ES6中可以理解为结构解析）"><a href="#对象说明符（ES6中可以理解为结构解析）" class="headerlink" title="对象说明符（ES6中可以理解为结构解析）"></a>对象说明符（ES6中可以理解为结构解析）</h3><p>有时候函数中需要传的参数过多，容易在调用时搞混这些参数的顺序，这时候就可以时使用对象说明符来解决。将形参写成一个对象的形式，实参叶根据这个形式进行传参</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var foo=function(&#123;</span><br><span class="line">  &apos;firststr&apos;:str,</span><br><span class="line">  &apos;secondstr&apos;:name</span><br><span class="line">&#125;)&#123;</span><br><span class="line">  console.log(str+ &quot;-----&quot;+ name );</span><br><span class="line">&#125;</span><br><span class="line">foo(&#123;&apos;firststr&apos;:&quot;你好啊&quot;,&apos;secondstr&apos;:&apos;JS&apos;&#125;);  //你好啊-----JS</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS之number</title>
-    <url>/2020/06/02/%E6%95%B0%E5%AD%97%E7%B1%BB%E5%9E%8Bnumber/</url>
-    <content><![CDATA[<h3 id="number一些方法"><a href="#number一些方法" class="headerlink" title="number一些方法"></a>number一些方法</h3><ul>
-<li><p><code>number.toExponential()</code>方法：将这个number转换为一个指数形式的字符串，参数items是控制其小数点后的数字位数，这个值必须在0~20之内</p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var x=Math.PI;</span><br><span class="line">console.log(x.toExponential(30)); //3.142e+0</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>number.x.toFixed()</code>方法：将number转换为一个十进制形式的字符串，可选参数控制其小数点都的数字位数，默认为0，这个值必须在0~20之内</p>
-</li>
-<li><p><code>number.toPrecision()</code>方法：将number转换为一个十进制数子形式的字符串，可选参数控制数字的精度，表示的是所有数字的个数，这个值必须在0~21之内</p>
-</li>
-<li><p><code>number.toString()</code>方法：将number转换为一个字符串，可选参数表示几进制，默认是10</p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var x=Math.PI;</span><br><span class="line">console.log(x.toString(8)); //3.1103755242102643</span><br><span class="line">console.log(x.toString(16)); //3.243f6a8885a3</span><br><span class="line">console.log(x.toString()); //3.141592653589793</span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
       </tags>
   </entry>
   <entry>
@@ -676,44 +640,39 @@ setTimeout2           process2
       </tags>
   </entry>
   <entry>
-    <title>搭建hexo博客</title>
-    <url>/2019/07/19/%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h3 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h3><h4 id="步骤1-搭建各种电脑环境"><a href="#步骤1-搭建各种电脑环境" class="headerlink" title="*步骤1 搭建各种电脑环境"></a>*步骤1 搭建各种电脑环境</h4><blockquote>
-<p>第一步<br>   <strong>* 1 下载nodejs 可能会添加环境变量<br>第二步<br>   *</strong> 2 下载git 并搭建git环境（并将git的bin加入环境变量path中）</p>
-</blockquote>
-<blockquote>
-<p>第三步<br>   *** 3 创建github账户 并创建一个仓库 并命名为自己的 用户名+github.io（必须要这个名字）</p>
-</blockquote>
-<blockquote>
-<p>第四步<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd ~/.ssh #检查本机已存在的ssh密钥</span><br><span class="line"> 如果提示No such file or directory 说明是第一次用git</span><br><span class="line">  ssh-keygen -t rsa -C &quot;邮件地址&quot;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>   连续三次回车 会生成 </p>
-<blockquote>
-<p>C:\Users\ASUS.ssh\id_rsa.pub<br>   打开这个文件 复制全部内容<br>第五步<br>打开github主页 在右上方找到setting，在其中找到SSH and GPG keys -&gt; New SSH key，将内容复制进去<br>第六步（测试是否成功）<br> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com <span class="comment"># 注意邮箱地址不用改</span></span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p> 若提示—&gt; Hi xiaoruran! You’ve successfully authenticated, but GitHub does not provide shell access. 说明SSH配置成功</p>
-<blockquote>
-<p>第七步（配置git的个人信息）<br>  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">"xiaoruran"</span>// 你的github用户名，非昵称</span><br><span class="line">git config --global user.email  <span class="string">"xxx@qq.com"</span>// 填写你的github注册邮箱</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>第八步 hexo的相关操作<br>   ***下载hexo </p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo</span><br></pre></td></tr></table></figure>
-
-<p> *** 初始化<br>   在电脑中创建一个目录 作为你的站点目录<br>   <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo init</span><br><span class="line">hexo g <span class="comment">#生成</span></span><br><span class="line">hexo s <span class="comment">#启动服务（一般默认是4000端口）</span></span><br><span class="line">hexo s -p 5000 <span class="comment">#将默认端口改为5000</span></span><br></pre></td></tr></table></figure></p>
-<p> ***上传到github<br>  配置主目录底下的_config.yml中的deploy部分<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repository: git@github.com:xiaoruran/xiaoruran.github.io.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure></p>
-<p>  ***可能要下载一个插件<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>第九步 （写自己的博客）<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new &apos;my-first-blog&apos;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>第十步 （修改配置文件 达到自己的效果 也可以更换主题）</p>
-</blockquote>
-<p>[参考链接]<br>（<a href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html" target="_blank" rel="noopener">https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html</a> ）<br>（<a href="https://blog.csdn.net/gsl9d1p04f6x2ts3c9/article/details/81024330" target="_blank" rel="noopener">https://blog.csdn.net/gsl9d1p04f6x2ts3c9/article/details/81024330</a> ）<br>（<a href="https://www.cnblogs.com/trista222/p/8017300.html）" target="_blank" rel="noopener">https://www.cnblogs.com/trista222/p/8017300.html）</a></p>
-]]></content>
+    <title>JS之对象说明符</title>
+    <url>/2020/06/02/%E5%AF%B9%E8%B1%A1%E8%AF%B4%E6%98%8E%E7%AC%A6/</url>
+    <content><![CDATA[<h3 id="对象说明符（ES6中可以理解为结构解析）"><a href="#对象说明符（ES6中可以理解为结构解析）" class="headerlink" title="对象说明符（ES6中可以理解为结构解析）"></a>对象说明符（ES6中可以理解为结构解析）</h3><p>有时候函数中需要传的参数过多，容易在调用时搞混这些参数的顺序，这时候就可以时使用对象说明符来解决。将形参写成一个对象的形式，实参叶根据这个形式进行传参</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var foo=function(&#123;</span><br><span class="line">  &apos;firststr&apos;:str,</span><br><span class="line">  &apos;secondstr&apos;:name</span><br><span class="line">&#125;)&#123;</span><br><span class="line">  console.log(str+ &quot;-----&quot;+ name );</span><br><span class="line">&#125;</span><br><span class="line">foo(&#123;&apos;firststr&apos;:&quot;你好啊&quot;,&apos;secondstr&apos;:&apos;JS&apos;&#125;);  //你好啊-----JS</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
       <tags>
-        <tag>think</tag>
-        <tag>idea</tag>
+        <tag>前端</tag>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS之number</title>
+    <url>/2020/06/02/%E6%95%B0%E5%AD%97%E7%B1%BB%E5%9E%8Bnumber/</url>
+    <content><![CDATA[<h3 id="number一些方法"><a href="#number一些方法" class="headerlink" title="number一些方法"></a>number一些方法</h3><ul>
+<li><p><code>number.toExponential()</code>方法：将这个number转换为一个指数形式的字符串，参数items是控制其小数点后的数字位数，这个值必须在0~20之内</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var x=Math.PI;</span><br><span class="line">console.log(x.toExponential(30)); //3.142e+0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>number.x.toFixed()</code>方法：将number转换为一个十进制形式的字符串，可选参数控制其小数点都的数字位数，默认为0，这个值必须在0~20之内</p>
+</li>
+<li><p><code>number.toPrecision()</code>方法：将number转换为一个十进制数子形式的字符串，可选参数控制数字的精度，表示的是所有数字的个数，这个值必须在0~21之内</p>
+</li>
+<li><p><code>number.toString()</code>方法：将number转换为一个字符串，可选参数表示几进制，默认是10</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var x=Math.PI;</span><br><span class="line">console.log(x.toString(8)); //3.1103755242102643</span><br><span class="line">console.log(x.toString(16)); //3.243f6a8885a3</span><br><span class="line">console.log(x.toString()); //3.141592653589793</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
       </tags>
   </entry>
   <entry>
@@ -858,6 +817,47 @@ setTimeout2           process2
       <tags>
         <tag>前端</tag>
         <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>搭建hexo博客</title>
+    <url>/2019/07/19/%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h3 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h3><h4 id="步骤1-搭建各种电脑环境"><a href="#步骤1-搭建各种电脑环境" class="headerlink" title="*步骤1 搭建各种电脑环境"></a>*步骤1 搭建各种电脑环境</h4><blockquote>
+<p>第一步<br>   <strong>* 1 下载nodejs 可能会添加环境变量<br>第二步<br>   *</strong> 2 下载git 并搭建git环境（并将git的bin加入环境变量path中）</p>
+</blockquote>
+<blockquote>
+<p>第三步<br>   *** 3 创建github账户 并创建一个仓库 并命名为自己的 用户名+github.io（必须要这个名字）</p>
+</blockquote>
+<blockquote>
+<p>第四步<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd ~/.ssh #检查本机已存在的ssh密钥</span><br><span class="line"> 如果提示No such file or directory 说明是第一次用git</span><br><span class="line">  ssh-keygen -t rsa -C &quot;邮件地址&quot;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>   连续三次回车 会生成 </p>
+<blockquote>
+<p>C:\Users\ASUS.ssh\id_rsa.pub<br>   打开这个文件 复制全部内容<br>第五步<br>打开github主页 在右上方找到setting，在其中找到SSH and GPG keys -&gt; New SSH key，将内容复制进去<br>第六步（测试是否成功）<br> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com <span class="comment"># 注意邮箱地址不用改</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p> 若提示—&gt; Hi xiaoruran! You’ve successfully authenticated, but GitHub does not provide shell access. 说明SSH配置成功</p>
+<blockquote>
+<p>第七步（配置git的个人信息）<br>  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">"xiaoruran"</span>// 你的github用户名，非昵称</span><br><span class="line">git config --global user.email  <span class="string">"xxx@qq.com"</span>// 填写你的github注册邮箱</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>第八步 hexo的相关操作<br>   ***下载hexo </p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo</span><br></pre></td></tr></table></figure>
+
+<p> *** 初始化<br>   在电脑中创建一个目录 作为你的站点目录<br>   <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo init</span><br><span class="line">hexo g <span class="comment">#生成</span></span><br><span class="line">hexo s <span class="comment">#启动服务（一般默认是4000端口）</span></span><br><span class="line">hexo s -p 5000 <span class="comment">#将默认端口改为5000</span></span><br></pre></td></tr></table></figure></p>
+<p> ***上传到github<br>  配置主目录底下的_config.yml中的deploy部分<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repository: git@github.com:xiaoruran/xiaoruran.github.io.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure></p>
+<p>  ***可能要下载一个插件<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>第九步 （写自己的博客）<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new &apos;my-first-blog&apos;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>第十步 （修改配置文件 达到自己的效果 也可以更换主题）</p>
+</blockquote>
+<p>[参考链接]<br>（<a href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html" target="_blank" rel="noopener">https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html</a> ）<br>（<a href="https://blog.csdn.net/gsl9d1p04f6x2ts3c9/article/details/81024330" target="_blank" rel="noopener">https://blog.csdn.net/gsl9d1p04f6x2ts3c9/article/details/81024330</a> ）<br>（<a href="https://www.cnblogs.com/trista222/p/8017300.html）" target="_blank" rel="noopener">https://www.cnblogs.com/trista222/p/8017300.html）</a></p>
+]]></content>
+      <tags>
+        <tag>think</tag>
+        <tag>idea</tag>
       </tags>
   </entry>
   <entry>
@@ -1137,21 +1137,27 @@ setTimeout2           process2
 <li>字符串是不可变的，一旦字符串被创建，就无法改变它，但可以通过+ 运算符的连接来创建新的字符串</li>
 </ul>
 <h4 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h4><ul>
-<li>顺序，选择，循环语句</li>
-<li>一个编译单元包含一组可执行的语句。在浏览器中，script标签提供一个被编译且立即执行的编译单元。</li>
-<li>由于缺少链接器，js将它们一起抛到一个公共的全局命名空间中</li>
-<li>在JS中 false、null、undefined、空字符串、数字0、数字 NaN都被当成假，其它所有的值都是真的，包括true,’false’,以及所有的对象</li>
-<li>注意:<code>for</code>语句<ol>
+<li><p>顺序，选择，循环语句</p>
+</li>
+<li><p>一个编译单元包含一组可执行的语句。在浏览器中，script标签提供一个被编译且立即执行的编译单元。</p>
+</li>
+<li><p>由于缺少链接器，js将它们一起抛到一个公共的全局命名空间中</p>
+</li>
+<li><p>在JS中 false、null、undefined、空字符串、数字0、数字 NaN都被当成假，其它所有的值都是真的，包括true,’false’,以及所有的对象</p>
+</li>
+<li><p>注意:<code>for</code>语句</p>
+<ol>
 <li>一种是常见的三个参数（初始化从句、条件从句、增量从句）</li>
 <li>另一种形式是<code>for in</code>语句，枚举一个对象的所有属性名，每次循环后，object的下一个属性名字符串会赋给variable<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for(attr in obj)&#123;</span><br><span class="line"> if(obj.hasOwnProperty(attr))&#123;</span><br><span class="line"> </span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
 </li>
 </ol>
+<blockquote>
+<p>一般需要通过检测obj.hasOwnProperty(attr)来判断这个属性名是这个对象的成员，还是来自<strong>原型链</strong></p>
+</blockquote>
 </li>
-</ul>
-<pre><code>&gt;一般需要通过检测obj.hasOwnProperty(attr)来判断这个属性名是这个对象的成员，还是来自**原型链**</code></pre><ul>
-<li>try语句<ol>
+<li><p>try语句</p>
+<ol>
 <li>try语句执行一个代码块，并捕获该代码块抛出的任何异常。</li>
 <li>catch从句定义一个新的变量variable来接受抛出的异常对象</li>
 <li>throw语句抛出一个异常，若该语句在try代码块中，控制流将会跳转到catch从句中。若throw语句在函数中，则该函数调用被放弃，控制流调用该函数的try语句中的catch从句</li>
