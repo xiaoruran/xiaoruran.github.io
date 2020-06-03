@@ -154,7 +154,7 @@
 <li>在JS中 false、null、undefined、空字符串、数字0、数字 NaN都被当成假，其它所有的值都是真的，包括true,’false’,以及所有的对象</li>
 <li>注意:<code>for</code>语句<ol>
 <li>一种是常见的三个参数（初始化从句、条件从句、增量从句）</li>
-<li>另一种形式是<code>for in</code>语句，枚举一个对象的所有属性名，每次循环后，object的下一个属性名字符串会赋给variable<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">   for(attr in obj)&#123;</span><br><span class="line">       if(obj.hasOwnProperty(attr))&#123;</span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   ``` </span><br><span class="line">   &gt;一般需要通过检测obj.hasOwnProperty(attr)来判断这个属性名是这个对象的成员，还是来自**原型链**</span><br><span class="line">+ try语句</span><br><span class="line">   1. try语句执行一个代码块，并捕获该代码块抛出的任何异常。</span><br><span class="line">   2. catch从句定义一个新的变量variable来接受抛出的异常对象</span><br><span class="line">   3. throw语句抛出一个异常，若该语句在try代码块中，控制流将会跳转到catch从句中。若throw语句在函数中，则该函数调用被放弃，控制流调用该函数的try语句中的catch从句</span><br><span class="line"></span><br><span class="line">#### 表达式</span><br><span class="line">+ 最简单的表达式时字面量值（比如字符串或数字）、变量、内置的值（true、false、null、undefined、NaN和Infinity）、以new开头的调用表达式、以delete开头的属性提取表达式、包在圆括号内的表达式...</span><br><span class="line">+ 运算符优先级</span><br><span class="line">   1. `.` `[]` `()` 提取属性与调用函数</span><br><span class="line">   2. `delete` `new` `typeof` `+` `-` `!` 一元运算符</span><br><span class="line">   3. `*` `/` `%` 乘法、除法、求余</span><br><span class="line">   4. `+` `-` 加法、减法</span><br><span class="line">   5. `&lt;==` `&gt;==` `&gt;` `&lt;`关系运算符，不等式运算符</span><br><span class="line">   6. `===` `!==` 等式运算符</span><br><span class="line">   7. `&amp;&amp;` 逻辑与</span><br><span class="line">   8. `||` 逻辑或</span><br><span class="line">   9. `? : ` 三元运算符</span><br><span class="line">   &gt;&amp;&amp; 与&amp;的区别： 两种都能用作逻辑与，&amp;是当两边的表达式为真时，才能为真。&amp;&amp;是短路测试，当前面的表达式为假时，不需要测试后面的表达式</span><br><span class="line">+ `typedef`语句</span><br><span class="line">   + 用typedef运算符产生的值有`number` `string` `boolean` `undefined` `function` `object`</span><br><span class="line"></span><br><span class="line">#### 字面量</span><br><span class="line">   1. 对象字面量</span><br><span class="line">   2. 数组字面量</span><br><span class="line">   3. 函数字面量</span><br><span class="line"></span><br><span class="line">### 对象（key-value）</span><br><span class="line"> JavaScript中的简单数据类型包括数字、字符串、布尔值、null和undefined值，其他的所有制都是对象。数字、字符串、布尔值貌似对象，因为他们拥有方法，但他们不可变。</span><br><span class="line"></span><br><span class="line"> 数组是对象，函数是对象，正则表达式是对象。</span><br><span class="line"> + 对象是属性的容器，其中每个属性都有自己的名字和值。属性名是包含空字符串在内的任意字符串。属性值可以是出undefined值之外的任何值</span><br><span class="line"> + JS中的对象是无类型的，对属性名和值没有限制。</span><br><span class="line"> + **JS包含一种原型链的特征，允许对象继承另一个对象的属性。正确的使用能减少对象初始化时消耗的内存与时间**</span><br><span class="line"></span><br><span class="line">### JS函数</span><br><span class="line">* 函数就是对象。对象是“key-value”对的集合并拥有一个连到原型对象的隐藏连接。对象字面量产生的对象连接到Object.prototype。函数对象连接到Function.prototype（该原型对象本身连接到Object.prototype）。</span><br><span class="line"></span><br><span class="line">* 每个函数在创建时会附加两个隐藏属性：函数的上下文（也可以理解为call和apply方法，在Function.prototype中定义）和实现函数行为的代码</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### 函数字面量</span><br><span class="line">* 函数通过函数字面量来创建</span><br><span class="line">   1. 第一部分为保留字 `function`</span><br><span class="line">   2. 第二部分时函数名，可以省略，这样的话就是匿名函数（anonymous）</span><br><span class="line">   3. 第三部分时包围在圆括号内的一组参数，**javascript不对参数列表做强匹配，当实参少于形参，剩下形参的值就为undefined，当实参多余形参个数时，只会匹配前几个实参，剩下多余的实参会直接忽略，任何类型的值可以被传递给任何参数**</span><br><span class="line">   4. 第四部分为包围在花括号的一组语句，这是函数的主题，在函数被调用时执行</span><br><span class="line"></span><br><span class="line">#### 函数调用</span><br><span class="line">在调用函数时，每个函数会接受两个附加的参数：`this`和`arguments`，参数this在面向对象编程时非常重要，**this的值取决于调用的模式**</span><br><span class="line"></span><br><span class="line">#### 函数调用模式</span><br><span class="line">1. 方法调用模式</span><br><span class="line">此模式主要是指：当函数声明在一个对象之中，这个函数属于对象的一个方法，此时函数内部的this属性被绑定到该对象中，这是this可以访问自己所属的对象</span><br></pre></td></tr></table></figure>
+<li>另一种形式是<code>for in</code>语句，枚举一个对象的所有属性名，每次循环后，object的下一个属性名字符串会赋给variable<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">        for(attr in obj)&#123;</span><br><span class="line">         if(obj.hasOwnProperty(attr))&#123;</span><br><span class="line"> </span><br><span class="line">         &#125;</span><br><span class="line">        &#125;</span><br><span class="line">       ``` </span><br><span class="line">   &gt;一般需要通过检测obj.hasOwnProperty(attr)来判断这个属性名是这个对象的成员，还是来自**原型链**</span><br><span class="line">+ try语句</span><br><span class="line">   1. try语句执行一个代码块，并捕获该代码块抛出的任何异常。</span><br><span class="line">   2. catch从句定义一个新的变量variable来接受抛出的异常对象</span><br><span class="line">   3. throw语句抛出一个异常，若该语句在try代码块中，控制流将会跳转到catch从句中。若throw语句在函数中，则该函数调用被放弃，控制流调用该函数的try语句中的catch从句</span><br><span class="line"></span><br><span class="line">#### 表达式</span><br><span class="line">+ 最简单的表达式时字面量值（比如字符串或数字）、变量、内置的值（true、false、null、undefined、NaN和Infinity）、以new开头的调用表达式、以delete开头的属性提取表达式、包在圆括号内的表达式...</span><br><span class="line">+ 运算符优先级</span><br><span class="line">   1. `.` `[]` `()` 提取属性与调用函数</span><br><span class="line">   2. `delete` `new` `typeof` `+` `-` `!` 一元运算符</span><br><span class="line">   3. `*` `/` `%` 乘法、除法、求余</span><br><span class="line">   4. `+` `-` 加法、减法</span><br><span class="line">   5. `&lt;==` `&gt;==` `&gt;` `&lt;`关系运算符，不等式运算符</span><br><span class="line">   6. `===` `!==` 等式运算符</span><br><span class="line">   7. `&amp;&amp;` 逻辑与</span><br><span class="line">   8. `||` 逻辑或</span><br><span class="line">   9. `? : ` 三元运算符</span><br><span class="line">   &gt;&amp;&amp; 与&amp;的区别： 两种都能用作逻辑与，&amp;是当两边的表达式为真时，才能为真。&amp;&amp;是短路测试，当前面的表达式为假时，不需要测试后面的表达式</span><br><span class="line">+ `typedef`语句</span><br><span class="line">   + 用typedef运算符产生的值有`number` `string` `boolean` `undefined` `function` `object`</span><br><span class="line"></span><br><span class="line">#### 字面量</span><br><span class="line">   1. 对象字面量</span><br><span class="line">   2. 数组字面量</span><br><span class="line">   3. 函数字面量</span><br><span class="line"></span><br><span class="line">### 对象（key-value）</span><br><span class="line"> JavaScript中的简单数据类型包括数字、字符串、布尔值、null和undefined值，其他的所有制都是对象。数字、字符串、布尔值貌似对象，因为他们拥有方法，但他们不可变。</span><br><span class="line"></span><br><span class="line"> 数组是对象，函数是对象，正则表达式是对象。</span><br><span class="line"> + 对象是属性的容器，其中每个属性都有自己的名字和值。属性名是包含空字符串在内的任意字符串。属性值可以是出undefined值之外的任何值</span><br><span class="line"> + JS中的对象是无类型的，对属性名和值没有限制。</span><br><span class="line"> + **JS包含一种原型链的特征，允许对象继承另一个对象的属性。正确的使用能减少对象初始化时消耗的内存与时间**</span><br><span class="line"></span><br><span class="line">### JS函数</span><br><span class="line">* 函数就是对象。对象是“key-value”对的集合并拥有一个连到原型对象的隐藏连接。对象字面量产生的对象连接到Object.prototype。函数对象连接到Function.prototype（该原型对象本身连接到Object.prototype）。</span><br><span class="line"></span><br><span class="line">* 每个函数在创建时会附加两个隐藏属性：函数的上下文（也可以理解为call和apply方法，在Function.prototype中定义）和实现函数行为的代码</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### 函数字面量</span><br><span class="line">* 函数通过函数字面量来创建</span><br><span class="line">   1. 第一部分为保留字 `function`</span><br><span class="line">   2. 第二部分时函数名，可以省略，这样的话就是匿名函数（anonymous）</span><br><span class="line">   3. 第三部分时包围在圆括号内的一组参数，**javascript不对参数列表做强匹配，当实参少于形参，剩下形参的值就为undefined，当实参多余形参个数时，只会匹配前几个实参，剩下多余的实参会直接忽略，任何类型的值可以被传递给任何参数**</span><br><span class="line">   4. 第四部分为包围在花括号的一组语句，这是函数的主题，在函数被调用时执行</span><br><span class="line"></span><br><span class="line">#### 函数调用</span><br><span class="line">在调用函数时，每个函数会接受两个附加的参数：`this`和`arguments`，参数this在面向对象编程时非常重要，**this的值取决于调用的模式**</span><br><span class="line"></span><br><span class="line">#### 函数调用模式</span><br><span class="line">1. 方法调用模式</span><br><span class="line">此模式主要是指：当函数声明在一个对象之中，这个函数属于对象的一个方法，此时函数内部的this属性被绑定到该对象中，这是this可以访问自己所属的对象</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
@@ -163,141 +163,133 @@
 <p>var myObject={<br>    value: 0,<br>    add : function(el){<br>       this.value += typeof el===”number” ?el:1;<br>    }<br>}<br>myObject.add(2);<br>console.log(myObject.value)  // 2<br>myObject.add();<br>console.log(myObject.value)  // 3</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;这里的this是访问myObject对象，它能从对象中取值或对对象进行修改。通过this可以取得所属对象的上下文的方法称为公共方法</span><br><span class="line">2. 函数调用模式</span><br><span class="line">当一个函数并非一个对象的属性时，那么它就是被当作一个函数来调用的</span><br><span class="line">   * 以此模式调用函数时，this会绑定到全局对象。不能利用内部函数来帮助它工作。但可以定义一个变量并给他赋值为this，则内部函数就可以通过那个变量访问到this</span><br></pre></td></tr></table></figure>
 
-<p>function foo(){<br>    console.log(this);<br>}</p>
-<p>foo();   //this指的是全局对象window</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">var myObject=&#123;</span><br><span class="line">    value: 1,</span><br><span class="line">    add : function(el)&#123;</span><br><span class="line">       this.value += typeof el===&quot;number&quot; ?el:1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">myObject.double=function()&#123;</span><br><span class="line">    var that=this;</span><br><span class="line">    //定义一个函数，这个helper函数中的this是全局对象window</span><br><span class="line">    var helper=function()&#123;</span><br><span class="line">        that.value+=that.value</span><br><span class="line">    &#125;</span><br><span class="line">    helper();</span><br><span class="line">&#125;</span><br><span class="line">myObject.double();</span><br><span class="line">console.log(myObject.value)   //2</span><br></pre></td></tr></table></figure>
+<pre><code>function foo(){
+    console.log(this);
+}
 
-<blockquote>
-<p>此时可以通过that访问到myObject对象</p>
-<ol start="3">
-<li>构造器调用模式<br>javascript是基于原型继承的语言<ul>
-<li>提供了一套与基于类的语言（java）类似的对象构建语法。</li>
-<li>若在一个函数前面加上<code>new</code>来调用，那么背地里会创建一个连接到该函数的<code>prototype</code>成员的新对象，<strong>同时this会被绑定到这个新对象上</strong>。</li>
-<li><code>new</code> 前缀会改变return语句的行为</li>
-<li><strong>通过prototype来创建的方法或属性，是为所有的new实例所共有的</strong></li>
-</ul>
-</li>
-</ol>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var newObject=function(str)&#123;</span><br><span class="line">   this.value=str;</span><br><span class="line">&#125;</span><br><span class="line">//通过prototype 创建属于所有实例的新方法或者属性</span><br><span class="line"> newObject.prototype.getValue=function()&#123;</span><br><span class="line">     return this.value;</span><br><span class="line"> &#125;</span><br><span class="line"> //通过new来创建实例</span><br><span class="line"> var obj=new newObject(&quot;hhhh&quot;)</span><br><span class="line"> console.log(obj.getValue());</span><br></pre></td></tr></table></figure>
+foo();   //this指的是全局对象window</code></pre>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>若一个函数通过new来调用，则称之为<em>构造器函数</em></p>
-<ul>
-<li>这里不推荐使用此模式来调用函数<ol start="4">
-<li>上下文调用模式（apply/call调用模式）<br>JavaScript是一门函数式的面向对象编程语言，函数可以拥有方法</li>
-</ol>
-</li>
-<li>上下文模式：根据用户传递的参数，指定函数内部不同的this的值</li>
-<li>核心形式： 以call/apply方法来调用某个函数</li>
-<li>call/apply方法定义在Function.prototype对象中，每个函数都能访问到这两个方法</li>
-<li>function fn(){}<br>fn—&gt;fn._<em>proto_</em>(Function.prototype)–&gt;fn._<em>proto_</em>._<em>proto_</em>(Object.prototype)<ul>
-<li>语法形式<ul>
-<li>函数名.call(…)</li>
-<li>函数名.apply(…)<br>这两种形式功能一样，唯一不同的就是参数的形式</li>
-</ul>
-</li>
-<li>apply时，第一个参数要么是对象，要么是null。如果是null/undefined就是函数调用，如果是对象，则是对象的方法调用。后面的参数是一个数组参数，将函数的参数依次放在数组中<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    function up(str)&#123;</span><br><span class="line">     console.log(this);</span><br><span class="line">    </span><br><span class="line"> &#125;</span><br><span class="line"> var obj=&#123;</span><br><span class="line">     name: &quot;hhh&quot;,</span><br><span class="line">     age: 10</span><br><span class="line"> &#125;</span><br><span class="line">up.apply(obj);  // &#123;name: &quot;hhh&quot;, age: 10&#125;</span><br><span class="line"> //此时的this指的是obj</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">     function up(str)&#123;</span><br><span class="line">    console.log(this);</span><br><span class="line">   </span><br><span class="line">&#125;</span><br><span class="line">var obj=&#123;</span><br><span class="line">    name: &quot;hhh&quot;,</span><br><span class="line">    age: 10</span><br><span class="line">&#125;</span><br><span class="line"> up.apply(null);  // window</span><br><span class="line"> //此时的this指的是window</span><br></pre></td></tr></table></figure>
+<pre><code>var myObject={
+    value: 1,
+    add : function(el){
+     this.value += typeof el===&quot;number&quot; ?el:1;
+    }
+}
+myObject.double=function(){
+    var that=this;
+    //定义一个函数，这个helper函数中的this是全局对象window
+    var helper=function(){
+      that.value+=that.value
+ }
+    helper();
+}
+myObject.double();
+console.log(myObject.value)   //2</code></pre>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; 此时可以通过that访问到myObject对象</span><br><span class="line">3. 构造器调用模式</span><br><span class="line">javascript是基于原型继承的语言</span><br><span class="line">   * 提供了一套与基于类的语言（java）类似的对象构建语法。</span><br><span class="line">   * 若在一个函数前面加上`new`来调用，那么背地里会创建一个连接到该函数的`prototype`成员的新对象，**同时this会被绑定到这个新对象上**。</span><br><span class="line">   * `new` 前缀会改变return语句的行为</span><br><span class="line">   * **通过prototype来创建的方法或属性，是为所有的new实例所共有的**</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>call时，其他与apply相同，只是参数列表可以不用数组，可以直接使用，，这样的形式</li>
-</ul>
-<h4 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h4><p>当函数被调用时，会得到一个免费配送的参数，那就是<code>arguments</code>数组，这并不是一个严格的数组，只是一个类似数组的对象，拥有一个length的属性，没有任何数组的方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function arg()&#123;</span><br><span class="line">   var i=0;</span><br><span class="line">   var sum=0;</span><br><span class="line">   for(i=0;i&lt;arguments.length;i++)&#123;</span><br><span class="line">       sum+=arguments[i];</span><br><span class="line">   &#125; </span><br><span class="line">   return sum;</span><br><span class="line">&#125;</span><br><span class="line">var sum=arg(1,2,3,4);</span><br><span class="line">console.log(sum);  //10</span><br></pre></td></tr></table></figure>
+<pre><code>var newObject=function(str){
+this.value=str;
+}
+//通过prototype 创建属于所有实例的新方法或者属性
+newObject.prototype.getValue=function(){
+    return this.value;
+}
+ //通过new来创建实例
+ var obj=new newObject(&quot;hhhh&quot;)
+console.log(obj.getValue());</code></pre>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt; 若一个函数通过new来调用，则称之为*构造器函数*</span><br><span class="line">   * 这里不推荐使用此模式来调用函数</span><br><span class="line">4. 上下文调用模式（apply/call调用模式）</span><br><span class="line">JavaScript是一门函数式的面向对象编程语言，函数可以拥有方法</span><br><span class="line">   * 上下文模式：根据用户传递的参数，指定函数内部不同的this的值</span><br><span class="line">   * 核心形式： 以call/apply方法来调用某个函数</span><br><span class="line">   * call/apply方法定义在Function.prototype对象中，每个函数都能访问到这两个方法</span><br><span class="line">   *  function fn()&#123;&#125;</span><br><span class="line">      fn---&gt;fn.\__proto\__(Function.prototype)--&gt;fn.\__proto\__.\__proto\__(Object.prototype)</span><br><span class="line">    * 语法形式</span><br><span class="line">       * 函数名.call(...)</span><br><span class="line">       * 函数名.apply(...)</span><br><span class="line">    这两种形式功能一样，唯一不同的就是参数的形式</span><br><span class="line">* apply时，第一个参数要么是对象，要么是null。如果是null/undefined就是函数调用，如果是对象，则是对象的方法调用。后面的参数是一个数组参数，将函数的参数依次放在数组中</span><br></pre></td></tr></table></figure>
 
-<h4 id="返回"><a href="#返回" class="headerlink" title="返回"></a>返回</h4><p>一个函数总会返回一个值。如果没有指定返回值，则返回undefined。<br>如果函数调用时在前面加上了new前缀，且返回值不是一个对象，则返回this（该新对象）</p>
-<h4 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function exe(a,b)&#123;</span><br><span class="line">    try&#123;</span><br><span class="line">    if(typeof a !== &quot;number&quot; || typeof b !== &quot;number&quot;)&#123;</span><br><span class="line">        //抛出一个Error实例,第一个参数为name,第二个参数为message,也可以自定义其他的参数，可以在catch方法参数e对象中获取</span><br><span class="line">        throw new Error(&quot;typeError&quot;,&quot;类型不是number&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;catch(e)&#123;</span><br><span class="line">    console.log(e.name+ &quot;---&quot;+ e.message);</span><br><span class="line">      return undefined;</span><br><span class="line">&#125;</span><br><span class="line">    return a+b;</span><br><span class="line">&#125;</span><br><span class="line">var x=exe(2,&quot;dd&quot;); //Error---typeError undefined</span><br></pre></td></tr></table></figure>
+<pre><code>function up(str){
+  console.log(this);
+}
+var obj={
+    name: &quot;hhh&quot;,
+    age: 10
+}
+up.apply(obj);  // {name: &quot;hhh&quot;, age: 10}
+//此时的this指的是obj
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
 
-<h3 id="扩充类型的功能"><a href="#扩充类型的功能" class="headerlink" title="扩充类型的功能"></a>扩充类型的功能</h3><p>JS中可以给语言的基本类型扩充功能。可以给Object.prototype添加方法，可以让该方法对所有对象都可用。<br>这样的方式对函数、数组、字符串、布尔、数字、正则表达式都适用</p>
-<ol>
-<li><p>首先可以给Function.prototype增加方法来使得该方法对所有函数可用：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//通过增加一个method方法，便于下次给对象增加方法时就不必键入prototype，省掉一些麻烦</span><br><span class="line">Function.prototype.method=function(name,func)&#123;</span><br><span class="line">    //由于相当于在对象里面增加方法，所以此时this指代的是Function</span><br><span class="line">    this.prototype[name]=func;</span><br><span class="line">    return this;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>接下来就可以给基本数据类型增加方法了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//给String类型增加方法</span><br><span class="line">String.method(&quot;addstr&quot;,function()&#123;</span><br><span class="line">    return this+&quot;addstr&quot;;</span><br><span class="line">&#125;)</span><br><span class="line">console.log(&quot;xixixi&quot;.addstr()); //&quot;xixixiaddstr&quot;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>基本类型的原型是公用结构，在类库混用时一定要无比小心。一个保险的做法就是只在确定没有该方法时才添加它</p>
-</li>
-</ol>
-<p>理解：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Function.prototype.method=function(fulname,val)&#123;</span><br><span class="line">  if(!this.prototype[fulname])&#123;</span><br><span class="line">    this.prototype[fulname]=val;</span><br><span class="line">  &#125;</span><br><span class="line">  return this;</span><br><span class="line">&#125;</span><br><span class="line">Function.method(&apos;bind&apos;,function(_arg)&#123;</span><br><span class="line">  var met=this; //这个this应该是bind此方法</span><br><span class="line">  console.log(this);</span><br><span class="line">  var slice=Array.prototype.slice;</span><br><span class="line">  var args=slice.apply(arguments,[1]); //argguments指的是bing方法所带的参数</span><br><span class="line">  return function()&#123;</span><br><span class="line">    return met.apply(_arg,args.concat(slice.apply(arguments,[0])));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">var x=function()&#123;</span><br><span class="line">  return this.value;</span><br><span class="line">&#125;.bind(&#123;value:11&#125;);</span><br><span class="line">console.log(x());   //11</span><br></pre></td></tr></table></figure>
+function up(str){
+ console.log(this);
+}
+var obj={
+ name: &quot;hhh&quot;,
+ age: 10
+}</code></pre><p>   up.apply(null);  // window<br>   //此时的this指的是window<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">* call时，其他与apply相同，只是参数列表可以不用数组，可以直接使用，，这样的形式</span><br><span class="line"></span><br><span class="line">#### 函数参数</span><br><span class="line">当函数被调用时，会得到一个免费配送的参数，那就是`arguments`数组，这并不是一个严格的数组，只是一个类似数组的对象，拥有一个length的属性，没有任何数组的方法</span><br></pre></td></tr></table></figure></p>
+<pre><code>function arg(){
+var i=0;
+var sum=0;
+for(i=0;i&lt;arguments.length;i++){
+   sum+=arguments[i];
+} 
+return sum;
+}
+var sum=arg(1,2,3,4);
+console.log(sum);  //10</code></pre>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 返回</span><br><span class="line">一个函数总会返回一个值。如果没有指定返回值，则返回undefined。</span><br><span class="line">如果函数调用时在前面加上了new前缀，且返回值不是一个对象，则返回this（该新对象）</span><br><span class="line"></span><br><span class="line">#### 异常</span><br></pre></td></tr></table></figure>
 
-<h3 id="JS数组"><a href="#JS数组" class="headerlink" title="JS数组"></a>JS数组</h3><p>数组是一段线性分配的内存，它通过整数计算偏移来访问其中的元素。JavaScript没有像此类数组一样的数据结构。<br>它拥有一种类数组（array-like）特性的对象。它把数组的下表转换为字符串，用其作为属性，它比真正的数组慢，它的属性的检索和更新的方式与对象一摸一样。</p>
-<ul>
-<li><p>js中的数组不必要求类型一致</p>
-</li>
-<li><p>长度： js中数组的length属性是没有上界的</p>
-</li>
-<li><p>可以直接设置length的值，设置更大的length并不会给数组分配更多的空间。但将length设置小会导致所有下标大于新的length的属性将被删除</p>
-</li>
-<li><p>删除：</p>
-<ul>
-<li><p><code>splice</code>方法:该方法会改变原来的数组，它可以删除元素，可以替换元素，可以在数组的指定位置插入（添加）元素</p>
-<ol>
-<li>splice(2,1) 则是在索引为2的位置删除一个元素，若果是删除元素，则返回的是含有被删除元素的数组</li>
-<li>splice(2,0,1) 则是在索引为2的位置插入1这个元素</li>
-</ol>
-</li>
-<li><p><code>slice()</code>方法：此方法是用来从数组中提取指定元素，不会改变原有数组，将截取到的元素封装到一个新的数组中返回</p>
-<ol>
-<li>语法：annayObject.slice(start,end); 前闭后开 </li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p>遍历</p>
-<ol>
-<li><p>使用for in 语句来遍历一个数组的所有属性，但无法保证属性的顺序</p>
-<blockquote>
-<p>并且此方法可能会从原型链中得到意外属性</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for (const key in object) &#123;</span><br><span class="line">    if (object.hasOwnProperty(key)) &#123;</span><br><span class="line">      const element = object[key];&#125;</span><br><span class="line">       &#125;</span><br><span class="line">       //避免遍历继承属性</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>常规的for语句可以避免这些问题</p>
-</li>
-</ol>
-</li>
-<li><p>使用typeof判断数组会出现’object’</p>
-</li>
-<li><p>判断一个对象是否为数组</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var is_arrry=function(val)&#123;</span><br><span class="line">return val &amp;&amp; typeof val ===&apos;object&apos; &amp;&amp; val.constructor === Array</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<pre><code>function exe(a,b){
+    try{
+    if(typeof a !== &quot;number&quot; || typeof b !== &quot;number&quot;){
+        //抛出一个Error实例,第一个参数为name,第二个参数为message,也可以自定义其他的参数，可以在catch方法参数e对象中获取
+        throw new Error(&quot;typeError&quot;,&quot;类型不是number&quot;);
+    }
+}catch(e){
+    console.log(e.name+ &quot;---&quot;+ e.message);
+    return undefined;
+}
+    return a+b;
+}
+var x=exe(2,&quot;dd&quot;); //Error---typeError undefined</code></pre>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">### 扩充类型的功能</span><br><span class="line">JS中可以给语言的基本类型扩充功能。可以给Object.prototype添加方法，可以让该方法对所有对象都可用。</span><br><span class="line">这样的方式对函数、数组、字符串、布尔、数字、正则表达式都适用</span><br><span class="line">1. 首先可以给Function.prototype增加方法来使得该方法对所有函数可用：</span><br></pre></td></tr></table></figure>
 
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">   //由于原型链的存在，使得扩充方法更加简单</span><br><span class="line">   Object.prototype.method=function(funname,val)&#123;</span><br><span class="line"> if(!this.prototype[funname])&#123;</span><br><span class="line">   this.prototype[funname]=val;</span><br><span class="line"> &#125;</span><br><span class="line"> return this;</span><br><span class="line">&#125;</span><br><span class="line">Array.method(&apos;reduce&apos;,function(f,value)&#123;</span><br><span class="line">  var i;</span><br><span class="line">  for(i=0;i&lt;this.length;i++)&#123;</span><br><span class="line">    value=f(this[i],value);</span><br><span class="line">  &#125;</span><br><span class="line">  return value;</span><br><span class="line">&#125;) </span><br><span class="line">var date=[1,2,3,4];</span><br><span class="line">var add=function(a,b)&#123;</span><br><span class="line">   return a+b;</span><br><span class="line">&#125;</span><br><span class="line">var sum=date.reduce(add,0);</span><br><span class="line">console.log(sum);  //10</span><br></pre></td></tr></table></figure>
+<p>//通过增加一个method方法，便于下次给对象增加方法时就不必键入prototype，省掉一些麻烦<br>Function.prototype.method=function(name,func){<br>    //由于相当于在对象里面增加方法，所以此时this指代的是Function<br>    this.prototype[name]=func;<br>    return this;<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2. 接下来就可以给基本数据类型增加方法了</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li><code>concat()</code>方法<ol>
-<li>产生一个新数组，包含一份原数组的浅复制，并把一个或多个参数item附在其后面，如果参数item是一个数组，那么它的每个元素被分别添加</li>
-<li>var a=[1,2,3],b=[4,5,6]; var c=a.concat(b,true);此时的c为[1,2,3,4,5,6,true];</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p><code>array.join()</code>方法:主要用来将数组构造成一个字符串，通过参数的形式来进行连接，默认的参数为逗号<code>,</code>.</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a=[&apos;1&apos;,3,4];</span><br><span class="line">var c=a.join(&quot;、&quot;);</span><br><span class="line">var d=a.join();</span><br><span class="line">console.log(c);// 1、3、4</span><br><span class="line">console.log(d); // 1,3,4</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>array.pop()</code>方法 ：使得数组可以像堆栈那样工作。pop方法移除array中的最后一个元素并返回该元素，如果array是empty，则返回undefined。</p>
-</li>
-<li><p><code>array.push()</code>方法：该方法将一个或多个参数附加到array的尾部。如果item是一个数组，会把整个数组作为单个元素添加进去，并返回这个array的最新长度值</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a=[1,3,4];</span><br><span class="line">var b=[true,&quot;hh&quot;];</span><br><span class="line">var c=a.push(b);//此时a=[[1,3,4,[true,&quot;hh&quot;]]</span><br><span class="line">var d=c.join();</span><br><span class="line">console.log(c);//4</span><br><span class="line">console.log(d);//1,3,4,true,hh</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>array.reverse()</code>方法：该方法反转array里的元素的顺序，并返回array本身；</p>
-</li>
-<li><p><code>array.shift()</code>方法：该方法移除array中的第一个元素并返回该元素</p>
-<ol>
-<li>若数组是空的，则返回undefined;</li>
-<li>shift通常比pop慢很多</li>
-</ol>
-</li>
-<li><p><code>array.unshift()</code>方法：与push方法一样，用于把元素添加到数组中去，但它是吧item插入到array的<em>开始部分</em>，返回array的新length</p>
-</li>
-</ul>
+<p>//给String类型增加方法<br>String.method(“addstr”,function(){<br>    return this+”addstr”;<br>})<br>console.log(“xixixi”.addstr()); //“xixixiaddstr”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">3. 基本类型的原型是公用结构，在类库混用时一定要无比小心。一个保险的做法就是只在确定没有该方法时才添加它</span><br><span class="line"></span><br><span class="line">理解：</span><br></pre></td></tr></table></figure>
 
+<p>Function.prototype.method=function(fulname,val){<br>  if(!this.prototype[fulname]){<br>    this.prototype[fulname]=val;<br>  }<br>  return this;<br>}<br>Function.method(‘bind’,function(_arg){<br>  var met=this; //这个this应该是bind此方法<br>  console.log(this);<br>  var slice=Array.prototype.slice;<br>  var args=slice.apply(arguments,[1]); //argguments指的是bing方法所带的参数<br>  return function(){<br>    return met.apply(_arg,args.concat(slice.apply(arguments,[0])));<br>  }<br>});<br>var x=function(){<br>  return this.value;<br>}.bind({value:11});<br>console.log(x());   //11</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### JS数组</span><br><span class="line">数组是一段线性分配的内存，它通过整数计算偏移来访问其中的元素。JavaScript没有像此类数组一样的数据结构。</span><br><span class="line">它拥有一种类数组（array-like）特性的对象。它把数组的下表转换为字符串，用其作为属性，它比真正的数组慢，它的属性的检索和更新的方式与对象一摸一样。</span><br><span class="line">+ js中的数组不必要求类型一致</span><br><span class="line">+ 长度： js中数组的length属性是没有上界的</span><br><span class="line">+ 可以直接设置length的值，设置更大的length并不会给数组分配更多的空间。但将length设置小会导致所有下标大于新的length的属性将被删除</span><br><span class="line">+ 删除：</span><br><span class="line">   + `splice`方法:该方法会改变原来的数组，它可以删除元素，可以替换元素，可以在数组的指定位置插入（添加）元素</span><br><span class="line">      1. splice(2,1) 则是在索引为2的位置删除一个元素，若果是删除元素，则返回的是含有被删除元素的数组</span><br><span class="line">      2. splice(2,0,1) 则是在索引为2的位置插入1这个元素</span><br><span class="line">    </span><br><span class="line">   + `slice()`方法：此方法是用来从数组中提取指定元素，不会改变原有数组，将截取到的元素封装到一个新的数组中返回</span><br><span class="line">      1. 语法：annayObject.slice(start,end); 前闭后开 </span><br><span class="line">+ 遍历</span><br><span class="line">   1. 使用for in 语句来遍历一个数组的所有属性，但无法保证属性的顺序</span><br><span class="line">   &gt;并且此方法可能会从原型链中得到意外属性</span><br></pre></td></tr></table></figure>
+
+<pre><code>for (const key in object) {
+    if (object.hasOwnProperty(key)) {
+      const element = object[key];}
+       }
+       //避免遍历继承属性</code></pre>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   2. 常规的for语句可以避免这些问题</span><br><span class="line">+ 使用typeof判断数组会出现&apos;object&apos;</span><br><span class="line">+ 判断一个对象是否为数组</span><br></pre></td></tr></table></figure>
+
+<p>   var is_arrry=function(val){<br>   return val &amp;&amp; typeof val ===’object’ &amp;&amp; val.constructor === Array<br>    }<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure></p>
+<p>   //由于原型链的存在，使得扩充方法更加简单<br>   Object.prototype.method=function(funname,val){<br> if(!this.prototype[funname]){<br>   this.prototype[funname]=val;<br> }<br> return this;<br>}<br>Array.method(‘reduce’,function(f,value){<br>  var i;<br>  for(i=0;i&lt;this.length;i++){<br>    value=f(this[i],value);<br>  }<br>  return value;<br>})<br>var date=[1,2,3,4];<br>var add=function(a,b){<br>   return a+b;<br>}<br>var sum=date.reduce(add,0);<br>console.log(sum);  //10<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   + `concat()`方法</span><br><span class="line">      1. 产生一个新数组，包含一份原数组的浅复制，并把一个或多个参数item附在其后面，如果参数item是一个数组，那么它的每个元素被分别添加</span><br><span class="line">      2. var a=[1,2,3],b=[4,5,6]; var c=a.concat(b,true);此时的c为[1,2,3,4,5,6,true];</span><br><span class="line">+ `array.join()`方法:主要用来将数组构造成一个字符串，通过参数的形式来进行连接，默认的参数为逗号`,`.</span><br></pre></td></tr></table></figure></p>
+<pre><code>var a=[&apos;1&apos;,3,4];
+var c=a.join(&quot;、&quot;);
+var d=a.join();
+console.log(c);// 1、3、4
+console.log(d); // 1,3,4</code></pre>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">+ `array.pop()`方法 ：使得数组可以像堆栈那样工作。pop方法移除array中的最后一个元素并返回该元素，如果array是empty，则返回undefined。</span><br><span class="line">+ `array.push()`方法：该方法将一个或多个参数附加到array的尾部。如果item是一个数组，会把整个数组作为单个元素添加进去，并返回这个array的最新长度值</span><br></pre></td></tr></table></figure>
+
+<p>   var a=[1,3,4];<br>   var b=[true,”hh”];<br>   var c=a.push(b);//此时a=[[1,3,4,[true,”hh”]]<br>   var d=c.join();<br>   console.log(c);//4<br>   console.log(d);//1,3,4,true,hh</p>
+<pre><code>+ `array.reverse()`方法：该方法反转array里的元素的顺序，并返回array本身；
++ `array.shift()`方法：该方法移除array中的第一个元素并返回该元素
+   1. 若数组是空的，则返回undefined;
+   2. shift通常比pop慢很多
++ `array.unshift()`方法：与push方法一样，用于把元素添加到数组中去，但它是吧item插入到array的*开始部分*，返回array的新length
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</code></pre>
       
       <!-- reward -->
       
