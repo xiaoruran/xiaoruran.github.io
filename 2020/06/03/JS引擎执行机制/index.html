@@ -141,7 +141,7 @@
 <li>宏任务: 包括整体代码<strong>script,setTimout,setInterval</strong></li>
 <li>微任务：宏任务底下的任务<strong>Promise，process.nextTick</strong><br>在一个事件循环中，执行第一个宏任务，宏任务执行结束，执行当前事件循环中的微任务，执行完毕之后进入下一个事件循环中，或者说执行下一个宏任务；</li>
 </ul>
-<p>   <strong>执行宏任务 ===&gt; 执行微任务 ===&gt; 执行另一个宏任务 ===&gt; 不断循环</strong><br>   <img src="/JS%E5%AE%8F%E4%BB%BB%E5%8A%A1%E4%B8%8E%E5%BE%AE%E4%BB%BB%E5%8A%A1.png" alt="avatar"></p>
+<p>   <strong>执行宏任务 ===&gt; 执行微任务 ===&gt; 执行另一个宏任务 ===&gt; 不断循环</strong><br>   <img src="/images/JS%E5%AE%8F%E4%BB%BB%E5%8A%A1%E4%B8%8E%E5%BE%AE%E4%BB%BB%E5%8A%A1.png" alt="avatar"></p>
 <p>   重新分析：</p>
 <ul>
 <li>首先执行script底下的宏任务，遇到setTimout,首先是异步任务，将其放入宏任务队列中</li>
