@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-06-02T14:30:01.539Z</updated>
+  <updated>2020-06-03T05:38:14.589Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Vue后续</title>
+    <link href="http://yoursite.com/2020/06/03/notevue4/"/>
+    <id>http://yoursite.com/2020/06/03/notevue4/</id>
+    <published>2020-06-03T13:38:55.000Z</published>
+    <updated>2020-06-03T05:38:14.589Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;Vue实例的生命周期&quot;&gt;&lt;a href=&quot;#Vue实例的生命周期&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="前端" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="前端" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="vue" scheme="http://yoursite.com/tags/vue/"/>
+    
+  </entry>
   
   <entry>
     <title>Vue之样式</title>
@@ -51,7 +80,7 @@
     <link href="http://yoursite.com/2020/06/03/vuenote1/"/>
     <id>http://yoursite.com/2020/06/03/vuenote1/</id>
     <published>2020-06-02T21:41:55.000Z</published>
-    <updated>2020-06-02T14:33:28.731Z</updated>
+    <updated>2020-06-02T14:35:31.951Z</updated>
     
     <summary type="html">
     
