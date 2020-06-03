@@ -14,30 +14,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JS之JSON</title>
-    <url>/2020/06/03/JSON/</url>
-    <content><![CDATA[<h3 id="JSON-JavaScript对象表示法"><a href="#JSON-JavaScript对象表示法" class="headerlink" title="JSON(JavaScript对象表示法)"></a>JSON(JavaScript对象表示法)</h3><p>这是一种轻量级的数据交换格式。基于JavaScript对象字面量表示法，那是JS最精华的部分之一。尽管只是JS的一个子集，但与语言无关。<br>现代编程语言写的程序，都可以用它来交换数据。它是一种文本格式，所以可以被人和机器阅读。<br>它易于实现且易于使用</p>
-<h4 id="JSON语法"><a href="#JSON语法" class="headerlink" title="JSON语法"></a>JSON语法</h4><ul>
-<li>JSON对象是一个相当于”key-value”的无序集合。名字可以是任何字符串，值可以是任何类型的JSON值，包括数组和对象</li>
-<li>JSON有六种类型的值：对象、数组、字符串、布尔类型、数字、和特殊值null</li>
-<li>JSON数字与JS数字类似，整数的首位不允许为0，因为一些语言用它来表示八进制数<h4 id="安全的使用JSON"><a href="#安全的使用JSON" class="headerlink" title="安全的使用JSON"></a>安全的使用JSON</h4></li>
-<li>使用eval函数可以把一段JSON文本转换为一个有用的数据结构，但是eval函数有着极其可怕的安全问题。</li>
-<li>可以使用<code>JSON.parse()</code>方法代替eval函数，能避免危险。如果文本中包含任何危险数据JSON.parse()会抛出一个异常，为防止服务器出现漏洞，建议总是用JSON.parse代替eval。</li>
-<li>在外部数据与innerHTML进行交互式还存在另一种危险。一种常见的Ajax模式是把服务器端发送过来的一个HTML文本赋值给某个HTML元素的innerHTML属性。这是一个非常糟糕的习观，如果这个HTML中包含一个&lt;\script&gt;标签或者其等价物，那么一个恶意脚本将被执行，这也可以是因为服务器端存在漏洞<blockquote>
-<p>如果一个恶意脚本在你的页面上被运行，它就有权访问这个页面的所有状态和执行该页面能做的所有操作.他能与服务器进行交互，而服务器并不能区分恶意请求。恶意脚本还能访问全局对象，这使得它有权访问用户能看到的一切，这个恶意脚本还拥有和用户对话的能力。document对象还能给该恶意脚本授权访问网络，允许它下载更多的恶意脚本，或者是在你的防火墙内探测站点，或者是把它已经窃取的隐私内容发送给世界上的任何一个服务器。这是JS全局变量的一个直接后果。</p>
-</blockquote>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JS之原型链理解</title>
     <url>/2020/06/03/JS%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%90%86%E8%A7%A3/</url>
     <content><![CDATA[<p>###JS原型及原型链<br>JavaScript中没有子类和父类的概念，也没有类和实例（instance）的区分,全靠一种称为”原型(prototype)链”的模式，来实现继承</p>
@@ -90,6 +66,47 @@
       <tags>
         <tag>前端</tag>
         <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS之JSON</title>
+    <url>/2020/06/03/JSON/</url>
+    <content><![CDATA[<h3 id="JSON-JavaScript对象表示法"><a href="#JSON-JavaScript对象表示法" class="headerlink" title="JSON(JavaScript对象表示法)"></a>JSON(JavaScript对象表示法)</h3><p>这是一种轻量级的数据交换格式。基于JavaScript对象字面量表示法，那是JS最精华的部分之一。尽管只是JS的一个子集，但与语言无关。<br>现代编程语言写的程序，都可以用它来交换数据。它是一种文本格式，所以可以被人和机器阅读。<br>它易于实现且易于使用</p>
+<h4 id="JSON语法"><a href="#JSON语法" class="headerlink" title="JSON语法"></a>JSON语法</h4><ul>
+<li>JSON对象是一个相当于”key-value”的无序集合。名字可以是任何字符串，值可以是任何类型的JSON值，包括数组和对象</li>
+<li>JSON有六种类型的值：对象、数组、字符串、布尔类型、数字、和特殊值null</li>
+<li>JSON数字与JS数字类似，整数的首位不允许为0，因为一些语言用它来表示八进制数<h4 id="安全的使用JSON"><a href="#安全的使用JSON" class="headerlink" title="安全的使用JSON"></a>安全的使用JSON</h4></li>
+<li>使用eval函数可以把一段JSON文本转换为一个有用的数据结构，但是eval函数有着极其可怕的安全问题。</li>
+<li>可以使用<code>JSON.parse()</code>方法代替eval函数，能避免危险。如果文本中包含任何危险数据JSON.parse()会抛出一个异常，为防止服务器出现漏洞，建议总是用JSON.parse代替eval。</li>
+<li>在外部数据与innerHTML进行交互式还存在另一种危险。一种常见的Ajax模式是把服务器端发送过来的一个HTML文本赋值给某个HTML元素的innerHTML属性。这是一个非常糟糕的习观，如果这个HTML中包含一个&lt;\script&gt;标签或者其等价物，那么一个恶意脚本将被执行，这也可以是因为服务器端存在漏洞<blockquote>
+<p>如果一个恶意脚本在你的页面上被运行，它就有权访问这个页面的所有状态和执行该页面能做的所有操作.他能与服务器进行交互，而服务器并不能区分恶意请求。恶意脚本还能访问全局对象，这使得它有权访问用户能看到的一切，这个恶意脚本还拥有和用户对话的能力。document对象还能给该恶意脚本授权访问网络，允许它下载更多的恶意脚本，或者是在你的防火墙内探测站点，或者是把它已经窃取的隐私内容发送给世界上的任何一个服务器。这是JS全局变量的一个直接后果。</p>
+</blockquote>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>About Me</title>
+    <url>/2020/06/03/about/</url>
+    <content><![CDATA[<blockquote>
+<p>A Student, Now live in Nanning, China.</p>
+</blockquote>
+<p>姓名：曹涵<br>现居：暂时没有<br>GitHub: <a href="https://github.com/xiaoruran/xiaoruran.github.io" target="_blank" rel="noopener">Cao_Han</a><br>QQ: 3314508022<br>微信: ch18325622987</p>
+<a id="more"></a>
+
+<!-- ![avatar.jpg](https://i.loli.net/2019/12/02/Hw5WJIMKzi1YrU8.jpg) -->
+
+<img src="https://pic.downk.cc/item/5e739676e83c3a1e3ab4b361.jpg" alt="avatar" width="300" style="border-radius:50%">
+]]></content>
+      <tags>
+        <tag>自我介绍</tag>
       </tags>
   </entry>
   <entry>
@@ -180,23 +197,6 @@ setTimeout2           process2
       </tags>
   </entry>
   <entry>
-    <title>About Me</title>
-    <url>/2020/06/03/about/</url>
-    <content><![CDATA[<blockquote>
-<p>A Student, Now live in Nanning, China.</p>
-</blockquote>
-<p>姓名：曹涵<br>现居：暂时没有<br>GitHub: <a href="https://github.com/xiaoruran/xiaoruran.github.io" target="_blank" rel="noopener">Cao_Han</a><br>QQ: 3314508022<br>微信: ch18325622987</p>
-<a id="more"></a>
-
-<!-- ![avatar.jpg](https://i.loli.net/2019/12/02/Hw5WJIMKzi1YrU8.jpg) -->
-
-<img src="https://pic.downk.cc/item/5e739676e83c3a1e3ab4b361.jpg" alt="avatar" width="300" style="border-radius:50%">
-]]></content>
-      <tags>
-        <tag>自我介绍</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JS之闭包理解</title>
     <url>/2020/06/01/JS%E9%97%AD%E5%8C%85/</url>
     <content><![CDATA[<h3 id="JS闭包理解"><a href="#JS闭包理解" class="headerlink" title="JS闭包理解"></a>JS闭包理解</h3><h4 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a>立即执行函数</h4><p>作用： 创建一个独立的作用域。这个作用域的变量外面访问不到（避免变量污染）</p>
@@ -269,6 +269,48 @@ setTimeout2           process2
       <tags>
         <tag>前端</tag>
         <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>博客Markdown的写法</title>
+    <url>/2020/01/17/my-second-blog/</url>
+    <content><![CDATA[<h4 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h4><pre><code># 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+注意：#后面要加空格 一级标题下面有一条横线 正常是需要闭合的这些标签</code></pre><h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><ul>
+<li><p>无序列表</p>
+<blockquote>
+<p>* 1<br>* 2<br>* 3<br>* 4</p>
+<blockquote>
+<p>注意 在*后面也要一个空格 用在线编辑器看实际上是转换承了 ul&gt;li</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p>有序列表</p>
+<blockquote>
+<ol>
+<li>列表一</li>
+<li>列表二</li>
+<li>列表三<blockquote>
+<p>注意：数字后面必须是英文的点，有序列表的序号是根据第一行列表的数字顺序来的</p>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p>比如说，你想对某个部分的内容做一些说明或者引用等，可以使用&gt;<br>‘&gt;’</p>
+<h4 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h4><p>使用四个缩进空格 表示代码块</p>
+<h4 id="加强的代码块"><a href="#加强的代码块" class="headerlink" title="加强的代码块"></a>加强的代码块</h4><p>支持四十一种编程语言的语法高亮显示，行号显示，使用&lt;!–￼0–&gt;</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
+        <tag>方法</tag>
       </tags>
   </entry>
   <entry>
@@ -395,6 +437,55 @@ setTimeout2           process2
 
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue简介</title>
+    <url>/2019/07/19/vue%E7%AE%80%E4%BB%8B%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h3 id="什么是Vue-js"><a href="#什么是Vue-js" class="headerlink" title="什么是Vue.js"></a>什么是Vue.js</h3><ul>
+<li>Vue.js是目前最火的前端框架，react是最流行的前端框架</li>
+<li>Vue.js是一套构建用户界面的框架，<strong>只关注视图层</strong>，它不仅易于上手，还便于和第三当库或既有项目整合。（Vue有配套的第三方类库，可以整合起来做大型项目的开发）</li>
+<li>在vue中核心的概念是让用户不再操作DOM元素，解放了用户的双手，让程序员关注业务逻辑</li>
+</ul>
+<h3 id="框架和库的区别"><a href="#框架和库的区别" class="headerlink" title="框架和库的区别"></a>框架和库的区别</h3><ul>
+<li>框架是一套完整的解决方案；对项目的侵入性较大；项目若要更换框架，则需要重新构建整个项目。<ul>
+<li>node中的express1</li>
+</ul>
+</li>
+<li>库也可以成为插件（提供的是一个小功能），对项目的侵入性校，如果某个库无法完成某些需求，可以很容易切换到其他库实现需求。<h3 id="Node（后端）中的mvc与前端中的mccm之间的区别"><a href="#Node（后端）中的mvc与前端中的mccm之间的区别" class="headerlink" title="Node（后端）中的mvc与前端中的mccm之间的区别"></a>Node（后端）中的mvc与前端中的mccm之间的区别</h3></li>
+</ul>
+<ul>
+<li><p>mvc是后端的分层开发概念</p>
+</li>
+<li><p>MVVM是前端视图层的概念，主要关注视图层的分离，mvvm把前端的视图层分为了三部分：<code>Model</code>、<code>View</code>、<code>VM ViewModel</code></p>
+</li>
+<li><p>为什么有了MVC还要有MVVM</p>
+</li>
+<li><p><strong>MVC结构</strong>：第一：app.js(项目的入口地址，一切的请求，都要先进入这里进行处理。注意：app.js没有路由分发的功能，需要调用router.js模块进行路由分发)；第二：router.js(功能单一，只负责分发路由，不负责具体逻辑业务的处理)；第三：Controller(业务处理层，功能单一，只负责处理业务，不负责处理数据的CRUD)；第四：Model（职能单一，只负责操作数据库，执行sql语句，运行数据的CRUD）</p>
+<ul>
+<li>通过View视图层给app.js(每当用户操作了界面，若需要进行业务的请求，就会通过网络请求，发送给后端的服务器，此时，我们这个请求，就会被后端的App.js监听到)</li>
+</ul>
+</li>
+<li><p><strong>MVVM结构</strong>：是在前端的View视图层进行划分的。将每个页面都分为M、V和VM。其中，VM是整个MVVM的核心，应为VM是V和M见的调度者。</p>
+<ol>
+<li>M中保存的是每个页面中单独的数据</li>
+<li>V中页面中静态的HTML结构</li>
+<li>VM是一个调度者，分割了V和M；V中想要存取数据，通过VM来得到；M中想存取<br>数据，只能通过VM</li>
+<li>前端页面中使用MVVM的思想，是为了让我们开发更加方便，<strong>MVVM提供的数据的双向绑定</strong>，这是由VM提供的<blockquote>
+<p>涵哥说过：你真棒</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>前端</category>
@@ -549,124 +640,10 @@ setTimeout2           process2
       </tags>
   </entry>
   <entry>
-    <title>博客Markdown的写法</title>
-    <url>/2020/01/17/my-second-blog/</url>
-    <content><![CDATA[<h4 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h4><pre><code># 一级标题
-## 二级标题
-### 三级标题
-#### 四级标题
-##### 五级标题
-注意：#后面要加空格 一级标题下面有一条横线 正常是需要闭合的这些标签</code></pre><h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><ul>
-<li><p>无序列表</p>
-<blockquote>
-<p>* 1<br>* 2<br>* 3<br>* 4</p>
-<blockquote>
-<p>注意 在*后面也要一个空格 用在线编辑器看实际上是转换承了 ul&gt;li</p>
-</blockquote>
-</blockquote>
-</li>
-<li><p>有序列表</p>
-<blockquote>
-<ol>
-<li>列表一</li>
-<li>列表二</li>
-<li>列表三<blockquote>
-<p>注意：数字后面必须是英文的点，有序列表的序号是根据第一行列表的数字顺序来的</p>
-</blockquote>
-</li>
-</ol>
-</blockquote>
-<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p>比如说，你想对某个部分的内容做一些说明或者引用等，可以使用&gt;<br>‘&gt;’</p>
-<h4 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h4><p>使用四个缩进空格 表示代码块</p>
-<h4 id="加强的代码块"><a href="#加强的代码块" class="headerlink" title="加强的代码块"></a>加强的代码块</h4><p>支持四十一种编程语言的语法高亮显示，行号显示，使用&lt;!–￼0–&gt;</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>技术</tag>
-        <tag>方法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JS之对象说明符</title>
     <url>/2020/06/02/%E5%AF%B9%E8%B1%A1%E8%AF%B4%E6%98%8E%E7%AC%A6/</url>
     <content><![CDATA[<h3 id="对象说明符（ES6中可以理解为结构解析）"><a href="#对象说明符（ES6中可以理解为结构解析）" class="headerlink" title="对象说明符（ES6中可以理解为结构解析）"></a>对象说明符（ES6中可以理解为结构解析）</h3><p>有时候函数中需要传的参数过多，容易在调用时搞混这些参数的顺序，这时候就可以时使用对象说明符来解决。将形参写成一个对象的形式，实参叶根据这个形式进行传参</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var foo=function(&#123;</span><br><span class="line">  &apos;firststr&apos;:str,</span><br><span class="line">  &apos;secondstr&apos;:name</span><br><span class="line">&#125;)&#123;</span><br><span class="line">  console.log(str+ &quot;-----&quot;+ name );</span><br><span class="line">&#125;</span><br><span class="line">foo(&#123;&apos;firststr&apos;:&quot;你好啊&quot;,&apos;secondstr&apos;:&apos;JS&apos;&#125;);  //你好啊-----JS</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Vue简介</title>
-    <url>/2019/07/19/vue%E7%AE%80%E4%BB%8B%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>[TOC]</p>
-<h3 id="什么是Vue-js"><a href="#什么是Vue-js" class="headerlink" title="什么是Vue.js"></a>什么是Vue.js</h3><ul>
-<li>Vue.js是目前最火的前端框架，react是最流行的前端框架</li>
-<li>Vue.js是一套构建用户界面的框架，<strong>只关注视图层</strong>，它不仅易于上手，还便于和第三当库或既有项目整合。（Vue有配套的第三方类库，可以整合起来做大型项目的开发）</li>
-<li>在vue中核心的概念是让用户不再操作DOM元素，解放了用户的双手，让程序员关注业务逻辑</li>
-</ul>
-<h3 id="框架和库的区别"><a href="#框架和库的区别" class="headerlink" title="框架和库的区别"></a>框架和库的区别</h3><ul>
-<li>框架是一套完整的解决方案；对项目的侵入性较大；项目若要更换框架，则需要重新构建整个项目。<ul>
-<li>node中的express1</li>
-</ul>
-</li>
-<li>库也可以成为插件（提供的是一个小功能），对项目的侵入性校，如果某个库无法完成某些需求，可以很容易切换到其他库实现需求。<h3 id="Node（后端）中的mvc与前端中的mccm之间的区别"><a href="#Node（后端）中的mvc与前端中的mccm之间的区别" class="headerlink" title="Node（后端）中的mvc与前端中的mccm之间的区别"></a>Node（后端）中的mvc与前端中的mccm之间的区别</h3></li>
-</ul>
-<ul>
-<li><p>mvc是后端的分层开发概念</p>
-</li>
-<li><p>MVVM是前端视图层的概念，主要关注视图层的分离，mvvm把前端的视图层分为了三部分：<code>Model</code>、<code>View</code>、<code>VM ViewModel</code></p>
-</li>
-<li><p>为什么有了MVC还要有MVVM</p>
-</li>
-<li><p><strong>MVC结构</strong>：第一：app.js(项目的入口地址，一切的请求，都要先进入这里进行处理。注意：app.js没有路由分发的功能，需要调用router.js模块进行路由分发)；第二：router.js(功能单一，只负责分发路由，不负责具体逻辑业务的处理)；第三：Controller(业务处理层，功能单一，只负责处理业务，不负责处理数据的CRUD)；第四：Model（职能单一，只负责操作数据库，执行sql语句，运行数据的CRUD）</p>
-<ul>
-<li>通过View视图层给app.js(每当用户操作了界面，若需要进行业务的请求，就会通过网络请求，发送给后端的服务器，此时，我们这个请求，就会被后端的App.js监听到)</li>
-</ul>
-</li>
-<li><p><strong>MVVM结构</strong>：是在前端的View视图层进行划分的。将每个页面都分为M、V和VM。其中，VM是整个MVVM的核心，应为VM是V和M见的调度者。</p>
-<ol>
-<li>M中保存的是每个页面中单独的数据</li>
-<li>V中页面中静态的HTML结构</li>
-<li>VM是一个调度者，分割了V和M；V中想要存取数据，通过VM来得到；M中想存取<br>数据，只能通过VM</li>
-<li>前端页面中使用MVVM的思想，是为了让我们开发更加方便，<strong>MVVM提供的数据的双向绑定</strong>，这是由VM提供的<blockquote>
-<p>涵哥说过：你真棒</p>
-</blockquote>
-</li>
-</ol>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS之number</title>
-    <url>/2020/06/02/%E6%95%B0%E5%AD%97%E7%B1%BB%E5%9E%8Bnumber/</url>
-    <content><![CDATA[<h3 id="number一些方法"><a href="#number一些方法" class="headerlink" title="number一些方法"></a>number一些方法</h3><ul>
-<li><p><code>number.toExponential()</code>方法：将这个number转换为一个指数形式的字符串，参数items是控制其小数点后的数字位数，这个值必须在0~20之内</p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var x=Math.PI;</span><br><span class="line">console.log(x.toExponential(30)); //3.142e+0</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>number.x.toFixed()</code>方法：将number转换为一个十进制形式的字符串，可选参数控制其小数点都的数字位数，默认为0，这个值必须在0~20之内</p>
-</li>
-<li><p><code>number.toPrecision()</code>方法：将number转换为一个十进制数子形式的字符串，可选参数控制数字的精度，表示的是所有数字的个数，这个值必须在0~21之内</p>
-</li>
-<li><p><code>number.toString()</code>方法：将number转换为一个字符串，可选参数表示几进制，默认是10</p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var x=Math.PI;</span><br><span class="line">console.log(x.toString(8)); //3.1103755242102643</span><br><span class="line">console.log(x.toString(16)); //3.243f6a8885a3</span><br><span class="line">console.log(x.toString()); //3.141592653589793</span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
       <categories>
         <category>前端</category>
       </categories>
@@ -714,6 +691,29 @@ setTimeout2           process2
       <tags>
         <tag>think</tag>
         <tag>idea</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS之number</title>
+    <url>/2020/06/02/%E6%95%B0%E5%AD%97%E7%B1%BB%E5%9E%8Bnumber/</url>
+    <content><![CDATA[<h3 id="number一些方法"><a href="#number一些方法" class="headerlink" title="number一些方法"></a>number一些方法</h3><ul>
+<li><p><code>number.toExponential()</code>方法：将这个number转换为一个指数形式的字符串，参数items是控制其小数点后的数字位数，这个值必须在0~20之内</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var x=Math.PI;</span><br><span class="line">console.log(x.toExponential(30)); //3.142e+0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>number.x.toFixed()</code>方法：将number转换为一个十进制形式的字符串，可选参数控制其小数点都的数字位数，默认为0，这个值必须在0~20之内</p>
+</li>
+<li><p><code>number.toPrecision()</code>方法：将number转换为一个十进制数子形式的字符串，可选参数控制数字的精度，表示的是所有数字的个数，这个值必须在0~21之内</p>
+</li>
+<li><p><code>number.toString()</code>方法：将number转换为一个字符串，可选参数表示几进制，默认是10</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var x=Math.PI;</span><br><span class="line">console.log(x.toString(8)); //3.1103755242102643</span><br><span class="line">console.log(x.toString(16)); //3.243f6a8885a3</span><br><span class="line">console.log(x.toString()); //3.141592653589793</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
       </tags>
   </entry>
   <entry>
@@ -1143,7 +1143,7 @@ setTimeout2           process2
 <li>在JS中 false、null、undefined、空字符串、数字0、数字 NaN都被当成假，其它所有的值都是真的，包括true,’false’,以及所有的对象</li>
 <li>注意:<code>for</code>语句<ol>
 <li>一种是常见的三个参数（初始化从句、条件从句、增量从句）</li>
-<li>另一种形式是<code>for in</code>语句，枚举一个对象的所有属性名，每次循环后，object的下一个属性名字符串会赋给variable<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">        for(attr in obj)&#123;</span><br><span class="line">         if(obj.hasOwnProperty(attr))&#123;</span><br><span class="line"> </span><br><span class="line">         &#125;</span><br><span class="line">        &#125;</span><br><span class="line">       ``` </span><br><span class="line">   &gt;一般需要通过检测obj.hasOwnProperty(attr)来判断这个属性名是这个对象的成员，还是来自**原型链**</span><br><span class="line">+ try语句</span><br><span class="line">   1. try语句执行一个代码块，并捕获该代码块抛出的任何异常。</span><br><span class="line">   2. catch从句定义一个新的变量variable来接受抛出的异常对象</span><br><span class="line">   3. throw语句抛出一个异常，若该语句在try代码块中，控制流将会跳转到catch从句中。若throw语句在函数中，则该函数调用被放弃，控制流调用该函数的try语句中的catch从句</span><br><span class="line"></span><br><span class="line">#### 表达式</span><br><span class="line">+ 最简单的表达式时字面量值（比如字符串或数字）、变量、内置的值（true、false、null、undefined、NaN和Infinity）、以new开头的调用表达式、以delete开头的属性提取表达式、包在圆括号内的表达式...</span><br><span class="line">+ 运算符优先级</span><br><span class="line">   1. `.` `[]` `()` 提取属性与调用函数</span><br><span class="line">   2. `delete` `new` `typeof` `+` `-` `!` 一元运算符</span><br><span class="line">   3. `*` `/` `%` 乘法、除法、求余</span><br><span class="line">   4. `+` `-` 加法、减法</span><br><span class="line">   5. `&lt;==` `&gt;==` `&gt;` `&lt;`关系运算符，不等式运算符</span><br><span class="line">   6. `===` `!==` 等式运算符</span><br><span class="line">   7. `&amp;&amp;` 逻辑与</span><br><span class="line">   8. `||` 逻辑或</span><br><span class="line">   9. `? : ` 三元运算符</span><br><span class="line">   &gt;&amp;&amp; 与&amp;的区别： 两种都能用作逻辑与，&amp;是当两边的表达式为真时，才能为真。&amp;&amp;是短路测试，当前面的表达式为假时，不需要测试后面的表达式</span><br><span class="line">+ `typedef`语句</span><br><span class="line">   + 用typedef运算符产生的值有`number` `string` `boolean` `undefined` `function` `object`</span><br><span class="line"></span><br><span class="line">#### 字面量</span><br><span class="line">   1. 对象字面量</span><br><span class="line">   2. 数组字面量</span><br><span class="line">   3. 函数字面量</span><br><span class="line"></span><br><span class="line">### 对象（key-value）</span><br><span class="line"> JavaScript中的简单数据类型包括数字、字符串、布尔值、null和undefined值，其他的所有制都是对象。数字、字符串、布尔值貌似对象，因为他们拥有方法，但他们不可变。</span><br><span class="line"></span><br><span class="line"> 数组是对象，函数是对象，正则表达式是对象。</span><br><span class="line"> + 对象是属性的容器，其中每个属性都有自己的名字和值。属性名是包含空字符串在内的任意字符串。属性值可以是出undefined值之外的任何值</span><br><span class="line"> + JS中的对象是无类型的，对属性名和值没有限制。</span><br><span class="line"> + **JS包含一种原型链的特征，允许对象继承另一个对象的属性。正确的使用能减少对象初始化时消耗的内存与时间**</span><br><span class="line"></span><br><span class="line">### JS函数</span><br><span class="line">* 函数就是对象。对象是“key-value”对的集合并拥有一个连到原型对象的隐藏连接。对象字面量产生的对象连接到Object.prototype。函数对象连接到Function.prototype（该原型对象本身连接到Object.prototype）。</span><br><span class="line"></span><br><span class="line">* 每个函数在创建时会附加两个隐藏属性：函数的上下文（也可以理解为call和apply方法，在Function.prototype中定义）和实现函数行为的代码</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### 函数字面量</span><br><span class="line">* 函数通过函数字面量来创建</span><br><span class="line">   1. 第一部分为保留字 `function`</span><br><span class="line">   2. 第二部分时函数名，可以省略，这样的话就是匿名函数（anonymous）</span><br><span class="line">   3. 第三部分时包围在圆括号内的一组参数，**javascript不对参数列表做强匹配，当实参少于形参，剩下形参的值就为undefined，当实参多余形参个数时，只会匹配前几个实参，剩下多余的实参会直接忽略，任何类型的值可以被传递给任何参数**</span><br><span class="line">   4. 第四部分为包围在花括号的一组语句，这是函数的主题，在函数被调用时执行</span><br><span class="line"></span><br><span class="line">#### 函数调用</span><br><span class="line">在调用函数时，每个函数会接受两个附加的参数：`this`和`arguments`，参数this在面向对象编程时非常重要，**this的值取决于调用的模式**</span><br><span class="line"></span><br><span class="line">#### 函数调用模式</span><br><span class="line">1. 方法调用模式</span><br><span class="line">此模式主要是指：当函数声明在一个对象之中，这个函数属于对象的一个方法，此时函数内部的this属性被绑定到该对象中，这是this可以访问自己所属的对象</span><br></pre></td></tr></table></figure>
+<li>另一种形式是<code>for in</code>语句，枚举一个对象的所有属性名，每次循环后，object的下一个属性名字符串会赋给variable<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">        for(attr in obj)&#123;</span><br><span class="line">         if(obj.hasOwnProperty(attr))&#123;</span><br><span class="line"> </span><br><span class="line">         &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ``` </span><br><span class="line">   &gt;一般需要通过检测obj.hasOwnProperty(attr)来判断这个属性名是这个对象的成员，还是来自**原型链**</span><br><span class="line">+ try语句</span><br><span class="line">   1. try语句执行一个代码块，并捕获该代码块抛出的任何异常。</span><br><span class="line">   2. catch从句定义一个新的变量variable来接受抛出的异常对象</span><br><span class="line">   3. throw语句抛出一个异常，若该语句在try代码块中，控制流将会跳转到catch从句中。若throw语句在函数中，则该函数调用被放弃，控制流调用该函数的try语句中的catch从句</span><br><span class="line"></span><br><span class="line">#### 表达式</span><br><span class="line">+ 最简单的表达式时字面量值（比如字符串或数字）、变量、内置的值（true、false、null、undefined、NaN和Infinity）、以new开头的调用表达式、以delete开头的属性提取表达式、包在圆括号内的表达式...</span><br><span class="line">+ 运算符优先级</span><br><span class="line">   1. `.` `[]` `()` 提取属性与调用函数</span><br><span class="line">   2. `delete` `new` `typeof` `+` `-` `!` 一元运算符</span><br><span class="line">   3. `*` `/` `%` 乘法、除法、求余</span><br><span class="line">   4. `+` `-` 加法、减法</span><br><span class="line">   5. `&lt;==` `&gt;==` `&gt;` `&lt;`关系运算符，不等式运算符</span><br><span class="line">   6. `===` `!==` 等式运算符</span><br><span class="line">   7. `&amp;&amp;` 逻辑与</span><br><span class="line">   8. `||` 逻辑或</span><br><span class="line">   9. `? : ` 三元运算符</span><br><span class="line">   &gt;&amp;&amp; 与&amp;的区别： 两种都能用作逻辑与，&amp;是当两边的表达式为真时，才能为真。&amp;&amp;是短路测试，当前面的表达式为假时，不需要测试后面的表达式</span><br><span class="line">+ `typedef`语句</span><br><span class="line">   + 用typedef运算符产生的值有`number` `string` `boolean` `undefined` `function` `object`</span><br><span class="line"></span><br><span class="line">#### 字面量</span><br><span class="line">   1. 对象字面量</span><br><span class="line">   2. 数组字面量</span><br><span class="line">   3. 函数字面量</span><br><span class="line"></span><br><span class="line">### 对象（key-value）</span><br><span class="line"> JavaScript中的简单数据类型包括数字、字符串、布尔值、null和undefined值，其他的所有制都是对象。数字、字符串、布尔值貌似对象，因为他们拥有方法，但他们不可变。</span><br><span class="line"></span><br><span class="line"> 数组是对象，函数是对象，正则表达式是对象。</span><br><span class="line"> + 对象是属性的容器，其中每个属性都有自己的名字和值。属性名是包含空字符串在内的任意字符串。属性值可以是出undefined值之外的任何值</span><br><span class="line"> + JS中的对象是无类型的，对属性名和值没有限制。</span><br><span class="line"> + **JS包含一种原型链的特征，允许对象继承另一个对象的属性。正确的使用能减少对象初始化时消耗的内存与时间**</span><br><span class="line"></span><br><span class="line">### JS函数</span><br><span class="line">* 函数就是对象。对象是“key-value”对的集合并拥有一个连到原型对象的隐藏连接。对象字面量产生的对象连接到Object.prototype。函数对象连接到Function.prototype（该原型对象本身连接到Object.prototype）。</span><br><span class="line"></span><br><span class="line">* 每个函数在创建时会附加两个隐藏属性：函数的上下文（也可以理解为call和apply方法，在Function.prototype中定义）和实现函数行为的代码</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### 函数字面量</span><br><span class="line">* 函数通过函数字面量来创建</span><br><span class="line">   1. 第一部分为保留字 `function`</span><br><span class="line">   2. 第二部分时函数名，可以省略，这样的话就是匿名函数（anonymous）</span><br><span class="line">   3. 第三部分时包围在圆括号内的一组参数，**javascript不对参数列表做强匹配，当实参少于形参，剩下形参的值就为undefined，当实参多余形参个数时，只会匹配前几个实参，剩下多余的实参会直接忽略，任何类型的值可以被传递给任何参数**</span><br><span class="line">   4. 第四部分为包围在花括号的一组语句，这是函数的主题，在函数被调用时执行</span><br><span class="line"></span><br><span class="line">#### 函数调用</span><br><span class="line">在调用函数时，每个函数会接受两个附加的参数：`this`和`arguments`，参数this在面向对象编程时非常重要，**this的值取决于调用的模式**</span><br><span class="line"></span><br><span class="line">#### 函数调用模式</span><br><span class="line">1. 方法调用模式</span><br><span class="line">此模式主要是指：当函数声明在一个对象之中，这个函数属于对象的一个方法，此时函数内部的this属性被绑定到该对象中，这是this可以访问自己所属的对象</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
