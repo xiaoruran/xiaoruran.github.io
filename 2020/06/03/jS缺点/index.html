@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    About Me |  曹涵的个人博客
+    JS之毒瘤 |  曹涵的个人博客
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -39,7 +39,7 @@
   <div id="app">
     <main class="content on">
       <section class="outer">
-  <article id="post-about" class="article article-type-post" itemscope
+  <article id="post-jS缺点" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -47,7 +47,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  About Me
+  JS之毒瘤
 </h1>
  
 
@@ -56,16 +56,43 @@
 
     
     <div class="article-meta">
-      <a href="/2020/06/03/about/" class="article-date">
-  <time datetime="2020-06-02T21:37:04.000Z" itemprop="datePublished">2020-06-02</time>
+      <a href="/2020/06/03/jS缺点/" class="article-date">
+  <time datetime="2020-06-02T16:21:50.000Z" itemprop="datePublished">2020-06-02</time>
 </a>
       
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.5k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">5 min</span>
+        </span>
+    </span>
+</div>
+
       
     </div>
     
 
     
     
+    <div class="tocbot"></div>
+
 
 
 
@@ -78,15 +105,76 @@
       
 
       
-      <blockquote>
-<p>A Student, Now live in Nanning, China.</p>
+      <h3 id="JS毒瘤"><a href="#JS毒瘤" class="headerlink" title="JS毒瘤"></a>JS毒瘤</h3><ul>
+<li><p><strong>全局变量</strong>:应尽可能的少用和不用全局变量，全局变量很难以管理，因为它可以在任何时间在程序的任意部分进行修改，降低了程序的可靠性</p>
+</li>
+<li><p><strong>作用域</strong>：js中代码块中变量作用域不止作用在此代码块中，这是一个极其危险的特性</p>
+</li>
+<li><p><strong>自动插入分号</strong>： JS有一个自动修复机制，它试图通过自动插入分号来修正有缺损的程序。但是，千万别指望它，它可能会掩盖/导致更严重的错误</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">return </span><br><span class="line">&#123;</span><br><span class="line">    status:ture;</span><br><span class="line">&#125;;</span><br><span class="line">//看去来是要返回一个包含status属性的对象，但自动插入分号会让它变成返回undefined</span><br><span class="line">//改正</span><br><span class="line">return&#123;</span><br><span class="line">     status:ture;</span><br><span class="line">&#125;</span><br><span class="line">//最好将&#123;写到最好一句的最后</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>typeof运算符</strong> 返回一个识别其类型的字符串</p>
+<ol>
+<li><p><code>typeof null</code> 返回的是’object’,typeof不能检测除null，只能通过一些辅助手段判断</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">myval=null;</span><br><span class="line">if (myval &amp;&amp; typeof myval === &apos;object&apos;)&#123;&#125;//..</span><br><span class="line">//或者</span><br><span class="line">if(myval === null)&#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>typeof array</code> 返回的是’object’,不是数组类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//通过构造函数</span><br><span class="line">if(array.constructor.toString().indexOf(&quot;Array&quot;) !== -1)</span><br><span class="line">//通过数组方法</span><br><span class="line">Array.isArray(array);</span><br><span class="line">//通过原型prototype+isPrototypeOf()</span><br><span class="line">Array.prototype.isPrototypeOf(array)</span><br><span class="line">//isPrototypeOf()函数：用于指示对象是否存在一个对象的原型链中。如果存在则返回true。该方法属于Object对象，由于所有的对象都继承了Object的对象实例。因此几乎所有的实例方法都可以使用该方法。如果array的原型链中存在Array对象，就会返回true，也就说明array属于数组类型</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p><code>parseInt()</code> 将字符串转为整数的方法</p>
+<ol>
+<li>遇到非数字时会停止解析 parseInt(“16”)和parseInt(“16 xx”)返回结果都是number型的16</li>
+<li>但是如果字符串的第一个字符是0，那么该字符串会基于八进制而非十进制来求值。在八进制中8和9不是数字，所以解析到8和9时会停止解析。<br>parseInt(“08”)和parseInt(“09”)都是返回0，这种错误会导致解析日期和时间时出现问题，可以在parseInt(),加上第二个参数parseInt(“08”，10)，这样可以解决问题<blockquote>
+<p>建议总是加上这个参数</p>
 </blockquote>
-<p>姓名：曹涵<br>现居：暂时没有<br>GitHub: <a href="https://github.com/xiaoruran/xiaoruran.github.io" target="_blank" rel="noopener">Cao_Han</a><br>QQ: 3314508022<br>微信: ch18325622987</p>
-<a id="more"></a>
+</li>
+</ol>
+</li>
+<li><p><code>+</code>运算符</p>
+<ol>
+<li>如果两边都是字符串，会连接起来</li>
+<li>若一边是空字符串，一边是数字，则会把数字转换为字符串进行连接</li>
+<li>若想要做加法运算，请保证两个运算数都是number</li>
+</ol>
+</li>
+<li><p>浮点数</p>
+<ul>
+<li>0.1+0.2不等于0.3</li>
+</ul>
+</li>
+<li><p><code>NaN</code> 不是一个数字的意思</p>
+<ul>
+<li>typeof NaN === ‘number’ //true</li>
+<li><code>isNaN()</code> 可以判断是否是NaN</li>
+<li>判断一个值是否可以用作数字的最好方法就是<code>isFinite()</code>函数,因为它会筛出NaN和Infinity，但它会试图把运算数转为一个数字。可以自定一个函数判断是否是一个数字<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var isNumber=function(value)&#123;</span><br><span class="line">   return typeof value === &apos;number&apos; &amp;&amp; isFinite(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>伪数组</p>
+<ul>
+<li><p>JS中的数组不是真正的数组</p>
+</li>
+<li><p>typeof不能判定是数组还是对象</p>
+</li>
+<li><p>判断是一个数组的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">    //通过构造函数</span><br><span class="line">    if(array.constructor.toString().indexOf(&quot;Array&quot;) !== -1)</span><br><span class="line">    //通过数组方法</span><br><span class="line">    Array.isArray(array);</span><br><span class="line">    //通过原型prototype+isPrototypeOf()</span><br><span class="line">    Array.prototype.isPrototypeOf(array)</span><br><span class="line">    ``` </span><br><span class="line">    &gt; `isPrototypeOf()`函数：用于指示对象是否存在一个对象的原型链中。如果存在则返回true。该方法属于Object对象，由于所有的对象都继承了Object的对象实例。因此几乎所有的实例方法都可以使用该方法。如果array的原型链中存在Array对象，就会返回true，也就说明array属于数组类型</span><br><span class="line"></span><br><span class="line">+ 假值（可以当成false的值）</span><br><span class="line">    1. 0（Number）</span><br><span class="line">    2. NaN（Number）</span><br><span class="line">    3. &apos;&apos;(String)</span><br><span class="line">    4. false(Boolean)</span><br><span class="line">    5. null(Object)</span><br><span class="line">    6. undefined(Undefined)</span><br><span class="line">+ `hasOwnProperty()`</span><br><span class="line">   + hasOwnProperty方法可以用来做成一个过滤器去避开for in语句的一个隐患。但这是一个方法，不是一个运算符，在任何对象中都可以进行赋值</span><br></pre></td></tr></table></figure>
 
-<!-- ![avatar.jpg](https://i.loli.net/2019/12/02/Hw5WJIMKzi1YrU8.jpg) -->
+<p>var name;<br>var obj.hasOwnProperty=null;  //地雷<br>for(name in obj){<br> if (obj.hasOwnProperty(name)){  //踩雷</p>
+<pre><code>console.log(name+&quot;:&quot;+obj[name]);</code></pre><p> }<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">### JS糟粕</span><br><span class="line">   1. 永远不要使用`==`和`!=`,必须使用`===`和`!==`</span><br><span class="line">      + 因为使用==时可能进行类型强转，由于==还具有传递性（x==y,y==z =&gt;x==z）</span><br><span class="line">#### 介绍eval()函数</span><br><span class="line">eval函数就是通过解析参数，进而通过JS编译器，来执行解析后的语句。相当于一个js语言的执行器，能把其中的参数按照JS的语法进行解析并执行</span><br><span class="line">   1. `eval(s)`</span><br><span class="line">   2. 当参数时数字或者Function类型时，直接返回该数字和该Function</span><br><span class="line">   3. 当参数时字符串时，JS会解析该字符串，并转换为相应的JS代码，执行该代码，并返回执行结果</span><br><span class="line">   4. 若参数是JSON格式（此时的JSON外面要加一对小括号），该方法返回该JSON</span><br><span class="line">   5. 如果参数s是字符串，并且字符串中是语句或语句块，则eval()方法会执行该语句或语句块，并且返回undefined</span><br><span class="line">   6. 如果试图覆盖eval属性或将eval()方法赋给另外一个属性，并通过该属性调用它，会出现EvalError 异常</span><br><span class="line">   7. 给了被求值的文本太多的权力，降低了语言的性能</span><br><span class="line"></span><br><span class="line">#### 代码块</span><br><span class="line">   + JS中，代码块并没有作用域</span><br><span class="line">   + JSLint期望只有function、if、switch、while、for、do、和try语句使用代码块，有一个例外就是在else或for in语句中的if语句可以不使用代码块</span><br></pre></td></tr></table></figure>
 
-<img src="https://pic.downk.cc/item/5e739676e83c3a1e3ab4b361.jpg" alt="avatar" width="300" style="border-radius:50%">
+</li>
+</ul>
+<p>var i=0;<br>for(i=0;i&lt;5;i++){<br>var x=8;<br>}<br>console.log(x); //8<br>```</p>
+<blockquote>
+<p>像for这样的代码块中声明的变量在其它地方也能调用，没有属于自己的作用</p>
+</blockquote>
+</li>
+<li><p><strong>最好不要使用++（递增）和–（递减），这是导致病毒和其它安全威胁的第二大元凶（第一个是架构缺陷）</strong></p>
+</li>
+</ul>
 
       
       <!-- reward -->
@@ -155,14 +243,14 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/06/03/about/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/06/03/jS缺点/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自我介绍/">自我介绍</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
 
 
     </footer>
@@ -173,19 +261,19 @@
   
   <nav class="article-nav">
     
-      <a href="/2020/06/03/vuenote1/" class="article-nav-link">
+      <a href="/2020/06/03/等号/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            Vue之事件等等
+            JS之等号
           
         </div>
       </a>
     
     
-      <a href="/2020/06/03/JSON/" class="article-nav-link">
+      <a href="/2020/06/02/对象说明符/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">JS之JSON</div>
+        <div class="article-nav-title">JS之对象说明符</div>
       </a>
     
   </nav>
@@ -417,6 +505,21 @@
 </script>
 
 <!-- Tocbot -->
+
+<script src="/js/tocbot.min.js"></script>
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
