@@ -14,6 +14,30 @@
       </tags>
   </entry>
   <entry>
+    <title>JS之JSON</title>
+    <url>/2020/06/03/JSON/</url>
+    <content><![CDATA[<h3 id="JSON-JavaScript对象表示法"><a href="#JSON-JavaScript对象表示法" class="headerlink" title="JSON(JavaScript对象表示法)"></a>JSON(JavaScript对象表示法)</h3><p>这是一种轻量级的数据交换格式。基于JavaScript对象字面量表示法，那是JS最精华的部分之一。尽管只是JS的一个子集，但与语言无关。<br>现代编程语言写的程序，都可以用它来交换数据。它是一种文本格式，所以可以被人和机器阅读。<br>它易于实现且易于使用</p>
+<h4 id="JSON语法"><a href="#JSON语法" class="headerlink" title="JSON语法"></a>JSON语法</h4><ul>
+<li>JSON对象是一个相当于”key-value”的无序集合。名字可以是任何字符串，值可以是任何类型的JSON值，包括数组和对象</li>
+<li>JSON有六种类型的值：对象、数组、字符串、布尔类型、数字、和特殊值null</li>
+<li>JSON数字与JS数字类似，整数的首位不允许为0，因为一些语言用它来表示八进制数<h4 id="安全的使用JSON"><a href="#安全的使用JSON" class="headerlink" title="安全的使用JSON"></a>安全的使用JSON</h4></li>
+<li>使用eval函数可以把一段JSON文本转换为一个有用的数据结构，但是eval函数有着极其可怕的安全问题。</li>
+<li>可以使用<code>JSON.parse()</code>方法代替eval函数，能避免危险。如果文本中包含任何危险数据JSON.parse()会抛出一个异常，为防止服务器出现漏洞，建议总是用JSON.parse代替eval。</li>
+<li>在外部数据与innerHTML进行交互式还存在另一种危险。一种常见的Ajax模式是把服务器端发送过来的一个HTML文本赋值给某个HTML元素的innerHTML属性。这是一个非常糟糕的习观，如果这个HTML中包含一个&lt;\script&gt;标签或者其等价物，那么一个恶意脚本将被执行，这也可以是因为服务器端存在漏洞<blockquote>
+<p>如果一个恶意脚本在你的页面上被运行，它就有权访问这个页面的所有状态和执行该页面能做的所有操作.他能与服务器进行交互，而服务器并不能区分恶意请求。恶意脚本还能访问全局对象，这使得它有权访问用户能看到的一切，这个恶意脚本还拥有和用户对话的能力。document对象还能给该恶意脚本授权访问网络，允许它下载更多的恶意脚本，或者是在你的防火墙内探测站点，或者是把它已经窃取的隐私内容发送给世界上的任何一个服务器。这是JS全局变量的一个直接后果。</p>
+</blockquote>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JS之原型链理解</title>
     <url>/2020/06/03/JS%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%90%86%E8%A7%A3/</url>
     <content><![CDATA[<p>###JS原型及原型链<br>JavaScript中没有子类和父类的概念，也没有类和实例（instance）的区分,全靠一种称为”原型(prototype)链”的模式，来实现继承</p>
@@ -69,113 +93,84 @@
       </tags>
   </entry>
   <entry>
-    <title>About Me</title>
-    <url>/2020/06/03/about/</url>
-    <content><![CDATA[<blockquote>
-<p>A Student, Now live in Nanning, China.</p>
-</blockquote>
-<p>姓名：曹涵<br>现居：暂时没有<br>GitHub: <a href="https://github.com/xiaoruran/xiaoruran.github.io" target="_blank" rel="noopener">Cao_Han</a><br>QQ: 3314508022<br>微信: ch18325622987</p>
-<a id="more"></a>
-
-<!-- ![avatar.jpg](https://i.loli.net/2019/12/02/Hw5WJIMKzi1YrU8.jpg) -->
-
-<img src="https://pic.downk.cc/item/5e739676e83c3a1e3ab4b361.jpg" alt="avatar" width="300" style="border-radius:50%">
-]]></content>
-      <tags>
-        <tag>自我介绍</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS之JSON</title>
-    <url>/2020/06/03/JSON/</url>
-    <content><![CDATA[<h3 id="JSON-JavaScript对象表示法"><a href="#JSON-JavaScript对象表示法" class="headerlink" title="JSON(JavaScript对象表示法)"></a>JSON(JavaScript对象表示法)</h3><p>这是一种轻量级的数据交换格式。基于JavaScript对象字面量表示法，那是JS最精华的部分之一。尽管只是JS的一个子集，但与语言无关。<br>现代编程语言写的程序，都可以用它来交换数据。它是一种文本格式，所以可以被人和机器阅读。<br>它易于实现且易于使用</p>
-<h4 id="JSON语法"><a href="#JSON语法" class="headerlink" title="JSON语法"></a>JSON语法</h4><ul>
-<li>JSON对象是一个相当于”key-value”的无序集合。名字可以是任何字符串，值可以是任何类型的JSON值，包括数组和对象</li>
-<li>JSON有六种类型的值：对象、数组、字符串、布尔类型、数字、和特殊值null</li>
-<li>JSON数字与JS数字类似，整数的首位不允许为0，因为一些语言用它来表示八进制数<h4 id="安全的使用JSON"><a href="#安全的使用JSON" class="headerlink" title="安全的使用JSON"></a>安全的使用JSON</h4></li>
-<li>使用eval函数可以把一段JSON文本转换为一个有用的数据结构，但是eval函数有着极其可怕的安全问题。</li>
-<li>可以使用<code>JSON.parse()</code>方法代替eval函数，能避免危险。如果文本中包含任何危险数据JSON.parse()会抛出一个异常，为防止服务器出现漏洞，建议总是用JSON.parse代替eval。</li>
-<li>在外部数据与innerHTML进行交互式还存在另一种危险。一种常见的Ajax模式是把服务器端发送过来的一个HTML文本赋值给某个HTML元素的innerHTML属性。这是一个非常糟糕的习观，如果这个HTML中包含一个&lt;\script&gt;标签或者其等价物，那么一个恶意脚本将被执行，这也可以是因为服务器端存在漏洞<blockquote>
-<p>如果一个恶意脚本在你的页面上被运行，它就有权访问这个页面的所有状态和执行该页面能做的所有操作.他能与服务器进行交互，而服务器并不能区分恶意请求。恶意脚本还能访问全局对象，这使得它有权访问用户能看到的一切，这个恶意脚本还拥有和用户对话的能力。document对象还能给该恶意脚本授权访问网络，允许它下载更多的恶意脚本，或者是在你的防火墙内探测站点，或者是把它已经窃取的隐私内容发送给世界上的任何一个服务器。这是JS全局变量的一个直接后果。</p>
-</blockquote>
+    <title>JS之事件执行机制</title>
+    <url>/2020/06/03/JS%E5%BC%95%E6%93%8E%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6/</url>
+    <content><![CDATA[<h3 id="JS引擎事件执行机制"><a href="#JS引擎事件执行机制" class="headerlink" title="JS引擎事件执行机制"></a>JS引擎事件执行机制</h3><h4 id="JS执行机制"><a href="#JS执行机制" class="headerlink" title="JS执行机制"></a>JS执行机制</h4><ol>
+<li><p>浏览器（或是JS引擎）执行JS的机制是基于事件循环</p>
 </li>
-</ul>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS之闭包理解</title>
-    <url>/2020/06/01/JS%E9%97%AD%E5%8C%85/</url>
-    <content><![CDATA[<h3 id="JS闭包理解"><a href="#JS闭包理解" class="headerlink" title="JS闭包理解"></a>JS闭包理解</h3><h4 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a>立即执行函数</h4><p>作用： 创建一个独立的作用域。这个作用域的变量外面访问不到（避免变量污染）</p>
-<ol>
-<li><p><code>(function foo(){}())</code><br>如果直接写function foo(){}()解释器会报错。<em>立即执行函数的调用方式是将函数表达式、调用操作符、分组操作符放到一个括号内，来告诉解释器这里有一个需要解释器立即执行的函数</em>。否则通常情况下，解析器遇到function关键子，都会把它当成一个函数声明，而不是个函数表达式</p>
+<li><p>JS是单线程机制，在同一时间只能执行一个任务，其他任务只能排队，后续任务必须等到前一个任务结束后才能开始执行</p>
+</li>
+<li><p>为了避免因为某些长时间任务造成的无意义等待，JS引入了<strong>异步</strong>的概念，用另一个线程来管理异步任务。</p>
+</li>
+<li><p>同步任务直接在主线程队列中顺序执行，异步任务会进入另一个任务队列，不会阻塞主线程。等到主线程队列空了后，就回去异步队列查询是否有可执行的异步任务（通常异步任务需要等一些条件才能执行，如Ajax请求、文件读写），如果某个异步任务可以执行，则加入主线程队列，以此循环</p>
+<h4 id="JS中基于事件循环机制（event-loop）"><a href="#JS中基于事件循环机制（event-loop）" class="headerlink" title="JS中基于事件循环机制（event loop）"></a>JS中基于事件循环机制（event loop）</h4><p>异步的概念引入是由于事件循环造成的</p>
+</li>
+<li><p><strong>event loop(1)</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">console.log(1)</span><br><span class="line"> setTimeout(function()&#123;</span><br><span class="line">     console.log(2)</span><br><span class="line"> &#125;,0)</span><br><span class="line"> console.log(3)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果是 1 3 2</p>
+<p>setTimeout里的函数并没有立即执行，而实延迟了一段时间，满足一定条件后，才开始执行，这种代码较异步代码。</p>
+<p>定时器是JS中很经典的异步模型</p>
+<p>按这种：JS的执行机制是</p>
+</li>
+</ol>
 <ul>
-<li>立即执行函数的写法</li>
-<li>相当于 function foo(){};foo();</li>
-<li>相当于先定义一个函数，然后调用执行它</li>
-<li>在最后面的括号里面可以直接写传递的参数<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function foo(n1,n2)&#123;</span><br><span class="line">    console.log(n1+n2);</span><br><span class="line">&#125;(3,5));  //8</span><br></pre></td></tr></table></figure>
-</li>
+<li>首先判断是同步还是异步，同步进入主进程，异步就进入 event tavle</li>
+<li>异步任务先不执行，在event table中注册函数，满足条件后，被推入event queue</li>
+<li>同步任务进入主线程后一直执行，直到主线程空闲时，才去event queue中查看是否有可执行的异步任务，若有则推入到主线程队列中执行</li>
 </ul>
-</li>
-<li><p><code>(function foo(){})()</code><br>总的语法和上面的一致</p>
-<blockquote>
-<p>注意：当在不需要表达式的场景下，就不需要用括号括起来了</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void function foo()&#123;&#125;()</span><br><span class="line">var foo =function()&#123;&#125;();</span><br><span class="line">true &amp;&amp; function()&#123;&#125;();</span><br><span class="line">0,function()&#123;&#125;();</span><br><span class="line">//以上都是作为函数表达式，所以不需要用括号括起来了</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<blockquote>
-<p>对于立即执行函数，也可以给他们传入参数，在最后一个括号里传</p>
-</blockquote>
-<ol start="3">
-<li>像常见的<code>(function($){}(jQuery))</code>;就是将实参jQuery作为实参传入到函数function($){}中，通过形参$接受</li>
-<li><code>$(function(){})</code><ul>
-<li>需要引入jQuery包</li>
-<li>是$(document).ready(function(){})的简写，两者效果完全一样</li>
-</ul>
-</li>
-<li>可以在function(){}()的前面加上!、+、-、~也可以使变成函数表达式，变成立即执行函数</li>
-</ol>
-<h4 id="是时候理解一波了"><a href="#是时候理解一波了" class="headerlink" title="是时候理解一波了"></a>是时候理解一波了</h4><p>我的理解：</p>
-<ul>
-<li>js中函数内部可以读取到全局变量，而函数外部不能读取函数内部的局部变量。此时闭包就是为了能使得从外部访问函数内部的变量。</li>
-<li>为了让某些变量始终保持在内存中，但同时也可能导致内存消耗的问题</li>
-<li>方便调用上下文的局部变量，利于代码封装<br>两个方面：<ol>
-<li>函数作为返回值<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> function a()&#123;</span><br><span class="line">  var name=&apos;hh&apos;;</span><br><span class="line">  return function()&#123;</span><br><span class="line">      return name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">var b=a();</span><br><span class="line">//将返回的匿名函数赋值给b，此时b相当于a内部的匿名函数，可以访问到a内部的变量</span><br><span class="line">console.log(b());</span><br><span class="line"> //通过b(),执行a内部的匿名函数，最后返回a函数内部的变量</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-</li>
-</ul>
-<blockquote>
-<p>这段代码实现了全局变量b可以获取到a方法下的局部变量name的值<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   function f1()&#123;</span><br><span class="line">    var num=12;</span><br><span class="line">    return function()&#123;</span><br><span class="line">        var n=0;</span><br><span class="line">        console.log(++num);</span><br><span class="line">        console.log(++n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var fn=f1();</span><br><span class="line">fn();  //13 1</span><br><span class="line">//第一次调用f1里的匿名函数</span><br><span class="line">fn();  //14 1</span><br><span class="line">//第二次调用f1里的匿名函数</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>上述代码中在fn执行完后，就应该连同它里面的变量以同销毁，但在此case中，匿名函数作为f1的返回值被赋给了fn，这时候就相当于fn=function(var n=0;…){},并且匿名函数内部引用这f1里面的变量num，所以变量num无法被销毁，但每次每次n是重新创建的，这里就产生了内存消耗的问题（num）<br>再来一个case:依次输出1到5<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> (function()&#123;</span><br><span class="line">var i=1;</span><br><span class="line">for(i=0;i&lt;5;i++)&#123;</span><br><span class="line">    setTimeout(function()&#123;</span><br><span class="line">     console.log(i);</span><br><span class="line">    &#125;,100)</span><br><span class="line">&#125;</span><br><span class="line">&#125;());  //5，5，5，5，5</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>这是会发现出现了5个5，与预期不同。我们来分析一下，首先由于js是单线程语言，遇到setTimeout函数，这是一个异步函数，将之放入异步函数队列，等到主线程运行完。好！主线程运行完了，即5个循环运行结束，这是的i为5。此时运行异步队列中的线程，此时i为5，所以打印的都是5。我们可以采用一下立即执行函数来解决这个问题<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line"> var i=0;</span><br><span class="line"> for(i=0;i&lt;5;++i)&#123;</span><br><span class="line">     (function(i)&#123;</span><br><span class="line">         setTimeout(function()&#123;</span><br><span class="line">             console.log(i);</span><br><span class="line">            &#125;,100)</span><br><span class="line">     &#125;(i));</span><br><span class="line"> &#125;</span><br><span class="line">&#125;()); //0,1,2,3,4</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>此时已完成预期效果。这里通过闭包来保存变量i，将setTimeout函数放入立即执行函数中，将for循环中的i作为参数传递，通过立即执行函数，相当于将i固定保存在匿名函数中（这就是立即执行函数的魅力），100毫秒后打印出0、1、2、3、4<br>    若要在隔100毫秒在输出，可以<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line"> var i=0;</span><br><span class="line"> for(i=0;i&lt;5;++i)&#123;</span><br><span class="line">     (function(i)&#123;</span><br><span class="line">         setTimeout(function()&#123;</span><br><span class="line">             console.log(i);</span><br><span class="line">            &#125;,i*100)</span><br><span class="line">     &#125;(i));</span><br><span class="line"> &#125;</span><br><span class="line">&#125;()); //0,1,2,3,4</span><br></pre></td></tr></table></figure></p>
-</blockquote>
 <ol start="2">
-<li><p>闭包作为参数传递<br>将(function(){}()) 中最后一个括号里面传函数</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   var num = 15</span><br><span class="line">var f1=function(x)&#123;</span><br><span class="line">  if(x&gt; num)&#123;</span><br><span class="line">      console.log(x);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 加上void 变成立即执行函数</span><br><span class="line">void function(fn)&#123;</span><br><span class="line"> var num=100;</span><br><span class="line"> fn(30)</span><br><span class="line">&#125;(f1)    //30</span><br></pre></td></tr></table></figure>
+<li><p><strong>event loop(2)</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> setTimeout(function()&#123;</span><br><span class="line">  console.log(&apos;定时器开始啦&apos;)</span><br><span class="line"> &#125;);</span><br><span class="line"> new Promise(function(resolve)&#123;</span><br><span class="line">  console.log(&apos;马上执行for循环啦&apos;);</span><br><span class="line">  for(var i = 0; i &lt; 10000; i++)&#123;</span><br><span class="line">      i == 99 &amp;&amp; resolve();</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;).then(function()&#123;</span><br><span class="line">  console.log(&apos;执行then函数啦&apos;)</span><br><span class="line"> &#125;);</span><br><span class="line">console.log(&apos;代码执行结束&apos;);</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>解释：这里首先有一个立即执行函数，直接执行，实参为f1对应的匿名方法，将之传给fn，在执行这个匿名函数，在执行这个匿名函数时，访问的num就是最上面的全局变量num（15）了</p>
-</blockquote>
+<p>按照event loop(1)的分析结果会是 马上执行for循环 代码执行结束 定时器开始啦 执行then函数啦，但是事实并非如此，真实的执行结果是：马上执行for循环 代码执行结束 执行then函数啦 定时器开始啦 </p>
+<p>这里可以提出更准确的划分机制:</p>
 </li>
 </ol>
-]]></content>
+<ul>
+<li>宏任务: 包括整体代码<strong>script,setTimout,setInterval</strong></li>
+<li>微任务：宏任务底下的任务<strong>Promise，process.nextTick</strong><br>在一个事件循环中，执行第一个宏任务，宏任务执行结束，执行当前事件循环中的微任务，执行完毕之后进入下一个事件循环中，或者说执行下一个宏任务；</li>
+</ul>
+<p>   <strong>执行宏任务 ===&gt; 执行微任务 ===&gt; 执行另一个宏任务 ===&gt; 不断循环</strong><br>   <img src="/images/JS%E5%AE%8F%E4%BB%BB%E5%8A%A1%E4%B8%8E%E5%BE%AE%E4%BB%BB%E5%8A%A1.png" alt="avatar"></p>
+<p>   重新分析：</p>
+<ul>
+<li>首先执行script底下的宏任务，遇到setTimout,首先是异步任务，将其放入宏任务队列中</li>
+<li>遇到Promise函数，由于是同步任务直接运行，然后遇到then，这是异步任务,同时也是微任务，放入微任务队列中</li>
+<li>然后执行同步任务，打印“代码执行结束”</li>
+<li>本轮宏任务结束,查看本轮的微任务,发现有个then函数，执行then函数</li>
+<li>下一轮循环中，先找是否有宏任务，发现在宏任务队列中有个setTimout函数，开始执行</li>
+</ul>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  console.log(&apos;1&apos;);</span><br><span class="line"> </span><br><span class="line">setTimeout(function() &#123;</span><br><span class="line">    console.log(&apos;2&apos;);</span><br><span class="line">    process.nextTick(function() &#123;</span><br><span class="line">        console.log(&apos;3&apos;);</span><br><span class="line">    &#125;)</span><br><span class="line">    new Promise(function(resolve) &#123;</span><br><span class="line">        console.log(&apos;4&apos;);</span><br><span class="line">        resolve();</span><br><span class="line">    &#125;).then(function() &#123;</span><br><span class="line">        console.log(&apos;5&apos;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line">process.nextTick(function() &#123;</span><br><span class="line">    console.log(&apos;6&apos;);</span><br><span class="line">&#125;)</span><br><span class="line">new Promise(function(resolve) &#123;</span><br><span class="line">    console.log(&apos;7&apos;);</span><br><span class="line">    resolve();</span><br><span class="line">&#125;).then(function() &#123;</span><br><span class="line">    console.log(&apos;8&apos;)</span><br><span class="line">&#125;)</span><br><span class="line"> </span><br><span class="line">setTimeout(function() &#123;</span><br><span class="line">    console.log(&apos;9&apos;);</span><br><span class="line">    process.nextTick(function() &#123;</span><br><span class="line">        console.log(&apos;10&apos;);</span><br><span class="line">    &#125;)</span><br><span class="line">    new Promise(function(resolve) &#123;</span><br><span class="line">        console.log(&apos;11&apos;);</span><br><span class="line">        resolve();</span><br><span class="line">    &#125;).then(function() &#123;</span><br><span class="line">        console.log(&apos;12&apos;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>解释：<br>   1、 第一轮事件循环流程分析如下：<br>    整体script作为第一个宏任务进入主线程，遇到console.log，输出1。<br>    遇到setTimeout，其回调函数被分发到宏任务Event Queue中。我们暂且记为setTimeout1。<br>    遇到process.nextTick()，其回调函数被分发到微任务Event Queue中。我们记为process1。<br>    遇到Promise，new Promise直接执行，输出7。then被分发到微任务Event Queue中。我们记为then1。<br>    又遇到了setTimeout，其回调函数被分发到宏任务Event Queue中，我们记为setTimeout2。</p>
+<pre><code>宏任务Event Queue   微任务Event Queue
+setTimeout1         process1
+setTimeout2         then1
+
+上表是第一轮事件循环宏任务结束时各Event Queue的情况，此时已经输出了1和7。
+我们发现了process1和then1两个微任务。
+执行process1,输出6。
+执行then1，输出8。
+
+好了，第一轮事件循环正式结束，这一轮的结果是输出1，7，6，8。</code></pre><p>2、 那么第二轮时间循环从setTimeout1宏任务开始：</p>
+<pre><code>首先输出2。接下来遇到了process.nextTick()，同样将其分发到微任务Event Queue中，</code></pre><p>记为process2。new Promise立即执行输出4，then也分发到微任务Event Queue中，记为then2。</p>
+<pre><code>宏任务Event Queue     微任务Event Queue
+setTimeout2           process2
+                      then2
+
+第二轮事件循环宏任务结束，我们发现有process2和then2两个微任务可以执行。
+    输出3。
+    输出5。
+    第二轮事件循环结束，第二轮输出2，4，3，5。</code></pre><p>3、 第三轮事件循环开始，此时只剩setTimeout2了，执行。<br>        直接输出9。<br>        将process.nextTick()分发到微任务Event Queue中。记为process3。<br>        直接执行new Promise，输出11。<br>        将then分发到微任务Event Queue中，记为then3。</p>
+<pre><code>宏任务Event Queue     微任务Event Queue
+                        process3
+                        then3     
+第三轮事件循环宏任务执行结束，执行两个微任务process3和then3。
+    输出10。
+    输出12。
+    第三轮事件循环结束，第三轮输出9，11，10，12。
+
+整段代码，共进行了三次事件循环，完整的输出为1，7，6，8，2，4，3，5，9，11，10，12。</code></pre>]]></content>
       <categories>
         <category>前端</category>
       </categories>
@@ -267,6 +262,98 @@
       </tags>
   </entry>
   <entry>
+    <title>About Me</title>
+    <url>/2020/06/03/about/</url>
+    <content><![CDATA[<blockquote>
+<p>A Student, Now live in Nanning, China.</p>
+</blockquote>
+<p>姓名：曹涵<br>现居：暂时没有<br>GitHub: <a href="https://github.com/xiaoruran/xiaoruran.github.io" target="_blank" rel="noopener">Cao_Han</a><br>QQ: 3314508022<br>微信: ch18325622987</p>
+<a id="more"></a>
+
+<!-- ![avatar.jpg](https://i.loli.net/2019/12/02/Hw5WJIMKzi1YrU8.jpg) -->
+
+<img src="https://pic.downk.cc/item/5e739676e83c3a1e3ab4b361.jpg" alt="avatar" width="300" style="border-radius:50%">
+]]></content>
+      <tags>
+        <tag>自我介绍</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS之闭包理解</title>
+    <url>/2020/06/01/JS%E9%97%AD%E5%8C%85/</url>
+    <content><![CDATA[<h3 id="JS闭包理解"><a href="#JS闭包理解" class="headerlink" title="JS闭包理解"></a>JS闭包理解</h3><h4 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a>立即执行函数</h4><p>作用： 创建一个独立的作用域。这个作用域的变量外面访问不到（避免变量污染）</p>
+<ol>
+<li><p><code>(function foo(){}())</code><br>如果直接写function foo(){}()解释器会报错。<em>立即执行函数的调用方式是将函数表达式、调用操作符、分组操作符放到一个括号内，来告诉解释器这里有一个需要解释器立即执行的函数</em>。否则通常情况下，解析器遇到function关键子，都会把它当成一个函数声明，而不是个函数表达式</p>
+<ul>
+<li>立即执行函数的写法</li>
+<li>相当于 function foo(){};foo();</li>
+<li>相当于先定义一个函数，然后调用执行它</li>
+<li>在最后面的括号里面可以直接写传递的参数<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function foo(n1,n2)&#123;</span><br><span class="line">    console.log(n1+n2);</span><br><span class="line">&#125;(3,5));  //8</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><code>(function foo(){})()</code><br>总的语法和上面的一致</p>
+<blockquote>
+<p>注意：当在不需要表达式的场景下，就不需要用括号括起来了</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void function foo()&#123;&#125;()</span><br><span class="line">var foo =function()&#123;&#125;();</span><br><span class="line">true &amp;&amp; function()&#123;&#125;();</span><br><span class="line">0,function()&#123;&#125;();</span><br><span class="line">//以上都是作为函数表达式，所以不需要用括号括起来了</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<blockquote>
+<p>对于立即执行函数，也可以给他们传入参数，在最后一个括号里传</p>
+</blockquote>
+<ol start="3">
+<li>像常见的<code>(function($){}(jQuery))</code>;就是将实参jQuery作为实参传入到函数function($){}中，通过形参$接受</li>
+<li><code>$(function(){})</code><ul>
+<li>需要引入jQuery包</li>
+<li>是$(document).ready(function(){})的简写，两者效果完全一样</li>
+</ul>
+</li>
+<li>可以在function(){}()的前面加上!、+、-、~也可以使变成函数表达式，变成立即执行函数</li>
+</ol>
+<h4 id="是时候理解一波了"><a href="#是时候理解一波了" class="headerlink" title="是时候理解一波了"></a>是时候理解一波了</h4><p>我的理解：</p>
+<ul>
+<li>js中函数内部可以读取到全局变量，而函数外部不能读取函数内部的局部变量。此时闭包就是为了能使得从外部访问函数内部的变量。</li>
+<li>为了让某些变量始终保持在内存中，但同时也可能导致内存消耗的问题</li>
+<li>方便调用上下文的局部变量，利于代码封装<br>两个方面：<ol>
+<li>函数作为返回值<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> function a()&#123;</span><br><span class="line">  var name=&apos;hh&apos;;</span><br><span class="line">  return function()&#123;</span><br><span class="line">      return name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">var b=a();</span><br><span class="line">//将返回的匿名函数赋值给b，此时b相当于a内部的匿名函数，可以访问到a内部的变量</span><br><span class="line">console.log(b());</span><br><span class="line"> //通过b(),执行a内部的匿名函数，最后返回a函数内部的变量</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>这段代码实现了全局变量b可以获取到a方法下的局部变量name的值<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   function f1()&#123;</span><br><span class="line">    var num=12;</span><br><span class="line">    return function()&#123;</span><br><span class="line">        var n=0;</span><br><span class="line">        console.log(++num);</span><br><span class="line">        console.log(++n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var fn=f1();</span><br><span class="line">fn();  //13 1</span><br><span class="line">//第一次调用f1里的匿名函数</span><br><span class="line">fn();  //14 1</span><br><span class="line">//第二次调用f1里的匿名函数</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>上述代码中在fn执行完后，就应该连同它里面的变量以同销毁，但在此case中，匿名函数作为f1的返回值被赋给了fn，这时候就相当于fn=function(var n=0;…){},并且匿名函数内部引用这f1里面的变量num，所以变量num无法被销毁，但每次每次n是重新创建的，这里就产生了内存消耗的问题（num）<br>再来一个case:依次输出1到5<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> (function()&#123;</span><br><span class="line">var i=1;</span><br><span class="line">for(i=0;i&lt;5;i++)&#123;</span><br><span class="line">    setTimeout(function()&#123;</span><br><span class="line">     console.log(i);</span><br><span class="line">    &#125;,100)</span><br><span class="line">&#125;</span><br><span class="line">&#125;());  //5，5，5，5，5</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>这是会发现出现了5个5，与预期不同。我们来分析一下，首先由于js是单线程语言，遇到setTimeout函数，这是一个异步函数，将之放入异步函数队列，等到主线程运行完。好！主线程运行完了，即5个循环运行结束，这是的i为5。此时运行异步队列中的线程，此时i为5，所以打印的都是5。我们可以采用一下立即执行函数来解决这个问题<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line"> var i=0;</span><br><span class="line"> for(i=0;i&lt;5;++i)&#123;</span><br><span class="line">     (function(i)&#123;</span><br><span class="line">         setTimeout(function()&#123;</span><br><span class="line">             console.log(i);</span><br><span class="line">            &#125;,100)</span><br><span class="line">     &#125;(i));</span><br><span class="line"> &#125;</span><br><span class="line">&#125;()); //0,1,2,3,4</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>此时已完成预期效果。这里通过闭包来保存变量i，将setTimeout函数放入立即执行函数中，将for循环中的i作为参数传递，通过立即执行函数，相当于将i固定保存在匿名函数中（这就是立即执行函数的魅力），100毫秒后打印出0、1、2、3、4<br>    若要在隔100毫秒在输出，可以<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line"> var i=0;</span><br><span class="line"> for(i=0;i&lt;5;++i)&#123;</span><br><span class="line">     (function(i)&#123;</span><br><span class="line">         setTimeout(function()&#123;</span><br><span class="line">             console.log(i);</span><br><span class="line">            &#125;,i*100)</span><br><span class="line">     &#125;(i));</span><br><span class="line"> &#125;</span><br><span class="line">&#125;()); //0,1,2,3,4</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<ol start="2">
+<li><p>闭包作为参数传递<br>将(function(){}()) 中最后一个括号里面传函数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   var num = 15</span><br><span class="line">var f1=function(x)&#123;</span><br><span class="line">  if(x&gt; num)&#123;</span><br><span class="line">      console.log(x);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 加上void 变成立即执行函数</span><br><span class="line">void function(fn)&#123;</span><br><span class="line"> var num=100;</span><br><span class="line"> fn(30)</span><br><span class="line">&#125;(f1)    //30</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>解释：这里首先有一个立即执行函数，直接执行，实参为f1对应的匿名方法，将之传给fn，在执行这个匿名函数，在执行这个匿名函数时，访问的num就是最上面的全局变量num（15）了</p>
+</blockquote>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>博客Markdown的写法</title>
     <url>/2020/01/17/my-second-blog/</url>
     <content><![CDATA[<h4 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h4><pre><code># 一级标题
@@ -306,6 +393,93 @@
       <tags>
         <tag>技术</tag>
         <tag>方法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue之样式</title>
+    <url>/2020/06/03/vue2node/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h3 id="Vue中使用样式"><a href="#Vue中使用样式" class="headerlink" title="Vue中使用样式"></a>Vue中使用样式</h3><h4 id="使用class样式"><a href="#使用class样式" class="headerlink" title="使用class样式"></a>使用class样式</h4><ol>
+<li><p>数组 直接传递数组 （了解就行）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; &lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;]&quot;&gt;这是一个标题&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：使用数组时，要用v-bind绑定class并且在class里面的数组，必须用字符串包裹起来，这时不需要在Vue中有data</p>
+</blockquote>
+</li>
+<li><p>在数组里面使用三元表达式（在Vue中需要声明数据）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; .active &#123;letter-spacing: 0.5em&#125;&lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;,flag?&apos;active&apos;:&apos;&apos;]&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  var vm =new Vue(&#123;</span><br><span class="line">     el:&quot;#app&quot;,</span><br><span class="line">     data:&#123;</span><br><span class="line">         flag:true</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>此时的三元表达式可以借用data中的数据进行，但还是需要将class绑定属性 v-bind</p>
+</blockquote>
+</li>
+<li><p>在数组里面使用对象可以代替三元表达式 例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; .active &#123;letter-spacing: 0.5em&#125;&lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;,&#123;&apos;active&apos;:flag&#125;]&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  var vm =new Vue(&#123;</span><br><span class="line">     el:&quot;#app&quot;,</span><br><span class="line">     data:&#123;</span><br><span class="line">         flag:true</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>直接使用对象（前提是使用v-bind绑定class属性对象的属性可以带引号也可不带，属性的值是一个标识符） 例如：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; .active &#123;letter-spacing: 0.5em&#125;&lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;&#123;red: true, active: false&#125;&quot;&gt;这是一个标题&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<blockquote>
+<p>注意：直接使用对象时，:class={} 这里是对象的括号，且里面可用字符串包裹，也可不用</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="Vue中绑定内联样式（style）"><a href="#Vue中绑定内联样式（style）" class="headerlink" title="Vue中绑定内联样式（style）"></a>Vue中绑定内联样式（style）</h4><ol>
+<li><p>直接通过v-bind绑定style</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;h1 :style=&quot;&#123;color:&apos;red&apos;,&apos;font-size&apos;:200px&#125;&quot;&gt;这是一个标题&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将样式对像，定义到data中，并直接应用到:style中</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;h1 :style=&quot;Objstyle&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  data:&#123;Objstyle:&#123;color:&apos;red&apos;,&apos;font-size&apos;:200px&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS之对象说明符</title>
+    <url>/2020/06/02/%E5%AF%B9%E8%B1%A1%E8%AF%B4%E6%98%8E%E7%AC%A6/</url>
+    <content><![CDATA[<h3 id="对象说明符（ES6中可以理解为结构解析）"><a href="#对象说明符（ES6中可以理解为结构解析）" class="headerlink" title="对象说明符（ES6中可以理解为结构解析）"></a>对象说明符（ES6中可以理解为结构解析）</h3><p>有时候函数中需要传的参数过多，容易在调用时搞混这些参数的顺序，这时候就可以时使用对象说明符来解决。将形参写成一个对象的形式，实参叶根据这个形式进行传参</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var foo=function(&#123;</span><br><span class="line">  &apos;firststr&apos;:str,</span><br><span class="line">  &apos;secondstr&apos;:name</span><br><span class="line">&#125;)&#123;</span><br><span class="line">  console.log(str+ &quot;-----&quot;+ name );</span><br><span class="line">&#125;</span><br><span class="line">foo(&#123;&apos;firststr&apos;:&quot;你好啊&quot;,&apos;secondstr&apos;:&apos;JS&apos;&#125;);  //你好啊-----JS</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS之number</title>
+    <url>/2020/06/02/%E6%95%B0%E5%AD%97%E7%B1%BB%E5%9E%8Bnumber/</url>
+    <content><![CDATA[<h3 id="number一些方法"><a href="#number一些方法" class="headerlink" title="number一些方法"></a>number一些方法</h3><ul>
+<li><p><code>number.toExponential()</code>方法：将这个number转换为一个指数形式的字符串，参数items是控制其小数点后的数字位数，这个值必须在0~20之内</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var x=Math.PI;</span><br><span class="line">console.log(x.toExponential(30)); //3.142e+0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>number.x.toFixed()</code>方法：将number转换为一个十进制形式的字符串，可选参数控制其小数点都的数字位数，默认为0，这个值必须在0~20之内</p>
+</li>
+<li><p><code>number.toPrecision()</code>方法：将number转换为一个十进制数子形式的字符串，可选参数控制数字的精度，表示的是所有数字的个数，这个值必须在0~21之内</p>
+</li>
+<li><p><code>number.toString()</code>方法：将number转换为一个字符串，可选参数表示几进制，默认是10</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var x=Math.PI;</span><br><span class="line">console.log(x.toString(8)); //3.1103755242102643</span><br><span class="line">console.log(x.toString(16)); //3.243f6a8885a3</span><br><span class="line">console.log(x.toString()); //3.141592653589793</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
       </tags>
   </entry>
   <entry>
@@ -499,180 +673,6 @@
       <tags>
         <tag>前端</tag>
         <tag>vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Vue之样式</title>
-    <url>/2020/06/03/vue2node/</url>
-    <content><![CDATA[<p>[TOC]</p>
-<h3 id="Vue中使用样式"><a href="#Vue中使用样式" class="headerlink" title="Vue中使用样式"></a>Vue中使用样式</h3><h4 id="使用class样式"><a href="#使用class样式" class="headerlink" title="使用class样式"></a>使用class样式</h4><ol>
-<li><p>数组 直接传递数组 （了解就行）</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; &lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;]&quot;&gt;这是一个标题&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意：使用数组时，要用v-bind绑定class并且在class里面的数组，必须用字符串包裹起来，这时不需要在Vue中有data</p>
-</blockquote>
-</li>
-<li><p>在数组里面使用三元表达式（在Vue中需要声明数据）</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; .active &#123;letter-spacing: 0.5em&#125;&lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;,flag?&apos;active&apos;:&apos;&apos;]&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  var vm =new Vue(&#123;</span><br><span class="line">     el:&quot;#app&quot;,</span><br><span class="line">     data:&#123;</span><br><span class="line">         flag:true</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>此时的三元表达式可以借用data中的数据进行，但还是需要将class绑定属性 v-bind</p>
-</blockquote>
-</li>
-<li><p>在数组里面使用对象可以代替三元表达式 例如：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; .active &#123;letter-spacing: 0.5em&#125;&lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;,&#123;&apos;active&apos;:flag&#125;]&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  var vm =new Vue(&#123;</span><br><span class="line">     el:&quot;#app&quot;,</span><br><span class="line">     data:&#123;</span><br><span class="line">         flag:true</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>直接使用对象（前提是使用v-bind绑定class属性对象的属性可以带引号也可不带，属性的值是一个标识符） 例如：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; .active &#123;letter-spacing: 0.5em&#125;&lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;&#123;red: true, active: false&#125;&quot;&gt;这是一个标题&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<blockquote>
-<p>注意：直接使用对象时，:class={} 这里是对象的括号，且里面可用字符串包裹，也可不用</p>
-</blockquote>
-</li>
-</ol>
-<h4 id="Vue中绑定内联样式（style）"><a href="#Vue中绑定内联样式（style）" class="headerlink" title="Vue中绑定内联样式（style）"></a>Vue中绑定内联样式（style）</h4><ol>
-<li><p>直接通过v-bind绑定style</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;h1 :style=&quot;&#123;color:&apos;red&apos;,&apos;font-size&apos;:200px&#125;&quot;&gt;这是一个标题&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将样式对像，定义到data中，并直接应用到:style中</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;h1 :style=&quot;Objstyle&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  data:&#123;Objstyle:&#123;color:&apos;red&apos;,&apos;font-size&apos;:200px&#125;</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS之number</title>
-    <url>/2020/06/02/%E6%95%B0%E5%AD%97%E7%B1%BB%E5%9E%8Bnumber/</url>
-    <content><![CDATA[<h3 id="number一些方法"><a href="#number一些方法" class="headerlink" title="number一些方法"></a>number一些方法</h3><ul>
-<li><p><code>number.toExponential()</code>方法：将这个number转换为一个指数形式的字符串，参数items是控制其小数点后的数字位数，这个值必须在0~20之内</p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var x=Math.PI;</span><br><span class="line">console.log(x.toExponential(30)); //3.142e+0</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>number.x.toFixed()</code>方法：将number转换为一个十进制形式的字符串，可选参数控制其小数点都的数字位数，默认为0，这个值必须在0~20之内</p>
-</li>
-<li><p><code>number.toPrecision()</code>方法：将number转换为一个十进制数子形式的字符串，可选参数控制数字的精度，表示的是所有数字的个数，这个值必须在0~21之内</p>
-</li>
-<li><p><code>number.toString()</code>方法：将number转换为一个字符串，可选参数表示几进制，默认是10</p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var x=Math.PI;</span><br><span class="line">console.log(x.toString(8)); //3.1103755242102643</span><br><span class="line">console.log(x.toString(16)); //3.243f6a8885a3</span><br><span class="line">console.log(x.toString()); //3.141592653589793</span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS之事件执行机制</title>
-    <url>/2020/06/03/JS%E5%BC%95%E6%93%8E%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6/</url>
-    <content><![CDATA[<h3 id="JS引擎事件执行机制"><a href="#JS引擎事件执行机制" class="headerlink" title="JS引擎事件执行机制"></a>JS引擎事件执行机制</h3><h4 id="JS执行机制"><a href="#JS执行机制" class="headerlink" title="JS执行机制"></a>JS执行机制</h4><ol>
-<li><p>浏览器（或是JS引擎）执行JS的机制是基于事件循环</p>
-</li>
-<li><p>JS是单线程机制，在同一时间只能执行一个任务，其他任务只能排队，后续任务必须等到前一个任务结束后才能开始执行</p>
-</li>
-<li><p>为了避免因为某些长时间任务造成的无意义等待，JS引入了<strong>异步</strong>的概念，用另一个线程来管理异步任务。</p>
-</li>
-<li><p>同步任务直接在主线程队列中顺序执行，异步任务会进入另一个任务队列，不会阻塞主线程。等到主线程队列空了后，就回去异步队列查询是否有可执行的异步任务（通常异步任务需要等一些条件才能执行，如Ajax请求、文件读写），如果某个异步任务可以执行，则加入主线程队列，以此循环</p>
-<h4 id="JS中基于事件循环机制（event-loop）"><a href="#JS中基于事件循环机制（event-loop）" class="headerlink" title="JS中基于事件循环机制（event loop）"></a>JS中基于事件循环机制（event loop）</h4><p>异步的概念引入是由于事件循环造成的</p>
-</li>
-<li><p><strong>event loop(1)</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">console.log(1)</span><br><span class="line"> setTimeout(function()&#123;</span><br><span class="line">     console.log(2)</span><br><span class="line"> &#125;,0)</span><br><span class="line"> console.log(3)</span><br></pre></td></tr></table></figure>
-
-<p>运行结果是 1 3 2</p>
-<p>setTimeout里的函数并没有立即执行，而实延迟了一段时间，满足一定条件后，才开始执行，这种代码较异步代码。</p>
-<p>定时器是JS中很经典的异步模型</p>
-<p>按这种：JS的执行机制是</p>
-</li>
-</ol>
-<ul>
-<li>首先判断是同步还是异步，同步进入主进程，异步就进入 event tavle</li>
-<li>异步任务先不执行，在event table中注册函数，满足条件后，被推入event queue</li>
-<li>同步任务进入主线程后一直执行，直到主线程空闲时，才去event queue中查看是否有可执行的异步任务，若有则推入到主线程队列中执行</li>
-</ul>
-<ol start="2">
-<li><p><strong>event loop(2)</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> setTimeout(function()&#123;</span><br><span class="line">  console.log(&apos;定时器开始啦&apos;)</span><br><span class="line"> &#125;);</span><br><span class="line"> new Promise(function(resolve)&#123;</span><br><span class="line">  console.log(&apos;马上执行for循环啦&apos;);</span><br><span class="line">  for(var i = 0; i &lt; 10000; i++)&#123;</span><br><span class="line">      i == 99 &amp;&amp; resolve();</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;).then(function()&#123;</span><br><span class="line">  console.log(&apos;执行then函数啦&apos;)</span><br><span class="line"> &#125;);</span><br><span class="line">console.log(&apos;代码执行结束&apos;);</span><br></pre></td></tr></table></figure>
-
-<p>按照event loop(1)的分析结果会是 马上执行for循环 代码执行结束 定时器开始啦 执行then函数啦，但是事实并非如此，真实的执行结果是：马上执行for循环 代码执行结束 执行then函数啦 定时器开始啦 </p>
-<p>这里可以提出更准确的划分机制:</p>
-</li>
-</ol>
-<ul>
-<li>宏任务: 包括整体代码<strong>script,setTimout,setInterval</strong></li>
-<li>微任务：宏任务底下的任务<strong>Promise，process.nextTick</strong><br>在一个事件循环中，执行第一个宏任务，宏任务执行结束，执行当前事件循环中的微任务，执行完毕之后进入下一个事件循环中，或者说执行下一个宏任务；</li>
-</ul>
-<p>   <strong>执行宏任务 ===&gt; 执行微任务 ===&gt; 执行另一个宏任务 ===&gt; 不断循环</strong><br>   <img src="/images/JS%E5%AE%8F%E4%BB%BB%E5%8A%A1%E4%B8%8E%E5%BE%AE%E4%BB%BB%E5%8A%A1.png" alt="avatar"></p>
-<p>   重新分析：</p>
-<ul>
-<li>首先执行script底下的宏任务，遇到setTimout,首先是异步任务，将其放入宏任务队列中</li>
-<li>遇到Promise函数，由于是同步任务直接运行，然后遇到then，这是异步任务,同时也是微任务，放入微任务队列中</li>
-<li>然后执行同步任务，打印“代码执行结束”</li>
-<li>本轮宏任务结束,查看本轮的微任务,发现有个then函数，执行then函数</li>
-<li>下一轮循环中，先找是否有宏任务，发现在宏任务队列中有个setTimout函数，开始执行</li>
-</ul>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  console.log(&apos;1&apos;);</span><br><span class="line"> </span><br><span class="line">setTimeout(function() &#123;</span><br><span class="line">    console.log(&apos;2&apos;);</span><br><span class="line">    process.nextTick(function() &#123;</span><br><span class="line">        console.log(&apos;3&apos;);</span><br><span class="line">    &#125;)</span><br><span class="line">    new Promise(function(resolve) &#123;</span><br><span class="line">        console.log(&apos;4&apos;);</span><br><span class="line">        resolve();</span><br><span class="line">    &#125;).then(function() &#123;</span><br><span class="line">        console.log(&apos;5&apos;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line">process.nextTick(function() &#123;</span><br><span class="line">    console.log(&apos;6&apos;);</span><br><span class="line">&#125;)</span><br><span class="line">new Promise(function(resolve) &#123;</span><br><span class="line">    console.log(&apos;7&apos;);</span><br><span class="line">    resolve();</span><br><span class="line">&#125;).then(function() &#123;</span><br><span class="line">    console.log(&apos;8&apos;)</span><br><span class="line">&#125;)</span><br><span class="line"> </span><br><span class="line">setTimeout(function() &#123;</span><br><span class="line">    console.log(&apos;9&apos;);</span><br><span class="line">    process.nextTick(function() &#123;</span><br><span class="line">        console.log(&apos;10&apos;);</span><br><span class="line">    &#125;)</span><br><span class="line">    new Promise(function(resolve) &#123;</span><br><span class="line">        console.log(&apos;11&apos;);</span><br><span class="line">        resolve();</span><br><span class="line">    &#125;).then(function() &#123;</span><br><span class="line">        console.log(&apos;12&apos;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>解释：<br>   1、 第一轮事件循环流程分析如下：<br>    整体script作为第一个宏任务进入主线程，遇到console.log，输出1。<br>    遇到setTimeout，其回调函数被分发到宏任务Event Queue中。我们暂且记为setTimeout1。<br>    遇到process.nextTick()，其回调函数被分发到微任务Event Queue中。我们记为process1。<br>    遇到Promise，new Promise直接执行，输出7。then被分发到微任务Event Queue中。我们记为then1。<br>    又遇到了setTimeout，其回调函数被分发到宏任务Event Queue中，我们记为setTimeout2。</p>
-<pre><code>宏任务Event Queue   微任务Event Queue
-setTimeout1         process1
-setTimeout2         then1
-
-上表是第一轮事件循环宏任务结束时各Event Queue的情况，此时已经输出了1和7。
-我们发现了process1和then1两个微任务。
-执行process1,输出6。
-执行then1，输出8。
-
-好了，第一轮事件循环正式结束，这一轮的结果是输出1，7，6，8。</code></pre><p>2、 那么第二轮时间循环从setTimeout1宏任务开始：</p>
-<pre><code>首先输出2。接下来遇到了process.nextTick()，同样将其分发到微任务Event Queue中，</code></pre><p>记为process2。new Promise立即执行输出4，then也分发到微任务Event Queue中，记为then2。</p>
-<pre><code>宏任务Event Queue     微任务Event Queue
-setTimeout2           process2
-                      then2
-
-第二轮事件循环宏任务结束，我们发现有process2和then2两个微任务可以执行。
-    输出3。
-    输出5。
-    第二轮事件循环结束，第二轮输出2，4，3，5。</code></pre><p>3、 第三轮事件循环开始，此时只剩setTimeout2了，执行。<br>        直接输出9。<br>        将process.nextTick()分发到微任务Event Queue中。记为process3。<br>        直接执行new Promise，输出11。<br>        将then分发到微任务Event Queue中，记为then3。</p>
-<pre><code>宏任务Event Queue     微任务Event Queue
-                        process3
-                        then3     
-第三轮事件循环宏任务执行结束，执行两个微任务process3和then3。
-    输出10。
-    输出12。
-    第三轮事件循环结束，第三轮输出9，11，10，12。
-
-整段代码，共进行了三次事件循环，完整的输出为1，7，6，8，2，4，3，5，9，11，10，12。</code></pre>]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS之对象说明符</title>
-    <url>/2020/06/02/%E5%AF%B9%E8%B1%A1%E8%AF%B4%E6%98%8E%E7%AC%A6/</url>
-    <content><![CDATA[<h3 id="对象说明符（ES6中可以理解为结构解析）"><a href="#对象说明符（ES6中可以理解为结构解析）" class="headerlink" title="对象说明符（ES6中可以理解为结构解析）"></a>对象说明符（ES6中可以理解为结构解析）</h3><p>有时候函数中需要传的参数过多，容易在调用时搞混这些参数的顺序，这时候就可以时使用对象说明符来解决。将形参写成一个对象的形式，实参叶根据这个形式进行传参</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var foo=function(&#123;</span><br><span class="line">  &apos;firststr&apos;:str,</span><br><span class="line">  &apos;secondstr&apos;:name</span><br><span class="line">&#125;)&#123;</span><br><span class="line">  console.log(str+ &quot;-----&quot;+ name );</span><br><span class="line">&#125;</span><br><span class="line">foo(&#123;&apos;firststr&apos;:&quot;你好啊&quot;,&apos;secondstr&apos;:&apos;JS&apos;&#125;);  //你好啊-----JS</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
       </tags>
   </entry>
   <entry>
@@ -1143,142 +1143,216 @@ setTimeout2           process2
 <li>在JS中 false、null、undefined、空字符串、数字0、数字 NaN都被当成假，其它所有的值都是真的，包括true,’false’,以及所有的对象</li>
 <li>注意:<code>for</code>语句<ol>
 <li>一种是常见的三个参数（初始化从句、条件从句、增量从句）</li>
-<li>另一种形式是<code>for in</code>语句，枚举一个对象的所有属性名，每次循环后，object的下一个属性名字符串会赋给variable<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">        for(attr in obj)&#123;</span><br><span class="line">         if(obj.hasOwnProperty(attr))&#123;</span><br><span class="line"> </span><br><span class="line">         &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ``` </span><br><span class="line">      &gt;一般需要通过检测obj.hasOwnProperty(attr)来判断这个属性名是这个对象的成员，还是来自**原型链**</span><br><span class="line">   + try语句</span><br><span class="line">      1. try语句执行一个代码块，并捕获该代码块抛出的任何异常。</span><br><span class="line">      2. catch从句定义一个新的变量variable来接受抛出的异常对象</span><br><span class="line">      3. throw语句抛出一个异常，若该语句在try代码块中，控制流将会跳转到catch从句中。若throw语句在函数中，则该函数调用被放弃，控制流调用该函数的try语句中的catch从句</span><br><span class="line"></span><br><span class="line">#### 表达式</span><br><span class="line">+ 最简单的表达式时字面量值（比如字符串或数字）、变量、内置的值（true、false、null、undefined、NaN和Infinity）、以new开头的调用表达式、以delete开头的属性提取表达式、包在圆括号内的表达式...</span><br><span class="line">+ 运算符优先级</span><br><span class="line">   1. `.` `[]` `()` 提取属性与调用函数</span><br><span class="line">   2. `delete` `new` `typeof` `+` `-` `!` 一元运算符</span><br><span class="line">   3. `*` `/` `%` 乘法、除法、求余</span><br><span class="line">   4. `+` `-` 加法、减法</span><br><span class="line">   5. `&lt;==` `&gt;==` `&gt;` `&lt;`关系运算符，不等式运算符</span><br><span class="line">   6. `===` `!==` 等式运算符</span><br><span class="line">   7. `&amp;&amp;` 逻辑与</span><br><span class="line">   8. `||` 逻辑或</span><br><span class="line">   9. `? : ` 三元运算符</span><br><span class="line">   &gt;&amp;&amp; 与&amp;的区别： 两种都能用作逻辑与，&amp;是当两边的表达式为真时，才能为真。&amp;&amp;是短路测试，当前面的表达式为假时，不需要测试后面的表达式</span><br><span class="line">+ `typedef`语句</span><br><span class="line">   + 用typedef运算符产生的值有`number` `string` `boolean` `undefined` `function` `object`</span><br><span class="line"></span><br><span class="line">#### 字面量</span><br><span class="line">   1. 对象字面量</span><br><span class="line">   2. 数组字面量</span><br><span class="line">   3. 函数字面量</span><br><span class="line"></span><br><span class="line">### 对象（key-value）</span><br><span class="line"> JavaScript中的简单数据类型包括数字、字符串、布尔值、null和undefined值，其他的所有制都是对象。数字、字符串、布尔值貌似对象，因为他们拥有方法，但他们不可变。</span><br><span class="line"></span><br><span class="line"> 数组是对象，函数是对象，正则表达式是对象。</span><br><span class="line"> + 对象是属性的容器，其中每个属性都有自己的名字和值。属性名是包含空字符串在内的任意字符串。属性值可以是出undefined值之外的任何值</span><br><span class="line"> + JS中的对象是无类型的，对属性名和值没有限制。</span><br><span class="line"> + **JS包含一种原型链的特征，允许对象继承另一个对象的属性。正确的使用能减少对象初始化时消耗的内存与时间**</span><br><span class="line"></span><br><span class="line">### JS函数</span><br><span class="line">* 函数就是对象。对象是“key-value”对的集合并拥有一个连到原型对象的隐藏连接。对象字面量产生的对象连接到Object.prototype。函数对象连接到Function.prototype（该原型对象本身连接到Object.prototype）。</span><br><span class="line"></span><br><span class="line">* 每个函数在创建时会附加两个隐藏属性：函数的上下文（也可以理解为call和apply方法，在Function.prototype中定义）和实现函数行为的代码</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### 函数字面量</span><br><span class="line">* 函数通过函数字面量来创建</span><br><span class="line">   1. 第一部分为保留字 `function`</span><br><span class="line">   2. 第二部分时函数名，可以省略，这样的话就是匿名函数（anonymous）</span><br><span class="line">   3. 第三部分时包围在圆括号内的一组参数，**javascript不对参数列表做强匹配，当实参少于形参，剩下形参的值就为undefined，当实参多余形参个数时，只会匹配前几个实参，剩下多余的实参会直接忽略，任何类型的值可以被传递给任何参数**</span><br><span class="line">   4. 第四部分为包围在花括号的一组语句，这是函数的主题，在函数被调用时执行</span><br><span class="line"></span><br><span class="line">#### 函数调用</span><br><span class="line">在调用函数时，每个函数会接受两个附加的参数：`this`和`arguments`，参数this在面向对象编程时非常重要，**this的值取决于调用的模式**</span><br><span class="line"></span><br><span class="line">#### 函数调用模式</span><br><span class="line">1. 方法调用模式</span><br><span class="line">此模式主要是指：当函数声明在一个对象之中，这个函数属于对象的一个方法，此时函数内部的this属性被绑定到该对象中，这是this可以访问自己所属的对象</span><br></pre></td></tr></table></figure>
+<li>另一种形式是<code>for in</code>语句，枚举一个对象的所有属性名，每次循环后，object的下一个属性名字符串会赋给variable<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for(attr in obj)&#123;</span><br><span class="line"> if(obj.hasOwnProperty(attr))&#123;</span><br><span class="line"> </span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
 </li>
 </ol>
 </li>
 </ul>
-<p>var myObject={<br>    value: 0,<br>    add : function(el){<br>       this.value += typeof el===”number” ?el:1;<br>    }<br>}<br>myObject.add(2);<br>console.log(myObject.value)  // 2<br>myObject.add();<br>console.log(myObject.value)  // 3</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt;这里的this是访问myObject对象，它能从对象中取值或对对象进行修改。通过this可以取得所属对象的上下文的方法称为公共方法</span><br><span class="line">2. 函数调用模式</span><br><span class="line">当一个函数并非一个对象的属性时，那么它就是被当作一个函数来调用的</span><br><span class="line">   * 以此模式调用函数时，this会绑定到全局对象。不能利用内部函数来帮助它工作。但可以定义一个变量并给他赋值为this，则内部函数就可以通过那个变量访问到this</span><br></pre></td></tr></table></figure>
+<pre><code>&gt;一般需要通过检测obj.hasOwnProperty(attr)来判断这个属性名是这个对象的成员，还是来自**原型链**</code></pre><ul>
+<li>try语句<ol>
+<li>try语句执行一个代码块，并捕获该代码块抛出的任何异常。</li>
+<li>catch从句定义一个新的变量variable来接受抛出的异常对象</li>
+<li>throw语句抛出一个异常，若该语句在try代码块中，控制流将会跳转到catch从句中。若throw语句在函数中，则该函数调用被放弃，控制流调用该函数的try语句中的catch从句</li>
+</ol>
+</li>
+</ul>
+<h4 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h4><ul>
+<li>最简单的表达式时字面量值（比如字符串或数字）、变量、内置的值（true、false、null、undefined、NaN和Infinity）、以new开头的调用表达式、以delete开头的属性提取表达式、包在圆括号内的表达式…</li>
+<li>运算符优先级<ol>
+<li><code>.</code> <code>[]</code> <code>()</code> 提取属性与调用函数</li>
+<li><code>delete</code> <code>new</code> <code>typeof</code> <code>+</code> <code>-</code> <code>!</code> 一元运算符</li>
+<li><code>*</code> <code>/</code> <code>%</code> 乘法、除法、求余</li>
+<li><code>+</code> <code>-</code> 加法、减法</li>
+<li><code>&lt;==</code> <code>&gt;==</code> <code>&gt;</code> <code>&lt;</code>关系运算符，不等式运算符</li>
+<li><code>===</code> <code>!==</code> 等式运算符</li>
+<li><code>&amp;&amp;</code> 逻辑与</li>
+<li><code>||</code> 逻辑或</li>
+<li><code>? :</code> 三元运算符<blockquote>
+<p>&amp;&amp; 与&amp;的区别： 两种都能用作逻辑与，&amp;是当两边的表达式为真时，才能为真。&amp;&amp;是短路测试，当前面的表达式为假时，不需要测试后面的表达式</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li><code>typedef</code>语句<ul>
+<li>用typedef运算符产生的值有<code>number</code> <code>string</code> <code>boolean</code> <code>undefined</code> <code>function</code> <code>object</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="字面量"><a href="#字面量" class="headerlink" title="字面量"></a>字面量</h4><ol>
+<li>对象字面量</li>
+<li>数组字面量</li>
+<li>函数字面量</li>
+</ol>
+<h3 id="对象（key-value）"><a href="#对象（key-value）" class="headerlink" title="对象（key-value）"></a>对象（key-value）</h3><p> JavaScript中的简单数据类型包括数字、字符串、布尔值、null和undefined值，其他的所有制都是对象。数字、字符串、布尔值貌似对象，因为他们拥有方法，但他们不可变。</p>
+<p> 数组是对象，函数是对象，正则表达式是对象。</p>
+<ul>
+<li>对象是属性的容器，其中每个属性都有自己的名字和值。属性名是包含空字符串在内的任意字符串。属性值可以是出undefined值之外的任何值</li>
+<li>JS中的对象是无类型的，对属性名和值没有限制。</li>
+<li><strong>JS包含一种原型链的特征，允许对象继承另一个对象的属性。正确的使用能减少对象初始化时消耗的内存与时间</strong></li>
+</ul>
+<h3 id="JS函数"><a href="#JS函数" class="headerlink" title="JS函数"></a>JS函数</h3><ul>
+<li><p>函数就是对象。对象是“key-value”对的集合并拥有一个连到原型对象的隐藏连接。对象字面量产生的对象连接到Object.prototype。函数对象连接到Function.prototype（该原型对象本身连接到Object.prototype）。</p>
+</li>
+<li><p>每个函数在创建时会附加两个隐藏属性：函数的上下文（也可以理解为call和apply方法，在Function.prototype中定义）和实现函数行为的代码</p>
+</li>
+</ul>
+<h4 id="函数字面量"><a href="#函数字面量" class="headerlink" title="函数字面量"></a>函数字面量</h4><ul>
+<li>函数通过函数字面量来创建<ol>
+<li>第一部分为保留字 <code>function</code></li>
+<li>第二部分时函数名，可以省略，这样的话就是匿名函数（anonymous）</li>
+<li>第三部分时包围在圆括号内的一组参数，<strong>javascript不对参数列表做强匹配，当实参少于形参，剩下形参的值就为undefined，当实参多余形参个数时，只会匹配前几个实参，剩下多余的实参会直接忽略，任何类型的值可以被传递给任何参数</strong></li>
+<li>第四部分为包围在花括号的一组语句，这是函数的主题，在函数被调用时执行</li>
+</ol>
+</li>
+</ul>
+<h4 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h4><p>在调用函数时，每个函数会接受两个附加的参数：<code>this</code>和<code>arguments</code>，参数this在面向对象编程时非常重要，<strong>this的值取决于调用的模式</strong></p>
+<h4 id="函数调用模式"><a href="#函数调用模式" class="headerlink" title="函数调用模式"></a>函数调用模式</h4><ol>
+<li>方法调用模式<br>此模式主要是指：当函数声明在一个对象之中，这个函数属于对象的一个方法，此时函数内部的this属性被绑定到该对象中，这是this可以访问自己所属的对象<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var myObject=&#123;</span><br><span class="line">    value: 0,</span><br><span class="line">    add : function(el)&#123;</span><br><span class="line">       this.value += typeof el===&quot;number&quot; ?el:1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">myObject.add(2);</span><br><span class="line">console.log(myObject.value)  // 2</span><br><span class="line">myObject.add();</span><br><span class="line">console.log(myObject.value)  // 3</span><br></pre></td></tr></table></figure>
 
-<pre><code>function foo(){
-    console.log(this);
-}
+</li>
+</ol>
+<blockquote>
+<p>这里的this是访问myObject对象，它能从对象中取值或对对象进行修改。通过this可以取得所属对象的上下文的方法称为公共方法</p>
+<ol start="2">
+<li>函数调用模式<br>当一个函数并非一个对象的属性时，那么它就是被当作一个函数来调用的<ul>
+<li>以此模式调用函数时，this会绑定到全局对象。不能利用内部函数来帮助它工作。但可以定义一个变量并给他赋值为this，则内部函数就可以通过那个变量访问到this<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function foo()&#123;</span><br><span class="line">    console.log(this);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo();   //this指的是全局对象window</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var myObject=&#123;</span><br><span class="line">    value: 1,</span><br><span class="line">    add : function(el)&#123;</span><br><span class="line">     this.value += typeof el===&quot;number&quot; ?el:1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">myObject.double=function()&#123;</span><br><span class="line">    var that=this;</span><br><span class="line">    //定义一个函数，这个helper函数中的this是全局对象window</span><br><span class="line">    var helper=function()&#123;</span><br><span class="line">      that.value+=that.value</span><br><span class="line"> &#125;</span><br><span class="line">    helper();</span><br><span class="line">&#125;</span><br><span class="line">myObject.double();</span><br><span class="line">console.log(myObject.value)   //2</span><br></pre></td></tr></table></figure>
 
-foo();   //this指的是全局对象window</code></pre>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>此时可以通过that访问到myObject对象</p>
+<ol start="3">
+<li>构造器调用模式<br>javascript是基于原型继承的语言<ul>
+<li>提供了一套与基于类的语言（java）类似的对象构建语法。</li>
+<li>若在一个函数前面加上<code>new</code>来调用，那么背地里会创建一个连接到该函数的<code>prototype</code>成员的新对象，<strong>同时this会被绑定到这个新对象上</strong>。</li>
+<li><code>new</code> 前缀会改变return语句的行为</li>
+<li><strong>通过prototype来创建的方法或属性，是为所有的new实例所共有的</strong><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var newObject=function(str)&#123;</span><br><span class="line">this.value=str;</span><br><span class="line">&#125;</span><br><span class="line">//通过prototype 创建属于所有实例的新方法或者属性</span><br><span class="line">newObject.prototype.getValue=function()&#123;</span><br><span class="line">    return this.value;</span><br><span class="line">&#125;</span><br><span class="line"> //通过new来创建实例</span><br><span class="line"> var obj=new newObject(&quot;hhhh&quot;)</span><br><span class="line">console.log(obj.getValue());</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>若一个函数通过new来调用，则称之为<em>构造器函数</em></p>
+<ul>
+<li>这里不推荐使用此模式来调用函数<ol start="4">
+<li>上下文调用模式（apply/call调用模式）<br>JavaScript是一门函数式的面向对象编程语言，函数可以拥有方法</li>
+</ol>
+</li>
+<li>上下文模式：根据用户传递的参数，指定函数内部不同的this的值</li>
+<li>核心形式： 以call/apply方法来调用某个函数</li>
+<li>call/apply方法定义在Function.prototype对象中，每个函数都能访问到这两个方法</li>
+<li>function fn(){}<br>fn—&gt;fn._<em>proto_</em>(Function.prototype)–&gt;fn._<em>proto_</em>._<em>proto_</em>(Object.prototype)<ul>
+<li>语法形式<ul>
+<li>函数名.call(…)</li>
+<li>函数名.apply(…)<br>这两种形式功能一样，唯一不同的就是参数的形式</li>
+</ul>
+</li>
+<li>apply时，第一个参数要么是对象，要么是null。如果是null/undefined就是函数调用，如果是对象，则是对象的方法调用。后面的参数是一个数组参数，将函数的参数依次放在数组中<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function up(str)&#123;</span><br><span class="line">  console.log(this);</span><br><span class="line">&#125;</span><br><span class="line">var obj=&#123;</span><br><span class="line">    name: &quot;hhh&quot;,</span><br><span class="line">    age: 10</span><br><span class="line">&#125;</span><br><span class="line">up.apply(obj);  // &#123;name: &quot;hhh&quot;, age: 10&#125;</span><br><span class="line">//此时的this指的是obj</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> function up(str)&#123;</span><br><span class="line">  console.log(this);</span><br><span class="line"> &#125;</span><br><span class="line"> var obj=&#123;</span><br><span class="line">  name: &quot;hhh&quot;,</span><br><span class="line">  age: 10</span><br><span class="line"> &#125;</span><br><span class="line">up.apply(null);  // window</span><br><span class="line">//此时的this指的是window</span><br></pre></td></tr></table></figure>
 
-<pre><code>var myObject={
-    value: 1,
-    add : function(el){
-     this.value += typeof el===&quot;number&quot; ?el:1;
-    }
-}
-myObject.double=function(){
-    var that=this;
-    //定义一个函数，这个helper函数中的this是全局对象window
-    var helper=function(){
-      that.value+=that.value
- }
-    helper();
-}
-myObject.double();
-console.log(myObject.value)   //2</code></pre>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 此时可以通过that访问到myObject对象</span><br><span class="line">3. 构造器调用模式</span><br><span class="line">javascript是基于原型继承的语言</span><br><span class="line">   * 提供了一套与基于类的语言（java）类似的对象构建语法。</span><br><span class="line">   * 若在一个函数前面加上`new`来调用，那么背地里会创建一个连接到该函数的`prototype`成员的新对象，**同时this会被绑定到这个新对象上**。</span><br><span class="line">   * `new` 前缀会改变return语句的行为</span><br><span class="line">   * **通过prototype来创建的方法或属性，是为所有的new实例所共有的**</span><br></pre></td></tr></table></figure>
+<ul>
+<li>call时，其他与apply相同，只是参数列表可以不用数组，可以直接使用，，这样的形式</li>
+</ul>
+<h4 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h4><p>当函数被调用时，会得到一个免费配送的参数，那就是<code>arguments</code>数组，这并不是一个严格的数组，只是一个类似数组的对象，拥有一个length的属性，没有任何数组的方法<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function arg()&#123;</span><br><span class="line">var i=0;</span><br><span class="line">var sum=0;</span><br><span class="line">for(i=0;i&lt;arguments.length;i++)&#123;</span><br><span class="line">   sum+=arguments[i];</span><br><span class="line">&#125; </span><br><span class="line">return sum;</span><br><span class="line">&#125;</span><br><span class="line">var sum=arg(1,2,3,4);</span><br><span class="line">console.log(sum);  //10</span><br></pre></td></tr></table></figure></p>
+<h4 id="返回"><a href="#返回" class="headerlink" title="返回"></a>返回</h4><p>一个函数总会返回一个值。如果没有指定返回值，则返回undefined。<br>如果函数调用时在前面加上了new前缀，且返回值不是一个对象，则返回this（该新对象）</p>
+<h4 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h4>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function exe(a,b)&#123;</span><br><span class="line">    try&#123;</span><br><span class="line">    if(typeof a !== &quot;number&quot; || typeof b !== &quot;number&quot;)&#123;</span><br><span class="line">        //抛出一个Error实例,第一个参数为name,第二个参数为message,也可以自定义其他的参数，可以在catch方法参数e对象中获取</span><br><span class="line">        throw new Error(&quot;typeError&quot;,&quot;类型不是number&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;catch(e)&#123;</span><br><span class="line">    console.log(e.name+ &quot;---&quot;+ e.message);</span><br><span class="line">    return undefined;</span><br><span class="line">&#125;</span><br><span class="line">    return a+b;</span><br><span class="line">&#125;</span><br><span class="line">var x=exe(2,&quot;dd&quot;); //Error---typeError undefined</span><br></pre></td></tr></table></figure>
 
-<pre><code>var newObject=function(str){
-this.value=str;
-}
-//通过prototype 创建属于所有实例的新方法或者属性
-newObject.prototype.getValue=function(){
-    return this.value;
-}
- //通过new来创建实例
- var obj=new newObject(&quot;hhhh&quot;)
-console.log(obj.getValue());</code></pre>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 若一个函数通过new来调用，则称之为*构造器函数*</span><br><span class="line">   * 这里不推荐使用此模式来调用函数</span><br><span class="line">4. 上下文调用模式（apply/call调用模式）</span><br><span class="line">JavaScript是一门函数式的面向对象编程语言，函数可以拥有方法</span><br><span class="line">   * 上下文模式：根据用户传递的参数，指定函数内部不同的this的值</span><br><span class="line">   * 核心形式： 以call/apply方法来调用某个函数</span><br><span class="line">   * call/apply方法定义在Function.prototype对象中，每个函数都能访问到这两个方法</span><br><span class="line">   *  function fn()&#123;&#125;</span><br><span class="line">      fn---&gt;fn.\__proto\__(Function.prototype)--&gt;fn.\__proto\__.\__proto\__(Object.prototype)</span><br><span class="line">    * 语法形式</span><br><span class="line">       * 函数名.call(...)</span><br><span class="line">       * 函数名.apply(...)</span><br><span class="line">    这两种形式功能一样，唯一不同的就是参数的形式</span><br><span class="line">* apply时，第一个参数要么是对象，要么是null。如果是null/undefined就是函数调用，如果是对象，则是对象的方法调用。后面的参数是一个数组参数，将函数的参数依次放在数组中</span><br></pre></td></tr></table></figure>
+<h3 id="扩充类型的功能"><a href="#扩充类型的功能" class="headerlink" title="扩充类型的功能"></a>扩充类型的功能</h3><p>JS中可以给语言的基本类型扩充功能。可以给Object.prototype添加方法，可以让该方法对所有对象都可用。<br>这样的方式对函数、数组、字符串、布尔、数字、正则表达式都适用</p>
+<ol>
+<li><p>首先可以给Function.prototype增加方法来使得该方法对所有函数可用：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//通过增加一个method方法，便于下次给对象增加方法时就不必键入prototype，省掉一些麻烦</span><br><span class="line">Function.prototype.method=function(name,func)&#123;</span><br><span class="line">    //由于相当于在对象里面增加方法，所以此时this指代的是Function</span><br><span class="line">    this.prototype[name]=func;</span><br><span class="line">    return this;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接下来就可以给基本数据类型增加方法了</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//给String类型增加方法</span><br><span class="line">String.method(&quot;addstr&quot;,function()&#123;</span><br><span class="line">    return this+&quot;addstr&quot;;</span><br><span class="line">&#125;)</span><br><span class="line">console.log(&quot;xixixi&quot;.addstr()); //&quot;xixixiaddstr&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>基本类型的原型是公用结构，在类库混用时一定要无比小心。一个保险的做法就是只在确定没有该方法时才添加它</p>
+</li>
+</ol>
+<p>理解：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Function.prototype.method=function(fulname,val)&#123;</span><br><span class="line">  if(!this.prototype[fulname])&#123;</span><br><span class="line">    this.prototype[fulname]=val;</span><br><span class="line">  &#125;</span><br><span class="line">  return this;</span><br><span class="line">&#125;</span><br><span class="line">Function.method(&apos;bind&apos;,function(_arg)&#123;</span><br><span class="line">  var met=this; //这个this应该是bind此方法</span><br><span class="line">  console.log(this);</span><br><span class="line">  var slice=Array.prototype.slice;</span><br><span class="line">  var args=slice.apply(arguments,[1]); //argguments指的是bing方法所带的参数</span><br><span class="line">  return function()&#123;</span><br><span class="line">    return met.apply(_arg,args.concat(slice.apply(arguments,[0])));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">var x=function()&#123;</span><br><span class="line">  return this.value;</span><br><span class="line">&#125;.bind(&#123;value:11&#125;);</span><br><span class="line">console.log(x());   //11</span><br></pre></td></tr></table></figure>
 
-<pre><code>function up(str){
-  console.log(this);
-}
-var obj={
-    name: &quot;hhh&quot;,
-    age: 10
-}
-up.apply(obj);  // {name: &quot;hhh&quot;, age: 10}
-//此时的this指的是obj
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
+<h3 id="JS数组"><a href="#JS数组" class="headerlink" title="JS数组"></a>JS数组</h3><p>数组是一段线性分配的内存，它通过整数计算偏移来访问其中的元素。JavaScript没有像此类数组一样的数据结构。<br>它拥有一种类数组（array-like）特性的对象。它把数组的下表转换为字符串，用其作为属性，它比真正的数组慢，它的属性的检索和更新的方式与对象一摸一样。</p>
+<ul>
+<li><p>js中的数组不必要求类型一致</p>
+</li>
+<li><p>长度： js中数组的length属性是没有上界的</p>
+</li>
+<li><p>可以直接设置length的值，设置更大的length并不会给数组分配更多的空间。但将length设置小会导致所有下标大于新的length的属性将被删除</p>
+</li>
+<li><p>删除：</p>
+<ul>
+<li><p><code>splice</code>方法:该方法会改变原来的数组，它可以删除元素，可以替换元素，可以在数组的指定位置插入（添加）元素</p>
+<ol>
+<li>splice(2,1) 则是在索引为2的位置删除一个元素，若果是删除元素，则返回的是含有被删除元素的数组</li>
+<li>splice(2,0,1) 则是在索引为2的位置插入1这个元素</li>
+</ol>
+</li>
+<li><p><code>slice()</code>方法：此方法是用来从数组中提取指定元素，不会改变原有数组，将截取到的元素封装到一个新的数组中返回</p>
+<ol>
+<li>语法：annayObject.slice(start,end); 前闭后开 </li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>遍历</p>
+<ol>
+<li><p>使用for in 语句来遍历一个数组的所有属性，但无法保证属性的顺序</p>
+<blockquote>
+<p>并且此方法可能会从原型链中得到意外属性</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for (const key in object) &#123;</span><br><span class="line">    if (object.hasOwnProperty(key)) &#123;</span><br><span class="line">      const element = object[key];&#125;</span><br><span class="line">       &#125;</span><br><span class="line">       //避免遍历继承属性</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常规的for语句可以避免这些问题</p>
+</li>
+</ol>
+</li>
+<li><p>使用typeof判断数组会出现’object’</p>
+</li>
+<li><p>判断一个对象是否为数组</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var is_arrry=function(val)&#123;</span><br><span class="line">return val &amp;&amp; typeof val ===&apos;object&apos; &amp;&amp; val.constructor === Array</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 
-function up(str){
- console.log(this);
-}
-var obj={
- name: &quot;hhh&quot;,
- age: 10
-}</code></pre><p>   up.apply(null);  // window<br>   //此时的this指的是window<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">* call时，其他与apply相同，只是参数列表可以不用数组，可以直接使用，，这样的形式</span><br><span class="line"></span><br><span class="line">#### 函数参数</span><br><span class="line">当函数被调用时，会得到一个免费配送的参数，那就是`arguments`数组，这并不是一个严格的数组，只是一个类似数组的对象，拥有一个length的属性，没有任何数组的方法</span><br></pre></td></tr></table></figure></p>
-<pre><code>function arg(){
-var i=0;
-var sum=0;
-for(i=0;i&lt;arguments.length;i++){
-   sum+=arguments[i];
-} 
-return sum;
-}
-var sum=arg(1,2,3,4);
-console.log(sum);  //10</code></pre>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#### 返回</span><br><span class="line">一个函数总会返回一个值。如果没有指定返回值，则返回undefined。</span><br><span class="line">如果函数调用时在前面加上了new前缀，且返回值不是一个对象，则返回this（该新对象）</span><br><span class="line"></span><br><span class="line">#### 异常</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   //由于原型链的存在，使得扩充方法更加简单</span><br><span class="line">   Object.prototype.method=function(funname,val)&#123;</span><br><span class="line"> if(!this.prototype[funname])&#123;</span><br><span class="line">   this.prototype[funname]=val;</span><br><span class="line"> &#125;</span><br><span class="line"> return this;</span><br><span class="line">&#125;</span><br><span class="line">Array.method(&apos;reduce&apos;,function(f,value)&#123;</span><br><span class="line">  var i;</span><br><span class="line">  for(i=0;i&lt;this.length;i++)&#123;</span><br><span class="line">    value=f(this[i],value);</span><br><span class="line">  &#125;</span><br><span class="line">  return value;</span><br><span class="line">&#125;) </span><br><span class="line">var date=[1,2,3,4];</span><br><span class="line">var add=function(a,b)&#123;</span><br><span class="line">   return a+b;</span><br><span class="line">&#125;</span><br><span class="line">var sum=date.reduce(add,0);</span><br><span class="line">console.log(sum);  //10</span><br></pre></td></tr></table></figure>
 
-<pre><code>function exe(a,b){
-    try{
-    if(typeof a !== &quot;number&quot; || typeof b !== &quot;number&quot;){
-        //抛出一个Error实例,第一个参数为name,第二个参数为message,也可以自定义其他的参数，可以在catch方法参数e对象中获取
-        throw new Error(&quot;typeError&quot;,&quot;类型不是number&quot;);
-    }
-}catch(e){
-    console.log(e.name+ &quot;---&quot;+ e.message);
-    return undefined;
-}
-    return a+b;
-}
-var x=exe(2,&quot;dd&quot;); //Error---typeError undefined</code></pre>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">### 扩充类型的功能</span><br><span class="line">JS中可以给语言的基本类型扩充功能。可以给Object.prototype添加方法，可以让该方法对所有对象都可用。</span><br><span class="line">这样的方式对函数、数组、字符串、布尔、数字、正则表达式都适用</span><br><span class="line">1. 首先可以给Function.prototype增加方法来使得该方法对所有函数可用：</span><br></pre></td></tr></table></figure>
-
-<p>//通过增加一个method方法，便于下次给对象增加方法时就不必键入prototype，省掉一些麻烦<br>Function.prototype.method=function(name,func){<br>    //由于相当于在对象里面增加方法，所以此时this指代的是Function<br>    this.prototype[name]=func;<br>    return this;<br>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2. 接下来就可以给基本数据类型增加方法了</span><br></pre></td></tr></table></figure>
-
-<p>//给String类型增加方法<br>String.method(“addstr”,function(){<br>    return this+”addstr”;<br>})<br>console.log(“xixixi”.addstr()); //“xixixiaddstr”</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">3. 基本类型的原型是公用结构，在类库混用时一定要无比小心。一个保险的做法就是只在确定没有该方法时才添加它</span><br><span class="line"></span><br><span class="line">理解：</span><br></pre></td></tr></table></figure>
-
-<p>Function.prototype.method=function(fulname,val){<br>  if(!this.prototype[fulname]){<br>    this.prototype[fulname]=val;<br>  }<br>  return this;<br>}<br>Function.method(‘bind’,function(_arg){<br>  var met=this; //这个this应该是bind此方法<br>  console.log(this);<br>  var slice=Array.prototype.slice;<br>  var args=slice.apply(arguments,[1]); //argguments指的是bing方法所带的参数<br>  return function(){<br>    return met.apply(_arg,args.concat(slice.apply(arguments,[0])));<br>  }<br>});<br>var x=function(){<br>  return this.value;<br>}.bind({value:11});<br>console.log(x());   //11</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### JS数组</span><br><span class="line">数组是一段线性分配的内存，它通过整数计算偏移来访问其中的元素。JavaScript没有像此类数组一样的数据结构。</span><br><span class="line">它拥有一种类数组（array-like）特性的对象。它把数组的下表转换为字符串，用其作为属性，它比真正的数组慢，它的属性的检索和更新的方式与对象一摸一样。</span><br><span class="line">+ js中的数组不必要求类型一致</span><br><span class="line">+ 长度： js中数组的length属性是没有上界的</span><br><span class="line">+ 可以直接设置length的值，设置更大的length并不会给数组分配更多的空间。但将length设置小会导致所有下标大于新的length的属性将被删除</span><br><span class="line">+ 删除：</span><br><span class="line">   + `splice`方法:该方法会改变原来的数组，它可以删除元素，可以替换元素，可以在数组的指定位置插入（添加）元素</span><br><span class="line">      1. splice(2,1) 则是在索引为2的位置删除一个元素，若果是删除元素，则返回的是含有被删除元素的数组</span><br><span class="line">      2. splice(2,0,1) 则是在索引为2的位置插入1这个元素</span><br><span class="line">    </span><br><span class="line">   + `slice()`方法：此方法是用来从数组中提取指定元素，不会改变原有数组，将截取到的元素封装到一个新的数组中返回</span><br><span class="line">      1. 语法：annayObject.slice(start,end); 前闭后开 </span><br><span class="line">+ 遍历</span><br><span class="line">   1. 使用for in 语句来遍历一个数组的所有属性，但无法保证属性的顺序</span><br><span class="line">   &gt;并且此方法可能会从原型链中得到意外属性</span><br></pre></td></tr></table></figure>
-
-<pre><code>for (const key in object) {
-    if (object.hasOwnProperty(key)) {
-      const element = object[key];}
-       }
-       //避免遍历继承属性</code></pre>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   2. 常规的for语句可以避免这些问题</span><br><span class="line">+ 使用typeof判断数组会出现&apos;object&apos;</span><br><span class="line">+ 判断一个对象是否为数组</span><br></pre></td></tr></table></figure>
-
-<p>   var is_arrry=function(val){<br>   return val &amp;&amp; typeof val ===’object’ &amp;&amp; val.constructor === Array<br>    }<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure></p>
-<p>   //由于原型链的存在，使得扩充方法更加简单<br>   Object.prototype.method=function(funname,val){<br> if(!this.prototype[funname]){<br>   this.prototype[funname]=val;<br> }<br> return this;<br>}<br>Array.method(‘reduce’,function(f,value){<br>  var i;<br>  for(i=0;i&lt;this.length;i++){<br>    value=f(this[i],value);<br>  }<br>  return value;<br>})<br>var date=[1,2,3,4];<br>var add=function(a,b){<br>   return a+b;<br>}<br>var sum=date.reduce(add,0);<br>console.log(sum);  //10<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   + `concat()`方法</span><br><span class="line">      1. 产生一个新数组，包含一份原数组的浅复制，并把一个或多个参数item附在其后面，如果参数item是一个数组，那么它的每个元素被分别添加</span><br><span class="line">      2. var a=[1,2,3],b=[4,5,6]; var c=a.concat(b,true);此时的c为[1,2,3,4,5,6,true];</span><br><span class="line">+ `array.join()`方法:主要用来将数组构造成一个字符串，通过参数的形式来进行连接，默认的参数为逗号`,`.</span><br></pre></td></tr></table></figure></p>
-<pre><code>var a=[&apos;1&apos;,3,4];
-var c=a.join(&quot;、&quot;);
-var d=a.join();
-console.log(c);// 1、3、4
-console.log(d); // 1,3,4</code></pre>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+ `array.pop()`方法 ：使得数组可以像堆栈那样工作。pop方法移除array中的最后一个元素并返回该元素，如果array是empty，则返回undefined。</span><br><span class="line">+ `array.push()`方法：该方法将一个或多个参数附加到array的尾部。如果item是一个数组，会把整个数组作为单个元素添加进去，并返回这个array的最新长度值</span><br></pre></td></tr></table></figure>
-
-<p>   var a=[1,3,4];<br>   var b=[true,”hh”];<br>   var c=a.push(b);//此时a=[[1,3,4,[true,”hh”]]<br>   var d=c.join();<br>   console.log(c);//4<br>   console.log(d);//1,3,4,true,hh</p>
-<pre><code>+ `array.reverse()`方法：该方法反转array里的元素的顺序，并返回array本身；
-+ `array.shift()`方法：该方法移除array中的第一个元素并返回该元素
-   1. 若数组是空的，则返回undefined;
-   2. shift通常比pop慢很多
-+ `array.unshift()`方法：与push方法一样，用于把元素添加到数组中去，但它是吧item插入到array的*开始部分*，返回array的新length
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</code></pre>]]></content>
+<ul>
+<li><code>concat()</code>方法<ol>
+<li>产生一个新数组，包含一份原数组的浅复制，并把一个或多个参数item附在其后面，如果参数item是一个数组，那么它的每个元素被分别添加</li>
+<li>var a=[1,2,3],b=[4,5,6]; var c=a.concat(b,true);此时的c为[1,2,3,4,5,6,true];</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><code>array.join()</code>方法:主要用来将数组构造成一个字符串，通过参数的形式来进行连接，默认的参数为逗号<code>,</code>.</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var a=[&apos;1&apos;,3,4];</span><br><span class="line">var c=a.join(&quot;、&quot;);</span><br><span class="line">var d=a.join();</span><br><span class="line">console.log(c);// 1、3、4</span><br><span class="line">console.log(d); // 1,3,4</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>array.pop()</code>方法 ：使得数组可以像堆栈那样工作。pop方法移除array中的最后一个元素并返回该元素，如果array是empty，则返回undefined。</p>
+</li>
+<li><p><code>array.push()</code>方法：该方法将一个或多个参数附加到array的尾部。如果item是一个数组，会把整个数组作为单个元素添加进去，并返回这个array的最新长度值</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var a=[1,3,4];</span><br><span class="line">var b=[true,&quot;hh&quot;];</span><br><span class="line">var c=a.push(b);//此时a=[[1,3,4,[true,&quot;hh&quot;]]</span><br><span class="line">var d=c.join();</span><br><span class="line">console.log(c);//4</span><br><span class="line">console.log(d);//1,3,4,true,hh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>array.reverse()</code>方法：该方法反转array里的元素的顺序，并返回array本身；</p>
+</li>
+<li><p><code>array.shift()</code>方法：该方法移除array中的第一个元素并返回该元素</p>
+<ol>
+<li>若数组是空的，则返回undefined;</li>
+<li>shift通常比pop慢很多</li>
+</ol>
+</li>
+<li><p><code>array.unshift()</code>方法：与push方法一样，用于把元素添加到数组中去，但它是吧item插入到array的<em>开始部分</em>，返回array的新length</p>
+</li>
+</ul>
+]]></content>
       <categories>
         <category>前端</category>
       </categories>
