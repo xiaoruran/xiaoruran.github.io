@@ -78,6 +78,266 @@
     
     
     
+    <article id="post-JS原型链理解" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/06/03/JS原型链理解/"
+    >JS之原型链理解</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/06/03/JS原型链理解/" class="article-date">
+  <time datetime="2020-06-03T13:52:32.000Z" itemprop="datePublished">2020-06-03</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>###JS原型及原型链<br>JavaScript中没有子类和父类的概念，也没有类和实例（instance）的区分,全靠一种称为”原型(prototype)链”的模式，来实现继承</p>
+<p>####背景介绍</p>
+<h5 id="一、-函数对象"><a href="#一、-函数对象" class="headerlink" title="一、 函数对象"></a>一、 函数对象</h5><ol>
+<li>所有实例对象都有一个<code>_proto_</code>属性,该属性不是标准属性，不可以用在编程中，用于浏览器内部使用</li>
+<li>所有函数都拥有<code>prototype</code>属性</li>
+<li>原型对象：指的是拥有prototype属性的对象，在定义函数时就被创建</li>
+<li>数组，函数，对象的原型都是Object<h5 id="二、构造函数"><a href="#二、构造函数" class="headerlink" title="二、构造函数"></a>二、构造函数</h5>构造函数，主要用来创建对象时初始化对象，每个构造函数都有prototype属性。<blockquote>
+<p>例如 function Person=function(){},<br>这里Person函数的构造函数就是 Person()</p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//构造方法</span><br><span class="line"> function Person(name,age,gender) &#123;</span><br><span class="line">     this.name=name;</span><br><span class="line">     this.age=age;</span><br><span class="line">     this.gender=gender;</span><br><span class="line">     this.say=function () &#123;</span><br><span class="line">     alert(this.name)</span><br><span class="line">           &#125;</span><br><span class="line">     &#125;</span><br><span class="line">    var person1=new Person(&apos;钟女士&apos;,80,&apos;女&apos;);</span><br><span class="line">    var person2=new Person(&apos;张女士&apos;,80,&apos;女&apos;);</span><br><span class="line">    console.log(person2)</span><br><span class="line">    console.log(person1)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//创建构造函数</span><br><span class="line">        function Word(words)&#123;</span><br><span class="line">            this.words = words;</span><br><span class="line">        &#125;</span><br><span class="line">        //相当于构造对象的原型方法，此方法属于构造方法内</span><br><span class="line">        Word.prototype = &#123;</span><br><span class="line">            alert()&#123;</span><br><span class="line">                alert(this.words);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        //创建实例</span><br><span class="line">        var w = new Word(&quot;hello world&quot;);</span><br><span class="line">        w.print = function()&#123;</span><br><span class="line">            console.log(this.words);</span><br><span class="line">            console.log(this);  //Person对象</span><br><span class="line">        &#125;</span><br><span class="line">        w.print();  //hello world</span><br><span class="line">        w.alert();  //hello world</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>print方法时w实例本身具有的方法，alert不属于w实例的方法，属于构造函数的方法，w.alert()也会打印，是因为实例继承构造函数的方法</p>
+</blockquote>
+<p><strong>实例w的隐式原型(_proto_)指向它的构造函数(函数本身名)的显式原型（prototype）</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">w._proto_=== Word.prototype</span><br><span class="line">Word.prototype.constructor=== Word() </span><br><span class="line">w._proto_.constructor=== Word()</span><br></pre></td></tr></table></figure>
+
+<p><strong>当调用实例的某种方法或属性时，首先会查找自身，若没有，则会去它的_proto_属性中查找,也就是它对应类的原型中查找。</strong></p>
+<h5 id="三、原型及原型链"><a href="#三、原型及原型链" class="headerlink" title="三、原型及原型链"></a>三、原型及原型链</h5><ul>
+<li><p><code>_proto_</code>是实例的一个属性，这个属性本身是一个对象，包含有两个属性，一个是<code>constructor</code>和<code>_proto_</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">        Function.prototype.a = &quot;a&quot;;</span><br><span class="line">Object.prototype.b = &quot;b&quot;;</span><br><span class="line">function Person()&#123;&#125;</span><br><span class="line">console.log(Person);    //function Person()</span><br><span class="line">let p = new Person();</span><br><span class="line">console.log(p);         //Person &#123;&#125; 对象</span><br><span class="line">console.log(p.a);       //undefined</span><br><span class="line">console.log(p.b);       //b</span><br><span class="line">console.log(p.__proto__.constructor);   //function Person()&#123;&#125;</span><br><span class="line">console.log(p.__proto__.__proto__);     //对象&#123;&#125;，拥有很多属性值</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>p.<em>proto</em>=Person.prototype</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">           //Function</span><br><span class="line">function Function()&#123;&#125;</span><br><span class="line">console.log(Function);  //Function()</span><br><span class="line">console.log(Function.prototype.constructor);    //Function()</span><br><span class="line">console.log(Function.prototype.__proto__);      //Object.prototype</span><br><span class="line">console.log(Function.prototype.__proto__.__proto__);    //NULL</span><br><span class="line">console.log(Function.prototype.__proto__.constructor);  //Object()</span><br><span class="line">console.log(Function.prototype.__proto__ === Object.prototype); //true</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>#####总结</p>
+<ol>
+<li>查找属性，如果没有，则去它的_proto_中查找，也就是构造函数的原型中查找，如果构造函数中也没有，因为构造函数也是对象，也会通过构造函数的_proto属性查找，一直道null，没有的话返回undefined</li>
+<li>p._proto_=Person.prototype</li>
+<li>p._proto_.constructor === function Person(){}</li>
+<li>p._proto_._proto_=Object.prototype</li>
+<li>p._proto_._proto_._proto_===Object.prototype._proto_ === null</li>
+<li>原型链是通过_proto_形成的而非prototype</li>
+</ol>
+<p><img src="/JS%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%90%86%E8%A7%A3.jpg" alt="avatar"><br>参考博客：<br> <a href="https://blog.csdn.net/yucihent/article/details/79424506" target="_blank" rel="noopener">深入javascript之原型和原型链</a><br><a href="https://blog.csdn.net/qq_42019025/article/details/80708446" target="_blank" rel="noopener">JS原型和原型链是什么？</a>  </p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-JS引擎执行机制" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/06/03/JS引擎执行机制/"
+    >JS之事件执行机制</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/06/03/JS引擎执行机制/" class="article-date">
+  <time datetime="2020-06-03T13:50:50.000Z" itemprop="datePublished">2020-06-03</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h3 id="JS引擎事件执行机制"><a href="#JS引擎事件执行机制" class="headerlink" title="JS引擎事件执行机制"></a>JS引擎事件执行机制</h3><h4 id="JS执行机制"><a href="#JS执行机制" class="headerlink" title="JS执行机制"></a>JS执行机制</h4><ol>
+<li><p>浏览器（或是JS引擎）执行JS的机制是基于事件循环</p>
+</li>
+<li><p>JS是单线程机制，在同一时间只能执行一个任务，其他任务只能排队，后续任务必须等到前一个任务结束后才能开始执行</p>
+</li>
+<li><p>为了避免因为某些长时间任务造成的无意义等待，JS引入了<strong>异步</strong>的概念，用另一个线程来管理异步任务。</p>
+</li>
+<li><p>同步任务直接在主线程队列中顺序执行，异步任务会进入另一个任务队列，不会阻塞主线程。等到主线程队列空了后，就回去异步队列查询是否有可执行的异步任务（通常异步任务需要等一些条件才能执行，如Ajax请求、文件读写），如果某个异步任务可以执行，则加入主线程队列，以此循环</p>
+<h4 id="JS中基于事件循环机制（event-loop）"><a href="#JS中基于事件循环机制（event-loop）" class="headerlink" title="JS中基于事件循环机制（event loop）"></a>JS中基于事件循环机制（event loop）</h4><p>异步的概念引入是由于事件循环造成的</p>
+</li>
+<li><p><strong>event loop(1)</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">console.log(1)</span><br><span class="line"> setTimeout(function()&#123;</span><br><span class="line">     console.log(2)</span><br><span class="line"> &#125;,0)</span><br><span class="line"> console.log(3)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果是 1 3 2</p>
+<p>setTimeout里的函数并没有立即执行，而实延迟了一段时间，满足一定条件后，才开始执行，这种代码较异步代码。</p>
+<p>定时器是JS中很经典的异步模型</p>
+<p>按这种：JS的执行机制是</p>
+</li>
+</ol>
+<ul>
+<li>首先判断是同步还是异步，同步进入主进程，异步就进入 event tavle</li>
+<li>异步任务先不执行，在event table中注册函数，满足条件后，被推入event queue</li>
+<li>同步任务进入主线程后一直执行，直到主线程空闲时，才去event queue中查看是否有可执行的异步任务，若有则推入到主线程队列中执行</li>
+</ul>
+<ol start="2">
+<li><p><strong>event loop(2)</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> setTimeout(function()&#123;</span><br><span class="line">  console.log(&apos;定时器开始啦&apos;)</span><br><span class="line"> &#125;);</span><br><span class="line"> new Promise(function(resolve)&#123;</span><br><span class="line">  console.log(&apos;马上执行for循环啦&apos;);</span><br><span class="line">  for(var i = 0; i &lt; 10000; i++)&#123;</span><br><span class="line">      i == 99 &amp;&amp; resolve();</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;).then(function()&#123;</span><br><span class="line">  console.log(&apos;执行then函数啦&apos;)</span><br><span class="line"> &#125;);</span><br><span class="line">console.log(&apos;代码执行结束&apos;);</span><br></pre></td></tr></table></figure>
+
+<p>按照event loop(1)的分析结果会是 马上执行for循环 代码执行结束 定时器开始啦 执行then函数啦，但是事实并非如此，真实的执行结果是：马上执行for循环 代码执行结束 执行then函数啦 定时器开始啦 </p>
+<p>这里可以提出更准确的划分机制:</p>
+</li>
+</ol>
+<ul>
+<li>宏任务: 包括整体代码<strong>script,setTimout,setInterval</strong></li>
+<li>微任务：宏任务底下的任务<strong>Promise，process.nextTick</strong><br>在一个事件循环中，执行第一个宏任务，宏任务执行结束，执行当前事件循环中的微任务，执行完毕之后进入下一个事件循环中，或者说执行下一个宏任务；</li>
+</ul>
+<p>   <strong>执行宏任务 ===&gt; 执行微任务 ===&gt; 执行另一个宏任务 ===&gt; 不断循环</strong><br>   <img src="/JS%E5%AE%8F%E4%BB%BB%E5%8A%A1%E4%B8%8E%E5%BE%AE%E4%BB%BB%E5%8A%A1.png" alt="avatar"></p>
+<p>   重新分析：</p>
+<ul>
+<li>首先执行script底下的宏任务，遇到setTimout,首先是异步任务，将其放入宏任务队列中</li>
+<li>遇到Promise函数，由于是同步任务直接运行，然后遇到then，这是异步任务,同时也是微任务，放入微任务队列中</li>
+<li>然后执行同步任务，打印“代码执行结束”</li>
+<li>本轮宏任务结束,查看本轮的微任务,发现有个then函数，执行then函数</li>
+<li>下一轮循环中，先找是否有宏任务，发现在宏任务队列中有个setTimout函数，开始执行</li>
+</ul>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">  console.log(&apos;1&apos;);</span><br><span class="line"> </span><br><span class="line">setTimeout(function() &#123;</span><br><span class="line">    console.log(&apos;2&apos;);</span><br><span class="line">    process.nextTick(function() &#123;</span><br><span class="line">        console.log(&apos;3&apos;);</span><br><span class="line">    &#125;)</span><br><span class="line">    new Promise(function(resolve) &#123;</span><br><span class="line">        console.log(&apos;4&apos;);</span><br><span class="line">        resolve();</span><br><span class="line">    &#125;).then(function() &#123;</span><br><span class="line">        console.log(&apos;5&apos;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line">process.nextTick(function() &#123;</span><br><span class="line">    console.log(&apos;6&apos;);</span><br><span class="line">&#125;)</span><br><span class="line">new Promise(function(resolve) &#123;</span><br><span class="line">    console.log(&apos;7&apos;);</span><br><span class="line">    resolve();</span><br><span class="line">&#125;).then(function() &#123;</span><br><span class="line">    console.log(&apos;8&apos;)</span><br><span class="line">&#125;)</span><br><span class="line"> </span><br><span class="line">setTimeout(function() &#123;</span><br><span class="line">    console.log(&apos;9&apos;);</span><br><span class="line">    process.nextTick(function() &#123;</span><br><span class="line">        console.log(&apos;10&apos;);</span><br><span class="line">    &#125;)</span><br><span class="line">    new Promise(function(resolve) &#123;</span><br><span class="line">        console.log(&apos;11&apos;);</span><br><span class="line">        resolve();</span><br><span class="line">    &#125;).then(function() &#123;</span><br><span class="line">        console.log(&apos;12&apos;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>解释：<br>   1、 第一轮事件循环流程分析如下：<br>    整体script作为第一个宏任务进入主线程，遇到console.log，输出1。<br>    遇到setTimeout，其回调函数被分发到宏任务Event Queue中。我们暂且记为setTimeout1。<br>    遇到process.nextTick()，其回调函数被分发到微任务Event Queue中。我们记为process1。<br>    遇到Promise，new Promise直接执行，输出7。then被分发到微任务Event Queue中。我们记为then1。<br>    又遇到了setTimeout，其回调函数被分发到宏任务Event Queue中，我们记为setTimeout2。</p>
+<pre><code>宏任务Event Queue   微任务Event Queue
+setTimeout1         process1
+setTimeout2         then1
+
+上表是第一轮事件循环宏任务结束时各Event Queue的情况，此时已经输出了1和7。
+我们发现了process1和then1两个微任务。
+执行process1,输出6。
+执行then1，输出8。
+
+好了，第一轮事件循环正式结束，这一轮的结果是输出1，7，6，8。</code></pre><p>2、 那么第二轮时间循环从setTimeout1宏任务开始：</p>
+<pre><code>首先输出2。接下来遇到了process.nextTick()，同样将其分发到微任务Event Queue中，</code></pre><p>记为process2。new Promise立即执行输出4，then也分发到微任务Event Queue中，记为then2。</p>
+<pre><code>宏任务Event Queue     微任务Event Queue
+setTimeout2           process2
+                      then2
+
+第二轮事件循环宏任务结束，我们发现有process2和then2两个微任务可以执行。
+    输出3。
+    输出5。
+    第二轮事件循环结束，第二轮输出2，4，3，5。</code></pre><p>3、 第三轮事件循环开始，此时只剩setTimeout2了，执行。<br>        直接输出9。<br>        将process.nextTick()分发到微任务Event Queue中。记为process3。<br>        直接执行new Promise，输出11。<br>        将then分发到微任务Event Queue中，记为then3。</p>
+<pre><code>宏任务Event Queue     微任务Event Queue
+                        process3
+                        then3     
+第三轮事件循环宏任务执行结束，执行两个微任务process3和then3。
+    输出10。
+    输出12。
+    第三轮事件循环结束，第三轮输出9，11，10，12。
+
+整段代码，共进行了三次事件循环，完整的输出为1，7，6，8，2，4，3，5，9，11，10，12。</code></pre>
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+  
+  
+
+</article>
+    
     <article id="post-notevue4" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -462,7 +722,7 @@
       
 
       
-      <p>[TOC]<br>由于hexo采用的编辑器不同，里面的两个大括号我都用一个代替</p>
+      <p>由于hexo采用的编辑器不同，里面的两个大括号我都用一个代替</p>
 <h3 id="之前学的总结"><a href="#之前学的总结" class="headerlink" title="之前学的总结"></a>之前学的总结</h3><ul>
 <li><p>如何定义一个Vue代码结构</p>
 </li>
@@ -678,6 +938,193 @@
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自我介绍/">自我介绍</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-正则表达式" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/05/13/正则表达式/"
+    >JS之正则表达式</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/05/13/正则表达式/" class="article-date">
+  <time datetime="2020-05-13T13:52:32.000Z" itemprop="datePublished">2020-05-13</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h2 id="正则表达式学习"><a href="#正则表达式学习" class="headerlink" title="正则表达式学习"></a>正则表达式学习</h2><p>  正则表达式是一个帮助处理和<strong>匹配复杂字符串</strong>的工具,regular expression(RegEx)</p>
+<h4 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h4><ol>
+<li>灵活，逻辑性和功能性非常强</li>
+<li>可以迅速用极简单的方式做到字符串的复杂控制</li>
+<li>对初学者不友好，比较晦涩难懂</li>
+</ol>
+<h4 id="常见用法："><a href="#常见用法：" class="headerlink" title="常见用法："></a>常见用法：</h4><ol>
+<li>邮箱验证</li>
+<li>密码强度验证</li>
+<li>身份证号验证</li>
+<li>用户名验证</li>
+<li>提取数字</li>
+</ol>
+<h4 id="字符集合"><a href="#字符集合" class="headerlink" title="字符集合[]"></a>字符集合[]</h4><p> 集合set是一对方括号[]内的一组字符，用来代表整个字符中的任意一个<br> 例如：</p>
+<blockquote>
+<p><code>[abc]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 指定字符（a，b或c）之一<br><code>[a-z]</code>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表示任何一个小写字母<br><code>[^abc]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^ 表示否的意思，表达了除a，b，c外的任意字符<br><code>[0246]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;代表 0，2，4，6的任意一个<br><code>[0-9]</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 代表 0到9的任意一个数字<br><code>[a-zA-Z]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;任何一个大小写字母<br><code>[+]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在集合中 +、*、|、()、$、{}都没有特殊含义，仅代表普通字符匹配<br><code>[0-9]+</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 这里的加代表连续多个</p>
+</blockquote>
+<h4 id="常见通配符（核心）"><a href="#常见通配符（核心）" class="headerlink" title="常见通配符（核心）"></a>常见通配符（核心）</h4><p>通配符是一种特殊字符，一般指的是反斜杠\后面紧跟的一些特殊标识符，用来<strong>指代某些字符集合</strong></p>
+<ul>
+<li><code>\d</code>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;代表阿拉伯数字（只能匹配一个字符）</li>
+<li><code>\D</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;代表除了阿拉伯数字外的所有字符，可以理解为[^\d]</li>
+<li><code>\s</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;空白字符</li>
+<li><code>\S</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;除空白字符外的所有字符</li>
+<li><code>\w</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;任何单词字符（字母、数字、汉字、下划线_字符）</li>
+<li><code>\W</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回一个匹配项，其中字符串不包含任何单词字符<br><strong>不常用：</strong><ul>
+<li><code>\A</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字符串的开头</li>
+<li><code>\Z</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字符串的末尾</li>
+<li><code>\b</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回指定字符位于单词的开头或者末尾的匹配项</li>
+<li><code>\B</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不在单词的开头和结尾处</li>
+</ul>
+</li>
+</ul>
+<h4 id="元字符（复杂重要）"><a href="#元字符（复杂重要）" class="headerlink" title="元字符（复杂重要）"></a>元字符（复杂重要）</h4><p> 在正则表达式中具有特殊含义的字符，具有<strong>很高的优先级</strong>。例如<code>[]</code>、<code>\</code>、<code>+</code>都是元字符<br> 在<strong>元字符中<code>\</code>的优先级最高</strong>,其次为各种括号</p>
+<ul>
+<li><p><code>\</code> 代表对随后的通配符进行转义，因此需要用<code>\\</code>表示<code>\</code>本身</p>
+<blockquote>
+<p>若反斜杠后面没有通配符，则反斜杠原样输出，就不再转义</p>
+</blockquote>
+</li>
+<li><p><code>[]</code> 用于限定字符集合</p>
+<blockquote>
+<p>注意：使用<code>[]</code>时，再[]中间的特殊字符如.+?*:-等等都是看作普通字符，但若要将\[]看作普通字符，需要进行转义，即使用\\表示\，使用\[来表示[</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[\w,]+</span><br><span class="line">//代表检索所有连续的单词字符或者连续的,  在[]中只能匹配一个字符</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>.</code> 英文的小数点，表示除换行符之外的<strong>任何一个字符</strong></p>
+</li>
+<li><p><code>*</code> 代表前面的字符可以出现0次或多次</p>
+</li>
+<li><p><code>+</code> 代表一个或多个<strong>连续</strong>匹配的字符</p>
+</li>
+<li><p><code>?</code> 非贪婪模式，表示匹配前面的字符0次或一次</p>
+</li>
+<li><p><code>+?</code> 将搜索模式从贪婪模式改为非贪婪模式</p>
+<blockquote>
+<p>如果能匹配到，则匹配一个，不会匹配多个</p>
+</blockquote>
+</li>
+<li><p><code>{}</code> 表示的是前面表达式的确切的出现次数</p>
+<blockquote>
+<p>\d{2} 表示 匹配两个数字<br>\d{2,4} 表示 匹配2-4个数字，2，3，4个<br>\d{2,} 表示2位到无限位</p>
+</blockquote>
+</li>
+<li><p><code>|</code> 管道符 代表选择其中一个，一般按顺序选择，若前面的已被匹配，就不会匹配后面的</p>
+</li>
+<li><p><code>()</code> 捕获和分组</p>
+<blockquote>
+<p>括号内的字符串将会作为捕获的结果进行输出,<strong>只会输出括号内的匹配字符串</strong></p>
+</blockquote>
+</li>
+<li><p><code>^</code> 代表字符串的开始</p>
+</li>
+<li><p><code>$</code> 代表字符串的结束</p>
+</li>
+<li><p><code>?:</code> 表示非捕获分组，匹配冒号后的内容抄但不获取匹配结果，不进行存储供以后使用。</p>
+</li>
+</ul>
+<h4 id="密码强度验证"><a href="#密码强度验证" class="headerlink" title="密码强度验证"></a>密码强度验证</h4><p> 使用正则表达式来进行密码强度验证，一般密码由数字、字母和特殊字符组成，若由一连串的数字或字母或特殊字符，这种密码的安全性不高，而由其中两种组成密码强度一般,用户密码包含的字符种类越多，密码的安全性越高</p>
+<ol>
+<li><p>只有数字验证（安全性较低）（六位以上的数字密码）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\d&#123;6,&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>只有字母验证（六位以上的字母密码）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[a-zA-Z]&#123;6,&#125;</span><br><span class="line">```   </span><br><span class="line">3. 只有特殊字符的密码（六位以上的特殊字符密码）</span><br></pre></td></tr></table></figure>
+
+<p>[.-+?\[]`/;‘@#$%^&amp;*():&lt;&gt;=~]{6,}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 注意：在集合中写[]和\时需要进行转义，因为这两个时元字符，优先级较[]来说更高</span><br><span class="line">4. 数字与字母混合使用密码</span><br></pre></td></tr></table></figure>
+
+<p>[\da-zA-Z]<em>\d+[a-zA-Z]+[\da-zA-Z]</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">**解释：**</span><br><span class="line">&gt;[\da-zA-Z]* &amp;nbsp;&amp;nbsp;表示匹配空字符串，或长度至少为1的由数字和字母组成的字符串</span><br><span class="line">    \d+[a-zA-Z]+&amp;nbsp;&amp;nbsp;表示1个或多个连续数字和1个或多个连续字母组成的字符串</span><br><span class="line">    连起来就可以匹配一系列数字和字母组成的字符串</span><br><span class="line"></span><br><span class="line">5. 数字和特殊字符串混合使用</span><br></pre></td></tr></table></figure>
+
+<p>[\d.-+?\[]<code>/;&#39;@#$%^&amp;*():&lt;&gt;=~]*\d+[.-+?\\\[\]</code>/;‘@#$%^&amp;<em>():&lt;&gt;=~]+[\d.-+?\[]`/;‘@#$%^&amp;</em>():&lt;&gt;=~]*</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">6. 三种字符混合使用（密码强度比较高）</span><br></pre></td></tr></table></figure>
+
+<p>[\da-zA-Z.-+?\[]<code>/;&#39;@#$%^&amp;*():&lt;&gt;=~]*  #0个或多个数字、字母和特殊字符的混合字符串
+((\d+[a-zA-Z]+[.-+?\\\[\]</code>/;‘@#$%^&amp;<em>():&lt;&gt;=~]+)|  #数字开头<br>(\d+[.-+?\[]`/;‘@#$%^&amp;</em>():&lt;&gt;=<del>]+[a-zA-Z]+)| #数字开头<br>([a-zA-Z]+\d+[.-+?\[]`/;‘@#$%^&amp;*():&lt;&gt;=</del>]+)| #字母开头<br>([a-zA-Z]+[.-+?\[]<code>/;&#39;@#$%^&amp;*():&lt;&gt;=~]+\d+)| #字母开头
+([.-+?\\\[\]</code>/;‘@#$%^&amp;<em>():&lt;&gt;=~]+\d+[a-zA-Z]+)| #特殊字符开头<br>([.-+?\[]`/;‘@#$%^&amp;</em>():&lt;&gt;=<del>]+[a-zA-Z]+\d+)| #特殊字符开头<br>)[\da-zA-Z.-+?\[]`/;‘@#$%^&amp;*():&lt;&gt;=</del>]* </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 邮箱验证</span><br><span class="line">一般邮箱在@前面会是数字和字母的混合,在其中间可能会混有`_`、`-`、`.`、`+`,在@后面可能会带有字母和数字然后.加上顶级域名或者会有两个域名</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>^[\da-zA-Z.-<em>+]+@[\da-zA-Z</em>.-+]+[.][\da-zA-Z]{2,4}$</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; 注意：想表示字符.时一定要加上[.],因为普通的.代表的是任意字符，而[.]代表的是字符.</span><br><span class="line"></span><br><span class="line">#### 身份证号验证</span><br><span class="line">身份证号由六位数字地址码,八位数字出生日期码，三位数字顺序码和一位数字校验码组成</span><br><span class="line">   1. 地址码规则</span><br><span class="line">   以数字1-9开始，剩下的5位数字为0-9</span><br></pre></td></tr></table></figure>
+
+<pre><code>[1-9]\d{5}</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2. 年份码规则</span><br><span class="line">年份码为4位，按现实情况来说现在只有18、19、20开头的</span><br></pre></td></tr></table></figure>
+
+<p>  (18|19|20)\d{2}<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">3. 月份码规则</span><br><span class="line">由两位数字组成，第一位若为0，则第二位是1-9；第一位若为1，则第二位为0、1或2</span><br><span class="line">(0[1-9])|(1[0-2])</span><br><span class="line">4. 日期码规则</span><br><span class="line">若第一位取1-2，第二位可以取0-9；若第一位取0，则第二位取1-9，若第一位取3，则第二位可以取0-1</span><br></pre></td></tr></table></figure></p>
+<p>  ([1-2][0-9])|(0[1-9])|(3[0-1])<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5. 顺序码规则</span><br><span class="line">顺序码为三位</span><br></pre></td></tr></table></figure></p>
+<p>  \d{3}<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">6. 校验码规则</span><br><span class="line">校验码长一位，可以是数字可以是X或者x</span><br></pre></td></tr></table></figure></p>
+<p>  [\dXx]<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7. 总结</span><br></pre></td></tr></table></figure></p>
+<p>  ^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([1-2][0-9])|(0[1-9])|(3[0-1]))\d{3}[\dXx]$</p>
+<pre><code>
+
+
+
+
+</code></pre>
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
 
 
     </footer>
@@ -1004,86 +1451,14 @@
 
 </article>
     
-    <article id="post-春节越南行" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2017/01/28/春节越南行/"
-    >春节越南行</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2017/01/28/春节越南行/" class="article-date">
-  <time datetime="2017-01-27T20:25:55.000Z" itemprop="datePublished">2017-01-27</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/旅行/">旅行</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <h2 id="我的所爱，在海云之间。"><a href="#我的所爱，在海云之间。" class="headerlink" title="我的所爱，在海云之间。"></a>我的所爱，在海云之间。</h2><blockquote>
-<p>最喜欢骑着摩托在海云岭上拉到最大马力的感觉~</p>
-</blockquote>
-<p>刚开始想去越南只是听朋友说物价便宜，人美景也美，尤其是有海滩，决定下来之后就开始查很多网友的攻略，后来发现看攻略根本记不住啥，说来说去都是这么几个注意点。上班的时候就没啥心思了，很期待这场旅行，本来假期就不多，春节正好可以躲避寒冬，于是约了个好友一起去，人均花费在4000左右吧，要是平时去估计能便宜一半。我选择了在年三十就出发，即使是这样，我们真正玩的时间也只有三天，有大半时间都浪费在了路上，不过这一路上的经历回想起来也挺有意思的。在此还是强烈推荐平时淡季去，春节机票贵，火车票又一票难求，如果是淡季去的话直飞是最爽快的了。</p>
-      
-      <a class="article-more-link" href="/2017/01/28/春节越南行/">阅读更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/东南亚/">东南亚</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/旅行/">旅行</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-  
-  
-
-</article>
-    
   </article>
   
 
+  
+  <nav class="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+  </nav>
   
 </section>
 </div>

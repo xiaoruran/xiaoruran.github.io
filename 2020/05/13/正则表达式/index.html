@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Vue后续 |  曹涵的个人博客
+    JS之正则表达式 |  曹涵的个人博客
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -39,7 +39,7 @@
   <div id="app">
     <main class="content on">
       <section class="outer">
-  <article id="post-notevue4" class="article article-type-post" itemscope
+  <article id="post-正则表达式" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -47,7 +47,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Vue后续
+  JS之正则表达式
 </h1>
  
 
@@ -56,8 +56,8 @@
 
     
     <div class="article-meta">
-      <a href="/2020/06/03/notevue4/" class="article-date">
-  <time datetime="2020-06-03T13:38:55.000Z" itemprop="datePublished">2020-06-03</time>
+      <a href="/2020/05/13/正则表达式/" class="article-date">
+  <time datetime="2020-05-13T13:52:32.000Z" itemprop="datePublished">2020-05-13</time>
 </a>
       
   <div class="article-category">
@@ -71,7 +71,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">2.1k</span>
+            <span class="post-count">1.9k</span>
         </span>
     </span>
 
@@ -80,7 +80,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">8 min</span>
+            <span class="post-count">7 min</span>
         </span>
     </span>
 </div>
@@ -105,170 +105,123 @@
       
 
       
-      <h3 id="Vue实例的生命周期"><a href="#Vue实例的生命周期" class="headerlink" title="Vue实例的生命周期"></a>Vue实例的生命周期</h3><p>生命周期：从Vue实例创建、运行、销毁期间，会伴随各种各样的时间，这些事件，统称为生命周期<br>生命周期钩子：生命周期函数或者生命周期事件</p>
-<h4 id="创建期间的生命周期函数"><a href="#创建期间的生命周期函数" class="headerlink" title="创建期间的生命周期函数"></a>创建期间的生命周期函数</h4><ul>
-<li><code>beforeCreate</code> 实例刚在内存中被创建出来，此时，还没有初始化好<code>data</code>和<code>methods</code>属性</li>
-<li><code>created</code> 实例已在内存中创建完成，此时<code>data</code>和<code>methods</code>已经创建完成，还没开始编译模块 ，在创建之后开始编译模板，最终，在内存中生成一个编译好的最终模板字符串，并准备将这个模板字符串渲染为内存中的DOM，此时只是在内存中渲染好了模板，并没有把模板挂载到真正的页面中去</li>
-<li><code>beforeMount</code> 此时已经完成了模板的编译，在内存中以及渲染好了模板，但还没有挂载到页面中</li>
-<li><code>mounted</code> 此时，已经将编译好的模板，挂载带了页面指定的容器中显示，用户已经可以看到渲染好的页面<h4 id="运行期间的生命周期函数"><a href="#运行期间的生命周期函数" class="headerlink" title="运行期间的生命周期函数"></a>运行期间的生命周期函数</h4></li>
-<li><code>beforeUpdate</code> 状态更新之前执行该函数，此时<code>data</code>的值是最新的，虚拟DOM节点的值以改变，但是界面上显示的数据还是旧的，此时还没有开始重新渲染DOM节点</li>
-<li><code>updated</code> 实例更新完毕后调用，此时页面已经重新渲染好了，数据也已更新完毕<h4 id="销毁期间的生命函数"><a href="#销毁期间的生命函数" class="headerlink" title="销毁期间的生命函数"></a>销毁期间的生命函数</h4></li>
-<li><code>beforeDestory</code> 实例销毁之前调用。在这一步，实例任然可用</li>
-<li><code>destoryed</code> Vue销毁后调用。调用后，Vue实例指示的所有东西都会解绑，所有事件监听器会被移除，所有的子实例也会被销毁</li>
-</ul>
-<blockquote>
-<p>自己的话：首先beforeCreate时，只是创建了一个Vue实例，还没有初始化data和method,在  created中，已经初始化data和methods了，可以在js中使用data中的数据和methods中的方法函数。在beforeMount中已经完成了模板的编译，但没有渲染到页面上，此时页面还没渲染上data的值。mounted中已经完成了页面的挂载和渲染，从用户角度可以看到页面渲染数据完毕。数据更新时，beforeUpdated函数，Vue实例中的data已经更新完成，但此时还是在虚拟DOM节点中，未渲染同步到真实DOM数中，所以页面的数据还是旧数据。upadted中更新的数据已经渲染到真实DOM节点中，即用户可以看到更新后的数据</p>
-</blockquote>
-<h4 id="Vue生命周期图示"><a href="#Vue生命周期图示" class="headerlink" title="Vue生命周期图示"></a>Vue生命周期图示</h4><p><img src="https://img2018.cnblogs.com/blog/47685/201901/47685-20190111173917518-1987865733.png" alt="avatar"></p>
-<h3 id="小case总结"><a href="#小case总结" class="headerlink" title="小case总结"></a>小case总结</h3><ol>
-<li>在Vue中使用事件绑定机制，为元素指订处理函数时，若加了小括号，就可以传参了</li>
+      <h2 id="正则表达式学习"><a href="#正则表达式学习" class="headerlink" title="正则表达式学习"></a>正则表达式学习</h2><p>  正则表达式是一个帮助处理和<strong>匹配复杂字符串</strong>的工具,regular expression(RegEx)</p>
+<h4 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h4><ol>
+<li>灵活，逻辑性和功能性非常强</li>
+<li>可以迅速用极简单的方式做到字符串的复杂控制</li>
+<li>对初学者不友好，比较晦涩难懂</li>
 </ol>
-<h4 id="遍历数组some和foreach"><a href="#遍历数组some和foreach" class="headerlink" title="遍历数组some和foreach"></a>遍历数组some和foreach</h4><ul>
-<li><p><code>some</code>用法 : </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">data:&#123;</span><br><span class="line">    list:[&#123;id:1,brand:&quot;奔驰&quot;,time: new Date()&#125;,</span><br><span class="line">          &#123;id:2,brand:&quot;宝马&quot;,time: new Date()&#125;</span><br><span class="line">          ]</span><br><span class="line">&#125;</span><br><span class="line">methods:&#123;</span><br><span class="line">    del(id)&#123;</span><br><span class="line">    this.list.some((item,i)=&gt;&#123;</span><br><span class="line">        if(item.id == id)&#123;</span><br><span class="line">            this.list.splice(i,1);</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意： 使用some时若满足条件，则直接退出循环，使用箭头函数代替 this.list.some(function(){}) 替换为 this.list.some(()=&gt;{})</p>
-</blockquote>
-</li>
-</ul>
-<ul>
-<li><p><code>foreach</code>用法</p>
-<ul>
-<li>参数 [].forEach((item,index,array)={})</li>
-<li>三个参数分别是 数组内容、索引、数组本身<blockquote>
-<p>注意：这里的forEach中的e要大写</p>
-</blockquote>
-</li>
-</ul>
-<h4 id="数组按照索引删除元素"><a href="#数组按照索引删除元素" class="headerlink" title="数组按照索引删除元素"></a>数组按照索引删除元素</h4></li>
-<li><p><code>splice()</code>方法</p>
-<ul>
-<li>使用数组.splice(索引,1) 代表删除索引所在位置的元素</li>
-</ul>
-<h4 id="Js中判断字符串中是否包含某一字符串"><a href="#Js中判断字符串中是否包含某一字符串" class="headerlink" title="Js中判断字符串中是否包含某一字符串"></a>Js中判断字符串中是否包含某一字符串</h4></li>
-<li><p><code>indexOf()</code>方法 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var str=&quot;曹涵有&quot;;</span><br><span class="line">var substr=&quot;曹&quot;；</span><br><span class="line">var result=str.indexOf(substr);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>此时的result为0,若不包含结果为-1</p>
-</blockquote>
-</li>
-<li><p><code>includes()</code>方法</p>
-<blockquote>
-<p>在ES6中，为字符串提供了一个新方法，叫做String.Prototype.includes(“要包含的字符串”)，如果包含则返回true,反之返回false</p>
-</blockquote>
-</li>
-</ul>
-<h4 id="查找数组中元素方法"><a href="#查找数组中元素方法" class="headerlink" title="查找数组中元素方法"></a>查找数组中元素方法</h4><ol>
-<li><p><code>find()</code></p>
-<ul>
-<li>查找第一个满足条件的元素，参数是一个回调函数，在回调函数中写需要查找元素的条件</li>
-<li>回调函数有三个参数<code>(value,index,arr)</code>,value为当前数组元素，index为当前元素的索引，arr为当前数组</li>
-<li>查找成功时返回的是数组元素，查找失败时返回的是undefined<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var list=[&quot;hh&quot;,&quot;xixi&quot;,&quot;heihei&quot;];</span><br><span class="line">list.find((val,index)=&gt;&#123;</span><br><span class="line">if(val.indexOf(&apos;h&apos;) != -1)</span><br><span class="line"> return true;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p><code>findIndex()</code></p>
-<ul>
-<li>查找到第一个满足条件元素的索引,参数是一个回调函数，在回调函数中写需要查找元素的条件</li>
-<li>回调函数有三个参数(value,index,arr)</li>
-<li>用法和find()差不多,查找成功时返回索引值，反之返回-1</li>
-</ul>
-</li>
-<li><p><code>filter()</code></p>
-<ul>
-<li>和之前两个参数和用法一样</li>
-<li>返回值是一个满足条件数组，若查找失败，则返回空数组</li>
-</ul>
-</li>
+<h4 id="常见用法："><a href="#常见用法：" class="headerlink" title="常见用法："></a>常见用法：</h4><ol>
+<li>邮箱验证</li>
+<li>密码强度验证</li>
+<li>身份证号验证</li>
+<li>用户名验证</li>
+<li>提取数字</li>
 </ol>
-<h3 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h3><p>Vue.js 允许自定义过滤器，<strong>可被用作一些常见的文本格式化</strong>，过滤器可以用作两个地方：<strong>mustachc插值</strong>和 <strong>v-bind表达式</strong>。过滤器应该被添加在Javascript表达式的尾部，有管道符表示；</p>
-<h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><ul>
-<li>全局过滤器的定义语法（<strong>本文件中的所有的Vue实例都能被共享</strong>）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue.fliter(&apos;过滤器的名称&apos;,function(data)&#123;&#125;)</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
+<h4 id="字符集合"><a href="#字符集合" class="headerlink" title="字符集合[]"></a>字符集合[]</h4><p> 集合set是一对方括号[]内的一组字符，用来代表整个字符中的任意一个<br> 例如：</p>
 <blockquote>
-<p>function的参数：第一个参数已经规定死了，永远都是过滤器从管道符前面接受过来的数据，<br>第二乃至第三个位置可以传参</p>
+<p><code>[abc]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 指定字符（a，b或c）之一<br><code>[a-z]</code>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表示任何一个小写字母<br><code>[^abc]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^ 表示否的意思，表达了除a，b，c外的任意字符<br><code>[0246]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;代表 0，2，4，6的任意一个<br><code>[0-9]</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 代表 0到9的任意一个数字<br><code>[a-zA-Z]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;任何一个大小写字母<br><code>[+]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在集合中 +、*、|、()、$、{}都没有特殊含义，仅代表普通字符匹配<br><code>[0-9]+</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 这里的加代表连续多个</p>
 </blockquote>
-<h4 id="使用格式"><a href="#使用格式" class="headerlink" title="使用格式"></a>使用格式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;&#123;msg | 过滤器名称&#125;&lt;/p&gt;1</span><br></pre></td></tr></table></figure>
-
+<h4 id="常见通配符（核心）"><a href="#常见通配符（核心）" class="headerlink" title="常见通配符（核心）"></a>常见通配符（核心）</h4><p>通配符是一种特殊字符，一般指的是反斜杠\后面紧跟的一些特殊标识符，用来<strong>指代某些字符集合</strong></p>
 <ul>
-<li>私有过滤器的定义语法（<strong>在Vue实例中声明，只能被此Vue实例控制的单元所使用</strong>）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">filters:&#123;</span><br><span class="line">         dataformat:function(data)&#123;&#125;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
-
+<li><code>\d</code>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;代表阿拉伯数字（只能匹配一个字符）</li>
+<li><code>\D</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;代表除了阿拉伯数字外的所有字符，可以理解为[^\d]</li>
+<li><code>\s</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;空白字符</li>
+<li><code>\S</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;除空白字符外的所有字符</li>
+<li><code>\w</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;任何单词字符（字母、数字、汉字、下划线_字符）</li>
+<li><code>\W</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回一个匹配项，其中字符串不包含任何单词字符<br><strong>不常用：</strong><ul>
+<li><code>\A</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字符串的开头</li>
+<li><code>\Z</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字符串的末尾</li>
+<li><code>\b</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回指定字符位于单词的开头或者末尾的匹配项</li>
+<li><code>\B</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不在单词的开头和结尾处</li>
+</ul>
 </li>
 </ul>
+<h4 id="元字符（复杂重要）"><a href="#元字符（复杂重要）" class="headerlink" title="元字符（复杂重要）"></a>元字符（复杂重要）</h4><p> 在正则表达式中具有特殊含义的字符，具有<strong>很高的优先级</strong>。例如<code>[]</code>、<code>\</code>、<code>+</code>都是元字符<br> 在<strong>元字符中<code>\</code>的优先级最高</strong>,其次为各种括号</p>
+<ul>
+<li><p><code>\</code> 代表对随后的通配符进行转义，因此需要用<code>\\</code>表示<code>\</code>本身</p>
 <blockquote>
-<p>在Vue实例中声明一个filters的对象，其中存放filter过滤器的实现</p>
+<p>若反斜杠后面没有通配符，则反斜杠原样输出，就不再转义</p>
 </blockquote>
-<p><strong>注意：过滤器调用的时候，采用就近原则，若全局过滤器和私有过滤器名称一致，优先调用私有过滤器</strong></p>
-<h4 id="时间格式化"><a href="#时间格式化" class="headerlink" title="时间格式化"></a>时间格式化</h4><ol>
-<li>首先 var date=new Date(这里可以穿值)；</li>
-<li>将想要设置的时间格式设置好</li>
-<li>var yy=date.getFullYear(); var mm=date.getMouth();var dd=date.getDate();</li>
-<li>var h=date.getHours(); var m=date.getMinutes(); var s=date.getSeconds();</li>
-</ol>
-<h4 id="按键修饰符"><a href="#按键修饰符" class="headerlink" title="按键修饰符"></a>按键修饰符</h4><ol>
-<li>Vue提供的：<ul>
-<li>@keyup.center</li>
-<li>@keyup.tab</li>
-<li>@keyup.delete</li>
-<li>@keyup.esc</li>
-<li>@keyup.space</li>
-<li>@keyup.up</li>
-<li>@keyup.down</li>
-<li>@keyup.right</li>
-<li>@keyup.left</li>
-</ul>
 </li>
-<li>用户可以自定义按键修饰符<ul>
-<li>@keyup.键盘对应的码值</li>
-</ul>
-2.0+版本中：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Vue.config.keyCodes.f2 = 113;</span><br><span class="line">@keyup.f2</span><br></pre></td></tr></table></figure>
-
+<li><p><code>[]</code> 用于限定字符集合</p>
+<blockquote>
+<p>注意：使用<code>[]</code>时，再[]中间的特殊字符如.+?*:-等等都是看作普通字符，但若要将\[]看作普通字符，需要进行转义，即使用\\表示\，使用\[来表示[</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[\w,]+</span><br><span class="line">//代表检索所有连续的单词字符或者连续的,  在[]中只能匹配一个字符</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
-<h4 id="自定义指令"><a href="#自定义指令" class="headerlink" title="自定义指令"></a>自定义指令</h4><p>使用<code>Vue.directive()</code>来定义全局指令</p>
-<ul>
-<li>参数1是 指令的名称。注意：在定义的时候有不需要再v-前缀,在调用时必须使用v-指令名称来调用。</li>
-<li>参数2是一个对象，身上有一些指令相关的函数，这些函数可以在特定阶段执行相关操作</li>
-<li>参数二对象中有几个函数：</li>
+<li><p><code>.</code> 英文的小数点，表示除换行符之外的<strong>任何一个字符</strong></p>
+</li>
+<li><p><code>*</code> 代表前面的字符可以出现0次或多次</p>
+</li>
+<li><p><code>+</code> 代表一个或多个<strong>连续</strong>匹配的字符</p>
+</li>
+<li><p><code>?</code> 非贪婪模式，表示匹配前面的字符0次或一次</p>
+</li>
+<li><p><code>+?</code> 将搜索模式从贪婪模式改为非贪婪模式</p>
+<blockquote>
+<p>如果能匹配到，则匹配一个，不会匹配多个</p>
+</blockquote>
+</li>
+<li><p><code>{}</code> 表示的是前面表达式的确切的出现次数</p>
+<blockquote>
+<p>\d{2} 表示 匹配两个数字<br>\d{2,4} 表示 匹配2-4个数字，2，3，4个<br>\d{2,} 表示2位到无限位</p>
+</blockquote>
+</li>
+<li><p><code>|</code> 管道符 代表选择其中一个，一般按顺序选择，若前面的已被匹配，就不会匹配后面的</p>
+</li>
+<li><p><code>()</code> 捕获和分组</p>
+<blockquote>
+<p>括号内的字符串将会作为捕获的结果进行输出,<strong>只会输出括号内的匹配字符串</strong></p>
+</blockquote>
+</li>
+<li><p><code>^</code> 代表字符串的开始</p>
+</li>
+<li><p><code>$</code> 代表字符串的结束</p>
+</li>
+<li><p><code>?:</code> 表示非捕获分组，匹配冒号后的内容抄但不获取匹配结果，不进行存储供以后使用。</p>
+</li>
 </ul>
+<h4 id="密码强度验证"><a href="#密码强度验证" class="headerlink" title="密码强度验证"></a>密码强度验证</h4><p> 使用正则表达式来进行密码强度验证，一般密码由数字、字母和特殊字符组成，若由一连串的数字或字母或特殊字符，这种密码的安全性不高，而由其中两种组成密码强度一般,用户密码包含的字符种类越多，密码的安全性越高</p>
 <ol>
-<li><p><code>bind:function(el){}</code></p>
-<blockquote>
-<p>指的是将指令绑定到某一结点时触发，此时的el指的是此节点<br>注意：在元素刚绑定指令的时候，还没有插入到DOM树中去，这时候，调用focus方法没有作用；<br>一个元素只有插入到DOM树之后，才能获取焦点</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;p v-focus&gt;&#123;msg&#125;&lt;/p&gt;</span><br><span class="line">Vue.directive(&quot;focus&quot;,&#123;</span><br><span class="line">    bind:function(el)&#123;</span><br><span class="line">        el.focus();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<li><p>只有数字验证（安全性较低）（六位以上的数字密码）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\d&#123;6,&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>只有字母验证（六位以上的字母密码）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[a-zA-Z]&#123;6,&#125;</span><br><span class="line">```   </span><br><span class="line">3. 只有特殊字符的密码（六位以上的特殊字符密码）</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>当绑定到此p标签时触发bind方法且只会触发一次</p>
-</blockquote>
-<p> <strong>对象中的几种方法的第一个参数永远是el，指的是一个原生的JS对象</strong></p>
-</li>
-<li><p><code>inserted:function(el){}</code></p>
-<blockquote>
-<p>指的是元素插入到DOM树中的时候，会执行inserted()函数，只能触发一次</p>
-</blockquote>
-</li>
-<li><p><code>updated:function(el){}</code></p>
-<blockquote>
-<p>指的是当VNode更新时，执行updated()函数，可能被触发多次</p>
-</blockquote>
-</li>
-</ol>
-<p>自定义指令中与样式有关的，可以在bind函数中定义，而与Js操作有关的，最好放置在inserted函数中</p>
-<ul>
-<li>自定义指令如何传值（v-focus=”‘hhhh’”）传递这个”hhhh”<ol>
-<li>在内置函数如 bind()、inserted()、updated()中第一个参数是<code>el</code>，第二个参数就是<code>binding</code>.</li>
-<li><code>binding</code>是一个对象.其中<code>binding.value</code>是使用<code>v-focus(&quot;&#39;red&#39;&quot;)中的red</code>,<code>binding.name</code>是指指令名称,<code>binding.expression</code>是指指令中的值的字符串<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">  &lt;p v-color=&quot;&apos;red&apos;&quot;&gt;&#123;msg&#125;&lt;/p&gt;</span><br><span class="line">  Vue.directive(&quot;color&quot;,&#123;</span><br><span class="line">    bind:function(el)&#123;</span><br><span class="line">        el.focus();</span><br><span class="line">    &#125;,</span><br><span class="line">    inserted:function(el,binding)&#123;</span><br><span class="line">        el.style.color=binding.value;</span><br><span class="line">        console.log(binding.name)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>[.-+?\[]`/;‘@#$%^&amp;*():&lt;&gt;=~]{6,}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 注意：在集合中写[]和\时需要进行转义，因为这两个时元字符，优先级较[]来说更高</span><br><span class="line">4. 数字与字母混合使用密码</span><br></pre></td></tr></table></figure>
+
+<p>[\da-zA-Z]<em>\d+[a-zA-Z]+[\da-zA-Z]</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">**解释：**</span><br><span class="line">&gt;[\da-zA-Z]* &amp;nbsp;&amp;nbsp;表示匹配空字符串，或长度至少为1的由数字和字母组成的字符串</span><br><span class="line">    \d+[a-zA-Z]+&amp;nbsp;&amp;nbsp;表示1个或多个连续数字和1个或多个连续字母组成的字符串</span><br><span class="line">    连起来就可以匹配一系列数字和字母组成的字符串</span><br><span class="line"></span><br><span class="line">5. 数字和特殊字符串混合使用</span><br></pre></td></tr></table></figure>
+
+<p>[\d.-+?\[]<code>/;&#39;@#$%^&amp;*():&lt;&gt;=~]*\d+[.-+?\\\[\]</code>/;‘@#$%^&amp;<em>():&lt;&gt;=~]+[\d.-+?\[]`/;‘@#$%^&amp;</em>():&lt;&gt;=~]*</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">6. 三种字符混合使用（密码强度比较高）</span><br></pre></td></tr></table></figure>
+
+<p>[\da-zA-Z.-+?\[]<code>/;&#39;@#$%^&amp;*():&lt;&gt;=~]*  #0个或多个数字、字母和特殊字符的混合字符串
+((\d+[a-zA-Z]+[.-+?\\\[\]</code>/;‘@#$%^&amp;<em>():&lt;&gt;=~]+)|  #数字开头<br>(\d+[.-+?\[]`/;‘@#$%^&amp;</em>():&lt;&gt;=<del>]+[a-zA-Z]+)| #数字开头<br>([a-zA-Z]+\d+[.-+?\[]`/;‘@#$%^&amp;*():&lt;&gt;=</del>]+)| #字母开头<br>([a-zA-Z]+[.-+?\[]<code>/;&#39;@#$%^&amp;*():&lt;&gt;=~]+\d+)| #字母开头
+([.-+?\\\[\]</code>/;‘@#$%^&amp;<em>():&lt;&gt;=~]+\d+[a-zA-Z]+)| #特殊字符开头<br>([.-+?\[]`/;‘@#$%^&amp;</em>():&lt;&gt;=<del>]+[a-zA-Z]+\d+)| #特殊字符开头<br>)[\da-zA-Z.-+?\[]`/;‘@#$%^&amp;*():&lt;&gt;=</del>]* </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 邮箱验证</span><br><span class="line">一般邮箱在@前面会是数字和字母的混合,在其中间可能会混有`_`、`-`、`.`、`+`,在@后面可能会带有字母和数字然后.加上顶级域名或者会有两个域名</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
-</li>
-</ul>
+<p>^[\da-zA-Z.-<em>+]+@[\da-zA-Z</em>.-+]+[.][\da-zA-Z]{2,4}$</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; 注意：想表示字符.时一定要加上[.],因为普通的.代表的是任意字符，而[.]代表的是字符.</span><br><span class="line"></span><br><span class="line">#### 身份证号验证</span><br><span class="line">身份证号由六位数字地址码,八位数字出生日期码，三位数字顺序码和一位数字校验码组成</span><br><span class="line">   1. 地址码规则</span><br><span class="line">   以数字1-9开始，剩下的5位数字为0-9</span><br></pre></td></tr></table></figure>
 
+<pre><code>[1-9]\d{5}</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2. 年份码规则</span><br><span class="line">年份码为4位，按现实情况来说现在只有18、19、20开头的</span><br></pre></td></tr></table></figure>
+
+<p>  (18|19|20)\d{2}<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">3. 月份码规则</span><br><span class="line">由两位数字组成，第一位若为0，则第二位是1-9；第一位若为1，则第二位为0、1或2</span><br><span class="line">(0[1-9])|(1[0-2])</span><br><span class="line">4. 日期码规则</span><br><span class="line">若第一位取1-2，第二位可以取0-9；若第一位取0，则第二位取1-9，若第一位取3，则第二位可以取0-1</span><br></pre></td></tr></table></figure></p>
+<p>  ([1-2][0-9])|(0[1-9])|(3[0-1])<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5. 顺序码规则</span><br><span class="line">顺序码为三位</span><br></pre></td></tr></table></figure></p>
+<p>  \d{3}<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">6. 校验码规则</span><br><span class="line">校验码长一位，可以是数字可以是X或者x</span><br></pre></td></tr></table></figure></p>
+<p>  [\dXx]<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7. 总结</span><br></pre></td></tr></table></figure></p>
+<p>  ^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([1-2][0-9])|(0[1-9])|(3[0-1]))\d{3}[\dXx]$</p>
+<pre><code>
+
+
+
+
+</code></pre>
       
       <!-- reward -->
       
@@ -336,14 +289,14 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/06/03/notevue4/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/05/13/正则表达式/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
 
 
     </footer>
@@ -354,19 +307,19 @@
   
   <nav class="article-nav">
     
-      <a href="/2020/06/03/JS引擎执行机制/" class="article-nav-link">
+      <a href="/2020/06/03/about/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            JS之事件执行机制
+            About Me
           
         </div>
       </a>
     
     
-      <a href="/2020/06/03/vue2node/" class="article-nav-link">
+      <a href="/2020/01/17/my-second-blog/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Vue之样式</div>
+        <div class="article-nav-title">博客Markdown的写法</div>
       </a>
     
   </nav>

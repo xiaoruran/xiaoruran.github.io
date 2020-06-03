@@ -18,9 +18,334 @@
       </tags>
   </entry>
   <entry>
+    <title>Vue之样式</title>
+    <url>/2020/06/03/vue2node/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h3 id="Vue中使用样式"><a href="#Vue中使用样式" class="headerlink" title="Vue中使用样式"></a>Vue中使用样式</h3><h4 id="使用class样式"><a href="#使用class样式" class="headerlink" title="使用class样式"></a>使用class样式</h4><ol>
+<li><p>数组 直接传递数组 （了解就行）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; &lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;]&quot;&gt;这是一个标题&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：使用数组时，要用v-bind绑定class并且在class里面的数组，必须用字符串包裹起来，这时不需要在Vue中有data</p>
+</blockquote>
+</li>
+<li><p>在数组里面使用三元表达式（在Vue中需要声明数据）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; .active &#123;letter-spacing: 0.5em&#125;&lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;,flag?&apos;active&apos;:&apos;&apos;]&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  var vm =new Vue(&#123;</span><br><span class="line">     el:&quot;#app&quot;,</span><br><span class="line">     data:&#123;</span><br><span class="line">         flag:true</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>此时的三元表达式可以借用data中的数据进行，但还是需要将class绑定属性 v-bind</p>
+</blockquote>
+</li>
+<li><p>在数组里面使用对象可以代替三元表达式 例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; .active &#123;letter-spacing: 0.5em&#125;&lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;,&#123;&apos;active&apos;:flag&#125;]&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  var vm =new Vue(&#123;</span><br><span class="line">     el:&quot;#app&quot;,</span><br><span class="line">     data:&#123;</span><br><span class="line">         flag:true</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>直接使用对象（前提是使用v-bind绑定class属性对象的属性可以带引号也可不带，属性的值是一个标识符） 例如：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; .active &#123;letter-spacing: 0.5em&#125;&lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;&#123;red: true, active: false&#125;&quot;&gt;这是一个标题&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<blockquote>
+<p>注意：直接使用对象时，:class={} 这里是对象的括号，且里面可用字符串包裹，也可不用</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="Vue中绑定内联样式（style）"><a href="#Vue中绑定内联样式（style）" class="headerlink" title="Vue中绑定内联样式（style）"></a>Vue中绑定内联样式（style）</h4><ol>
+<li><p>直接通过v-bind绑定style</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;h1 :style=&quot;&#123;color:&apos;red&apos;,&apos;font-size&apos;:200px&#125;&quot;&gt;这是一个标题&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将样式对像，定义到data中，并直接应用到:style中</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;h1 :style=&quot;Objstyle&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  data:&#123;Objstyle:&#123;color:&apos;red&apos;,&apos;font-size&apos;:200px&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue简介</title>
+    <url>/2019/07/19/vue%E7%AE%80%E4%BB%8B%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h3 id="什么是Vue-js"><a href="#什么是Vue-js" class="headerlink" title="什么是Vue.js"></a>什么是Vue.js</h3><ul>
+<li>Vue.js是目前最火的前端框架，react是最流行的前端框架</li>
+<li>Vue.js是一套构建用户界面的框架，<strong>只关注视图层</strong>，它不仅易于上手，还便于和第三当库或既有项目整合。（Vue有配套的第三方类库，可以整合起来做大型项目的开发）</li>
+<li>在vue中核心的概念是让用户不再操作DOM元素，解放了用户的双手，让程序员关注业务逻辑</li>
+</ul>
+<h3 id="框架和库的区别"><a href="#框架和库的区别" class="headerlink" title="框架和库的区别"></a>框架和库的区别</h3><ul>
+<li>框架是一套完整的解决方案；对项目的侵入性较大；项目若要更换框架，则需要重新构建整个项目。<ul>
+<li>node中的express1</li>
+</ul>
+</li>
+<li>库也可以成为插件（提供的是一个小功能），对项目的侵入性校，如果某个库无法完成某些需求，可以很容易切换到其他库实现需求。<h3 id="Node（后端）中的mvc与前端中的mccm之间的区别"><a href="#Node（后端）中的mvc与前端中的mccm之间的区别" class="headerlink" title="Node（后端）中的mvc与前端中的mccm之间的区别"></a>Node（后端）中的mvc与前端中的mccm之间的区别</h3></li>
+</ul>
+<ul>
+<li><p>mvc是后端的分层开发概念</p>
+</li>
+<li><p>MVVM是前端视图层的概念，主要关注视图层的分离，mvvm把前端的视图层分为了三部分：<code>Model</code>、<code>View</code>、<code>VM ViewModel</code></p>
+</li>
+<li><p>为什么有了MVC还要有MVVM</p>
+</li>
+<li><p><strong>MVC结构</strong>：第一：app.js(项目的入口地址，一切的请求，都要先进入这里进行处理。注意：app.js没有路由分发的功能，需要调用router.js模块进行路由分发)；第二：router.js(功能单一，只负责分发路由，不负责具体逻辑业务的处理)；第三：Controller(业务处理层，功能单一，只负责处理业务，不负责处理数据的CRUD)；第四：Model（职能单一，只负责操作数据库，执行sql语句，运行数据的CRUD）</p>
+<ul>
+<li>通过View视图层给app.js(每当用户操作了界面，若需要进行业务的请求，就会通过网络请求，发送给后端的服务器，此时，我们这个请求，就会被后端的App.js监听到)</li>
+</ul>
+</li>
+<li><p><strong>MVVM结构</strong>：是在前端的View视图层进行划分的。将每个页面都分为M、V和VM。其中，VM是整个MVVM的核心，应为VM是V和M见的调度者。</p>
+<ol>
+<li>M中保存的是每个页面中单独的数据</li>
+<li>V中页面中静态的HTML结构</li>
+<li>VM是一个调度者，分割了V和M；V中想要存取数据，通过VM来得到；M中想存取<br>数据，只能通过VM</li>
+<li>前端页面中使用MVVM的思想，是为了让我们开发更加方便，<strong>MVVM提供的数据的双向绑定</strong>，这是由VM提供的<blockquote>
+<p>涵哥说过：你真棒</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>博客Markdown的写法</title>
+    <url>/2020/01/17/my-second-blog/</url>
+    <content><![CDATA[<h4 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h4><pre><code># 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+注意：#后面要加空格 一级标题下面有一条横线 正常是需要闭合的这些标签</code></pre><h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><ul>
+<li><p>无序列表</p>
+<blockquote>
+<p>* 1<br>* 2<br>* 3<br>* 4</p>
+<blockquote>
+<p>注意 在*后面也要一个空格 用在线编辑器看实际上是转换承了 ul&gt;li</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p>有序列表</p>
+<blockquote>
+<ol>
+<li>列表一</li>
+<li>列表二</li>
+<li>列表三<blockquote>
+<p>注意：数字后面必须是英文的点，有序列表的序号是根据第一行列表的数字顺序来的</p>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p>比如说，你想对某个部分的内容做一些说明或者引用等，可以使用&gt;<br>‘&gt;’</p>
+<h4 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h4><p>使用四个缩进空格 表示代码块</p>
+<h4 id="加强的代码块"><a href="#加强的代码块" class="headerlink" title="加强的代码块"></a>加强的代码块</h4><p>支持四十一种编程语言的语法高亮显示，行号显示，使用&lt;!–￼0–&gt;</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
+        <tag>方法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS之原型链理解</title>
+    <url>/2020/06/03/JS%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%90%86%E8%A7%A3/</url>
+    <content><![CDATA[<p>###JS原型及原型链<br>JavaScript中没有子类和父类的概念，也没有类和实例（instance）的区分,全靠一种称为”原型(prototype)链”的模式，来实现继承</p>
+<p>####背景介绍</p>
+<h5 id="一、-函数对象"><a href="#一、-函数对象" class="headerlink" title="一、 函数对象"></a>一、 函数对象</h5><ol>
+<li>所有实例对象都有一个<code>_proto_</code>属性,该属性不是标准属性，不可以用在编程中，用于浏览器内部使用</li>
+<li>所有函数都拥有<code>prototype</code>属性</li>
+<li>原型对象：指的是拥有prototype属性的对象，在定义函数时就被创建</li>
+<li>数组，函数，对象的原型都是Object<h5 id="二、构造函数"><a href="#二、构造函数" class="headerlink" title="二、构造函数"></a>二、构造函数</h5>构造函数，主要用来创建对象时初始化对象，每个构造函数都有prototype属性。<blockquote>
+<p>例如 function Person=function(){},<br>这里Person函数的构造函数就是 Person()</p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//构造方法</span><br><span class="line"> function Person(name,age,gender) &#123;</span><br><span class="line">     this.name=name;</span><br><span class="line">     this.age=age;</span><br><span class="line">     this.gender=gender;</span><br><span class="line">     this.say=function () &#123;</span><br><span class="line">     alert(this.name)</span><br><span class="line">           &#125;</span><br><span class="line">     &#125;</span><br><span class="line">    var person1=new Person(&apos;钟女士&apos;,80,&apos;女&apos;);</span><br><span class="line">    var person2=new Person(&apos;张女士&apos;,80,&apos;女&apos;);</span><br><span class="line">    console.log(person2)</span><br><span class="line">    console.log(person1)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//创建构造函数</span><br><span class="line">        function Word(words)&#123;</span><br><span class="line">            this.words = words;</span><br><span class="line">        &#125;</span><br><span class="line">        //相当于构造对象的原型方法，此方法属于构造方法内</span><br><span class="line">        Word.prototype = &#123;</span><br><span class="line">            alert()&#123;</span><br><span class="line">                alert(this.words);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        //创建实例</span><br><span class="line">        var w = new Word(&quot;hello world&quot;);</span><br><span class="line">        w.print = function()&#123;</span><br><span class="line">            console.log(this.words);</span><br><span class="line">            console.log(this);  //Person对象</span><br><span class="line">        &#125;</span><br><span class="line">        w.print();  //hello world</span><br><span class="line">        w.alert();  //hello world</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>print方法时w实例本身具有的方法，alert不属于w实例的方法，属于构造函数的方法，w.alert()也会打印，是因为实例继承构造函数的方法</p>
+</blockquote>
+<p><strong>实例w的隐式原型(_proto_)指向它的构造函数(函数本身名)的显式原型（prototype）</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">w._proto_=== Word.prototype</span><br><span class="line">Word.prototype.constructor=== Word() </span><br><span class="line">w._proto_.constructor=== Word()</span><br></pre></td></tr></table></figure>
+
+<p><strong>当调用实例的某种方法或属性时，首先会查找自身，若没有，则会去它的_proto_属性中查找,也就是它对应类的原型中查找。</strong></p>
+<h5 id="三、原型及原型链"><a href="#三、原型及原型链" class="headerlink" title="三、原型及原型链"></a>三、原型及原型链</h5><ul>
+<li><p><code>_proto_</code>是实例的一个属性，这个属性本身是一个对象，包含有两个属性，一个是<code>constructor</code>和<code>_proto_</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">        Function.prototype.a = &quot;a&quot;;</span><br><span class="line">Object.prototype.b = &quot;b&quot;;</span><br><span class="line">function Person()&#123;&#125;</span><br><span class="line">console.log(Person);    //function Person()</span><br><span class="line">let p = new Person();</span><br><span class="line">console.log(p);         //Person &#123;&#125; 对象</span><br><span class="line">console.log(p.a);       //undefined</span><br><span class="line">console.log(p.b);       //b</span><br><span class="line">console.log(p.__proto__.constructor);   //function Person()&#123;&#125;</span><br><span class="line">console.log(p.__proto__.__proto__);     //对象&#123;&#125;，拥有很多属性值</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>p.<em>proto</em>=Person.prototype</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">           //Function</span><br><span class="line">function Function()&#123;&#125;</span><br><span class="line">console.log(Function);  //Function()</span><br><span class="line">console.log(Function.prototype.constructor);    //Function()</span><br><span class="line">console.log(Function.prototype.__proto__);      //Object.prototype</span><br><span class="line">console.log(Function.prototype.__proto__.__proto__);    //NULL</span><br><span class="line">console.log(Function.prototype.__proto__.constructor);  //Object()</span><br><span class="line">console.log(Function.prototype.__proto__ === Object.prototype); //true</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>#####总结</p>
+<ol>
+<li>查找属性，如果没有，则去它的_proto_中查找，也就是构造函数的原型中查找，如果构造函数中也没有，因为构造函数也是对象，也会通过构造函数的_proto属性查找，一直道null，没有的话返回undefined</li>
+<li>p._proto_=Person.prototype</li>
+<li>p._proto_.constructor === function Person(){}</li>
+<li>p._proto_._proto_=Object.prototype</li>
+<li>p._proto_._proto_._proto_===Object.prototype._proto_ === null</li>
+<li>原型链是通过_proto_形成的而非prototype</li>
+</ol>
+<p><img src="/JS%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%90%86%E8%A7%A3.jpg" alt="avatar"><br>参考博客：<br> <a href="https://blog.csdn.net/yucihent/article/details/79424506" target="_blank" rel="noopener">深入javascript之原型和原型链</a><br><a href="https://blog.csdn.net/qq_42019025/article/details/80708446" target="_blank" rel="noopener">JS原型和原型链是什么？</a>  </p>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS之事件执行机制</title>
+    <url>/2020/06/03/JS%E5%BC%95%E6%93%8E%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6/</url>
+    <content><![CDATA[<h3 id="JS引擎事件执行机制"><a href="#JS引擎事件执行机制" class="headerlink" title="JS引擎事件执行机制"></a>JS引擎事件执行机制</h3><h4 id="JS执行机制"><a href="#JS执行机制" class="headerlink" title="JS执行机制"></a>JS执行机制</h4><ol>
+<li><p>浏览器（或是JS引擎）执行JS的机制是基于事件循环</p>
+</li>
+<li><p>JS是单线程机制，在同一时间只能执行一个任务，其他任务只能排队，后续任务必须等到前一个任务结束后才能开始执行</p>
+</li>
+<li><p>为了避免因为某些长时间任务造成的无意义等待，JS引入了<strong>异步</strong>的概念，用另一个线程来管理异步任务。</p>
+</li>
+<li><p>同步任务直接在主线程队列中顺序执行，异步任务会进入另一个任务队列，不会阻塞主线程。等到主线程队列空了后，就回去异步队列查询是否有可执行的异步任务（通常异步任务需要等一些条件才能执行，如Ajax请求、文件读写），如果某个异步任务可以执行，则加入主线程队列，以此循环</p>
+<h4 id="JS中基于事件循环机制（event-loop）"><a href="#JS中基于事件循环机制（event-loop）" class="headerlink" title="JS中基于事件循环机制（event loop）"></a>JS中基于事件循环机制（event loop）</h4><p>异步的概念引入是由于事件循环造成的</p>
+</li>
+<li><p><strong>event loop(1)</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">console.log(1)</span><br><span class="line"> setTimeout(function()&#123;</span><br><span class="line">     console.log(2)</span><br><span class="line"> &#125;,0)</span><br><span class="line"> console.log(3)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果是 1 3 2</p>
+<p>setTimeout里的函数并没有立即执行，而实延迟了一段时间，满足一定条件后，才开始执行，这种代码较异步代码。</p>
+<p>定时器是JS中很经典的异步模型</p>
+<p>按这种：JS的执行机制是</p>
+</li>
+</ol>
+<ul>
+<li>首先判断是同步还是异步，同步进入主进程，异步就进入 event tavle</li>
+<li>异步任务先不执行，在event table中注册函数，满足条件后，被推入event queue</li>
+<li>同步任务进入主线程后一直执行，直到主线程空闲时，才去event queue中查看是否有可执行的异步任务，若有则推入到主线程队列中执行</li>
+</ul>
+<ol start="2">
+<li><p><strong>event loop(2)</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> setTimeout(function()&#123;</span><br><span class="line">  console.log(&apos;定时器开始啦&apos;)</span><br><span class="line"> &#125;);</span><br><span class="line"> new Promise(function(resolve)&#123;</span><br><span class="line">  console.log(&apos;马上执行for循环啦&apos;);</span><br><span class="line">  for(var i = 0; i &lt; 10000; i++)&#123;</span><br><span class="line">      i == 99 &amp;&amp; resolve();</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;).then(function()&#123;</span><br><span class="line">  console.log(&apos;执行then函数啦&apos;)</span><br><span class="line"> &#125;);</span><br><span class="line">console.log(&apos;代码执行结束&apos;);</span><br></pre></td></tr></table></figure>
+
+<p>按照event loop(1)的分析结果会是 马上执行for循环 代码执行结束 定时器开始啦 执行then函数啦，但是事实并非如此，真实的执行结果是：马上执行for循环 代码执行结束 执行then函数啦 定时器开始啦 </p>
+<p>这里可以提出更准确的划分机制:</p>
+</li>
+</ol>
+<ul>
+<li>宏任务: 包括整体代码<strong>script,setTimout,setInterval</strong></li>
+<li>微任务：宏任务底下的任务<strong>Promise，process.nextTick</strong><br>在一个事件循环中，执行第一个宏任务，宏任务执行结束，执行当前事件循环中的微任务，执行完毕之后进入下一个事件循环中，或者说执行下一个宏任务；</li>
+</ul>
+<p>   <strong>执行宏任务 ===&gt; 执行微任务 ===&gt; 执行另一个宏任务 ===&gt; 不断循环</strong><br>   <img src="/JS%E5%AE%8F%E4%BB%BB%E5%8A%A1%E4%B8%8E%E5%BE%AE%E4%BB%BB%E5%8A%A1.png" alt="avatar"></p>
+<p>   重新分析：</p>
+<ul>
+<li>首先执行script底下的宏任务，遇到setTimout,首先是异步任务，将其放入宏任务队列中</li>
+<li>遇到Promise函数，由于是同步任务直接运行，然后遇到then，这是异步任务,同时也是微任务，放入微任务队列中</li>
+<li>然后执行同步任务，打印“代码执行结束”</li>
+<li>本轮宏任务结束,查看本轮的微任务,发现有个then函数，执行then函数</li>
+<li>下一轮循环中，先找是否有宏任务，发现在宏任务队列中有个setTimout函数，开始执行</li>
+</ul>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  console.log(&apos;1&apos;);</span><br><span class="line"> </span><br><span class="line">setTimeout(function() &#123;</span><br><span class="line">    console.log(&apos;2&apos;);</span><br><span class="line">    process.nextTick(function() &#123;</span><br><span class="line">        console.log(&apos;3&apos;);</span><br><span class="line">    &#125;)</span><br><span class="line">    new Promise(function(resolve) &#123;</span><br><span class="line">        console.log(&apos;4&apos;);</span><br><span class="line">        resolve();</span><br><span class="line">    &#125;).then(function() &#123;</span><br><span class="line">        console.log(&apos;5&apos;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line">process.nextTick(function() &#123;</span><br><span class="line">    console.log(&apos;6&apos;);</span><br><span class="line">&#125;)</span><br><span class="line">new Promise(function(resolve) &#123;</span><br><span class="line">    console.log(&apos;7&apos;);</span><br><span class="line">    resolve();</span><br><span class="line">&#125;).then(function() &#123;</span><br><span class="line">    console.log(&apos;8&apos;)</span><br><span class="line">&#125;)</span><br><span class="line"> </span><br><span class="line">setTimeout(function() &#123;</span><br><span class="line">    console.log(&apos;9&apos;);</span><br><span class="line">    process.nextTick(function() &#123;</span><br><span class="line">        console.log(&apos;10&apos;);</span><br><span class="line">    &#125;)</span><br><span class="line">    new Promise(function(resolve) &#123;</span><br><span class="line">        console.log(&apos;11&apos;);</span><br><span class="line">        resolve();</span><br><span class="line">    &#125;).then(function() &#123;</span><br><span class="line">        console.log(&apos;12&apos;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>解释：<br>   1、 第一轮事件循环流程分析如下：<br>    整体script作为第一个宏任务进入主线程，遇到console.log，输出1。<br>    遇到setTimeout，其回调函数被分发到宏任务Event Queue中。我们暂且记为setTimeout1。<br>    遇到process.nextTick()，其回调函数被分发到微任务Event Queue中。我们记为process1。<br>    遇到Promise，new Promise直接执行，输出7。then被分发到微任务Event Queue中。我们记为then1。<br>    又遇到了setTimeout，其回调函数被分发到宏任务Event Queue中，我们记为setTimeout2。</p>
+<pre><code>宏任务Event Queue   微任务Event Queue
+setTimeout1         process1
+setTimeout2         then1
+
+上表是第一轮事件循环宏任务结束时各Event Queue的情况，此时已经输出了1和7。
+我们发现了process1和then1两个微任务。
+执行process1,输出6。
+执行then1，输出8。
+
+好了，第一轮事件循环正式结束，这一轮的结果是输出1，7，6，8。</code></pre><p>2、 那么第二轮时间循环从setTimeout1宏任务开始：</p>
+<pre><code>首先输出2。接下来遇到了process.nextTick()，同样将其分发到微任务Event Queue中，</code></pre><p>记为process2。new Promise立即执行输出4，then也分发到微任务Event Queue中，记为then2。</p>
+<pre><code>宏任务Event Queue     微任务Event Queue
+setTimeout2           process2
+                      then2
+
+第二轮事件循环宏任务结束，我们发现有process2和then2两个微任务可以执行。
+    输出3。
+    输出5。
+    第二轮事件循环结束，第二轮输出2，4，3，5。</code></pre><p>3、 第三轮事件循环开始，此时只剩setTimeout2了，执行。<br>        直接输出9。<br>        将process.nextTick()分发到微任务Event Queue中。记为process3。<br>        直接执行new Promise，输出11。<br>        将then分发到微任务Event Queue中，记为then3。</p>
+<pre><code>宏任务Event Queue     微任务Event Queue
+                        process3
+                        then3     
+第三轮事件循环宏任务执行结束，执行两个微任务process3和then3。
+    输出10。
+    输出12。
+    第三轮事件循环结束，第三轮输出9，11，10，12。
+
+整段代码，共进行了三次事件循环，完整的输出为1，7，6，8，2，4，3，5，9，11，10，12。</code></pre>]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>搭建hexo博客</title>
+    <url>/2019/07/19/%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h3 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h3><h4 id="步骤1-搭建各种电脑环境"><a href="#步骤1-搭建各种电脑环境" class="headerlink" title="*步骤1 搭建各种电脑环境"></a>*步骤1 搭建各种电脑环境</h4><blockquote>
+<p>第一步<br>   <strong>* 1 下载nodejs 可能会添加环境变量<br>第二步<br>   *</strong> 2 下载git 并搭建git环境（并将git的bin加入环境变量path中）</p>
+</blockquote>
+<blockquote>
+<p>第三步<br>   *** 3 创建github账户 并创建一个仓库 并命名为自己的 用户名+github.io（必须要这个名字）</p>
+</blockquote>
+<blockquote>
+<p>第四步<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd ~/.ssh #检查本机已存在的ssh密钥</span><br><span class="line"> 如果提示No such file or directory 说明是第一次用git</span><br><span class="line">  ssh-keygen -t rsa -C &quot;邮件地址&quot;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>   连续三次回车 会生成 </p>
+<blockquote>
+<p>C:\Users\ASUS.ssh\id_rsa.pub<br>   打开这个文件 复制全部内容<br>第五步<br>打开github主页 在右上方找到setting，在其中找到SSH and GPG keys -&gt; New SSH key，将内容复制进去<br>第六步（测试是否成功）<br> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com <span class="comment"># 注意邮箱地址不用改</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p> 若提示—&gt; Hi xiaoruran! You’ve successfully authenticated, but GitHub does not provide shell access. 说明SSH配置成功</p>
+<blockquote>
+<p>第七步（配置git的个人信息）<br>  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">"xiaoruran"</span>// 你的github用户名，非昵称</span><br><span class="line">git config --global user.email  <span class="string">"xxx@qq.com"</span>// 填写你的github注册邮箱</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>第八步 hexo的相关操作<br>   ***下载hexo </p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo</span><br></pre></td></tr></table></figure>
+
+<p> *** 初始化<br>   在电脑中创建一个目录 作为你的站点目录<br>   <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo init</span><br><span class="line">hexo g <span class="comment">#生成</span></span><br><span class="line">hexo s <span class="comment">#启动服务（一般默认是4000端口）</span></span><br><span class="line">hexo s -p 5000 <span class="comment">#将默认端口改为5000</span></span><br></pre></td></tr></table></figure></p>
+<p> ***上传到github<br>  配置主目录底下的_config.yml中的deploy部分<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repository: git@github.com:xiaoruran/xiaoruran.github.io.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure></p>
+<p>  ***可能要下载一个插件<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>第九步 （写自己的博客）<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new &apos;my-first-blog&apos;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>第十步 （修改配置文件 达到自己的效果 也可以更换主题）</p>
+</blockquote>
+<p>[参考链接]<br>（<a href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html" target="_blank" rel="noopener">https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html</a> ）<br>（<a href="https://blog.csdn.net/gsl9d1p04f6x2ts3c9/article/details/81024330" target="_blank" rel="noopener">https://blog.csdn.net/gsl9d1p04f6x2ts3c9/article/details/81024330</a> ）<br>（<a href="https://www.cnblogs.com/trista222/p/8017300.html）" target="_blank" rel="noopener">https://www.cnblogs.com/trista222/p/8017300.html）</a></p>
+]]></content>
+      <tags>
+        <tag>think</tag>
+        <tag>idea</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vue之事件等等</title>
     <url>/2020/06/03/vuenote1/</url>
-    <content><![CDATA[<p>[TOC]<br>由于hexo采用的编辑器不同，里面的两个大括号我都用一个代替</p>
+    <content><![CDATA[<p>由于hexo采用的编辑器不同，里面的两个大括号我都用一个代替</p>
 <h3 id="之前学的总结"><a href="#之前学的总结" class="headerlink" title="之前学的总结"></a>之前学的总结</h3><ul>
 <li><p>如何定义一个Vue代码结构</p>
 </li>
@@ -162,186 +487,200 @@
       </tags>
   </entry>
   <entry>
-    <title>博客Markdown的写法</title>
-    <url>/2020/01/17/my-second-blog/</url>
-    <content><![CDATA[<h4 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h4><pre><code># 一级标题
-## 二级标题
-### 三级标题
-#### 四级标题
-##### 五级标题
-注意：#后面要加空格 一级标题下面有一条横线 正常是需要闭合的这些标签</code></pre><h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><ul>
-<li><p>无序列表</p>
-<blockquote>
-<p>* 1<br>* 2<br>* 3<br>* 4</p>
-<blockquote>
-<p>注意 在*后面也要一个空格 用在线编辑器看实际上是转换承了 ul&gt;li</p>
-</blockquote>
-</blockquote>
-</li>
-<li><p>有序列表</p>
-<blockquote>
-<ol>
-<li>列表一</li>
-<li>列表二</li>
-<li>列表三<blockquote>
-<p>注意：数字后面必须是英文的点，有序列表的序号是根据第一行列表的数字顺序来的</p>
-</blockquote>
-</li>
+    <title>JS之正则表达式</title>
+    <url>/2020/05/13/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+    <content><![CDATA[<h2 id="正则表达式学习"><a href="#正则表达式学习" class="headerlink" title="正则表达式学习"></a>正则表达式学习</h2><p>  正则表达式是一个帮助处理和<strong>匹配复杂字符串</strong>的工具,regular expression(RegEx)</p>
+<h4 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h4><ol>
+<li>灵活，逻辑性和功能性非常强</li>
+<li>可以迅速用极简单的方式做到字符串的复杂控制</li>
+<li>对初学者不友好，比较晦涩难懂</li>
 </ol>
+<h4 id="常见用法："><a href="#常见用法：" class="headerlink" title="常见用法："></a>常见用法：</h4><ol>
+<li>邮箱验证</li>
+<li>密码强度验证</li>
+<li>身份证号验证</li>
+<li>用户名验证</li>
+<li>提取数字</li>
+</ol>
+<h4 id="字符集合"><a href="#字符集合" class="headerlink" title="字符集合[]"></a>字符集合[]</h4><p> 集合set是一对方括号[]内的一组字符，用来代表整个字符中的任意一个<br> 例如：</p>
+<blockquote>
+<p><code>[abc]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 指定字符（a，b或c）之一<br><code>[a-z]</code>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表示任何一个小写字母<br><code>[^abc]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^ 表示否的意思，表达了除a，b，c外的任意字符<br><code>[0246]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;代表 0，2，4，6的任意一个<br><code>[0-9]</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 代表 0到9的任意一个数字<br><code>[a-zA-Z]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;任何一个大小写字母<br><code>[+]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在集合中 +、*、|、()、$、{}都没有特殊含义，仅代表普通字符匹配<br><code>[0-9]+</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 这里的加代表连续多个</p>
 </blockquote>
-<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p>比如说，你想对某个部分的内容做一些说明或者引用等，可以使用&gt;<br>‘&gt;’</p>
-<h4 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h4><p>使用四个缩进空格 表示代码块</p>
-<h4 id="加强的代码块"><a href="#加强的代码块" class="headerlink" title="加强的代码块"></a>加强的代码块</h4><p>支持四十一种编程语言的语法高亮显示，行号显示，使用&lt;!–￼0–&gt;</p>
+<h4 id="常见通配符（核心）"><a href="#常见通配符（核心）" class="headerlink" title="常见通配符（核心）"></a>常见通配符（核心）</h4><p>通配符是一种特殊字符，一般指的是反斜杠\后面紧跟的一些特殊标识符，用来<strong>指代某些字符集合</strong></p>
+<ul>
+<li><code>\d</code>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;代表阿拉伯数字（只能匹配一个字符）</li>
+<li><code>\D</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;代表除了阿拉伯数字外的所有字符，可以理解为[^\d]</li>
+<li><code>\s</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;空白字符</li>
+<li><code>\S</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;除空白字符外的所有字符</li>
+<li><code>\w</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;任何单词字符（字母、数字、汉字、下划线_字符）</li>
+<li><code>\W</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回一个匹配项，其中字符串不包含任何单词字符<br><strong>不常用：</strong><ul>
+<li><code>\A</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字符串的开头</li>
+<li><code>\Z</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字符串的末尾</li>
+<li><code>\b</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回指定字符位于单词的开头或者末尾的匹配项</li>
+<li><code>\B</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不在单词的开头和结尾处</li>
+</ul>
 </li>
 </ul>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>技术</tag>
-        <tag>方法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Vue之样式</title>
-    <url>/2020/06/03/vue2node/</url>
-    <content><![CDATA[<p>[TOC]</p>
-<h3 id="Vue中使用样式"><a href="#Vue中使用样式" class="headerlink" title="Vue中使用样式"></a>Vue中使用样式</h3><h4 id="使用class样式"><a href="#使用class样式" class="headerlink" title="使用class样式"></a>使用class样式</h4><ol>
-<li><p>数组 直接传递数组 （了解就行）</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; &lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;]&quot;&gt;这是一个标题&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
-
+<h4 id="元字符（复杂重要）"><a href="#元字符（复杂重要）" class="headerlink" title="元字符（复杂重要）"></a>元字符（复杂重要）</h4><p> 在正则表达式中具有特殊含义的字符，具有<strong>很高的优先级</strong>。例如<code>[]</code>、<code>\</code>、<code>+</code>都是元字符<br> 在<strong>元字符中<code>\</code>的优先级最高</strong>,其次为各种括号</p>
+<ul>
+<li><p><code>\</code> 代表对随后的通配符进行转义，因此需要用<code>\\</code>表示<code>\</code>本身</p>
 <blockquote>
-<p>注意：使用数组时，要用v-bind绑定class并且在class里面的数组，必须用字符串包裹起来，这时不需要在Vue中有data</p>
+<p>若反斜杠后面没有通配符，则反斜杠原样输出，就不再转义</p>
 </blockquote>
 </li>
-<li><p>在数组里面使用三元表达式（在Vue中需要声明数据）</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; .active &#123;letter-spacing: 0.5em&#125;&lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;,flag?&apos;active&apos;:&apos;&apos;]&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  var vm =new Vue(&#123;</span><br><span class="line">     el:&quot;#app&quot;,</span><br><span class="line">     data:&#123;</span><br><span class="line">         flag:true</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
-
+<li><p><code>[]</code> 用于限定字符集合</p>
 <blockquote>
-<p>此时的三元表达式可以借用data中的数据进行，但还是需要将class绑定属性 v-bind</p>
+<p>注意：使用<code>[]</code>时，再[]中间的特殊字符如.+?*:-等等都是看作普通字符，但若要将\[]看作普通字符，需要进行转义，即使用\\表示\，使用\[来表示[</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[\w,]+</span><br><span class="line">//代表检索所有连续的单词字符或者连续的,  在[]中只能匹配一个字符</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>.</code> 英文的小数点，表示除换行符之外的<strong>任何一个字符</strong></p>
+</li>
+<li><p><code>*</code> 代表前面的字符可以出现0次或多次</p>
+</li>
+<li><p><code>+</code> 代表一个或多个<strong>连续</strong>匹配的字符</p>
+</li>
+<li><p><code>?</code> 非贪婪模式，表示匹配前面的字符0次或一次</p>
+</li>
+<li><p><code>+?</code> 将搜索模式从贪婪模式改为非贪婪模式</p>
+<blockquote>
+<p>如果能匹配到，则匹配一个，不会匹配多个</p>
 </blockquote>
 </li>
-<li><p>在数组里面使用对象可以代替三元表达式 例如：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; .active &#123;letter-spacing: 0.5em&#125;&lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;,&#123;&apos;active&apos;:flag&#125;]&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  var vm =new Vue(&#123;</span><br><span class="line">     el:&quot;#app&quot;,</span><br><span class="line">     data:&#123;</span><br><span class="line">         flag:true</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+<li><p><code>{}</code> 表示的是前面表达式的确切的出现次数</p>
+<blockquote>
+<p>\d{2} 表示 匹配两个数字<br>\d{2,4} 表示 匹配2-4个数字，2，3，4个<br>\d{2,} 表示2位到无限位</p>
+</blockquote>
+</li>
+<li><p><code>|</code> 管道符 代表选择其中一个，一般按顺序选择，若前面的已被匹配，就不会匹配后面的</p>
+</li>
+<li><p><code>()</code> 捕获和分组</p>
+<blockquote>
+<p>括号内的字符串将会作为捕获的结果进行输出,<strong>只会输出括号内的匹配字符串</strong></p>
+</blockquote>
+</li>
+<li><p><code>^</code> 代表字符串的开始</p>
+</li>
+<li><p><code>$</code> 代表字符串的结束</p>
+</li>
+<li><p><code>?:</code> 表示非捕获分组，匹配冒号后的内容抄但不获取匹配结果，不进行存储供以后使用。</p>
+</li>
+</ul>
+<h4 id="密码强度验证"><a href="#密码强度验证" class="headerlink" title="密码强度验证"></a>密码强度验证</h4><p> 使用正则表达式来进行密码强度验证，一般密码由数字、字母和特殊字符组成，若由一连串的数字或字母或特殊字符，这种密码的安全性不高，而由其中两种组成密码强度一般,用户密码包含的字符种类越多，密码的安全性越高</p>
+<ol>
+<li><p>只有数字验证（安全性较低）（六位以上的数字密码）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">\d&#123;6,&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>只有字母验证（六位以上的字母密码）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[a-zA-Z]&#123;6,&#125;</span><br><span class="line">```   </span><br><span class="line">3. 只有特殊字符的密码（六位以上的特殊字符密码）</span><br></pre></td></tr></table></figure>
 
-<ol start="4">
-<li>直接使用对象（前提是使用v-bind绑定class属性对象的属性可以带引号也可不带，属性的值是一个标识符） 例如：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; .active &#123;letter-spacing: 0.5em&#125;&lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;&#123;red: true, active: false&#125;&quot;&gt;这是一个标题&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
+<p>[.-+?\[]`/;‘@#$%^&amp;*():&lt;&gt;=~]{6,}</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 注意：在集合中写[]和\时需要进行转义，因为这两个时元字符，优先级较[]来说更高</span><br><span class="line">4. 数字与字母混合使用密码</span><br></pre></td></tr></table></figure>
+
+<p>[\da-zA-Z]<em>\d+[a-zA-Z]+[\da-zA-Z]</em></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">**解释：**</span><br><span class="line">&gt;[\da-zA-Z]* &amp;nbsp;&amp;nbsp;表示匹配空字符串，或长度至少为1的由数字和字母组成的字符串</span><br><span class="line">    \d+[a-zA-Z]+&amp;nbsp;&amp;nbsp;表示1个或多个连续数字和1个或多个连续字母组成的字符串</span><br><span class="line">    连起来就可以匹配一系列数字和字母组成的字符串</span><br><span class="line"></span><br><span class="line">5. 数字和特殊字符串混合使用</span><br></pre></td></tr></table></figure>
+
+<p>[\d.-+?\[]<code>/;&#39;@#$%^&amp;*():&lt;&gt;=~]*\d+[.-+?\\\[\]</code>/;‘@#$%^&amp;<em>():&lt;&gt;=~]+[\d.-+?\[]`/;‘@#$%^&amp;</em>():&lt;&gt;=~]*</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">6. 三种字符混合使用（密码强度比较高）</span><br></pre></td></tr></table></figure>
+
+<p>[\da-zA-Z.-+?\[]<code>/;&#39;@#$%^&amp;*():&lt;&gt;=~]*  #0个或多个数字、字母和特殊字符的混合字符串
+((\d+[a-zA-Z]+[.-+?\\\[\]</code>/;‘@#$%^&amp;<em>():&lt;&gt;=~]+)|  #数字开头<br>(\d+[.-+?\[]`/;‘@#$%^&amp;</em>():&lt;&gt;=<del>]+[a-zA-Z]+)| #数字开头<br>([a-zA-Z]+\d+[.-+?\[]`/;‘@#$%^&amp;*():&lt;&gt;=</del>]+)| #字母开头<br>([a-zA-Z]+[.-+?\[]<code>/;&#39;@#$%^&amp;*():&lt;&gt;=~]+\d+)| #字母开头
+([.-+?\\\[\]</code>/;‘@#$%^&amp;<em>():&lt;&gt;=~]+\d+[a-zA-Z]+)| #特殊字符开头<br>([.-+?\[]`/;‘@#$%^&amp;</em>():&lt;&gt;=<del>]+[a-zA-Z]+\d+)| #特殊字符开头<br>)[\da-zA-Z.-+?\[]`/;‘@#$%^&amp;*():&lt;&gt;=</del>]* </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#### 邮箱验证</span><br><span class="line">一般邮箱在@前面会是数字和字母的混合,在其中间可能会混有`_`、`-`、`.`、`+`,在@后面可能会带有字母和数字然后.加上顶级域名或者会有两个域名</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
-<blockquote>
-<p>注意：直接使用对象时，:class={} 这里是对象的括号，且里面可用字符串包裹，也可不用</p>
-</blockquote>
-</li>
-</ol>
-<h4 id="Vue中绑定内联样式（style）"><a href="#Vue中绑定内联样式（style）" class="headerlink" title="Vue中绑定内联样式（style）"></a>Vue中绑定内联样式（style）</h4><ol>
-<li><p>直接通过v-bind绑定style</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;h1 :style=&quot;&#123;color:&apos;red&apos;,&apos;font-size&apos;:200px&#125;&quot;&gt;这是一个标题&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将样式对像，定义到data中，并直接应用到:style中</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;h1 :style=&quot;Objstyle&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  data:&#123;Objstyle:&#123;color:&apos;red&apos;,&apos;font-size&apos;:200px&#125;</span><br></pre></td></tr></table></figure>
+<p>^[\da-zA-Z.-<em>+]+@[\da-zA-Z</em>.-+]+[.][\da-zA-Z]{2,4}$</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 注意：想表示字符.时一定要加上[.],因为普通的.代表的是任意字符，而[.]代表的是字符.</span><br><span class="line"></span><br><span class="line">#### 身份证号验证</span><br><span class="line">身份证号由六位数字地址码,八位数字出生日期码，三位数字顺序码和一位数字校验码组成</span><br><span class="line">   1. 地址码规则</span><br><span class="line">   以数字1-9开始，剩下的5位数字为0-9</span><br></pre></td></tr></table></figure>
+
+<pre><code>[1-9]\d{5}</code></pre>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2. 年份码规则</span><br><span class="line">年份码为4位，按现实情况来说现在只有18、19、20开头的</span><br></pre></td></tr></table></figure>
+
+<p>  (18|19|20)\d{2}<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">3. 月份码规则</span><br><span class="line">由两位数字组成，第一位若为0，则第二位是1-9；第一位若为1，则第二位为0、1或2</span><br><span class="line">(0[1-9])|(1[0-2])</span><br><span class="line">4. 日期码规则</span><br><span class="line">若第一位取1-2，第二位可以取0-9；若第一位取0，则第二位取1-9，若第一位取3，则第二位可以取0-1</span><br></pre></td></tr></table></figure></p>
+<p>  ([1-2][0-9])|(0[1-9])|(3[0-1])<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">5. 顺序码规则</span><br><span class="line">顺序码为三位</span><br></pre></td></tr></table></figure></p>
+<p>  \d{3}<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">6. 校验码规则</span><br><span class="line">校验码长一位，可以是数字可以是X或者x</span><br></pre></td></tr></table></figure></p>
+<p>  [\dXx]<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">7. 总结</span><br></pre></td></tr></table></figure></p>
+<p>  ^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([1-2][0-9])|(0[1-9])|(3[0-1]))\d{3}[\dXx]$</p>
+<pre><code>
 
 
-</li>
-</ol>
-]]></content>
+
+
+</code></pre>]]></content>
       <categories>
         <category>前端</category>
       </categories>
       <tags>
         <tag>前端</tag>
-        <tag>vue</tag>
+        <tag>JS</tag>
       </tags>
   </entry>
   <entry>
-    <title>Vue简介</title>
-    <url>/2019/07/19/vue%E7%AE%80%E4%BB%8B%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>[TOC]</p>
-<h3 id="什么是Vue-js"><a href="#什么是Vue-js" class="headerlink" title="什么是Vue.js"></a>什么是Vue.js</h3><ul>
-<li>Vue.js是目前最火的前端框架，react是最流行的前端框架</li>
-<li>Vue.js是一套构建用户界面的框架，<strong>只关注视图层</strong>，它不仅易于上手，还便于和第三当库或既有项目整合。（Vue有配套的第三方类库，可以整合起来做大型项目的开发）</li>
-<li>在vue中核心的概念是让用户不再操作DOM元素，解放了用户的双手，让程序员关注业务逻辑</li>
-</ul>
-<h3 id="框架和库的区别"><a href="#框架和库的区别" class="headerlink" title="框架和库的区别"></a>框架和库的区别</h3><ul>
-<li>框架是一套完整的解决方案；对项目的侵入性较大；项目若要更换框架，则需要重新构建整个项目。<ul>
-<li>node中的express1</li>
-</ul>
-</li>
-<li>库也可以成为插件（提供的是一个小功能），对项目的侵入性校，如果某个库无法完成某些需求，可以很容易切换到其他库实现需求。<h3 id="Node（后端）中的mvc与前端中的mccm之间的区别"><a href="#Node（后端）中的mvc与前端中的mccm之间的区别" class="headerlink" title="Node（后端）中的mvc与前端中的mccm之间的区别"></a>Node（后端）中的mvc与前端中的mccm之间的区别</h3></li>
-</ul>
-<ul>
-<li><p>mvc是后端的分层开发概念</p>
-</li>
-<li><p>MVVM是前端视图层的概念，主要关注视图层的分离，mvvm把前端的视图层分为了三部分：<code>Model</code>、<code>View</code>、<code>VM ViewModel</code></p>
-</li>
-<li><p>为什么有了MVC还要有MVVM</p>
-</li>
-<li><p><strong>MVC结构</strong>：第一：app.js(项目的入口地址，一切的请求，都要先进入这里进行处理。注意：app.js没有路由分发的功能，需要调用router.js模块进行路由分发)；第二：router.js(功能单一，只负责分发路由，不负责具体逻辑业务的处理)；第三：Controller(业务处理层，功能单一，只负责处理业务，不负责处理数据的CRUD)；第四：Model（职能单一，只负责操作数据库，执行sql语句，运行数据的CRUD）</p>
-<ul>
-<li>通过View视图层给app.js(每当用户操作了界面，若需要进行业务的请求，就会通过网络请求，发送给后端的服务器，此时，我们这个请求，就会被后端的App.js监听到)</li>
-</ul>
-</li>
-<li><p><strong>MVVM结构</strong>：是在前端的View视图层进行划分的。将每个页面都分为M、V和VM。其中，VM是整个MVVM的核心，应为VM是V和M见的调度者。</p>
-<ol>
-<li>M中保存的是每个页面中单独的数据</li>
-<li>V中页面中静态的HTML结构</li>
-<li>VM是一个调度者，分割了V和M；V中想要存取数据，通过VM来得到；M中想存取<br>数据，只能通过VM</li>
-<li>前端页面中使用MVVM的思想，是为了让我们开发更加方便，<strong>MVVM提供的数据的双向绑定</strong>，这是由VM提供的<blockquote>
-<p>涵哥说过：你真棒</p>
+    <title>春节越南行</title>
+    <url>/2017/01/28/%E6%98%A5%E8%8A%82%E8%B6%8A%E5%8D%97%E8%A1%8C/</url>
+    <content><![CDATA[<h2 id="我的所爱，在海云之间。"><a href="#我的所爱，在海云之间。" class="headerlink" title="我的所爱，在海云之间。"></a>我的所爱，在海云之间。</h2><blockquote>
+<p>最喜欢骑着摩托在海云岭上拉到最大马力的感觉~</p>
 </blockquote>
-</li>
-</ol>
-</li>
-</ul>
+<p>刚开始想去越南只是听朋友说物价便宜，人美景也美，尤其是有海滩，决定下来之后就开始查很多网友的攻略，后来发现看攻略根本记不住啥，说来说去都是这么几个注意点。上班的时候就没啥心思了，很期待这场旅行，本来假期就不多，春节正好可以躲避寒冬，于是约了个好友一起去，人均花费在4000左右吧，要是平时去估计能便宜一半。我选择了在年三十就出发，即使是这样，我们真正玩的时间也只有三天，有大半时间都浪费在了路上，不过这一路上的经历回想起来也挺有意思的。在此还是强烈推荐平时淡季去，春节机票贵，火车票又一票难求，如果是淡季去的话直飞是最爽快的了。</p>
+<a id="more"></a>
+
+
+<p>我先是提前一个月抢到了从杭州到南宁的火车票，后来因为退票了只能去桂林中转，南宁到河内嘉林火车站的票也是提前2个星期在淘宝买的，签证淘宝只要240，3天就能出签还包邮。因为是春节，所有票都只能在网上买，机票啥的要比平时贵一半都不止。所以这次唯一的遗憾是没有提前抢好廉价机票。我推荐大家最好是提前抢好国内直飞岘港的廉价往返机票，这样可以省去好多时间。</p>
+<p>至于旅行的路线，我觉得一个岘港就已经够了，去很多城市首先是累，再者浪费时间，因为越南的交通条件本身就不发达，一般距离较远的两个城市之间都是飞机或火车或sleeping bus，后面两个交通工具太慢了，春节期间的机票还死贵，所以我觉得玩一个岘港就足够了。我们在路上遇到的驴友也和我一样的观点，岘港有山有水有海滩，其他城市有的它都有，其他城市没有的它也有，所以好好的玩一个岘港，比在河内西贡芽庄美奈大叻岘港之间奔波要好得多。</p>
+<p>要带的衣物不多，就一套短袖和一套长袖，还有穿去的一套厚的登山服，一路慢慢脱。签证、护照、充电器、充电宝这是必不可少的，除此之外带着足够的钱就可以了，转接插头也不用带，那边的两项插孔是完全兼容国内的插头的。</p>
+<hr>
+<h2 id="南宁——秀美的省会城市"><a href="#南宁——秀美的省会城市" class="headerlink" title="南宁——秀美的省会城市"></a>南宁——秀美的省会城市</h2><p>先是杭州东站坐火车到桂林，到桂林是第二天凌晨5点，还来不及看看漓江就坐上动车去南宁了，到南宁是第二天的中午，吃了碗米粉，比杭州的正宗，但比较脏，没有杭州的干净。接着去华夏银行换美元，发现银行的营业厅关门，然后我又跑了好几家，最后绝望的发现南宁市里所有银行正月初一都是休息的，只好在ATM自助机上取了1500人民币（不过后来根本没用到这些钱）。南宁给我的印象就是静静的，我最喜爱的是邕江。因为南宁到河内是晚上6点的火车，所以我下午打了辆的士决定去江滨公园逛逛，当开过邕江大桥的时候，第一眼就被它碧绿澄澈的水吸引了，这么干净的水在我们江浙一带是很少见的，它在阳光的照耀下波光粼粼，江边还有不少钓鱼的老头，游泳的小孩，散步的情侣。这一切构成了一副很安静闲适的画面，我当即拍下了这张照片。</p>
+<p><img src="https://c4-q.mafengwo.net/s10/M00/4B/F1/wKgBZ1iW2qyAJbXHAAxupxS_7Ec88.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt="南宁·邕江"></p>
+<hr>
+<h2 id="嘉林——体验了国际列车"><a href="#嘉林——体验了国际列车" class="headerlink" title="嘉林——体验了国际列车"></a>嘉林——体验了国际列车</h2><p>在邕江逛到下午4点，就打车回火车站，坐上了去河内嘉林的火车。这趟国际列车和国内的绿皮火车一样，不过都是软卧，有隔开的包厢，还可以关门，睡着挺舒服，不过半夜要起来两次去过境边检，所以只能过了同登边检才能安心睡觉。</p>
+<p><img src="https://a1-q.mafengwo.net/s10/M00/4E/19/wKgBZ1iW3R2ARuBWAADEfDnL5PI03.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt="越南的同登边检站"></p>
+<p>到同登边检站是十分激动的，毕竟千里迢迢的终于到越南了，为了到嘉林不至于没钱打车，我在这个入境边检的地方换了100元，汇率是3150，比河内市里ATM机取的汇率要低。火车凌晨5点多到嘉林，嘉林火车站很小很破，出来之后有卖手机卡和换钱的小店，我们好多人在这里买手机卡又被坑了，包括我，花了150k买的Viettel卡以为是无限流量，结果只有200m流量，用完之后又要花钱充值的。所以大家千万别急着买手机卡和换钱，如果不是很急的话还是建议到河内市里去买，另外手机卡先问清楚流量再买，我后来又花100k买了张3GB流量的卡，2号回来的时候还有2个G多出来。换越盾可以网上先查一下不收手续费的本地银行，华夏银行每月有一笔境外取现是免费的，就算有手续费也不会很多，不论何时何地，ATM机里取钱汇率都是最划算的。河内街上到处都是带着银联标志的ATM机，只要带着银行卡，不用担心没地方取越盾。</p>
+<hr>
+<h2 id="河内——值得品味的老街"><a href="#河内——值得品味的老街" class="headerlink" title="河内——值得品味的老街"></a>河内——值得品味的老街</h2><p>到河内是1月29号凌晨5点多，之后我们打车去了圣约瑟夫大教堂，从大教堂一路在巷子中绕来绕去，先在路边摊吃了碗米粉，那个米粉的味道真的超级好，第一口汤汁我就爱上它了，之后在岘港我也吃了好几碗米粉，但味道都没有河内的好。越南的店铺都有小的青柠檬和朝天椒作为调味料，在米粉中挤点柠檬汁，再放点辣椒酱，味道比国内任何面啊粉啊都要好吃。吃完后我们走到还剑湖边，我在ATM机取了921人民币，300万越盾，那一刻确实有一种变身百万富翁的错觉哈哈。算了一下汇率有3257，比任何地方换都要高了。</p>
+<p><img src="https://c2-q.mafengwo.net/s10/M00/58/89/wKgBZ1iW6N2Ac-wmACjdycIr2tw34.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt="圣约瑟夫大教堂"><br><img src="https://a3-q.mafengwo.net/s10/M00/58/BD/wKgBZ1iW6SKAD2w6AAtG6K1I6U081.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt="取了300万越盾"><br><img src="https://b2-q.mafengwo.net/s10/M00/58/8A/wKgBZ1iW6N2Aa2_bAAHETHlPzHE68.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt><br><img src="https://n1-q.mafengwo.net/s10/M00/58/8B/wKgBZ1iW6N-ATOdJAAF43uhSluU64.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></p>
+<p>换好钱我们在还剑湖周边的大街小巷乱逛了一通，体验了一下越南的风土人情。越南的建筑都很有特色，毕竟曾是法国的殖民地，所以大到大教堂，小到小酒馆，都很有法式风情。越南的贫富差距严重，大多数人都骑摩托车，街上还停着不少限量豪车。其他我感触最深的一点就是，街上太乱了！！连河内这个首都也很少有红绿灯，放眼望去，基本都是摩托车，在大街上走你千万不能玩手机或者左顾右盼，要快速地小跑而过。街边乱停乱放的现象也十分普遍，除非有撞伤人了，不然根本没有交警会来管。有些撞人事故也是自己处理的，我在路上就正好遇到一个被撞的妇女，本来以为会有交警来处理，结果那女的和司机都拍拍屁股就走了，好像什么事情都没发生过一样。</p>
+<p><img src="https://p1-q.mafengwo.net/s10/M00/59/20/wKgBZ1iW6X2AZVGpAAHzR3F-svk23.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt><br><img src="https://p1-q.mafengwo.net/s10/M00/59/21/wKgBZ1iW6X6AWXRXAAKeZ8G7Oqs80.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt><br><img src="https://a4-q.mafengwo.net/s10/M00/59/23/wKgBZ1iW6X6AE5VgAAJVPwZB_YY44.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt><br><img src="https://c1-q.mafengwo.net/s10/M00/59/24/wKgBZ1iW6X-AOGbCAAJ0TdZSsPY36.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></p>
+<p>因为正好是春节，所以还剑湖周边都很有节日气氛，不同国籍的人坐在咖啡馆晒着太阳听着歌闲聊，街上吆喝的小贩，湖边摩肩接踵的人流，这些都比国内要热闹不少。</p>
+<p><img src="https://c4-q.mafengwo.net/s10/M00/5A/FD/wKgBZ1iW65qAJl0sAA0B0cSXsfo35.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt><br><img src="https://b3-q.mafengwo.net/s10/M00/5B/00/wKgBZ1iW65-ABvbcACR3CtgCRTg92.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt><br><img src="https://a4-q.mafengwo.net/s10/M00/5B/AF/wKgBZ1iW7EuAL6LzACZ4gt7X6As85.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></p>
+<p>我们在还剑湖边上的一个旅行社买了晚上去岘港的sleeping bus汽车票，后来才知道260元人民币的价格买贵了，网上查的新咖啡也只要100多就行了。所以最好是去open bus的官网预定好。越南的open bus有好几家，我们坐的是camel bus，设施还算干净，只是旁边过道上也有人睡，味道难闻。</p>
+<p><img src="https://a3-q.mafengwo.net/s10/M00/C9/A5/wKgBZ1iX2giALQ4fAAoAt49H0jg81.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></p>
+<p>晚上6点我们就坐上这个bus，第二天凌晨5点到了顺化，我们决定提前下车了，一是因为实在呆不下去，二是因为想看看顺化到岘港那段火车沿途的美景。这个sleeping bus根本无法sleep，不同国籍的人脱了鞋子挤在一个车厢里，味道真是酸爽，巴士开得还摇摇晃晃的，晚上我是一刻都没睡着。</p>
+<p>凌晨我们在下车的旅行社遇到了几个也打算坐火车去岘港的中国小伙伴，跟着他们走到火车站买了票，因为网上都说顺化没啥好看的，所以我们没在顺化停留。</p>
+<hr>
+<h2 id="岘港——惊艳于海云之间"><a href="#岘港——惊艳于海云之间" class="headerlink" title="岘港——惊艳于海云之间"></a>岘港——惊艳于海云之间</h2><p>火车去岘港的途中一路美景，灵姑湾到海云岭的这一段山路被National Geographic票选为人生必去的50景之一。我们去的那天正好阳光明媚，一路的海边公路上骑摩托的人，海水在阳光照耀下波光粼粼，简直是美cry！</p>
+<p><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/184997183.html" target="_blank" rel="noopener"><img src="https://b2-q.mafengwo.net/s10/M00/CC/41/wKgBZ1iX3daASfWOAAimiGs_hvw90.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/184997184.html" target="_blank" rel="noopener"><img src="https://c1-q.mafengwo.net/s10/M00/CC/42/wKgBZ1iX3diAZl3gAAePlb4Dds416.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/184997185.html" target="_blank" rel="noopener"><img src="https://c2-q.mafengwo.net/s10/M00/CC/43/wKgBZ1iX3dmALjoWAAZk2ErMMvw09.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/184997186.html" target="_blank" rel="noopener"><img src="https://n4-q.mafengwo.net/s10/M00/CC/44/wKgBZ1iX3dqAOTFeAAeF-OppZ0c49.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/184997187.html" target="_blank" rel="noopener"><img src="https://b3-q.mafengwo.net/s10/M00/CC/44/wKgBZ1iX3duATxlVAAWF8R9O2gE54.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a></p>
+<p>这段路真的是这段旅行中最最让我觉得惊艳的，当时完全不顾手机容量够不够，只管一直按拍照键，回到宾馆一看，每一张都是美景。</p>
+<p>到了岘港后，我们就找了个sea view的宾馆先放行李，450k，其实只看得到一点点海，因为没有visa的卡，所以无法在booking上预定，只能一家家走过去问价格，真正的海景房一般都要800k+，很多还没房间了。</p>
+<p><img src="https://c3-q.mafengwo.net/s10/M00/D2/8E/wKgBZ1iX5pCARx3xAAigLdtkjvY23.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></p>
+<p>因为在sleeping bus上根本没睡着过，我到了宾馆洗了个澡倒头就睡，小伙伴自己去玩了，醒来是傍晚6点了，下楼花150k租了一辆motorbike，很多好看的摩托已经被租掉了，只能选了辆外观一般的。摩托店的老板不错，还手把手教我怎么打火熄火，发着后要一点点给油才不至于熄火，还告诉我哪些按钮对应哪些灯。自动挡的摩托车还是挺简单的，唯一的难点是打火，打着后就和电瓶车差不多，而且越南的摩托开起来很爽，不断给油可以跑得比汽车还快，加速也很快，超车啥的最爽，减油后停得也很快，所以开习惯之后还是挺安全的。</p>
+<p>我适应了一会儿马上就掌握了要领，问了路边的一个小哥加油站的位置，花了60k加满油，这还是挺划算的，折合人民币20元，能开一天。我晚上从美溪沙滩开到乐天超市一个来回，第二天又去海云关一个来回，回来油箱还有的剩下。</p>
+<p>加完油我按着地图的指示去了乐天超市买了一双人字拖，买了点酸奶喝，还买了几盒咖啡打算带回去。在这里提一下越南的物价吧，越南的物价比国内普遍要便宜30%左右，酸奶很正宗，而且比国内便宜一半都不止，咖啡也很正宗，很多咖啡都停止出口到中国了，但在这里的超市都买得到。</p>
+<p><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185017920.html" target="_blank" rel="noopener"><img src="https://a1-q.mafengwo.net/s10/M00/DA/79/wKgBZ1iX70uAUwAfAAlgigScCmE00.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a></p>
+<p>超市的停车场都是摩托，却鲜有汽车，进去门卫会给你个号码，出来后再把号码还给他，在越南停车都是免费的。<br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185017921.html" target="_blank" rel="noopener"><img src="https://b2-q.mafengwo.net/s10/M00/DA/7B/wKgBZ1iX70yAU-RcAAmdDtqnyOg65.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185017922.html" target="_blank" rel="noopener"><img src="https://p4-q.mafengwo.net/s10/M00/DA/7C/wKgBZ1iX702APYdkAAO0Tw0EWGw57.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a></p>
+<p>在超市买完东西，我又骑着摩托沿着美溪海岸开了一圈，美溪沙滩人很少，海水还算干净，浪有点大，适合冲浪，不过我没敢下水，海风吹着脸庞，听浪潮拍打的声音，感觉超级relax。</p>
+<p><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185019577.html" target="_blank" rel="noopener"><img src="https://a1-q.mafengwo.net/s10/M00/DB/98/wKgBZ1iX8MSAOJSbAAqU4qXFPIs14.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185019578.html" target="_blank" rel="noopener"><img src="https://n2-q.mafengwo.net/s10/M00/DB/9C/wKgBZ1iX8MmAPl_yACFh-RELFmw33.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a></p>
+<p>回宾馆又是倒头就睡，之前听朋友说去海云关骑摩托很爽，所以第二天开着摩托沿着岘港的海岸公路，去海云关和灵姑湾溜达了一圈，大晴天的在海岸线上开摩托车真是超级爽，可惜后来到海云关就下毛毛雨了，山上很冷，想去的朋友一定要提前带件外套，我在回来之后头都被冻得很晕，要不是及时洗个热水澡吃了点辣椒驱寒，肯定会发烧。海云关是我在岘港玩得最high的一个地方，沿着盘山公路开上去，可以开得比汽车还快，旁边就是一望无际的大海。一下子就感觉好自由，所有烦恼都没有，心胸也一下子开阔了。</p>
+<p><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024127.html" target="_blank" rel="noopener"><img src="https://p3-q.mafengwo.net/s10/M00/DE/A6/wKgBZ1iX9LmAYeQsAAp08TAF1Qg47.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br>早晨来到美溪沙滩拍了张全景照<br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024128.html" target="_blank" rel="noopener"><img src="https://b3-q.mafengwo.net/s10/M00/DE/B0/wKgBZ1iX9MqAbqPPAApGGJTrFfo41.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br>岘港的dragon bridge<br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024129.html" target="_blank" rel="noopener"><img src="https://a3-q.mafengwo.net/s10/M00/DE/B2/wKgBZ1iX9MuAAsqCAAlqVX6e8Po61.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024130.html" target="_blank" rel="noopener"><img src="https://n4-q.mafengwo.net/s10/M00/DE/B4/wKgBZ1iX9M2ARSf9AAkjcJmSQIs35.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br>海云关上还是有不少中国人的，在此一个河南大哥帮我拍了一张。<br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024131.html" target="_blank" rel="noopener"><img src="https://a2-q.mafengwo.net/s10/M00/DE/B6/wKgBZ1iX9M-ASnxgAApYyaYClnc47.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024132.html" target="_blank" rel="noopener"><img src="https://n2-q.mafengwo.net/s10/M00/DE/B6/wKgBZ1iX9NCAQ91CAAcXnUb6k_U71.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024133.html" target="_blank" rel="noopener"><img src="https://c2-q.mafengwo.net/s10/M00/DE/B8/wKgBZ1iX9NGARO4GAAhjCoHTLx400.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024134.html" target="_blank" rel="noopener"><img src="https://c4-q.mafengwo.net/s10/M00/DE/B8/wKgBZ1iX9NKABs3RAAdjtb56m8g17.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024135.html" target="_blank" rel="noopener"><img src="https://n2-q.mafengwo.net/s10/M00/DE/BA/wKgBZ1iX9NSAUDtdAAhjsfdEQ7k80.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a></p>
+<hr>
+<h2 id="会安——灯火阑珊的古镇"><a href="#会安——灯火阑珊的古镇" class="headerlink" title="会安——灯火阑珊的古镇"></a>会安——灯火阑珊的古镇</h2><p>在岘港玩了一天，傍晚我被朋友拉着去了会安，在印象里，会安古镇只有晚上几盏灯笼比较好看，除此之外还有一个占婆岛值得一玩。但这次去，我感到遗憾的是，到会安的那天正好下雨，所以只能在会安古镇的小餐馆喝喝咖啡吃点米粉，去占婆岛潜水的计划完全泡汤了。不过会安古镇热闹繁华的夜晚还是给我留下了深刻的印象，路边有很多各种好吃的小吃，抬头一望总能看到五颜六色的灯笼，旁边还时而走过几个美女，视觉和味觉都能得到很好的满足。会安的很多hotel都有小泳池，可以惬意的游一圈，但天气有点冷，再加上那天受凉了，所以没下水。价格比岘港只多了50k，却是3星级的，设施环境啥的都比较好。</p>
+<p><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185041518.html" target="_blank" rel="noopener"><img src="https://c2-q.mafengwo.net/s10/M00/EA/2A/wKgBZ1iYBYyASDa4AAkPoKEePmE02.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185041519.html" target="_blank" rel="noopener"><img src="https://b4-q.mafengwo.net/s10/M00/EA/2C/wKgBZ1iYBY2AVEa1AAhxlrPQwrs36.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185041520.html" target="_blank" rel="noopener"><img src="https://a4-q.mafengwo.net/s10/M00/EA/2D/wKgBZ1iYBY-AT0hmAAmBZUKRxSM81.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185041521.html" target="_blank" rel="noopener"><img src="https://n2-q.mafengwo.net/s10/M00/EA/32/wKgBZ1iYBZSAbdY2ACpC77g4x2Q72.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185041522.html" target="_blank" rel="noopener"><img src="https://a1-q.mafengwo.net/s10/M00/EA/35/wKgBZ1iYBZmAFNH_AB4P44TMjGI14.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185041523.html" target="_blank" rel="noopener"><img src="https://n1-q.mafengwo.net/s10/M00/EA/36/wKgBZ1iYBZyAVoMiAB9Vd-jmWDE82.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185041524.html" target="_blank" rel="noopener"><img src="https://n4-q.mafengwo.net/s10/M00/EA/3A/wKgBZ1iYBaGAYdFCACVFLc6_RY898.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a></p>
+<p>逛完会安古镇，回到宾馆洗个热水澡，出了一身汗，第二天就没受凉头晕的感觉了，本来想去占婆岛，不过天公不作美，只能在古镇到处走走。找了个小咖啡馆喝滴壶咖啡喝到下午，打算回岘港，不过出租车都要100人民币的样子，网上查了一下有巴士直接到岘港的，是黄色车身的大巴，具体是在下面地图的黄色标注位置。</p>
+<p><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185043864.html" target="_blank" rel="noopener"><img src="https://b1-q.mafengwo.net/s10/M00/EB/B2/wKgBZ1iYB72ARXtDAAEb9YzA23045.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br>下面是一些雨天在会安街上闲逛时拍的风景。<br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185045047.html" target="_blank" rel="noopener"><img src="https://a1-q.mafengwo.net/s10/M00/EC/84/wKgBZ1iYCMKAbU0KABF_a_6TfIw03.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br>这好像是一所大学，具体叫什么名字我不认识，大门开着我就进去了，后来又被里面的员工赶出来了。里面风景还是不错的，教学楼一律是古黄色，凳子，不知名的植物，在下雨天中别有一番味道。<br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185045048.html" target="_blank" rel="noopener"><img src="https://n3-q.mafengwo.net/s10/M00/EC/86/wKgBZ1iYCMWAZ9C4AA0mmLM-Hfw64.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185045049.html" target="_blank" rel="noopener"><img src="https://b1-q.mafengwo.net/s10/M00/EC/89/wKgBZ1iYCMiAHDJBAAs1NL-4YSg76.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185045050.html" target="_blank" rel="noopener"><img src="https://a1-q.mafengwo.net/s10/M00/EC/8B/wKgBZ1iYCMqAJsWIAAs-uHEZGbE81.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185045051.html" target="_blank" rel="noopener"><img src="https://p2-q.mafengwo.net/s10/M00/EC/8B/wKgBZ1iYCMyATL_QAAk--L0zFrE95.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185045052.html" target="_blank" rel="noopener"><img src="https://c4-q.mafengwo.net/s10/M00/EC/8D/wKgBZ1iYCM-AKPlnAAclnnZdiOY64.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a></p>
+<p>从会安回岘港的巴士上又是一段值得回忆的经历。我首先向旁边一个老外打了招呼，问他这辆车到岘港的哪里，然后我俩就聊起来了，后来得知他是从澳大利亚移民到越南的，再然后，我们互相吐槽中国和澳大利亚的房价和物价高，赞越南的物价和女人，他说在澳大利亚他有big house和nice car，但是not happy，从刚到越南至现在的6年里，他找回了自己，他每天都过得开心。在得知我要找个靠近机场的旅馆后，还热心的打算帮我安排住处，到岘港后，我跟着他来到他妻子的家里，把我介绍给了他的越南家人，让他的Vietnamese Lady帮我找了个靠近机场的旅馆。</p>
+<p>晚上出去逛了一圈，还交了几个当地的朋友，我的感觉是，越南年轻人对国人还是挺友好的，他们对我们就像是我们对日本人，有敬畏也有崇拜，或许也有一点敌视吧，但我这次旅行接触的当地人对我都挺友好，他们请我一起喝啤酒，虽然我们语言不通，但翻译软件的帮助下还是可以勉强交流的，最后还互相加了facebook。</p>
+<p><img src="https://c3-q.mafengwo.net/s10/M00/F7/2A/wKgBZ1iYFjuACZkdABholsWqTjY97.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></p>
+<hr>
+<h2 id="爱上岘港，爱上越南"><a href="#爱上岘港，爱上越南" class="headerlink" title="爱上岘港，爱上越南"></a>爱上岘港，爱上越南</h2><p>在岘港和会安玩了2天，越南之旅也算是到尾声了，离开前的一早我还在街边吃了本趟越南之行的最后一碗米粉，出奇的好吃，比河内的还要好吃，折成人民币才5元，搞得我更加舍不得岘港这座城市了。</p>
+<p><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185070222.html" target="_blank" rel="noopener"><img src="https://a3-q.mafengwo.net/s10/M00/F8/B5/wKgBZ1iYF-qAerrEAAfmafIhVeE78.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185070223.html" target="_blank" rel="noopener"><img src="https://a3-q.mafengwo.net/s10/M00/F8/BA/wKgBZ1iYF-2ALAaBAAc_UDQzs6g78.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185070224.html" target="_blank" rel="noopener"><img src="https://n1-q.mafengwo.net/s10/M00/F8/BC/wKgBZ1iYF-6ARlXCAAVw4Xok3BY34.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a></p>
+<p>从岘港回河内说什么也不能再坐sleeping bus了，飞机虽然花了我560元，加上托运费360k，加起来将近700（这也是没提前做好安排的代价），但飞机的好处是快，不会那么累。</p>
+<p>回到河内才下午3点，离晚上嘉林回南宁火车的发车时间还有好几个小时，就趁机场大巴在乐天停下的时候提早下车了，买了不少路上吃的零食，买了些干米粉带给家人，河内的乐天超市物价比岘港还要便宜，小包的咖啡才20k都不到，小瓶的可乐折算成人民币才1块多。购物完毕我们就打车去了嘉林火车站，在此提醒大家，绿色的taxi跳表是最快的，也是最贵的，我们从长钱商场到嘉林火车站就要90k越盾，原先我们以为越盾会多出来，还打算换成人民币，最后发现不够打的，正好在嘉林火车站门口的小店里碰到几个要换越盾的妹子，就又换了100k越盾，剩下的越盾回家留着做纪念。</p>
+<p>我感到奇怪的是，河内回南宁的火车上并没什么人，但淘宝上问了好几家都说没票了，估计是被黄牛搞的。第二天回杭州的火车是11点在南宁站发车，之前还担心河内到南宁的火车会晚点，但后来问了列车上的工作人员，事实也证明，这趟国际列车很少会发生晚点。</p>
 ]]></content>
       <categories>
-        <category>前端</category>
+        <category>旅行</category>
       </categories>
       <tags>
-        <tag>前端</tag>
-        <tag>vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>搭建hexo博客</title>
-    <url>/2019/07/19/%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h3 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h3><h4 id="步骤1-搭建各种电脑环境"><a href="#步骤1-搭建各种电脑环境" class="headerlink" title="*步骤1 搭建各种电脑环境"></a>*步骤1 搭建各种电脑环境</h4><blockquote>
-<p>第一步<br>   <strong>* 1 下载nodejs 可能会添加环境变量<br>第二步<br>   *</strong> 2 下载git 并搭建git环境（并将git的bin加入环境变量path中）</p>
-</blockquote>
-<blockquote>
-<p>第三步<br>   *** 3 创建github账户 并创建一个仓库 并命名为自己的 用户名+github.io（必须要这个名字）</p>
-</blockquote>
-<blockquote>
-<p>第四步<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd ~/.ssh #检查本机已存在的ssh密钥</span><br><span class="line"> 如果提示No such file or directory 说明是第一次用git</span><br><span class="line">  ssh-keygen -t rsa -C &quot;邮件地址&quot;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>   连续三次回车 会生成 </p>
-<blockquote>
-<p>C:\Users\ASUS.ssh\id_rsa.pub<br>   打开这个文件 复制全部内容<br>第五步<br>打开github主页 在右上方找到setting，在其中找到SSH and GPG keys -&gt; New SSH key，将内容复制进去<br>第六步（测试是否成功）<br> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com <span class="comment"># 注意邮箱地址不用改</span></span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p> 若提示—&gt; Hi xiaoruran! You’ve successfully authenticated, but GitHub does not provide shell access. 说明SSH配置成功</p>
-<blockquote>
-<p>第七步（配置git的个人信息）<br>  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">"xiaoruran"</span>// 你的github用户名，非昵称</span><br><span class="line">git config --global user.email  <span class="string">"xxx@qq.com"</span>// 填写你的github注册邮箱</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>第八步 hexo的相关操作<br>   ***下载hexo </p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo</span><br></pre></td></tr></table></figure>
-
-<p> *** 初始化<br>   在电脑中创建一个目录 作为你的站点目录<br>   <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo init</span><br><span class="line">hexo g <span class="comment">#生成</span></span><br><span class="line">hexo s <span class="comment">#启动服务（一般默认是4000端口）</span></span><br><span class="line">hexo s -p 5000 <span class="comment">#将默认端口改为5000</span></span><br></pre></td></tr></table></figure></p>
-<p> ***上传到github<br>  配置主目录底下的_config.yml中的deploy部分<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repository: git@github.com:xiaoruran/xiaoruran.github.io.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure></p>
-<p>  ***可能要下载一个插件<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>第九步 （写自己的博客）<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new &apos;my-first-blog&apos;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>第十步 （修改配置文件 达到自己的效果 也可以更换主题）</p>
-</blockquote>
-<p>[参考链接]<br>（<a href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html" target="_blank" rel="noopener">https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html</a> ）<br>（<a href="https://blog.csdn.net/gsl9d1p04f6x2ts3c9/article/details/81024330" target="_blank" rel="noopener">https://blog.csdn.net/gsl9d1p04f6x2ts3c9/article/details/81024330</a> ）<br>（<a href="https://www.cnblogs.com/trista222/p/8017300.html）" target="_blank" rel="noopener">https://www.cnblogs.com/trista222/p/8017300.html）</a></p>
-]]></content>
-      <tags>
-        <tag>think</tag>
-        <tag>idea</tag>
+        <tag>旅行</tag>
+        <tag>东南亚</tag>
       </tags>
   </entry>
   <entry>
@@ -517,75 +856,6 @@
       <tags>
         <tag>前端</tag>
         <tag>vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>春节越南行</title>
-    <url>/2017/01/28/%E6%98%A5%E8%8A%82%E8%B6%8A%E5%8D%97%E8%A1%8C/</url>
-    <content><![CDATA[<h2 id="我的所爱，在海云之间。"><a href="#我的所爱，在海云之间。" class="headerlink" title="我的所爱，在海云之间。"></a>我的所爱，在海云之间。</h2><blockquote>
-<p>最喜欢骑着摩托在海云岭上拉到最大马力的感觉~</p>
-</blockquote>
-<p>刚开始想去越南只是听朋友说物价便宜，人美景也美，尤其是有海滩，决定下来之后就开始查很多网友的攻略，后来发现看攻略根本记不住啥，说来说去都是这么几个注意点。上班的时候就没啥心思了，很期待这场旅行，本来假期就不多，春节正好可以躲避寒冬，于是约了个好友一起去，人均花费在4000左右吧，要是平时去估计能便宜一半。我选择了在年三十就出发，即使是这样，我们真正玩的时间也只有三天，有大半时间都浪费在了路上，不过这一路上的经历回想起来也挺有意思的。在此还是强烈推荐平时淡季去，春节机票贵，火车票又一票难求，如果是淡季去的话直飞是最爽快的了。</p>
-<a id="more"></a>
-
-
-<p>我先是提前一个月抢到了从杭州到南宁的火车票，后来因为退票了只能去桂林中转，南宁到河内嘉林火车站的票也是提前2个星期在淘宝买的，签证淘宝只要240，3天就能出签还包邮。因为是春节，所有票都只能在网上买，机票啥的要比平时贵一半都不止。所以这次唯一的遗憾是没有提前抢好廉价机票。我推荐大家最好是提前抢好国内直飞岘港的廉价往返机票，这样可以省去好多时间。</p>
-<p>至于旅行的路线，我觉得一个岘港就已经够了，去很多城市首先是累，再者浪费时间，因为越南的交通条件本身就不发达，一般距离较远的两个城市之间都是飞机或火车或sleeping bus，后面两个交通工具太慢了，春节期间的机票还死贵，所以我觉得玩一个岘港就足够了。我们在路上遇到的驴友也和我一样的观点，岘港有山有水有海滩，其他城市有的它都有，其他城市没有的它也有，所以好好的玩一个岘港，比在河内西贡芽庄美奈大叻岘港之间奔波要好得多。</p>
-<p>要带的衣物不多，就一套短袖和一套长袖，还有穿去的一套厚的登山服，一路慢慢脱。签证、护照、充电器、充电宝这是必不可少的，除此之外带着足够的钱就可以了，转接插头也不用带，那边的两项插孔是完全兼容国内的插头的。</p>
-<hr>
-<h2 id="南宁——秀美的省会城市"><a href="#南宁——秀美的省会城市" class="headerlink" title="南宁——秀美的省会城市"></a>南宁——秀美的省会城市</h2><p>先是杭州东站坐火车到桂林，到桂林是第二天凌晨5点，还来不及看看漓江就坐上动车去南宁了，到南宁是第二天的中午，吃了碗米粉，比杭州的正宗，但比较脏，没有杭州的干净。接着去华夏银行换美元，发现银行的营业厅关门，然后我又跑了好几家，最后绝望的发现南宁市里所有银行正月初一都是休息的，只好在ATM自助机上取了1500人民币（不过后来根本没用到这些钱）。南宁给我的印象就是静静的，我最喜爱的是邕江。因为南宁到河内是晚上6点的火车，所以我下午打了辆的士决定去江滨公园逛逛，当开过邕江大桥的时候，第一眼就被它碧绿澄澈的水吸引了，这么干净的水在我们江浙一带是很少见的，它在阳光的照耀下波光粼粼，江边还有不少钓鱼的老头，游泳的小孩，散步的情侣。这一切构成了一副很安静闲适的画面，我当即拍下了这张照片。</p>
-<p><img src="https://c4-q.mafengwo.net/s10/M00/4B/F1/wKgBZ1iW2qyAJbXHAAxupxS_7Ec88.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt="南宁·邕江"></p>
-<hr>
-<h2 id="嘉林——体验了国际列车"><a href="#嘉林——体验了国际列车" class="headerlink" title="嘉林——体验了国际列车"></a>嘉林——体验了国际列车</h2><p>在邕江逛到下午4点，就打车回火车站，坐上了去河内嘉林的火车。这趟国际列车和国内的绿皮火车一样，不过都是软卧，有隔开的包厢，还可以关门，睡着挺舒服，不过半夜要起来两次去过境边检，所以只能过了同登边检才能安心睡觉。</p>
-<p><img src="https://a1-q.mafengwo.net/s10/M00/4E/19/wKgBZ1iW3R2ARuBWAADEfDnL5PI03.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt="越南的同登边检站"></p>
-<p>到同登边检站是十分激动的，毕竟千里迢迢的终于到越南了，为了到嘉林不至于没钱打车，我在这个入境边检的地方换了100元，汇率是3150，比河内市里ATM机取的汇率要低。火车凌晨5点多到嘉林，嘉林火车站很小很破，出来之后有卖手机卡和换钱的小店，我们好多人在这里买手机卡又被坑了，包括我，花了150k买的Viettel卡以为是无限流量，结果只有200m流量，用完之后又要花钱充值的。所以大家千万别急着买手机卡和换钱，如果不是很急的话还是建议到河内市里去买，另外手机卡先问清楚流量再买，我后来又花100k买了张3GB流量的卡，2号回来的时候还有2个G多出来。换越盾可以网上先查一下不收手续费的本地银行，华夏银行每月有一笔境外取现是免费的，就算有手续费也不会很多，不论何时何地，ATM机里取钱汇率都是最划算的。河内街上到处都是带着银联标志的ATM机，只要带着银行卡，不用担心没地方取越盾。</p>
-<hr>
-<h2 id="河内——值得品味的老街"><a href="#河内——值得品味的老街" class="headerlink" title="河内——值得品味的老街"></a>河内——值得品味的老街</h2><p>到河内是1月29号凌晨5点多，之后我们打车去了圣约瑟夫大教堂，从大教堂一路在巷子中绕来绕去，先在路边摊吃了碗米粉，那个米粉的味道真的超级好，第一口汤汁我就爱上它了，之后在岘港我也吃了好几碗米粉，但味道都没有河内的好。越南的店铺都有小的青柠檬和朝天椒作为调味料，在米粉中挤点柠檬汁，再放点辣椒酱，味道比国内任何面啊粉啊都要好吃。吃完后我们走到还剑湖边，我在ATM机取了921人民币，300万越盾，那一刻确实有一种变身百万富翁的错觉哈哈。算了一下汇率有3257，比任何地方换都要高了。</p>
-<p><img src="https://c2-q.mafengwo.net/s10/M00/58/89/wKgBZ1iW6N2Ac-wmACjdycIr2tw34.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt="圣约瑟夫大教堂"><br><img src="https://a3-q.mafengwo.net/s10/M00/58/BD/wKgBZ1iW6SKAD2w6AAtG6K1I6U081.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt="取了300万越盾"><br><img src="https://b2-q.mafengwo.net/s10/M00/58/8A/wKgBZ1iW6N2Aa2_bAAHETHlPzHE68.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt><br><img src="https://n1-q.mafengwo.net/s10/M00/58/8B/wKgBZ1iW6N-ATOdJAAF43uhSluU64.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></p>
-<p>换好钱我们在还剑湖周边的大街小巷乱逛了一通，体验了一下越南的风土人情。越南的建筑都很有特色，毕竟曾是法国的殖民地，所以大到大教堂，小到小酒馆，都很有法式风情。越南的贫富差距严重，大多数人都骑摩托车，街上还停着不少限量豪车。其他我感触最深的一点就是，街上太乱了！！连河内这个首都也很少有红绿灯，放眼望去，基本都是摩托车，在大街上走你千万不能玩手机或者左顾右盼，要快速地小跑而过。街边乱停乱放的现象也十分普遍，除非有撞伤人了，不然根本没有交警会来管。有些撞人事故也是自己处理的，我在路上就正好遇到一个被撞的妇女，本来以为会有交警来处理，结果那女的和司机都拍拍屁股就走了，好像什么事情都没发生过一样。</p>
-<p><img src="https://p1-q.mafengwo.net/s10/M00/59/20/wKgBZ1iW6X2AZVGpAAHzR3F-svk23.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt><br><img src="https://p1-q.mafengwo.net/s10/M00/59/21/wKgBZ1iW6X6AWXRXAAKeZ8G7Oqs80.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt><br><img src="https://a4-q.mafengwo.net/s10/M00/59/23/wKgBZ1iW6X6AE5VgAAJVPwZB_YY44.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt><br><img src="https://c1-q.mafengwo.net/s10/M00/59/24/wKgBZ1iW6X-AOGbCAAJ0TdZSsPY36.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></p>
-<p>因为正好是春节，所以还剑湖周边都很有节日气氛，不同国籍的人坐在咖啡馆晒着太阳听着歌闲聊，街上吆喝的小贩，湖边摩肩接踵的人流，这些都比国内要热闹不少。</p>
-<p><img src="https://c4-q.mafengwo.net/s10/M00/5A/FD/wKgBZ1iW65qAJl0sAA0B0cSXsfo35.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt><br><img src="https://b3-q.mafengwo.net/s10/M00/5B/00/wKgBZ1iW65-ABvbcACR3CtgCRTg92.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt><br><img src="https://a4-q.mafengwo.net/s10/M00/5B/AF/wKgBZ1iW7EuAL6LzACZ4gt7X6As85.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></p>
-<p>我们在还剑湖边上的一个旅行社买了晚上去岘港的sleeping bus汽车票，后来才知道260元人民币的价格买贵了，网上查的新咖啡也只要100多就行了。所以最好是去open bus的官网预定好。越南的open bus有好几家，我们坐的是camel bus，设施还算干净，只是旁边过道上也有人睡，味道难闻。</p>
-<p><img src="https://a3-q.mafengwo.net/s10/M00/C9/A5/wKgBZ1iX2giALQ4fAAoAt49H0jg81.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></p>
-<p>晚上6点我们就坐上这个bus，第二天凌晨5点到了顺化，我们决定提前下车了，一是因为实在呆不下去，二是因为想看看顺化到岘港那段火车沿途的美景。这个sleeping bus根本无法sleep，不同国籍的人脱了鞋子挤在一个车厢里，味道真是酸爽，巴士开得还摇摇晃晃的，晚上我是一刻都没睡着。</p>
-<p>凌晨我们在下车的旅行社遇到了几个也打算坐火车去岘港的中国小伙伴，跟着他们走到火车站买了票，因为网上都说顺化没啥好看的，所以我们没在顺化停留。</p>
-<hr>
-<h2 id="岘港——惊艳于海云之间"><a href="#岘港——惊艳于海云之间" class="headerlink" title="岘港——惊艳于海云之间"></a>岘港——惊艳于海云之间</h2><p>火车去岘港的途中一路美景，灵姑湾到海云岭的这一段山路被National Geographic票选为人生必去的50景之一。我们去的那天正好阳光明媚，一路的海边公路上骑摩托的人，海水在阳光照耀下波光粼粼，简直是美cry！</p>
-<p><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/184997183.html" target="_blank" rel="noopener"><img src="https://b2-q.mafengwo.net/s10/M00/CC/41/wKgBZ1iX3daASfWOAAimiGs_hvw90.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/184997184.html" target="_blank" rel="noopener"><img src="https://c1-q.mafengwo.net/s10/M00/CC/42/wKgBZ1iX3diAZl3gAAePlb4Dds416.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/184997185.html" target="_blank" rel="noopener"><img src="https://c2-q.mafengwo.net/s10/M00/CC/43/wKgBZ1iX3dmALjoWAAZk2ErMMvw09.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/184997186.html" target="_blank" rel="noopener"><img src="https://n4-q.mafengwo.net/s10/M00/CC/44/wKgBZ1iX3dqAOTFeAAeF-OppZ0c49.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/184997187.html" target="_blank" rel="noopener"><img src="https://b3-q.mafengwo.net/s10/M00/CC/44/wKgBZ1iX3duATxlVAAWF8R9O2gE54.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a></p>
-<p>这段路真的是这段旅行中最最让我觉得惊艳的，当时完全不顾手机容量够不够，只管一直按拍照键，回到宾馆一看，每一张都是美景。</p>
-<p>到了岘港后，我们就找了个sea view的宾馆先放行李，450k，其实只看得到一点点海，因为没有visa的卡，所以无法在booking上预定，只能一家家走过去问价格，真正的海景房一般都要800k+，很多还没房间了。</p>
-<p><img src="https://c3-q.mafengwo.net/s10/M00/D2/8E/wKgBZ1iX5pCARx3xAAigLdtkjvY23.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></p>
-<p>因为在sleeping bus上根本没睡着过，我到了宾馆洗了个澡倒头就睡，小伙伴自己去玩了，醒来是傍晚6点了，下楼花150k租了一辆motorbike，很多好看的摩托已经被租掉了，只能选了辆外观一般的。摩托店的老板不错，还手把手教我怎么打火熄火，发着后要一点点给油才不至于熄火，还告诉我哪些按钮对应哪些灯。自动挡的摩托车还是挺简单的，唯一的难点是打火，打着后就和电瓶车差不多，而且越南的摩托开起来很爽，不断给油可以跑得比汽车还快，加速也很快，超车啥的最爽，减油后停得也很快，所以开习惯之后还是挺安全的。</p>
-<p>我适应了一会儿马上就掌握了要领，问了路边的一个小哥加油站的位置，花了60k加满油，这还是挺划算的，折合人民币20元，能开一天。我晚上从美溪沙滩开到乐天超市一个来回，第二天又去海云关一个来回，回来油箱还有的剩下。</p>
-<p>加完油我按着地图的指示去了乐天超市买了一双人字拖，买了点酸奶喝，还买了几盒咖啡打算带回去。在这里提一下越南的物价吧，越南的物价比国内普遍要便宜30%左右，酸奶很正宗，而且比国内便宜一半都不止，咖啡也很正宗，很多咖啡都停止出口到中国了，但在这里的超市都买得到。</p>
-<p><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185017920.html" target="_blank" rel="noopener"><img src="https://a1-q.mafengwo.net/s10/M00/DA/79/wKgBZ1iX70uAUwAfAAlgigScCmE00.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a></p>
-<p>超市的停车场都是摩托，却鲜有汽车，进去门卫会给你个号码，出来后再把号码还给他，在越南停车都是免费的。<br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185017921.html" target="_blank" rel="noopener"><img src="https://b2-q.mafengwo.net/s10/M00/DA/7B/wKgBZ1iX70yAU-RcAAmdDtqnyOg65.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185017922.html" target="_blank" rel="noopener"><img src="https://p4-q.mafengwo.net/s10/M00/DA/7C/wKgBZ1iX702APYdkAAO0Tw0EWGw57.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a></p>
-<p>在超市买完东西，我又骑着摩托沿着美溪海岸开了一圈，美溪沙滩人很少，海水还算干净，浪有点大，适合冲浪，不过我没敢下水，海风吹着脸庞，听浪潮拍打的声音，感觉超级relax。</p>
-<p><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185019577.html" target="_blank" rel="noopener"><img src="https://a1-q.mafengwo.net/s10/M00/DB/98/wKgBZ1iX8MSAOJSbAAqU4qXFPIs14.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185019578.html" target="_blank" rel="noopener"><img src="https://n2-q.mafengwo.net/s10/M00/DB/9C/wKgBZ1iX8MmAPl_yACFh-RELFmw33.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a></p>
-<p>回宾馆又是倒头就睡，之前听朋友说去海云关骑摩托很爽，所以第二天开着摩托沿着岘港的海岸公路，去海云关和灵姑湾溜达了一圈，大晴天的在海岸线上开摩托车真是超级爽，可惜后来到海云关就下毛毛雨了，山上很冷，想去的朋友一定要提前带件外套，我在回来之后头都被冻得很晕，要不是及时洗个热水澡吃了点辣椒驱寒，肯定会发烧。海云关是我在岘港玩得最high的一个地方，沿着盘山公路开上去，可以开得比汽车还快，旁边就是一望无际的大海。一下子就感觉好自由，所有烦恼都没有，心胸也一下子开阔了。</p>
-<p><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024127.html" target="_blank" rel="noopener"><img src="https://p3-q.mafengwo.net/s10/M00/DE/A6/wKgBZ1iX9LmAYeQsAAp08TAF1Qg47.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br>早晨来到美溪沙滩拍了张全景照<br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024128.html" target="_blank" rel="noopener"><img src="https://b3-q.mafengwo.net/s10/M00/DE/B0/wKgBZ1iX9MqAbqPPAApGGJTrFfo41.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br>岘港的dragon bridge<br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024129.html" target="_blank" rel="noopener"><img src="https://a3-q.mafengwo.net/s10/M00/DE/B2/wKgBZ1iX9MuAAsqCAAlqVX6e8Po61.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024130.html" target="_blank" rel="noopener"><img src="https://n4-q.mafengwo.net/s10/M00/DE/B4/wKgBZ1iX9M2ARSf9AAkjcJmSQIs35.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br>海云关上还是有不少中国人的，在此一个河南大哥帮我拍了一张。<br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024131.html" target="_blank" rel="noopener"><img src="https://a2-q.mafengwo.net/s10/M00/DE/B6/wKgBZ1iX9M-ASnxgAApYyaYClnc47.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024132.html" target="_blank" rel="noopener"><img src="https://n2-q.mafengwo.net/s10/M00/DE/B6/wKgBZ1iX9NCAQ91CAAcXnUb6k_U71.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024133.html" target="_blank" rel="noopener"><img src="https://c2-q.mafengwo.net/s10/M00/DE/B8/wKgBZ1iX9NGARO4GAAhjCoHTLx400.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024134.html" target="_blank" rel="noopener"><img src="https://c4-q.mafengwo.net/s10/M00/DE/B8/wKgBZ1iX9NKABs3RAAdjtb56m8g17.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024135.html" target="_blank" rel="noopener"><img src="https://n2-q.mafengwo.net/s10/M00/DE/BA/wKgBZ1iX9NSAUDtdAAhjsfdEQ7k80.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a></p>
-<hr>
-<h2 id="会安——灯火阑珊的古镇"><a href="#会安——灯火阑珊的古镇" class="headerlink" title="会安——灯火阑珊的古镇"></a>会安——灯火阑珊的古镇</h2><p>在岘港玩了一天，傍晚我被朋友拉着去了会安，在印象里，会安古镇只有晚上几盏灯笼比较好看，除此之外还有一个占婆岛值得一玩。但这次去，我感到遗憾的是，到会安的那天正好下雨，所以只能在会安古镇的小餐馆喝喝咖啡吃点米粉，去占婆岛潜水的计划完全泡汤了。不过会安古镇热闹繁华的夜晚还是给我留下了深刻的印象，路边有很多各种好吃的小吃，抬头一望总能看到五颜六色的灯笼，旁边还时而走过几个美女，视觉和味觉都能得到很好的满足。会安的很多hotel都有小泳池，可以惬意的游一圈，但天气有点冷，再加上那天受凉了，所以没下水。价格比岘港只多了50k，却是3星级的，设施环境啥的都比较好。</p>
-<p><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185041518.html" target="_blank" rel="noopener"><img src="https://c2-q.mafengwo.net/s10/M00/EA/2A/wKgBZ1iYBYyASDa4AAkPoKEePmE02.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185041519.html" target="_blank" rel="noopener"><img src="https://b4-q.mafengwo.net/s10/M00/EA/2C/wKgBZ1iYBY2AVEa1AAhxlrPQwrs36.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185041520.html" target="_blank" rel="noopener"><img src="https://a4-q.mafengwo.net/s10/M00/EA/2D/wKgBZ1iYBY-AT0hmAAmBZUKRxSM81.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185041521.html" target="_blank" rel="noopener"><img src="https://n2-q.mafengwo.net/s10/M00/EA/32/wKgBZ1iYBZSAbdY2ACpC77g4x2Q72.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185041522.html" target="_blank" rel="noopener"><img src="https://a1-q.mafengwo.net/s10/M00/EA/35/wKgBZ1iYBZmAFNH_AB4P44TMjGI14.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185041523.html" target="_blank" rel="noopener"><img src="https://n1-q.mafengwo.net/s10/M00/EA/36/wKgBZ1iYBZyAVoMiAB9Vd-jmWDE82.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185041524.html" target="_blank" rel="noopener"><img src="https://n4-q.mafengwo.net/s10/M00/EA/3A/wKgBZ1iYBaGAYdFCACVFLc6_RY898.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a></p>
-<p>逛完会安古镇，回到宾馆洗个热水澡，出了一身汗，第二天就没受凉头晕的感觉了，本来想去占婆岛，不过天公不作美，只能在古镇到处走走。找了个小咖啡馆喝滴壶咖啡喝到下午，打算回岘港，不过出租车都要100人民币的样子，网上查了一下有巴士直接到岘港的，是黄色车身的大巴，具体是在下面地图的黄色标注位置。</p>
-<p><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185043864.html" target="_blank" rel="noopener"><img src="https://b1-q.mafengwo.net/s10/M00/EB/B2/wKgBZ1iYB72ARXtDAAEb9YzA23045.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br>下面是一些雨天在会安街上闲逛时拍的风景。<br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185045047.html" target="_blank" rel="noopener"><img src="https://a1-q.mafengwo.net/s10/M00/EC/84/wKgBZ1iYCMKAbU0KABF_a_6TfIw03.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br>这好像是一所大学，具体叫什么名字我不认识，大门开着我就进去了，后来又被里面的员工赶出来了。里面风景还是不错的，教学楼一律是古黄色，凳子，不知名的植物，在下雨天中别有一番味道。<br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185045048.html" target="_blank" rel="noopener"><img src="https://n3-q.mafengwo.net/s10/M00/EC/86/wKgBZ1iYCMWAZ9C4AA0mmLM-Hfw64.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185045049.html" target="_blank" rel="noopener"><img src="https://b1-q.mafengwo.net/s10/M00/EC/89/wKgBZ1iYCMiAHDJBAAs1NL-4YSg76.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185045050.html" target="_blank" rel="noopener"><img src="https://a1-q.mafengwo.net/s10/M00/EC/8B/wKgBZ1iYCMqAJsWIAAs-uHEZGbE81.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185045051.html" target="_blank" rel="noopener"><img src="https://p2-q.mafengwo.net/s10/M00/EC/8B/wKgBZ1iYCMyATL_QAAk--L0zFrE95.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185045052.html" target="_blank" rel="noopener"><img src="https://c4-q.mafengwo.net/s10/M00/EC/8D/wKgBZ1iYCM-AKPlnAAclnnZdiOY64.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a></p>
-<p>从会安回岘港的巴士上又是一段值得回忆的经历。我首先向旁边一个老外打了招呼，问他这辆车到岘港的哪里，然后我俩就聊起来了，后来得知他是从澳大利亚移民到越南的，再然后，我们互相吐槽中国和澳大利亚的房价和物价高，赞越南的物价和女人，他说在澳大利亚他有big house和nice car，但是not happy，从刚到越南至现在的6年里，他找回了自己，他每天都过得开心。在得知我要找个靠近机场的旅馆后，还热心的打算帮我安排住处，到岘港后，我跟着他来到他妻子的家里，把我介绍给了他的越南家人，让他的Vietnamese Lady帮我找了个靠近机场的旅馆。</p>
-<p>晚上出去逛了一圈，还交了几个当地的朋友，我的感觉是，越南年轻人对国人还是挺友好的，他们对我们就像是我们对日本人，有敬畏也有崇拜，或许也有一点敌视吧，但我这次旅行接触的当地人对我都挺友好，他们请我一起喝啤酒，虽然我们语言不通，但翻译软件的帮助下还是可以勉强交流的，最后还互相加了facebook。</p>
-<p><img src="https://c3-q.mafengwo.net/s10/M00/F7/2A/wKgBZ1iYFjuACZkdABholsWqTjY97.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></p>
-<hr>
-<h2 id="爱上岘港，爱上越南"><a href="#爱上岘港，爱上越南" class="headerlink" title="爱上岘港，爱上越南"></a>爱上岘港，爱上越南</h2><p>在岘港和会安玩了2天，越南之旅也算是到尾声了，离开前的一早我还在街边吃了本趟越南之行的最后一碗米粉，出奇的好吃，比河内的还要好吃，折成人民币才5元，搞得我更加舍不得岘港这座城市了。</p>
-<p><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185070222.html" target="_blank" rel="noopener"><img src="https://a3-q.mafengwo.net/s10/M00/F8/B5/wKgBZ1iYF-qAerrEAAfmafIhVeE78.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185070223.html" target="_blank" rel="noopener"><img src="https://a3-q.mafengwo.net/s10/M00/F8/BA/wKgBZ1iYF-2ALAaBAAc_UDQzs6g78.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185070224.html" target="_blank" rel="noopener"><img src="https://n1-q.mafengwo.net/s10/M00/F8/BC/wKgBZ1iYF-6ARlXCAAVw4Xok3BY34.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a></p>
-<p>从岘港回河内说什么也不能再坐sleeping bus了，飞机虽然花了我560元，加上托运费360k，加起来将近700（这也是没提前做好安排的代价），但飞机的好处是快，不会那么累。</p>
-<p>回到河内才下午3点，离晚上嘉林回南宁火车的发车时间还有好几个小时，就趁机场大巴在乐天停下的时候提早下车了，买了不少路上吃的零食，买了些干米粉带给家人，河内的乐天超市物价比岘港还要便宜，小包的咖啡才20k都不到，小瓶的可乐折算成人民币才1块多。购物完毕我们就打车去了嘉林火车站，在此提醒大家，绿色的taxi跳表是最快的，也是最贵的，我们从长钱商场到嘉林火车站就要90k越盾，原先我们以为越盾会多出来，还打算换成人民币，最后发现不够打的，正好在嘉林火车站门口的小店里碰到几个要换越盾的妹子，就又换了100k越盾，剩下的越盾回家留着做纪念。</p>
-<p>我感到奇怪的是，河内回南宁的火车上并没什么人，但淘宝上问了好几家都说没票了，估计是被黄牛搞的。第二天回杭州的火车是11点在南宁站发车，之前还担心河内到南宁的火车会晚点，但后来问了列车上的工作人员，事实也证明，这趟国际列车很少会发生晚点。</p>
-]]></content>
-      <categories>
-        <category>旅行</category>
-      </categories>
-      <tags>
-        <tag>旅行</tag>
-        <tag>东南亚</tag>
       </tags>
   </entry>
 </search>
