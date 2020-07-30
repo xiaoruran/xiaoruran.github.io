@@ -180,23 +180,6 @@ setTimeout2           process2
       </tags>
   </entry>
   <entry>
-    <title>About Me</title>
-    <url>/2020/06/03/about/</url>
-    <content><![CDATA[<blockquote>
-<p>A Student, Now live in Nanning, China.</p>
-</blockquote>
-<p>姓名：曹涵<br>现居：暂时没有<br>GitHub: <a href="https://github.com/xiaoruran/xiaoruran.github.io" target="_blank" rel="noopener">Cao_Han</a><br>QQ: 3314508022<br>微信: ch18325622987</p>
-<a id="more"></a>
-
-<!-- ![avatar.jpg](https://i.loli.net/2019/12/02/Hw5WJIMKzi1YrU8.jpg) -->
-
-<img src="https://pic.downk.cc/item/5e739676e83c3a1e3ab4b361.jpg" alt="avatar" width="300" style="border-radius:50%">
-]]></content>
-      <tags>
-        <tag>自我介绍</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JS之闭包理解</title>
     <url>/2020/06/01/JS%E9%97%AD%E5%8C%85/</url>
     <content><![CDATA[<h3 id="JS闭包理解"><a href="#JS闭包理解" class="headerlink" title="JS闭包理解"></a>JS闭包理解</h3><h4 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a>立即执行函数</h4><p>作用： 创建一个独立的作用域。这个作用域的变量外面访问不到（避免变量污染）</p>
@@ -272,45 +255,20 @@ setTimeout2           process2
       </tags>
   </entry>
   <entry>
-    <title>博客Markdown的写法</title>
-    <url>/2020/01/17/my-second-blog/</url>
-    <content><![CDATA[<h4 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h4><pre><code># 一级标题
-## 二级标题
-### 三级标题
-#### 四级标题
-##### 五级标题
-注意：#后面要加空格 一级标题下面有一条横线 正常是需要闭合的这些标签</code></pre><h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><ul>
-<li><p>无序列表</p>
-<blockquote>
-<p>* 1<br>* 2<br>* 3<br>* 4</p>
-<blockquote>
-<p>注意 在*后面也要一个空格 用在线编辑器看实际上是转换承了 ul&gt;li</p>
+    <title>About Me</title>
+    <url>/2020/06/03/about/</url>
+    <content><![CDATA[<blockquote>
+<p>A Student, Now live in Nanning, China.</p>
 </blockquote>
-</blockquote>
-</li>
-<li><p>有序列表</p>
-<blockquote>
-<ol>
-<li>列表一</li>
-<li>列表二</li>
-<li>列表三<blockquote>
-<p>注意：数字后面必须是英文的点，有序列表的序号是根据第一行列表的数字顺序来的</p>
-</blockquote>
-</li>
-</ol>
-</blockquote>
-<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p>比如说，你想对某个部分的内容做一些说明或者引用等，可以使用&gt;<br>‘&gt;’</p>
-<h4 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h4><p>使用四个缩进空格 表示代码块</p>
-<h4 id="加强的代码块"><a href="#加强的代码块" class="headerlink" title="加强的代码块"></a>加强的代码块</h4><p>支持四十一种编程语言的语法高亮显示，行号显示，使用&lt;!–￼0–&gt;</p>
-</li>
-</ul>
+<p>姓名：曹涵<br>现居：暂时没有<br>GitHub: <a href="https://github.com/xiaoruran/xiaoruran.github.io" target="_blank" rel="noopener">Cao_Han</a><br>QQ: 3314508022<br>微信: ch18325622987</p>
+<a id="more"></a>
+
+<!-- ![avatar.jpg](https://i.loli.net/2019/12/02/Hw5WJIMKzi1YrU8.jpg) -->
+
+<img src="https://pic.downk.cc/item/5e739676e83c3a1e3ab4b361.jpg" alt="avatar" width="300" style="border-radius:50%">
 ]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
       <tags>
-        <tag>技术</tag>
-        <tag>方法</tag>
+        <tag>自我介绍</tag>
       </tags>
   </entry>
   <entry>
@@ -393,6 +351,48 @@ setTimeout2           process2
       <tags>
         <tag>前端</tag>
         <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>博客Markdown的写法</title>
+    <url>/2020/01/17/my-second-blog/</url>
+    <content><![CDATA[<h4 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h4><pre><code># 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+注意：#后面要加空格 一级标题下面有一条横线 正常是需要闭合的这些标签</code></pre><h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><ul>
+<li><p>无序列表</p>
+<blockquote>
+<p>* 1<br>* 2<br>* 3<br>* 4</p>
+<blockquote>
+<p>注意 在*后面也要一个空格 用在线编辑器看实际上是转换承了 ul&gt;li</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p>有序列表</p>
+<blockquote>
+<ol>
+<li>列表一</li>
+<li>列表二</li>
+<li>列表三<blockquote>
+<p>注意：数字后面必须是英文的点，有序列表的序号是根据第一行列表的数字顺序来的</p>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p>比如说，你想对某个部分的内容做一些说明或者引用等，可以使用&gt;<br>‘&gt;’</p>
+<h4 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h4><p>使用四个缩进空格 表示代码块</p>
+<h4 id="加强的代码块"><a href="#加强的代码块" class="headerlink" title="加强的代码块"></a>加强的代码块</h4><p>支持四十一种编程语言的语法高亮显示，行号显示，使用&lt;!–￼0–&gt;</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
+        <tag>方法</tag>
       </tags>
   </entry>
   <entry>
@@ -591,6 +591,48 @@ setTimeout2           process2
       </tags>
   </entry>
   <entry>
+    <title>位运算小技巧</title>
+    <url>/2020/07/31/%E4%BD%8D%E8%BF%90%E7%AE%97/</url>
+    <content><![CDATA[<h3 id="位运算小技巧"><a href="#位运算小技巧" class="headerlink" title="位运算小技巧"></a>位运算小技巧</h3><p>   js中有一个著名bug，0.1+0.2 ！== 0.3,因为精度的问题，导致所有的浮点运算都是不安全的。<br>   js中完全套用了java的位运算符，包括按位与<code>&amp;</code>、按位或<code>|</code>、按位异或<code>^</code>、按位非<code>~</code>、左移<code>&lt;&lt;</code>、带符号的右移<code>&gt;&gt;</code>和用<code>0</code>补足的右移<code>&gt;&gt;&gt;</code>。这套运算符争对的是整数，但在js内部，所有的数字都是以双精度浮点数进行保存。<br>如果要使用位运算符，js会将数字先转为整数再进行运算，这样就降低了运算速度</p>
+<h4 id="1-使用左移运算符迅速得出2的次方"><a href="#1-使用左移运算符迅速得出2的次方" class="headerlink" title="1. 使用左移运算符迅速得出2的次方"></a>1. 使用左移运算符迅速得出2的次方</h4><pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1 &lt;&lt; 2  //4 ,即1乘2的2次方</span><br><span class="line">1 &lt;&lt; 10  //1024</span><br></pre></td></tr></table></figure></code></pre><h4 id="2-使用-切换变量0或1（异或规则：相同为0，相异为1）"><a href="#2-使用-切换变量0或1（异或规则：相同为0，相异为1）" class="headerlink" title="2. 使用^切换变量0或1（异或规则：相同为0，相异为1）"></a>2. 使用<code>^</code>切换变量0或1（异或规则：相同为0，相异为1）</h4><pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var toggle=0;</span><br><span class="line">toggle ^=1; //1,当toggle为1时，变为0</span><br></pre></td></tr></table></figure></code></pre><h4 id="3-使用-amp-判断奇偶性"><a href="#3-使用-amp-判断奇偶性" class="headerlink" title="3. 使用&amp;判断奇偶性"></a>3. 使用<code>&amp;</code>判断奇偶性</h4><ul>
+<li><p>偶数 &amp; 1 =0</p>
+</li>
+<li><p>奇数 &amp; 1 =1</p>
+<h4 id="4-使用-将一个值转化为布尔值"><a href="#4-使用-将一个值转化为布尔值" class="headerlink" title="4. 使用!!将一个值转化为布尔值"></a>4. 使用<code>!!</code>将一个值转化为布尔值</h4><h4 id="5-使用-、-gt-gt-、-lt-lt-、-gt-gt-gt-、-来取整"><a href="#5-使用-、-gt-gt-、-lt-lt-、-gt-gt-gt-、-来取整" class="headerlink" title="5. 使用~、&gt;&gt;、&lt;&lt;、&gt;&gt;&gt;、| 来取整"></a>5. 使用~、&gt;&gt;、&lt;&lt;、&gt;&gt;&gt;、| 来取整</h4></li>
+<li><p>相当于使用了Math.floor()，向下取整</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">~~11.71   //11</span><br><span class="line">11.71 &gt;&gt; 0 //11</span><br><span class="line">11.71 &lt;&lt; 0 //11</span><br><span class="line">11.71 | 0 //11</span><br><span class="line">11.71 &gt;&gt;&gt; 0 //11</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>js引擎察觉到使用位运算，会将浮点型转换为整型;&gt;&gt;&gt; 不可以对负数取整;Math.round()为四舍五入</p>
+</blockquote>
+<h4 id="6-使用-完成值交换"><a href="#6-使用-完成值交换" class="headerlink" title="6. 使用^完成值交换"></a>6. 使用^完成值交换</h4><p>在es6的解构赋值出来之前，这种当时会更快（但必须是整数）</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//before</span><br><span class="line">let a=7, b=1;</span><br><span class="line">let temp=a;a=b;b=temp;    //借助临时变量</span><br><span class="line">b=[a,a=b][0];             //借助数组</span><br><span class="line">&#123;                         //借助数轴，即两数之间的距离进行交换</span><br><span class="line">  a=a-b;</span><br><span class="line">  b=a+b;</span><br><span class="line">  a=b-a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//after</span><br><span class="line">let a=7,b=1;</span><br><span class="line">a^=b;</span><br><span class="line">b^=a;</span><br><span class="line">a^=b;                    //a=1,b=7</span><br><span class="line">//es6</span><br><span class="line">[a,b]=[b,a];</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-使用-判断符号是否相等"><a href="#7-使用-判断符号是否相等" class="headerlink" title="7. 使用^判断符号是否相等"></a>7. 使用^判断符号是否相等</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(a^b)&gt;=0;   //true为相同符号，false为相反符号</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>因为两数进行异或，最高位是符号位，相同为0，相异为1，所以相同的话，结果为正数，相反的，结果为负数</p>
+<h4 id="8-使用-来检查数字是否不相等"><a href="#8-使用-来检查数字是否不相等" class="headerlink" title="8. 使用^来检查数字是否不相等"></a>8. 使用^来检查数字是否不相等</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//before</span><br><span class="line">if(a!==3)&#123;&#125; </span><br><span class="line">//after</span><br><span class="line">if(a^3)&#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>原理：如果两数不相等，那么总会有一个位不同，结果就不会是0</p>
+<h4 id="9-使用-amp-来判断一个数是否为2的整数幂（6不是，8是）"><a href="#9-使用-amp-来判断一个数是否为2的整数幂（6不是，8是）" class="headerlink" title="9. 使用&amp;来判断一个数是否为2的整数幂（6不是，8是）"></a>9. 使用&amp;来判断一个数是否为2的整数幂（6不是，8是）</h4></li>
+<li><p>n &amp; (n-1) ,若结果是0，则是整数幂，反之则不是</p>
+</li>
+<li><p>解析： 若一个数是整数次幂，则写成二进制会是，只有一个位置上有1（设为index），其他位置都为0，<br>此时n-1的二进制则是index-1的位置到第一位都是1，此时按位&amp;，所有位置都为0，结果就为0</p>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>技巧</category>
+      </categories>
+      <tags>
+        <tag>技巧</tag>
+        <tag>位运算</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vue简介</title>
     <url>/2019/07/19/vue%E7%AE%80%E4%BB%8B%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>[TOC]</p>
@@ -640,48 +682,6 @@ setTimeout2           process2
       </tags>
   </entry>
   <entry>
-    <title>位运算小技巧</title>
-    <url>/2020/07/31/%E4%BD%8D%E8%BF%90%E7%AE%97/</url>
-    <content><![CDATA[<h3 id="位运算小技巧"><a href="#位运算小技巧" class="headerlink" title="位运算小技巧"></a>位运算小技巧</h3><p>   js中有一个著名bug，0.1+0.2 ！== 0.3,因为精度的问题，导致所有的浮点运算都是不安全的。<br>   js中完全套用了java的位运算符，包括按位与<code>&amp;</code>、按位或<code>|</code>、按位异或<code>^</code>、按位非<code>~</code>、左移<code>&lt;&lt;</code>、带符号的右移<code>&gt;&gt;</code>和用<code>0</code>补足的右移<code>&gt;&gt;&gt;</code>。这套运算符争对的是整数，但在js内部，所有的数字都是以双精度浮点数进行保存。<br>如果要使用位运算符，js会将数字先转为整数再进行运算，这样就降低了运算速度</p>
-<h4 id="1-使用左移运算符迅速得出2的次方"><a href="#1-使用左移运算符迅速得出2的次方" class="headerlink" title="1. 使用左移运算符迅速得出2的次方"></a>1. 使用左移运算符迅速得出2的次方</h4><pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1 &lt;&lt; 2  //4 ,即1乘2的2次方</span><br><span class="line">1 &lt;&lt; 10  //1024</span><br></pre></td></tr></table></figure></code></pre><h4 id="2-使用-切换变量0或1（异或规则：相同为0，相异为1）"><a href="#2-使用-切换变量0或1（异或规则：相同为0，相异为1）" class="headerlink" title="2. 使用^切换变量0或1（异或规则：相同为0，相异为1）"></a>2. 使用<code>^</code>切换变量0或1（异或规则：相同为0，相异为1）</h4><pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var toggle=0;</span><br><span class="line">toggle ^=1; //1,当toggle为1时，变为0</span><br></pre></td></tr></table></figure></code></pre><h4 id="3-使用-amp-判断奇偶性"><a href="#3-使用-amp-判断奇偶性" class="headerlink" title="3. 使用&amp;判断奇偶性"></a>3. 使用<code>&amp;</code>判断奇偶性</h4><ul>
-<li><p>偶数 &amp; 1 =0</p>
-</li>
-<li><p>奇数 &amp; 1 =1</p>
-<h4 id="4-使用-将一个值转化为布尔值"><a href="#4-使用-将一个值转化为布尔值" class="headerlink" title="4. 使用!!将一个值转化为布尔值"></a>4. 使用<code>!!</code>将一个值转化为布尔值</h4><h4 id="5-使用-、-gt-gt-、-lt-lt-、-gt-gt-gt-、-来取整"><a href="#5-使用-、-gt-gt-、-lt-lt-、-gt-gt-gt-、-来取整" class="headerlink" title="5. 使用~、&gt;&gt;、&lt;&lt;、&gt;&gt;&gt;、| 来取整"></a>5. 使用~、&gt;&gt;、&lt;&lt;、&gt;&gt;&gt;、| 来取整</h4></li>
-<li><p>相当于使用了Math.floor()，向下取整</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">~~11.71   //11</span><br><span class="line">11.71 &gt;&gt; 0 //11</span><br><span class="line">11.71 &lt;&lt; 0 //11</span><br><span class="line">11.71 | 0 //11</span><br><span class="line">11.71 &gt;&gt;&gt; 0 //11</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>js引擎察觉到使用位运算，会将浮点型转换为整型;&gt;&gt;&gt; 不可以对负数取整;Math.round()为四舍五入</p>
-</blockquote>
-<h4 id="6-使用-完成值交换"><a href="#6-使用-完成值交换" class="headerlink" title="6. 使用^完成值交换"></a>6. 使用^完成值交换</h4><p>在es6的解构赋值出来之前，这种当时会更快（但必须是整数）</p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//before</span><br><span class="line">let a=7, b=1;</span><br><span class="line">let temp=a;a=b;b=temp;    //借助临时变量</span><br><span class="line">b=[a,a=b][0];             //借助数组</span><br><span class="line">&#123;                         //借助数轴，即两数之间的距离进行交换</span><br><span class="line">  a=a-b;</span><br><span class="line">  b=a+b;</span><br><span class="line">  a=b-a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//after</span><br><span class="line">let a=7,b=1;</span><br><span class="line">a^=b;</span><br><span class="line">b^=a;</span><br><span class="line">a^=b;                    //a=1,b=7</span><br><span class="line">//es6</span><br><span class="line">[a,b]=[b,a];</span><br></pre></td></tr></table></figure>
-
-<h4 id="7-使用-判断符号是否相等"><a href="#7-使用-判断符号是否相等" class="headerlink" title="7. 使用^判断符号是否相等"></a>7. 使用^判断符号是否相等</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(a^b)&gt;=0;   //true为相同符号，false为相反符号</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>因为两数进行异或，最高位是符号位，相同为0，相异为1，所以相同的话，结果为正数，相反的，结果为负数</p>
-<h4 id="8-使用-来检查数字是否不相等"><a href="#8-使用-来检查数字是否不相等" class="headerlink" title="8. 使用^来检查数字是否不相等"></a>8. 使用^来检查数字是否不相等</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//before</span><br><span class="line">if(a!==3)&#123;&#125; </span><br><span class="line">//after</span><br><span class="line">if(a^3)&#123;&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>原理：如果两数不相等，那么总会有一个位不同，结果就不会是0</p>
-<h4 id="9-使用-amp-来判断一个数是否为2的整数幂（6不是，8是）"><a href="#9-使用-amp-来判断一个数是否为2的整数幂（6不是，8是）" class="headerlink" title="9. 使用&amp;来判断一个数是否为2的整数幂（6不是，8是）"></a>9. 使用&amp;来判断一个数是否为2的整数幂（6不是，8是）</h4></li>
-<li><p>n &amp; (n-1) ,若结果是0，则是整数幂，反之则不是</p>
-</li>
-<li><p>解析： 若一个数是整数次幂，则写成二进制会是，只有一个位置上有1（设为index），其他位置都为0，<br>此时n-1的二进制则是index-1的位置到第一位都是1，此时按位&amp;，所有位置都为0，结果就为0</p>
-</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>技巧</category>
-      </categories>
-      <tags>
-        <tag>技巧</tag>
-        <tag>位运算</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JS之对象说明符</title>
     <url>/2020/06/02/%E5%AF%B9%E8%B1%A1%E8%AF%B4%E6%98%8E%E7%AC%A6/</url>
     <content><![CDATA[<h3 id="对象说明符（ES6中可以理解为结构解析）"><a href="#对象说明符（ES6中可以理解为结构解析）" class="headerlink" title="对象说明符（ES6中可以理解为结构解析）"></a>对象说明符（ES6中可以理解为结构解析）</h3><p>有时候函数中需要传的参数过多，容易在调用时搞混这些参数的顺序，这时候就可以时使用对象说明符来解决。将形参写成一个对象的形式，实参叶根据这个形式进行传参</p>
@@ -707,22 +707,6 @@ setTimeout2           process2
 </li>
 <li><p><code>number.toString()</code>方法：将number转换为一个字符串，可选参数表示几进制，默认是10</p>
  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var x=Math.PI;</span><br><span class="line">console.log(x.toString(8)); //3.1103755242102643</span><br><span class="line">console.log(x.toString(16)); //3.243f6a8885a3</span><br><span class="line">console.log(x.toString()); //3.141592653589793</span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS之等号</title>
-    <url>/2020/06/03/%E7%AD%89%E5%8F%B7/</url>
-    <content><![CDATA[<h4 id="相等（-），严格相等（-）"><a href="#相等（-），严格相等（-）" class="headerlink" title="相等（==），严格相等（===）"></a>相等（==），严格相等（===）</h4><ul>
-<li>在进行相等（==）时，如果一边是字符，一边是数字，会将字符串转换为数字再进行比较</li>
-<li>在进行严格相等（===）运算时，不会进行类型的转换，会直接先判断类型是否相同，不相同时，直接为false</li>
 </ul>
 ]]></content>
       <categories>
@@ -772,6 +756,22 @@ setTimeout2           process2
       <tags>
         <tag>think</tag>
         <tag>idea</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS之等号</title>
+    <url>/2020/06/03/%E7%AD%89%E5%8F%B7/</url>
+    <content><![CDATA[<h4 id="相等（-），严格相等（-）"><a href="#相等（-），严格相等（-）" class="headerlink" title="相等（==），严格相等（===）"></a>相等（==），严格相等（===）</h4><ul>
+<li>在进行相等（==）时，如果一边是字符，一边是数字，会将字符串转换为数字再进行比较</li>
+<li>在进行严格相等（===）运算时，不会进行类型的转换，会直接先判断类型是否相同，不相同时，直接为false</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
       </tags>
   </entry>
   <entry>
