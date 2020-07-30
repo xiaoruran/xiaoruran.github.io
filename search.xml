@@ -38,136 +38,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JS之原型链理解</title>
-    <url>/2020/06/03/JS%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%90%86%E8%A7%A3/</url>
-    <content><![CDATA[<p>###JS原型及原型链<br>JavaScript中没有子类和父类的概念，也没有类和实例（instance）的区分,全靠一种称为”原型(prototype)链”的模式，来实现继承</p>
-<p>####背景介绍</p>
-<h5 id="一、-函数对象"><a href="#一、-函数对象" class="headerlink" title="一、 函数对象"></a>一、 函数对象</h5><ol>
-<li>所有实例对象都有一个<code>_proto_</code>属性,该属性不是标准属性，不可以用在编程中，用于浏览器内部使用</li>
-<li>所有函数都拥有<code>prototype</code>属性</li>
-<li>原型对象：指的是拥有prototype属性的对象，在定义函数时就被创建</li>
-<li>数组，函数，对象的原型都是Object<h5 id="二、构造函数"><a href="#二、构造函数" class="headerlink" title="二、构造函数"></a>二、构造函数</h5>构造函数，主要用来创建对象时初始化对象，每个构造函数都有prototype属性。<blockquote>
-<p>例如 function Person=function(){},<br>这里Person函数的构造函数就是 Person()</p>
-</blockquote>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//构造方法</span><br><span class="line"> function Person(name,age,gender) &#123;</span><br><span class="line">     this.name=name;</span><br><span class="line">     this.age=age;</span><br><span class="line">     this.gender=gender;</span><br><span class="line">     this.say=function () &#123;</span><br><span class="line">     alert(this.name)</span><br><span class="line">           &#125;</span><br><span class="line">     &#125;</span><br><span class="line">    var person1=new Person(&apos;钟女士&apos;,80,&apos;女&apos;);</span><br><span class="line">    var person2=new Person(&apos;张女士&apos;,80,&apos;女&apos;);</span><br><span class="line">    console.log(person2)</span><br><span class="line">    console.log(person1)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//创建构造函数</span><br><span class="line">        function Word(words)&#123;</span><br><span class="line">            this.words = words;</span><br><span class="line">        &#125;</span><br><span class="line">        //相当于构造对象的原型方法，此方法属于构造方法内</span><br><span class="line">        Word.prototype = &#123;</span><br><span class="line">            alert()&#123;</span><br><span class="line">                alert(this.words);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        //创建实例</span><br><span class="line">        var w = new Word(&quot;hello world&quot;);</span><br><span class="line">        w.print = function()&#123;</span><br><span class="line">            console.log(this.words);</span><br><span class="line">            console.log(this);  //Person对象</span><br><span class="line">        &#125;</span><br><span class="line">        w.print();  //hello world</span><br><span class="line">        w.alert();  //hello world</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>print方法时w实例本身具有的方法，alert不属于w实例的方法，属于构造函数的方法，w.alert()也会打印，是因为实例继承构造函数的方法</p>
-</blockquote>
-<p><strong>实例w的隐式原型(_proto_)指向它的构造函数(函数本身名)的显式原型（prototype）</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">w._proto_=== Word.prototype</span><br><span class="line">Word.prototype.constructor=== Word() </span><br><span class="line">w._proto_.constructor=== Word()</span><br></pre></td></tr></table></figure>
-
-<p><strong>当调用实例的某种方法或属性时，首先会查找自身，若没有，则会去它的_proto_属性中查找,也就是它对应类的原型中查找。</strong></p>
-<h5 id="三、原型及原型链"><a href="#三、原型及原型链" class="headerlink" title="三、原型及原型链"></a>三、原型及原型链</h5><ul>
-<li><p><code>_proto_</code>是实例的一个属性，这个属性本身是一个对象，包含有两个属性，一个是<code>constructor</code>和<code>_proto_</code></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">        Function.prototype.a = &quot;a&quot;;</span><br><span class="line">Object.prototype.b = &quot;b&quot;;</span><br><span class="line">function Person()&#123;&#125;</span><br><span class="line">console.log(Person);    //function Person()</span><br><span class="line">let p = new Person();</span><br><span class="line">console.log(p);         //Person &#123;&#125; 对象</span><br><span class="line">console.log(p.a);       //undefined</span><br><span class="line">console.log(p.b);       //b</span><br><span class="line">console.log(p.__proto__.constructor);   //function Person()&#123;&#125;</span><br><span class="line">console.log(p.__proto__.__proto__);     //对象&#123;&#125;，拥有很多属性值</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>p.<em>proto</em>=Person.prototype</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">           //Function</span><br><span class="line">function Function()&#123;&#125;</span><br><span class="line">console.log(Function);  //Function()</span><br><span class="line">console.log(Function.prototype.constructor);    //Function()</span><br><span class="line">console.log(Function.prototype.__proto__);      //Object.prototype</span><br><span class="line">console.log(Function.prototype.__proto__.__proto__);    //NULL</span><br><span class="line">console.log(Function.prototype.__proto__.constructor);  //Object()</span><br><span class="line">console.log(Function.prototype.__proto__ === Object.prototype); //true</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>#####总结</p>
-<ol>
-<li>查找属性，如果没有，则去它的_proto_中查找，也就是构造函数的原型中查找，如果构造函数中也没有，因为构造函数也是对象，也会通过构造函数的_proto属性查找，一直道null，没有的话返回undefined</li>
-<li>p._proto_=Person.prototype</li>
-<li>p._proto_.constructor === function Person(){}</li>
-<li>p._proto_._proto_=Object.prototype</li>
-<li>p._proto_._proto_._proto_===Object.prototype._proto_ === null</li>
-<li>原型链是通过_proto_形成的而非prototype</li>
-</ol>
-<p><img src="https://img-blog.csdn.net/2018030222305858" alt="avatar"><br>参考博客：<br> <a href="https://blog.csdn.net/yucihent/article/details/79424506" target="_blank" rel="noopener">深入javascript之原型和原型链</a><br><a href="https://blog.csdn.net/qq_42019025/article/details/80708446" target="_blank" rel="noopener">JS原型和原型链是什么？</a>  </p>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS之闭包理解</title>
-    <url>/2020/06/01/JS%E9%97%AD%E5%8C%85/</url>
-    <content><![CDATA[<h3 id="JS闭包理解"><a href="#JS闭包理解" class="headerlink" title="JS闭包理解"></a>JS闭包理解</h3><h4 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a>立即执行函数</h4><p>作用： 创建一个独立的作用域。这个作用域的变量外面访问不到（避免变量污染）</p>
-<ol>
-<li><p><code>(function foo(){}())</code><br>如果直接写function foo(){}()解释器会报错。<em>立即执行函数的调用方式是将函数表达式、调用操作符、分组操作符放到一个括号内，来告诉解释器这里有一个需要解释器立即执行的函数</em>。否则通常情况下，解析器遇到function关键子，都会把它当成一个函数声明，而不是个函数表达式</p>
-<ul>
-<li>立即执行函数的写法</li>
-<li>相当于 function foo(){};foo();</li>
-<li>相当于先定义一个函数，然后调用执行它</li>
-<li>在最后面的括号里面可以直接写传递的参数<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function foo(n1,n2)&#123;</span><br><span class="line">    console.log(n1+n2);</span><br><span class="line">&#125;(3,5));  //8</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p><code>(function foo(){})()</code><br>总的语法和上面的一致</p>
-<blockquote>
-<p>注意：当在不需要表达式的场景下，就不需要用括号括起来了</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void function foo()&#123;&#125;()</span><br><span class="line">var foo =function()&#123;&#125;();</span><br><span class="line">true &amp;&amp; function()&#123;&#125;();</span><br><span class="line">0,function()&#123;&#125;();</span><br><span class="line">//以上都是作为函数表达式，所以不需要用括号括起来了</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<blockquote>
-<p>对于立即执行函数，也可以给他们传入参数，在最后一个括号里传</p>
-</blockquote>
-<ol start="3">
-<li>像常见的<code>(function($){}(jQuery))</code>;就是将实参jQuery作为实参传入到函数function($){}中，通过形参$接受</li>
-<li><code>$(function(){})</code><ul>
-<li>需要引入jQuery包</li>
-<li>是$(document).ready(function(){})的简写，两者效果完全一样</li>
-</ul>
-</li>
-<li>可以在function(){}()的前面加上!、+、-、~也可以使变成函数表达式，变成立即执行函数</li>
-</ol>
-<h4 id="是时候理解一波了"><a href="#是时候理解一波了" class="headerlink" title="是时候理解一波了"></a>是时候理解一波了</h4><p>我的理解：</p>
-<ul>
-<li>js中函数内部可以读取到全局变量，而函数外部不能读取函数内部的局部变量。此时闭包就是为了能使得从外部访问函数内部的变量。</li>
-<li>为了让某些变量始终保持在内存中，但同时也可能导致内存消耗的问题</li>
-<li>方便调用上下文的局部变量，利于代码封装<br>两个方面：<ol>
-<li>函数作为返回值<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> function a()&#123;</span><br><span class="line">  var name=&apos;hh&apos;;</span><br><span class="line">  return function()&#123;</span><br><span class="line">      return name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">var b=a();</span><br><span class="line">//将返回的匿名函数赋值给b，此时b相当于a内部的匿名函数，可以访问到a内部的变量</span><br><span class="line">console.log(b());</span><br><span class="line"> //通过b(),执行a内部的匿名函数，最后返回a函数内部的变量</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-</li>
-</ul>
-<blockquote>
-<p>这段代码实现了全局变量b可以获取到a方法下的局部变量name的值<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   function f1()&#123;</span><br><span class="line">    var num=12;</span><br><span class="line">    return function()&#123;</span><br><span class="line">        var n=0;</span><br><span class="line">        console.log(++num);</span><br><span class="line">        console.log(++n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var fn=f1();</span><br><span class="line">fn();  //13 1</span><br><span class="line">//第一次调用f1里的匿名函数</span><br><span class="line">fn();  //14 1</span><br><span class="line">//第二次调用f1里的匿名函数</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>上述代码中在fn执行完后，就应该连同它里面的变量以同销毁，但在此case中，匿名函数作为f1的返回值被赋给了fn，这时候就相当于fn=function(var n=0;…){},并且匿名函数内部引用这f1里面的变量num，所以变量num无法被销毁，但每次每次n是重新创建的，这里就产生了内存消耗的问题（num）<br>再来一个case:依次输出1到5<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> (function()&#123;</span><br><span class="line">var i=1;</span><br><span class="line">for(i=0;i&lt;5;i++)&#123;</span><br><span class="line">    setTimeout(function()&#123;</span><br><span class="line">     console.log(i);</span><br><span class="line">    &#125;,100)</span><br><span class="line">&#125;</span><br><span class="line">&#125;());  //5，5，5，5，5</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>这是会发现出现了5个5，与预期不同。我们来分析一下，首先由于js是单线程语言，遇到setTimeout函数，这是一个异步函数，将之放入异步函数队列，等到主线程运行完。好！主线程运行完了，即5个循环运行结束，这是的i为5。此时运行异步队列中的线程，此时i为5，所以打印的都是5。我们可以采用一下立即执行函数来解决这个问题<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line"> var i=0;</span><br><span class="line"> for(i=0;i&lt;5;++i)&#123;</span><br><span class="line">     (function(i)&#123;</span><br><span class="line">         setTimeout(function()&#123;</span><br><span class="line">             console.log(i);</span><br><span class="line">            &#125;,100)</span><br><span class="line">     &#125;(i));</span><br><span class="line"> &#125;</span><br><span class="line">&#125;()); //0,1,2,3,4</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>此时已完成预期效果。这里通过闭包来保存变量i，将setTimeout函数放入立即执行函数中，将for循环中的i作为参数传递，通过立即执行函数，相当于将i固定保存在匿名函数中（这就是立即执行函数的魅力），100毫秒后打印出0、1、2、3、4<br>    若要在隔100毫秒在输出，可以<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line"> var i=0;</span><br><span class="line"> for(i=0;i&lt;5;++i)&#123;</span><br><span class="line">     (function(i)&#123;</span><br><span class="line">         setTimeout(function()&#123;</span><br><span class="line">             console.log(i);</span><br><span class="line">            &#125;,i*100)</span><br><span class="line">     &#125;(i));</span><br><span class="line"> &#125;</span><br><span class="line">&#125;()); //0,1,2,3,4</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<ol start="2">
-<li><p>闭包作为参数传递<br>将(function(){}()) 中最后一个括号里面传函数</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   var num = 15</span><br><span class="line">var f1=function(x)&#123;</span><br><span class="line">  if(x&gt; num)&#123;</span><br><span class="line">      console.log(x);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 加上void 变成立即执行函数</span><br><span class="line">void function(fn)&#123;</span><br><span class="line"> var num=100;</span><br><span class="line"> fn(30)</span><br><span class="line">&#125;(f1)    //30</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>解释：这里首先有一个立即执行函数，直接执行，实参为f1对应的匿名方法，将之传给fn，在执行这个匿名函数，在执行这个匿名函数时，访问的num就是最上面的全局变量num（15）了</p>
-</blockquote>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JS之事件执行机制</title>
     <url>/2020/06/03/JS%E5%BC%95%E6%93%8E%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6/</url>
     <content><![CDATA[<h3 id="JS引擎事件执行机制"><a href="#JS引擎事件执行机制" class="headerlink" title="JS引擎事件执行机制"></a>JS引擎事件执行机制</h3><h4 id="JS执行机制"><a href="#JS执行机制" class="headerlink" title="JS执行机制"></a>JS执行机制</h4><ol>
@@ -255,6 +125,153 @@ setTimeout2           process2
       </tags>
   </entry>
   <entry>
+    <title>JS之原型链理解</title>
+    <url>/2020/06/03/JS%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%90%86%E8%A7%A3/</url>
+    <content><![CDATA[<p>###JS原型及原型链<br>JavaScript中没有子类和父类的概念，也没有类和实例（instance）的区分,全靠一种称为”原型(prototype)链”的模式，来实现继承</p>
+<p>####背景介绍</p>
+<h5 id="一、-函数对象"><a href="#一、-函数对象" class="headerlink" title="一、 函数对象"></a>一、 函数对象</h5><ol>
+<li>所有实例对象都有一个<code>_proto_</code>属性,该属性不是标准属性，不可以用在编程中，用于浏览器内部使用</li>
+<li>所有函数都拥有<code>prototype</code>属性</li>
+<li>原型对象：指的是拥有prototype属性的对象，在定义函数时就被创建</li>
+<li>数组，函数，对象的原型都是Object<h5 id="二、构造函数"><a href="#二、构造函数" class="headerlink" title="二、构造函数"></a>二、构造函数</h5>构造函数，主要用来创建对象时初始化对象，每个构造函数都有prototype属性。<blockquote>
+<p>例如 function Person=function(){},<br>这里Person函数的构造函数就是 Person()</p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//构造方法</span><br><span class="line"> function Person(name,age,gender) &#123;</span><br><span class="line">     this.name=name;</span><br><span class="line">     this.age=age;</span><br><span class="line">     this.gender=gender;</span><br><span class="line">     this.say=function () &#123;</span><br><span class="line">     alert(this.name)</span><br><span class="line">           &#125;</span><br><span class="line">     &#125;</span><br><span class="line">    var person1=new Person(&apos;钟女士&apos;,80,&apos;女&apos;);</span><br><span class="line">    var person2=new Person(&apos;张女士&apos;,80,&apos;女&apos;);</span><br><span class="line">    console.log(person2)</span><br><span class="line">    console.log(person1)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//创建构造函数</span><br><span class="line">        function Word(words)&#123;</span><br><span class="line">            this.words = words;</span><br><span class="line">        &#125;</span><br><span class="line">        //相当于构造对象的原型方法，此方法属于构造方法内</span><br><span class="line">        Word.prototype = &#123;</span><br><span class="line">            alert()&#123;</span><br><span class="line">                alert(this.words);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        //创建实例</span><br><span class="line">        var w = new Word(&quot;hello world&quot;);</span><br><span class="line">        w.print = function()&#123;</span><br><span class="line">            console.log(this.words);</span><br><span class="line">            console.log(this);  //Person对象</span><br><span class="line">        &#125;</span><br><span class="line">        w.print();  //hello world</span><br><span class="line">        w.alert();  //hello world</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>print方法时w实例本身具有的方法，alert不属于w实例的方法，属于构造函数的方法，w.alert()也会打印，是因为实例继承构造函数的方法</p>
+</blockquote>
+<p><strong>实例w的隐式原型(_proto_)指向它的构造函数(函数本身名)的显式原型（prototype）</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">w._proto_=== Word.prototype</span><br><span class="line">Word.prototype.constructor=== Word() </span><br><span class="line">w._proto_.constructor=== Word()</span><br></pre></td></tr></table></figure>
+
+<p><strong>当调用实例的某种方法或属性时，首先会查找自身，若没有，则会去它的_proto_属性中查找,也就是它对应类的原型中查找。</strong></p>
+<h5 id="三、原型及原型链"><a href="#三、原型及原型链" class="headerlink" title="三、原型及原型链"></a>三、原型及原型链</h5><ul>
+<li><p><code>_proto_</code>是实例的一个属性，这个属性本身是一个对象，包含有两个属性，一个是<code>constructor</code>和<code>_proto_</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">        Function.prototype.a = &quot;a&quot;;</span><br><span class="line">Object.prototype.b = &quot;b&quot;;</span><br><span class="line">function Person()&#123;&#125;</span><br><span class="line">console.log(Person);    //function Person()</span><br><span class="line">let p = new Person();</span><br><span class="line">console.log(p);         //Person &#123;&#125; 对象</span><br><span class="line">console.log(p.a);       //undefined</span><br><span class="line">console.log(p.b);       //b</span><br><span class="line">console.log(p.__proto__.constructor);   //function Person()&#123;&#125;</span><br><span class="line">console.log(p.__proto__.__proto__);     //对象&#123;&#125;，拥有很多属性值</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>p.<em>proto</em>=Person.prototype</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">           //Function</span><br><span class="line">function Function()&#123;&#125;</span><br><span class="line">console.log(Function);  //Function()</span><br><span class="line">console.log(Function.prototype.constructor);    //Function()</span><br><span class="line">console.log(Function.prototype.__proto__);      //Object.prototype</span><br><span class="line">console.log(Function.prototype.__proto__.__proto__);    //NULL</span><br><span class="line">console.log(Function.prototype.__proto__.constructor);  //Object()</span><br><span class="line">console.log(Function.prototype.__proto__ === Object.prototype); //true</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>#####总结</p>
+<ol>
+<li>查找属性，如果没有，则去它的_proto_中查找，也就是构造函数的原型中查找，如果构造函数中也没有，因为构造函数也是对象，也会通过构造函数的_proto属性查找，一直道null，没有的话返回undefined</li>
+<li>p._proto_=Person.prototype</li>
+<li>p._proto_.constructor === function Person(){}</li>
+<li>p._proto_._proto_=Object.prototype</li>
+<li>p._proto_._proto_._proto_===Object.prototype._proto_ === null</li>
+<li>原型链是通过_proto_形成的而非prototype</li>
+</ol>
+<p><img src="https://img-blog.csdn.net/2018030222305858" alt="avatar"><br>参考博客：<br> <a href="https://blog.csdn.net/yucihent/article/details/79424506" target="_blank" rel="noopener">深入javascript之原型和原型链</a><br><a href="https://blog.csdn.net/qq_42019025/article/details/80708446" target="_blank" rel="noopener">JS原型和原型链是什么？</a>  </p>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>About Me</title>
+    <url>/2020/06/03/about/</url>
+    <content><![CDATA[<blockquote>
+<p>A Student, Now live in Nanning, China.</p>
+</blockquote>
+<p>姓名：曹涵<br>现居：暂时没有<br>GitHub: <a href="https://github.com/xiaoruran/xiaoruran.github.io" target="_blank" rel="noopener">Cao_Han</a><br>QQ: 3314508022<br>微信: ch18325622987</p>
+<a id="more"></a>
+
+<!-- ![avatar.jpg](https://i.loli.net/2019/12/02/Hw5WJIMKzi1YrU8.jpg) -->
+
+<img src="https://pic.downk.cc/item/5e739676e83c3a1e3ab4b361.jpg" alt="avatar" width="300" style="border-radius:50%">
+]]></content>
+      <tags>
+        <tag>自我介绍</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS之闭包理解</title>
+    <url>/2020/06/01/JS%E9%97%AD%E5%8C%85/</url>
+    <content><![CDATA[<h3 id="JS闭包理解"><a href="#JS闭包理解" class="headerlink" title="JS闭包理解"></a>JS闭包理解</h3><h4 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a>立即执行函数</h4><p>作用： 创建一个独立的作用域。这个作用域的变量外面访问不到（避免变量污染）</p>
+<ol>
+<li><p><code>(function foo(){}())</code><br>如果直接写function foo(){}()解释器会报错。<em>立即执行函数的调用方式是将函数表达式、调用操作符、分组操作符放到一个括号内，来告诉解释器这里有一个需要解释器立即执行的函数</em>。否则通常情况下，解析器遇到function关键子，都会把它当成一个函数声明，而不是个函数表达式</p>
+<ul>
+<li>立即执行函数的写法</li>
+<li>相当于 function foo(){};foo();</li>
+<li>相当于先定义一个函数，然后调用执行它</li>
+<li>在最后面的括号里面可以直接写传递的参数<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function foo(n1,n2)&#123;</span><br><span class="line">    console.log(n1+n2);</span><br><span class="line">&#125;(3,5));  //8</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><code>(function foo(){})()</code><br>总的语法和上面的一致</p>
+<blockquote>
+<p>注意：当在不需要表达式的场景下，就不需要用括号括起来了</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void function foo()&#123;&#125;()</span><br><span class="line">var foo =function()&#123;&#125;();</span><br><span class="line">true &amp;&amp; function()&#123;&#125;();</span><br><span class="line">0,function()&#123;&#125;();</span><br><span class="line">//以上都是作为函数表达式，所以不需要用括号括起来了</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<blockquote>
+<p>对于立即执行函数，也可以给他们传入参数，在最后一个括号里传</p>
+</blockquote>
+<ol start="3">
+<li>像常见的<code>(function($){}(jQuery))</code>;就是将实参jQuery作为实参传入到函数function($){}中，通过形参$接受</li>
+<li><code>$(function(){})</code><ul>
+<li>需要引入jQuery包</li>
+<li>是$(document).ready(function(){})的简写，两者效果完全一样</li>
+</ul>
+</li>
+<li>可以在function(){}()的前面加上!、+、-、~也可以使变成函数表达式，变成立即执行函数</li>
+</ol>
+<h4 id="是时候理解一波了"><a href="#是时候理解一波了" class="headerlink" title="是时候理解一波了"></a>是时候理解一波了</h4><p>我的理解：</p>
+<ul>
+<li>js中函数内部可以读取到全局变量，而函数外部不能读取函数内部的局部变量。此时闭包就是为了能使得从外部访问函数内部的变量。</li>
+<li>为了让某些变量始终保持在内存中，但同时也可能导致内存消耗的问题</li>
+<li>方便调用上下文的局部变量，利于代码封装<br>两个方面：<ol>
+<li>函数作为返回值<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> function a()&#123;</span><br><span class="line">  var name=&apos;hh&apos;;</span><br><span class="line">  return function()&#123;</span><br><span class="line">      return name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">var b=a();</span><br><span class="line">//将返回的匿名函数赋值给b，此时b相当于a内部的匿名函数，可以访问到a内部的变量</span><br><span class="line">console.log(b());</span><br><span class="line"> //通过b(),执行a内部的匿名函数，最后返回a函数内部的变量</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>这段代码实现了全局变量b可以获取到a方法下的局部变量name的值<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   function f1()&#123;</span><br><span class="line">    var num=12;</span><br><span class="line">    return function()&#123;</span><br><span class="line">        var n=0;</span><br><span class="line">        console.log(++num);</span><br><span class="line">        console.log(++n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var fn=f1();</span><br><span class="line">fn();  //13 1</span><br><span class="line">//第一次调用f1里的匿名函数</span><br><span class="line">fn();  //14 1</span><br><span class="line">//第二次调用f1里的匿名函数</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>上述代码中在fn执行完后，就应该连同它里面的变量以同销毁，但在此case中，匿名函数作为f1的返回值被赋给了fn，这时候就相当于fn=function(var n=0;…){},并且匿名函数内部引用这f1里面的变量num，所以变量num无法被销毁，但每次每次n是重新创建的，这里就产生了内存消耗的问题（num）<br>再来一个case:依次输出1到5<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> (function()&#123;</span><br><span class="line">var i=1;</span><br><span class="line">for(i=0;i&lt;5;i++)&#123;</span><br><span class="line">    setTimeout(function()&#123;</span><br><span class="line">     console.log(i);</span><br><span class="line">    &#125;,100)</span><br><span class="line">&#125;</span><br><span class="line">&#125;());  //5，5，5，5，5</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>这是会发现出现了5个5，与预期不同。我们来分析一下，首先由于js是单线程语言，遇到setTimeout函数，这是一个异步函数，将之放入异步函数队列，等到主线程运行完。好！主线程运行完了，即5个循环运行结束，这是的i为5。此时运行异步队列中的线程，此时i为5，所以打印的都是5。我们可以采用一下立即执行函数来解决这个问题<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line"> var i=0;</span><br><span class="line"> for(i=0;i&lt;5;++i)&#123;</span><br><span class="line">     (function(i)&#123;</span><br><span class="line">         setTimeout(function()&#123;</span><br><span class="line">             console.log(i);</span><br><span class="line">            &#125;,100)</span><br><span class="line">     &#125;(i));</span><br><span class="line"> &#125;</span><br><span class="line">&#125;()); //0,1,2,3,4</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>此时已完成预期效果。这里通过闭包来保存变量i，将setTimeout函数放入立即执行函数中，将for循环中的i作为参数传递，通过立即执行函数，相当于将i固定保存在匿名函数中（这就是立即执行函数的魅力），100毫秒后打印出0、1、2、3、4<br>    若要在隔100毫秒在输出，可以<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line"> var i=0;</span><br><span class="line"> for(i=0;i&lt;5;++i)&#123;</span><br><span class="line">     (function(i)&#123;</span><br><span class="line">         setTimeout(function()&#123;</span><br><span class="line">             console.log(i);</span><br><span class="line">            &#125;,i*100)</span><br><span class="line">     &#125;(i));</span><br><span class="line"> &#125;</span><br><span class="line">&#125;()); //0,1,2,3,4</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<ol start="2">
+<li><p>闭包作为参数传递<br>将(function(){}()) 中最后一个括号里面传函数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   var num = 15</span><br><span class="line">var f1=function(x)&#123;</span><br><span class="line">  if(x&gt; num)&#123;</span><br><span class="line">      console.log(x);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 加上void 变成立即执行函数</span><br><span class="line">void function(fn)&#123;</span><br><span class="line"> var num=100;</span><br><span class="line"> fn(30)</span><br><span class="line">&#125;(f1)    //30</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>解释：这里首先有一个立即执行函数，直接执行，实参为f1对应的匿名方法，将之传给fn，在执行这个匿名函数，在执行这个匿名函数时，访问的num就是最上面的全局变量num（15）了</p>
+</blockquote>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>博客Markdown的写法</title>
     <url>/2020/01/17/my-second-blog/</url>
     <content><![CDATA[<h4 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h4><pre><code># 一级标题
@@ -297,20 +314,85 @@ setTimeout2           process2
       </tags>
   </entry>
   <entry>
-    <title>About Me</title>
-    <url>/2020/06/03/about/</url>
-    <content><![CDATA[<blockquote>
-<p>A Student, Now live in Nanning, China.</p>
+    <title>JS之毒瘤</title>
+    <url>/2020/06/03/jS%E7%BC%BA%E7%82%B9/</url>
+    <content><![CDATA[<h3 id="JS毒瘤"><a href="#JS毒瘤" class="headerlink" title="JS毒瘤"></a>JS毒瘤</h3><ul>
+<li><p><strong>全局变量</strong>:应尽可能的少用和不用全局变量，全局变量很难以管理，因为它可以在任何时间在程序的任意部分进行修改，降低了程序的可靠性</p>
+</li>
+<li><p><strong>作用域</strong>：js中代码块中变量作用域不止作用在此代码块中，这是一个极其危险的特性</p>
+</li>
+<li><p><strong>自动插入分号</strong>： JS有一个自动修复机制，它试图通过自动插入分号来修正有缺损的程序。但是，千万别指望它，它可能会掩盖/导致更严重的错误</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">return </span><br><span class="line">&#123;</span><br><span class="line">    status:ture;</span><br><span class="line">&#125;;</span><br><span class="line">//看去来是要返回一个包含status属性的对象，但自动插入分号会让它变成返回undefined</span><br><span class="line">//改正</span><br><span class="line">return&#123;</span><br><span class="line">     status:ture;</span><br><span class="line">&#125;</span><br><span class="line">//最好将&#123;写到最好一句的最后</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>typeof运算符</strong> 返回一个识别其类型的字符串</p>
+<ol>
+<li><p><code>typeof null</code> 返回的是’object’,typeof不能检测除null，只能通过一些辅助手段判断</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">myval=null;</span><br><span class="line">if (myval &amp;&amp; typeof myval === &apos;object&apos;)&#123;&#125;//..</span><br><span class="line">//或者</span><br><span class="line">if(myval === null)&#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>typeof array</code> 返回的是’object’,不是数组类型</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//通过构造函数</span><br><span class="line">if(array.constructor.toString().indexOf(&quot;Array&quot;) !== -1)</span><br><span class="line">//通过数组方法</span><br><span class="line">Array.isArray(array);</span><br><span class="line">//通过原型prototype+isPrototypeOf()</span><br><span class="line">Array.prototype.isPrototypeOf(array)</span><br><span class="line">//isPrototypeOf()函数：用于指示对象是否存在一个对象的原型链中。如果存在则返回true。该方法属于Object对象，由于所有的对象都继承了Object的对象实例。因此几乎所有的实例方法都可以使用该方法。如果array的原型链中存在Array对象，就会返回true，也就说明array属于数组类型</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p><code>parseInt()</code> 将字符串转为整数的方法</p>
+<ol>
+<li>遇到非数字时会停止解析 parseInt(“16”)和parseInt(“16 xx”)返回结果都是number型的16</li>
+<li>但是如果字符串的第一个字符是0，那么该字符串会基于八进制而非十进制来求值。在八进制中8和9不是数字，所以解析到8和9时会停止解析。<br>parseInt(“08”)和parseInt(“09”)都是返回0，这种错误会导致解析日期和时间时出现问题，可以在parseInt(),加上第二个参数parseInt(“08”，10)，这样可以解决问题<blockquote>
+<p>建议总是加上这个参数</p>
 </blockquote>
-<p>姓名：曹涵<br>现居：暂时没有<br>GitHub: <a href="https://github.com/xiaoruran/xiaoruran.github.io" target="_blank" rel="noopener">Cao_Han</a><br>QQ: 3314508022<br>微信: ch18325622987</p>
-<a id="more"></a>
+</li>
+</ol>
+</li>
+<li><p><code>+</code>运算符</p>
+<ol>
+<li>如果两边都是字符串，会连接起来</li>
+<li>若一边是空字符串，一边是数字，则会把数字转换为字符串进行连接</li>
+<li>若想要做加法运算，请保证两个运算数都是number</li>
+</ol>
+</li>
+<li><p>浮点数</p>
+<ul>
+<li>0.1+0.2不等于0.3</li>
+</ul>
+</li>
+<li><p><code>NaN</code> 不是一个数字的意思</p>
+<ul>
+<li>typeof NaN === ‘number’ //true</li>
+<li><code>isNaN()</code> 可以判断是否是NaN</li>
+<li>判断一个值是否可以用作数字的最好方法就是<code>isFinite()</code>函数,因为它会筛出NaN和Infinity，但它会试图把运算数转为一个数字。可以自定一个函数判断是否是一个数字<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var isNumber=function(value)&#123;</span><br><span class="line">   return typeof value === &apos;number&apos; &amp;&amp; isFinite(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>伪数组</p>
+<ul>
+<li><p>JS中的数组不是真正的数组</p>
+</li>
+<li><p>typeof不能判定是数组还是对象</p>
+</li>
+<li><p>判断是一个数组的方法</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    //通过构造函数</span><br><span class="line">    if(array.constructor.toString().indexOf(&quot;Array&quot;) !== -1)</span><br><span class="line">    //通过数组方法</span><br><span class="line">    Array.isArray(array);</span><br><span class="line">    //通过原型prototype+isPrototypeOf()</span><br><span class="line">    Array.prototype.isPrototypeOf(array)</span><br><span class="line">    ``` </span><br><span class="line">    &gt; `isPrototypeOf()`函数：用于指示对象是否存在一个对象的原型链中。如果存在则返回true。该方法属于Object对象，由于所有的对象都继承了Object的对象实例。因此几乎所有的实例方法都可以使用该方法。如果array的原型链中存在Array对象，就会返回true，也就说明array属于数组类型</span><br><span class="line"></span><br><span class="line">+ 假值（可以当成false的值）</span><br><span class="line">    1. 0（Number）</span><br><span class="line">    2. NaN（Number）</span><br><span class="line">    3. &apos;&apos;(String)</span><br><span class="line">    4. false(Boolean)</span><br><span class="line">    5. null(Object)</span><br><span class="line">    6. undefined(Undefined)</span><br><span class="line">+ `hasOwnProperty()`</span><br><span class="line">   + hasOwnProperty方法可以用来做成一个过滤器去避开for in语句的一个隐患。但这是一个方法，不是一个运算符，在任何对象中都可以进行赋值</span><br></pre></td></tr></table></figure>
 
-<!-- ![avatar.jpg](https://i.loli.net/2019/12/02/Hw5WJIMKzi1YrU8.jpg) -->
+<p>var name;<br>var obj.hasOwnProperty=null;  //地雷<br>for(name in obj){<br> if (obj.hasOwnProperty(name)){  //踩雷</p>
+<pre><code>console.log(name+&quot;:&quot;+obj[name]);</code></pre><p> }<br>}</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">### JS糟粕</span><br><span class="line">   1. 永远不要使用`==`和`!=`,必须使用`===`和`!==`</span><br><span class="line">      + 因为使用==时可能进行类型强转，由于==还具有传递性（x==y,y==z =&gt;x==z）</span><br><span class="line">#### 介绍eval()函数</span><br><span class="line">eval函数就是通过解析参数，进而通过JS编译器，来执行解析后的语句。相当于一个js语言的执行器，能把其中的参数按照JS的语法进行解析并执行</span><br><span class="line">   1. `eval(s)`</span><br><span class="line">   2. 当参数时数字或者Function类型时，直接返回该数字和该Function</span><br><span class="line">   3. 当参数时字符串时，JS会解析该字符串，并转换为相应的JS代码，执行该代码，并返回执行结果</span><br><span class="line">   4. 若参数是JSON格式（此时的JSON外面要加一对小括号），该方法返回该JSON</span><br><span class="line">   5. 如果参数s是字符串，并且字符串中是语句或语句块，则eval()方法会执行该语句或语句块，并且返回undefined</span><br><span class="line">   6. 如果试图覆盖eval属性或将eval()方法赋给另外一个属性，并通过该属性调用它，会出现EvalError 异常</span><br><span class="line">   7. 给了被求值的文本太多的权力，降低了语言的性能</span><br><span class="line"></span><br><span class="line">#### 代码块</span><br><span class="line">   + JS中，代码块并没有作用域</span><br><span class="line">   + JSLint期望只有function、if、switch、while、for、do、和try语句使用代码块，有一个例外就是在else或for in语句中的if语句可以不使用代码块</span><br></pre></td></tr></table></figure>
 
-<img src="https://pic.downk.cc/item/5e739676e83c3a1e3ab4b361.jpg" alt="avatar" width="300" style="border-radius:50%">
+</li>
+</ul>
+<p>var i=0;<br>for(i=0;i&lt;5;i++){<br>var x=8;<br>}<br>console.log(x); //8<br>```</p>
+<blockquote>
+<p>像for这样的代码块中声明的变量在其它地方也能调用，没有属于自己的作用</p>
+</blockquote>
+</li>
+<li><p><strong>最好不要使用++（递增）和–（递减），这是导致病毒和其它安全威胁的第二大元凶（第一个是架构缺陷）</strong></p>
+</li>
+</ul>
 ]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
       <tags>
-        <tag>自我介绍</tag>
+        <tag>前端</tag>
+        <tag>JS</tag>
       </tags>
   </entry>
   <entry>
@@ -558,19 +640,6 @@ setTimeout2           process2
       </tags>
   </entry>
   <entry>
-    <title>JS之对象说明符</title>
-    <url>/2020/06/02/%E5%AF%B9%E8%B1%A1%E8%AF%B4%E6%98%8E%E7%AC%A6/</url>
-    <content><![CDATA[<h3 id="对象说明符（ES6中可以理解为结构解析）"><a href="#对象说明符（ES6中可以理解为结构解析）" class="headerlink" title="对象说明符（ES6中可以理解为结构解析）"></a>对象说明符（ES6中可以理解为结构解析）</h3><p>有时候函数中需要传的参数过多，容易在调用时搞混这些参数的顺序，这时候就可以时使用对象说明符来解决。将形参写成一个对象的形式，实参叶根据这个形式进行传参</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var foo=function(&#123;</span><br><span class="line">  &apos;firststr&apos;:str,</span><br><span class="line">  &apos;secondstr&apos;:name</span><br><span class="line">&#125;)&#123;</span><br><span class="line">  console.log(str+ &quot;-----&quot;+ name );</span><br><span class="line">&#125;</span><br><span class="line">foo(&#123;&apos;firststr&apos;:&quot;你好啊&quot;,&apos;secondstr&apos;:&apos;JS&apos;&#125;);  //你好啊-----JS</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>位运算小技巧</title>
     <url>/2020/07/31/%E4%BD%8D%E8%BF%90%E7%AE%97/</url>
     <content><![CDATA[<h3 id="位运算小技巧"><a href="#位运算小技巧" class="headerlink" title="位运算小技巧"></a>位运算小技巧</h3><p>   js中有一个著名bug，0.1+0.2 ！== 0.3,因为精度的问题，导致所有的浮点运算都是不安全的。<br>   js中完全套用了java的位运算符，包括按位与<code>&amp;</code>、按位或<code>|</code>、按位异或<code>^</code>、按位非<code>~</code>、左移<code>&lt;&lt;</code>、带符号的右移<code>&gt;&gt;</code>和用<code>0</code>补足的右移<code>&gt;&gt;&gt;</code>。这套运算符争对的是整数，但在js内部，所有的数字都是以双精度浮点数进行保存。<br>如果要使用位运算符，js会将数字先转为整数再进行运算，这样就降低了运算速度</p>
@@ -613,6 +682,19 @@ setTimeout2           process2
       </tags>
   </entry>
   <entry>
+    <title>JS之对象说明符</title>
+    <url>/2020/06/02/%E5%AF%B9%E8%B1%A1%E8%AF%B4%E6%98%8E%E7%AC%A6/</url>
+    <content><![CDATA[<h3 id="对象说明符（ES6中可以理解为结构解析）"><a href="#对象说明符（ES6中可以理解为结构解析）" class="headerlink" title="对象说明符（ES6中可以理解为结构解析）"></a>对象说明符（ES6中可以理解为结构解析）</h3><p>有时候函数中需要传的参数过多，容易在调用时搞混这些参数的顺序，这时候就可以时使用对象说明符来解决。将形参写成一个对象的形式，实参叶根据这个形式进行传参</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var foo=function(&#123;</span><br><span class="line">  &apos;firststr&apos;:str,</span><br><span class="line">  &apos;secondstr&apos;:name</span><br><span class="line">&#125;)&#123;</span><br><span class="line">  console.log(str+ &quot;-----&quot;+ name );</span><br><span class="line">&#125;</span><br><span class="line">foo(&#123;&apos;firststr&apos;:&quot;你好啊&quot;,&apos;secondstr&apos;:&apos;JS&apos;&#125;);  //你好啊-----JS</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JS之number</title>
     <url>/2020/06/02/%E6%95%B0%E5%AD%97%E7%B1%BB%E5%9E%8Bnumber/</url>
     <content><![CDATA[<h3 id="number一些方法"><a href="#number一些方法" class="headerlink" title="number一些方法"></a>number一些方法</h3><ul>
@@ -625,88 +707,6 @@ setTimeout2           process2
 </li>
 <li><p><code>number.toString()</code>方法：将number转换为一个字符串，可选参数表示几进制，默认是10</p>
  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var x=Math.PI;</span><br><span class="line">console.log(x.toString(8)); //3.1103755242102643</span><br><span class="line">console.log(x.toString(16)); //3.243f6a8885a3</span><br><span class="line">console.log(x.toString()); //3.141592653589793</span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS之毒瘤</title>
-    <url>/2020/06/03/jS%E7%BC%BA%E7%82%B9/</url>
-    <content><![CDATA[<h3 id="JS毒瘤"><a href="#JS毒瘤" class="headerlink" title="JS毒瘤"></a>JS毒瘤</h3><ul>
-<li><p><strong>全局变量</strong>:应尽可能的少用和不用全局变量，全局变量很难以管理，因为它可以在任何时间在程序的任意部分进行修改，降低了程序的可靠性</p>
-</li>
-<li><p><strong>作用域</strong>：js中代码块中变量作用域不止作用在此代码块中，这是一个极其危险的特性</p>
-</li>
-<li><p><strong>自动插入分号</strong>： JS有一个自动修复机制，它试图通过自动插入分号来修正有缺损的程序。但是，千万别指望它，它可能会掩盖/导致更严重的错误</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">return </span><br><span class="line">&#123;</span><br><span class="line">    status:ture;</span><br><span class="line">&#125;;</span><br><span class="line">//看去来是要返回一个包含status属性的对象，但自动插入分号会让它变成返回undefined</span><br><span class="line">//改正</span><br><span class="line">return&#123;</span><br><span class="line">     status:ture;</span><br><span class="line">&#125;</span><br><span class="line">//最好将&#123;写到最好一句的最后</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>typeof运算符</strong> 返回一个识别其类型的字符串</p>
-<ol>
-<li><p><code>typeof null</code> 返回的是’object’,typeof不能检测除null，只能通过一些辅助手段判断</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">myval=null;</span><br><span class="line">if (myval &amp;&amp; typeof myval === &apos;object&apos;)&#123;&#125;//..</span><br><span class="line">//或者</span><br><span class="line">if(myval === null)&#123;&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>typeof array</code> 返回的是’object’,不是数组类型</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//通过构造函数</span><br><span class="line">if(array.constructor.toString().indexOf(&quot;Array&quot;) !== -1)</span><br><span class="line">//通过数组方法</span><br><span class="line">Array.isArray(array);</span><br><span class="line">//通过原型prototype+isPrototypeOf()</span><br><span class="line">Array.prototype.isPrototypeOf(array)</span><br><span class="line">//isPrototypeOf()函数：用于指示对象是否存在一个对象的原型链中。如果存在则返回true。该方法属于Object对象，由于所有的对象都继承了Object的对象实例。因此几乎所有的实例方法都可以使用该方法。如果array的原型链中存在Array对象，就会返回true，也就说明array属于数组类型</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p><code>parseInt()</code> 将字符串转为整数的方法</p>
-<ol>
-<li>遇到非数字时会停止解析 parseInt(“16”)和parseInt(“16 xx”)返回结果都是number型的16</li>
-<li>但是如果字符串的第一个字符是0，那么该字符串会基于八进制而非十进制来求值。在八进制中8和9不是数字，所以解析到8和9时会停止解析。<br>parseInt(“08”)和parseInt(“09”)都是返回0，这种错误会导致解析日期和时间时出现问题，可以在parseInt(),加上第二个参数parseInt(“08”，10)，这样可以解决问题<blockquote>
-<p>建议总是加上这个参数</p>
-</blockquote>
-</li>
-</ol>
-</li>
-<li><p><code>+</code>运算符</p>
-<ol>
-<li>如果两边都是字符串，会连接起来</li>
-<li>若一边是空字符串，一边是数字，则会把数字转换为字符串进行连接</li>
-<li>若想要做加法运算，请保证两个运算数都是number</li>
-</ol>
-</li>
-<li><p>浮点数</p>
-<ul>
-<li>0.1+0.2不等于0.3</li>
-</ul>
-</li>
-<li><p><code>NaN</code> 不是一个数字的意思</p>
-<ul>
-<li>typeof NaN === ‘number’ //true</li>
-<li><code>isNaN()</code> 可以判断是否是NaN</li>
-<li>判断一个值是否可以用作数字的最好方法就是<code>isFinite()</code>函数,因为它会筛出NaN和Infinity，但它会试图把运算数转为一个数字。可以自定一个函数判断是否是一个数字<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var isNumber=function(value)&#123;</span><br><span class="line">   return typeof value === &apos;number&apos; &amp;&amp; isFinite(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>伪数组</p>
-<ul>
-<li><p>JS中的数组不是真正的数组</p>
-</li>
-<li><p>typeof不能判定是数组还是对象</p>
-</li>
-<li><p>判断是一个数组的方法</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    //通过构造函数</span><br><span class="line">    if(array.constructor.toString().indexOf(&quot;Array&quot;) !== -1)</span><br><span class="line">    //通过数组方法</span><br><span class="line">    Array.isArray(array);</span><br><span class="line">    //通过原型prototype+isPrototypeOf()</span><br><span class="line">    Array.prototype.isPrototypeOf(array)</span><br><span class="line">    ``` </span><br><span class="line">    &gt; `isPrototypeOf()`函数：用于指示对象是否存在一个对象的原型链中。如果存在则返回true。该方法属于Object对象，由于所有的对象都继承了Object的对象实例。因此几乎所有的实例方法都可以使用该方法。如果array的原型链中存在Array对象，就会返回true，也就说明array属于数组类型</span><br><span class="line"></span><br><span class="line">+ 假值（可以当成false的值）</span><br><span class="line">    1. 0（Number）</span><br><span class="line">    2. NaN（Number）</span><br><span class="line">    3. &apos;&apos;(String)</span><br><span class="line">    4. false(Boolean)</span><br><span class="line">    5. null(Object)</span><br><span class="line">    6. undefined(Undefined)</span><br><span class="line">+ `hasOwnProperty()`</span><br><span class="line">   + hasOwnProperty方法可以用来做成一个过滤器去避开for in语句的一个隐患。但这是一个方法，不是一个运算符，在任何对象中都可以进行赋值</span><br></pre></td></tr></table></figure>
-
-<p>var name;<br>var obj.hasOwnProperty=null;  //地雷<br>for(name in obj){<br> if (obj.hasOwnProperty(name)){  //踩雷</p>
-<pre><code>console.log(name+&quot;:&quot;+obj[name]);</code></pre><p> }<br>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">### JS糟粕</span><br><span class="line">   1. 永远不要使用`==`和`!=`,必须使用`===`和`!==`</span><br><span class="line">      + 因为使用==时可能进行类型强转，由于==还具有传递性（x==y,y==z =&gt;x==z）</span><br><span class="line">#### 介绍eval()函数</span><br><span class="line">eval函数就是通过解析参数，进而通过JS编译器，来执行解析后的语句。相当于一个js语言的执行器，能把其中的参数按照JS的语法进行解析并执行</span><br><span class="line">   1. `eval(s)`</span><br><span class="line">   2. 当参数时数字或者Function类型时，直接返回该数字和该Function</span><br><span class="line">   3. 当参数时字符串时，JS会解析该字符串，并转换为相应的JS代码，执行该代码，并返回执行结果</span><br><span class="line">   4. 若参数是JSON格式（此时的JSON外面要加一对小括号），该方法返回该JSON</span><br><span class="line">   5. 如果参数s是字符串，并且字符串中是语句或语句块，则eval()方法会执行该语句或语句块，并且返回undefined</span><br><span class="line">   6. 如果试图覆盖eval属性或将eval()方法赋给另外一个属性，并通过该属性调用它，会出现EvalError 异常</span><br><span class="line">   7. 给了被求值的文本太多的权力，降低了语言的性能</span><br><span class="line"></span><br><span class="line">#### 代码块</span><br><span class="line">   + JS中，代码块并没有作用域</span><br><span class="line">   + JSLint期望只有function、if、switch、while、for、do、和try语句使用代码块，有一个例外就是在else或for in语句中的if语句可以不使用代码块</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>var i=0;<br>for(i=0;i&lt;5;i++){<br>var x=8;<br>}<br>console.log(x); //8<br>```</p>
-<blockquote>
-<p>像for这样的代码块中声明的变量在其它地方也能调用，没有属于自己的作用</p>
-</blockquote>
-</li>
-<li><p><strong>最好不要使用++（递增）和–（递减），这是导致病毒和其它安全威胁的第二大元凶（第一个是架构缺陷）</strong></p>
-</li>
 </ul>
 ]]></content>
       <categories>
