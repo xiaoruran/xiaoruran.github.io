@@ -14,6 +14,117 @@
       </tags>
   </entry>
   <entry>
+    <title>JS之事件执行机制</title>
+    <url>/2020/06/03/JS%E5%BC%95%E6%93%8E%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6/</url>
+    <content><![CDATA[<h3 id="JS引擎事件执行机制"><a href="#JS引擎事件执行机制" class="headerlink" title="JS引擎事件执行机制"></a>JS引擎事件执行机制</h3><h4 id="JS执行机制"><a href="#JS执行机制" class="headerlink" title="JS执行机制"></a>JS执行机制</h4><ol>
+<li><p>浏览器（或是JS引擎）执行JS的机制是基于事件循环</p>
+</li>
+<li><p>JS是单线程机制，在同一时间只能执行一个任务，其他任务只能排队，后续任务必须等到前一个任务结束后才能开始执行</p>
+</li>
+<li><p>为了避免因为某些长时间任务造成的无意义等待，JS引入了<strong>异步</strong>的概念，用另一个线程来管理异步任务。</p>
+</li>
+<li><p>同步任务直接在主线程队列中顺序执行，异步任务会进入另一个任务队列，不会阻塞主线程。等到主线程队列空了后，就回去异步队列查询是否有可执行的异步任务（通常异步任务需要等一些条件才能执行，如Ajax请求、文件读写），如果某个异步任务可以执行，则加入主线程队列，以此循环</p>
+<h4 id="JS中基于事件循环机制（event-loop）"><a href="#JS中基于事件循环机制（event-loop）" class="headerlink" title="JS中基于事件循环机制（event loop）"></a>JS中基于事件循环机制（event loop）</h4><p>异步的概念引入是由于事件循环造成的</p>
+</li>
+<li><p><strong>event loop(1)</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">console.log(1)</span><br><span class="line"> setTimeout(function()&#123;</span><br><span class="line">     console.log(2)</span><br><span class="line"> &#125;,0)</span><br><span class="line"> console.log(3)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果是 1 3 2</p>
+<p>setTimeout里的函数并没有立即执行，而实延迟了一段时间，满足一定条件后，才开始执行，这种代码较异步代码。</p>
+<p>定时器是JS中很经典的异步模型</p>
+<p>按这种：JS的执行机制是</p>
+</li>
+</ol>
+<ul>
+<li>首先判断是同步还是异步，同步进入主进程，异步就进入 event tavle</li>
+<li>异步任务先不执行，在event table中注册函数，满足条件后，被推入event queue</li>
+<li>同步任务进入主线程后一直执行，直到主线程空闲时，才去event queue中查看是否有可执行的异步任务，若有则推入到主线程队列中执行</li>
+</ul>
+<ol start="2">
+<li><p><strong>event loop(2)</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> setTimeout(function()&#123;</span><br><span class="line">  console.log(&apos;定时器开始啦&apos;)</span><br><span class="line"> &#125;);</span><br><span class="line"> new Promise(function(resolve)&#123;</span><br><span class="line">  console.log(&apos;马上执行for循环啦&apos;);</span><br><span class="line">  for(var i = 0; i &lt; 10000; i++)&#123;</span><br><span class="line">      i == 99 &amp;&amp; resolve();</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;).then(function()&#123;</span><br><span class="line">  console.log(&apos;执行then函数啦&apos;)</span><br><span class="line"> &#125;);</span><br><span class="line">console.log(&apos;代码执行结束&apos;);</span><br></pre></td></tr></table></figure>
+
+<p>按照event loop(1)的分析结果会是 马上执行for循环 代码执行结束 定时器开始啦 执行then函数啦，但是事实并非如此，真实的执行结果是：马上执行for循环 代码执行结束 执行then函数啦 定时器开始啦<br><img src="https://images2018.cnblogs.com/blog/1053223/201808/1053223-20180831162152579-2034514663.png" alt="avatar"></p>
+<p>这里可以提出更准确的划分机制:</p>
+</li>
+</ol>
+<ul>
+<li>宏任务: 包括整体代码<strong>script,setTimout,setInterval</strong></li>
+<li>微任务：宏任务底下的任务<strong>Promise，process.nextTick</strong><br>在一个事件循环中，执行第一个宏任务，宏任务执行结束，执行当前事件循环中的微任务，执行完毕之后进入下一个事件循环中，或者说执行下一个宏任务；</li>
+</ul>
+<p>   <strong>执行宏任务 ===&gt; 执行微任务 ===&gt; 执行另一个宏任务 ===&gt; 不断循环</strong><br>   <img src="https://images2018.cnblogs.com/blog/1053223/201808/1053223-20180831162350437-143973108.png" alt="avatar"></p>
+<p>   重新分析：</p>
+<ul>
+<li>首先执行script底下的宏任务，遇到setTimout,首先是异步任务，将其放入宏任务队列中</li>
+<li>遇到Promise函数，由于是同步任务直接运行，然后遇到then，这是异步任务,同时也是微任务，放入微任务队列中</li>
+<li>然后执行同步任务，打印“代码执行结束”</li>
+<li>本轮宏任务结束,查看本轮的微任务,发现有个then函数，执行then函数</li>
+<li>下一轮循环中，先找是否有宏任务，发现在宏任务队列中有个setTimout函数，开始执行</li>
+</ul>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  console.log(&apos;1&apos;);</span><br><span class="line"> </span><br><span class="line">setTimeout(function() &#123;</span><br><span class="line">    console.log(&apos;2&apos;);</span><br><span class="line">    process.nextTick(function() &#123;</span><br><span class="line">        console.log(&apos;3&apos;);</span><br><span class="line">    &#125;)</span><br><span class="line">    new Promise(function(resolve) &#123;</span><br><span class="line">        console.log(&apos;4&apos;);</span><br><span class="line">        resolve();</span><br><span class="line">    &#125;).then(function() &#123;</span><br><span class="line">        console.log(&apos;5&apos;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line">process.nextTick(function() &#123;</span><br><span class="line">    console.log(&apos;6&apos;);</span><br><span class="line">&#125;)</span><br><span class="line">new Promise(function(resolve) &#123;</span><br><span class="line">    console.log(&apos;7&apos;);</span><br><span class="line">    resolve();</span><br><span class="line">&#125;).then(function() &#123;</span><br><span class="line">    console.log(&apos;8&apos;)</span><br><span class="line">&#125;)</span><br><span class="line"> </span><br><span class="line">setTimeout(function() &#123;</span><br><span class="line">    console.log(&apos;9&apos;);</span><br><span class="line">    process.nextTick(function() &#123;</span><br><span class="line">        console.log(&apos;10&apos;);</span><br><span class="line">    &#125;)</span><br><span class="line">    new Promise(function(resolve) &#123;</span><br><span class="line">        console.log(&apos;11&apos;);</span><br><span class="line">        resolve();</span><br><span class="line">    &#125;).then(function() &#123;</span><br><span class="line">        console.log(&apos;12&apos;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>解释：<br>   1、 第一轮事件循环流程分析如下：<br>    整体script作为第一个宏任务进入主线程，遇到console.log，输出1。<br>    遇到setTimeout，其回调函数被分发到宏任务Event Queue中。我们暂且记为setTimeout1。<br>    遇到process.nextTick()，其回调函数被分发到微任务Event Queue中。我们记为process1。<br>    遇到Promise，new Promise直接执行，输出7。then被分发到微任务Event Queue中。我们记为then1。<br>    又遇到了setTimeout，其回调函数被分发到宏任务Event Queue中，我们记为setTimeout2。</p>
+<pre><code>宏任务Event Queue   微任务Event Queue
+setTimeout1         process1
+setTimeout2         then1
+
+上表是第一轮事件循环宏任务结束时各Event Queue的情况，此时已经输出了1和7。
+我们发现了process1和then1两个微任务。
+执行process1,输出6。
+执行then1，输出8。
+
+好了，第一轮事件循环正式结束，这一轮的结果是输出1，7，6，8。</code></pre><p>2、 那么第二轮时间循环从setTimeout1宏任务开始：</p>
+<pre><code>首先输出2。接下来遇到了process.nextTick()，同样将其分发到微任务Event Queue中，</code></pre><p>记为process2。new Promise立即执行输出4，then也分发到微任务Event Queue中，记为then2。</p>
+<pre><code>宏任务Event Queue     微任务Event Queue
+setTimeout2           process2
+                      then2
+
+第二轮事件循环宏任务结束，我们发现有process2和then2两个微任务可以执行。
+    输出3。
+    输出5。
+    第二轮事件循环结束，第二轮输出2，4，3，5。</code></pre><p>3、 第三轮事件循环开始，此时只剩setTimeout2了，执行。<br>        直接输出9。<br>        将process.nextTick()分发到微任务Event Queue中。记为process3。<br>        直接执行new Promise，输出11。<br>        将then分发到微任务Event Queue中，记为then3。</p>
+<pre><code>宏任务Event Queue     微任务Event Queue
+                        process3
+                        then3     
+第三轮事件循环宏任务执行结束，执行两个微任务process3和then3。
+    输出10。
+    输出12。
+    第三轮事件循环结束，第三轮输出9，11，10，12。
+
+整段代码，共进行了三次事件循环，完整的输出为1，7，6，8，2，4，3，5，9，11，10，12。</code></pre>]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS之JSON</title>
+    <url>/2020/06/03/JSON/</url>
+    <content><![CDATA[<h3 id="JSON-JavaScript对象表示法"><a href="#JSON-JavaScript对象表示法" class="headerlink" title="JSON(JavaScript对象表示法)"></a>JSON(JavaScript对象表示法)</h3><p>这是一种轻量级的数据交换格式。基于JavaScript对象字面量表示法，那是JS最精华的部分之一。尽管只是JS的一个子集，但与语言无关。<br>现代编程语言写的程序，都可以用它来交换数据。它是一种文本格式，所以可以被人和机器阅读。<br>它易于实现且易于使用</p>
+<h4 id="JSON语法"><a href="#JSON语法" class="headerlink" title="JSON语法"></a>JSON语法</h4><ul>
+<li>JSON对象是一个相当于”key-value”的无序集合。名字可以是任何字符串，值可以是任何类型的JSON值，包括数组和对象</li>
+<li>JSON有六种类型的值：对象、数组、字符串、布尔类型、数字、和特殊值null</li>
+<li>JSON数字与JS数字类似，整数的首位不允许为0，因为一些语言用它来表示八进制数<h4 id="安全的使用JSON"><a href="#安全的使用JSON" class="headerlink" title="安全的使用JSON"></a>安全的使用JSON</h4></li>
+<li>使用eval函数可以把一段JSON文本转换为一个有用的数据结构，但是eval函数有着极其可怕的安全问题。</li>
+<li>可以使用<code>JSON.parse()</code>方法代替eval函数，能避免危险。如果文本中包含任何危险数据JSON.parse()会抛出一个异常，为防止服务器出现漏洞，建议总是用JSON.parse代替eval。</li>
+<li>在外部数据与innerHTML进行交互式还存在另一种危险。一种常见的Ajax模式是把服务器端发送过来的一个HTML文本赋值给某个HTML元素的innerHTML属性。这是一个非常糟糕的习观，如果这个HTML中包含一个&lt;\script&gt;标签或者其等价物，那么一个恶意脚本将被执行，这也可以是因为服务器端存在漏洞<blockquote>
+<p>如果一个恶意脚本在你的页面上被运行，它就有权访问这个页面的所有状态和执行该页面能做的所有操作.他能与服务器进行交互，而服务器并不能区分恶意请求。恶意脚本还能访问全局对象，这使得它有权访问用户能看到的一切，这个恶意脚本还拥有和用户对话的能力。document对象还能给该恶意脚本授权访问网络，允许它下载更多的恶意脚本，或者是在你的防火墙内探测站点，或者是把它已经窃取的隐私内容发送给世界上的任何一个服务器。这是JS全局变量的一个直接后果。</p>
+</blockquote>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JS之原型链理解</title>
     <url>/2020/06/03/JS%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%90%86%E8%A7%A3/</url>
     <content><![CDATA[<p>###JS原型及原型链<br>JavaScript中没有子类和父类的概念，也没有类和实例（instance）的区分,全靠一种称为”原型(prototype)链”的模式，来实现继承</p>
@@ -69,20 +180,88 @@
       </tags>
   </entry>
   <entry>
-    <title>JS之JSON</title>
-    <url>/2020/06/03/JSON/</url>
-    <content><![CDATA[<h3 id="JSON-JavaScript对象表示法"><a href="#JSON-JavaScript对象表示法" class="headerlink" title="JSON(JavaScript对象表示法)"></a>JSON(JavaScript对象表示法)</h3><p>这是一种轻量级的数据交换格式。基于JavaScript对象字面量表示法，那是JS最精华的部分之一。尽管只是JS的一个子集，但与语言无关。<br>现代编程语言写的程序，都可以用它来交换数据。它是一种文本格式，所以可以被人和机器阅读。<br>它易于实现且易于使用</p>
-<h4 id="JSON语法"><a href="#JSON语法" class="headerlink" title="JSON语法"></a>JSON语法</h4><ul>
-<li>JSON对象是一个相当于”key-value”的无序集合。名字可以是任何字符串，值可以是任何类型的JSON值，包括数组和对象</li>
-<li>JSON有六种类型的值：对象、数组、字符串、布尔类型、数字、和特殊值null</li>
-<li>JSON数字与JS数字类似，整数的首位不允许为0，因为一些语言用它来表示八进制数<h4 id="安全的使用JSON"><a href="#安全的使用JSON" class="headerlink" title="安全的使用JSON"></a>安全的使用JSON</h4></li>
-<li>使用eval函数可以把一段JSON文本转换为一个有用的数据结构，但是eval函数有着极其可怕的安全问题。</li>
-<li>可以使用<code>JSON.parse()</code>方法代替eval函数，能避免危险。如果文本中包含任何危险数据JSON.parse()会抛出一个异常，为防止服务器出现漏洞，建议总是用JSON.parse代替eval。</li>
-<li>在外部数据与innerHTML进行交互式还存在另一种危险。一种常见的Ajax模式是把服务器端发送过来的一个HTML文本赋值给某个HTML元素的innerHTML属性。这是一个非常糟糕的习观，如果这个HTML中包含一个&lt;\script&gt;标签或者其等价物，那么一个恶意脚本将被执行，这也可以是因为服务器端存在漏洞<blockquote>
-<p>如果一个恶意脚本在你的页面上被运行，它就有权访问这个页面的所有状态和执行该页面能做的所有操作.他能与服务器进行交互，而服务器并不能区分恶意请求。恶意脚本还能访问全局对象，这使得它有权访问用户能看到的一切，这个恶意脚本还拥有和用户对话的能力。document对象还能给该恶意脚本授权访问网络，允许它下载更多的恶意脚本，或者是在你的防火墙内探测站点，或者是把它已经窃取的隐私内容发送给世界上的任何一个服务器。这是JS全局变量的一个直接后果。</p>
+    <title>About Me</title>
+    <url>/2020/06/03/about/</url>
+    <content><![CDATA[<blockquote>
+<p>A Student, Now live in Nanning, China.</p>
 </blockquote>
+<p>姓名：曹涵<br>现居：暂时没有<br>GitHub: <a href="https://github.com/xiaoruran/xiaoruran.github.io" target="_blank" rel="noopener">Cao_Han</a><br>QQ: 3314508022<br>微信: ch18325622987</p>
+<a id="more"></a>
+
+<!-- ![avatar.jpg](https://i.loli.net/2019/12/02/Hw5WJIMKzi1YrU8.jpg) -->
+
+<img src="https://pic.downk.cc/item/5e739676e83c3a1e3ab4b361.jpg" alt="avatar" width="300" style="border-radius:50%">
+]]></content>
+      <tags>
+        <tag>自我介绍</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS之闭包理解</title>
+    <url>/2020/06/01/JS%E9%97%AD%E5%8C%85/</url>
+    <content><![CDATA[<h3 id="JS闭包理解"><a href="#JS闭包理解" class="headerlink" title="JS闭包理解"></a>JS闭包理解</h3><h4 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a>立即执行函数</h4><p>作用： 创建一个独立的作用域。这个作用域的变量外面访问不到（避免变量污染）</p>
+<ol>
+<li><p><code>(function foo(){}())</code><br>如果直接写function foo(){}()解释器会报错。<em>立即执行函数的调用方式是将函数表达式、调用操作符、分组操作符放到一个括号内，来告诉解释器这里有一个需要解释器立即执行的函数</em>。否则通常情况下，解析器遇到function关键子，都会把它当成一个函数声明，而不是个函数表达式</p>
+<ul>
+<li>立即执行函数的写法</li>
+<li>相当于 function foo(){};foo();</li>
+<li>相当于先定义一个函数，然后调用执行它</li>
+<li>在最后面的括号里面可以直接写传递的参数<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function foo(n1,n2)&#123;</span><br><span class="line">    console.log(n1+n2);</span><br><span class="line">&#125;(3,5));  //8</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+</li>
+<li><p><code>(function foo(){})()</code><br>总的语法和上面的一致</p>
+<blockquote>
+<p>注意：当在不需要表达式的场景下，就不需要用括号括起来了</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void function foo()&#123;&#125;()</span><br><span class="line">var foo =function()&#123;&#125;();</span><br><span class="line">true &amp;&amp; function()&#123;&#125;();</span><br><span class="line">0,function()&#123;&#125;();</span><br><span class="line">//以上都是作为函数表达式，所以不需要用括号括起来了</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<blockquote>
+<p>对于立即执行函数，也可以给他们传入参数，在最后一个括号里传</p>
+</blockquote>
+<ol start="3">
+<li>像常见的<code>(function($){}(jQuery))</code>;就是将实参jQuery作为实参传入到函数function($){}中，通过形参$接受</li>
+<li><code>$(function(){})</code><ul>
+<li>需要引入jQuery包</li>
+<li>是$(document).ready(function(){})的简写，两者效果完全一样</li>
+</ul>
+</li>
+<li>可以在function(){}()的前面加上!、+、-、~也可以使变成函数表达式，变成立即执行函数</li>
+</ol>
+<h4 id="是时候理解一波了"><a href="#是时候理解一波了" class="headerlink" title="是时候理解一波了"></a>是时候理解一波了</h4><p>我的理解：</p>
+<ul>
+<li>js中函数内部可以读取到全局变量，而函数外部不能读取函数内部的局部变量。此时闭包就是为了能使得从外部访问函数内部的变量。</li>
+<li>为了让某些变量始终保持在内存中，但同时也可能导致内存消耗的问题</li>
+<li>方便调用上下文的局部变量，利于代码封装<br>两个方面：<ol>
+<li>函数作为返回值<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> function a()&#123;</span><br><span class="line">  var name=&apos;hh&apos;;</span><br><span class="line">  return function()&#123;</span><br><span class="line">      return name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">var b=a();</span><br><span class="line">//将返回的匿名函数赋值给b，此时b相当于a内部的匿名函数，可以访问到a内部的变量</span><br><span class="line">console.log(b());</span><br><span class="line"> //通过b(),执行a内部的匿名函数，最后返回a函数内部的变量</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>这段代码实现了全局变量b可以获取到a方法下的局部变量name的值<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   function f1()&#123;</span><br><span class="line">    var num=12;</span><br><span class="line">    return function()&#123;</span><br><span class="line">        var n=0;</span><br><span class="line">        console.log(++num);</span><br><span class="line">        console.log(++n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var fn=f1();</span><br><span class="line">fn();  //13 1</span><br><span class="line">//第一次调用f1里的匿名函数</span><br><span class="line">fn();  //14 1</span><br><span class="line">//第二次调用f1里的匿名函数</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>上述代码中在fn执行完后，就应该连同它里面的变量以同销毁，但在此case中，匿名函数作为f1的返回值被赋给了fn，这时候就相当于fn=function(var n=0;…){},并且匿名函数内部引用这f1里面的变量num，所以变量num无法被销毁，但每次每次n是重新创建的，这里就产生了内存消耗的问题（num）<br>再来一个case:依次输出1到5<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> (function()&#123;</span><br><span class="line">var i=1;</span><br><span class="line">for(i=0;i&lt;5;i++)&#123;</span><br><span class="line">    setTimeout(function()&#123;</span><br><span class="line">     console.log(i);</span><br><span class="line">    &#125;,100)</span><br><span class="line">&#125;</span><br><span class="line">&#125;());  //5，5，5，5，5</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>这是会发现出现了5个5，与预期不同。我们来分析一下，首先由于js是单线程语言，遇到setTimeout函数，这是一个异步函数，将之放入异步函数队列，等到主线程运行完。好！主线程运行完了，即5个循环运行结束，这是的i为5。此时运行异步队列中的线程，此时i为5，所以打印的都是5。我们可以采用一下立即执行函数来解决这个问题<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line"> var i=0;</span><br><span class="line"> for(i=0;i&lt;5;++i)&#123;</span><br><span class="line">     (function(i)&#123;</span><br><span class="line">         setTimeout(function()&#123;</span><br><span class="line">             console.log(i);</span><br><span class="line">            &#125;,100)</span><br><span class="line">     &#125;(i));</span><br><span class="line"> &#125;</span><br><span class="line">&#125;()); //0,1,2,3,4</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>此时已完成预期效果。这里通过闭包来保存变量i，将setTimeout函数放入立即执行函数中，将for循环中的i作为参数传递，通过立即执行函数，相当于将i固定保存在匿名函数中（这就是立即执行函数的魅力），100毫秒后打印出0、1、2、3、4<br>    若要在隔100毫秒在输出，可以<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line"> var i=0;</span><br><span class="line"> for(i=0;i&lt;5;++i)&#123;</span><br><span class="line">     (function(i)&#123;</span><br><span class="line">         setTimeout(function()&#123;</span><br><span class="line">             console.log(i);</span><br><span class="line">            &#125;,i*100)</span><br><span class="line">     &#125;(i));</span><br><span class="line"> &#125;</span><br><span class="line">&#125;()); //0,1,2,3,4</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<ol start="2">
+<li><p>闭包作为参数传递<br>将(function(){}()) 中最后一个括号里面传函数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   var num = 15</span><br><span class="line">var f1=function(x)&#123;</span><br><span class="line">  if(x&gt; num)&#123;</span><br><span class="line">      console.log(x);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 加上void 变成立即执行函数</span><br><span class="line">void function(fn)&#123;</span><br><span class="line"> var num=100;</span><br><span class="line"> fn(30)</span><br><span class="line">&#125;(f1)    //30</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>解释：这里首先有一个立即执行函数，直接执行，实参为f1对应的匿名方法，将之传给fn，在执行这个匿名函数，在执行这个匿名函数时，访问的num就是最上面的全局变量num（15）了</p>
+</blockquote>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>前端</category>
@@ -175,185 +354,6 @@
       </tags>
   </entry>
   <entry>
-    <title>About Me</title>
-    <url>/2020/06/03/about/</url>
-    <content><![CDATA[<blockquote>
-<p>A Student, Now live in Nanning, China.</p>
-</blockquote>
-<p>姓名：曹涵<br>现居：暂时没有<br>GitHub: <a href="https://github.com/xiaoruran/xiaoruran.github.io" target="_blank" rel="noopener">Cao_Han</a><br>QQ: 3314508022<br>微信: ch18325622987</p>
-<a id="more"></a>
-
-<!-- ![avatar.jpg](https://i.loli.net/2019/12/02/Hw5WJIMKzi1YrU8.jpg) -->
-
-<img src="https://pic.downk.cc/item/5e739676e83c3a1e3ab4b361.jpg" alt="avatar" width="300" style="border-radius:50%">
-]]></content>
-      <tags>
-        <tag>自我介绍</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS之事件执行机制</title>
-    <url>/2020/06/03/JS%E5%BC%95%E6%93%8E%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6/</url>
-    <content><![CDATA[<h3 id="JS引擎事件执行机制"><a href="#JS引擎事件执行机制" class="headerlink" title="JS引擎事件执行机制"></a>JS引擎事件执行机制</h3><h4 id="JS执行机制"><a href="#JS执行机制" class="headerlink" title="JS执行机制"></a>JS执行机制</h4><ol>
-<li><p>浏览器（或是JS引擎）执行JS的机制是基于事件循环</p>
-</li>
-<li><p>JS是单线程机制，在同一时间只能执行一个任务，其他任务只能排队，后续任务必须等到前一个任务结束后才能开始执行</p>
-</li>
-<li><p>为了避免因为某些长时间任务造成的无意义等待，JS引入了<strong>异步</strong>的概念，用另一个线程来管理异步任务。</p>
-</li>
-<li><p>同步任务直接在主线程队列中顺序执行，异步任务会进入另一个任务队列，不会阻塞主线程。等到主线程队列空了后，就回去异步队列查询是否有可执行的异步任务（通常异步任务需要等一些条件才能执行，如Ajax请求、文件读写），如果某个异步任务可以执行，则加入主线程队列，以此循环</p>
-<h4 id="JS中基于事件循环机制（event-loop）"><a href="#JS中基于事件循环机制（event-loop）" class="headerlink" title="JS中基于事件循环机制（event loop）"></a>JS中基于事件循环机制（event loop）</h4><p>异步的概念引入是由于事件循环造成的</p>
-</li>
-<li><p><strong>event loop(1)</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">console.log(1)</span><br><span class="line"> setTimeout(function()&#123;</span><br><span class="line">     console.log(2)</span><br><span class="line"> &#125;,0)</span><br><span class="line"> console.log(3)</span><br></pre></td></tr></table></figure>
-
-<p>运行结果是 1 3 2</p>
-<p>setTimeout里的函数并没有立即执行，而实延迟了一段时间，满足一定条件后，才开始执行，这种代码较异步代码。</p>
-<p>定时器是JS中很经典的异步模型</p>
-<p>按这种：JS的执行机制是</p>
-</li>
-</ol>
-<ul>
-<li>首先判断是同步还是异步，同步进入主进程，异步就进入 event tavle</li>
-<li>异步任务先不执行，在event table中注册函数，满足条件后，被推入event queue</li>
-<li>同步任务进入主线程后一直执行，直到主线程空闲时，才去event queue中查看是否有可执行的异步任务，若有则推入到主线程队列中执行</li>
-</ul>
-<ol start="2">
-<li><p><strong>event loop(2)</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> setTimeout(function()&#123;</span><br><span class="line">  console.log(&apos;定时器开始啦&apos;)</span><br><span class="line"> &#125;);</span><br><span class="line"> new Promise(function(resolve)&#123;</span><br><span class="line">  console.log(&apos;马上执行for循环啦&apos;);</span><br><span class="line">  for(var i = 0; i &lt; 10000; i++)&#123;</span><br><span class="line">      i == 99 &amp;&amp; resolve();</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;).then(function()&#123;</span><br><span class="line">  console.log(&apos;执行then函数啦&apos;)</span><br><span class="line"> &#125;);</span><br><span class="line">console.log(&apos;代码执行结束&apos;);</span><br></pre></td></tr></table></figure>
-
-<p>按照event loop(1)的分析结果会是 马上执行for循环 代码执行结束 定时器开始啦 执行then函数啦，但是事实并非如此，真实的执行结果是：马上执行for循环 代码执行结束 执行then函数啦 定时器开始啦<br><img src="https://images2018.cnblogs.com/blog/1053223/201808/1053223-20180831162152579-2034514663.png" alt="avatar"></p>
-<p>这里可以提出更准确的划分机制:</p>
-</li>
-</ol>
-<ul>
-<li>宏任务: 包括整体代码<strong>script,setTimout,setInterval</strong></li>
-<li>微任务：宏任务底下的任务<strong>Promise，process.nextTick</strong><br>在一个事件循环中，执行第一个宏任务，宏任务执行结束，执行当前事件循环中的微任务，执行完毕之后进入下一个事件循环中，或者说执行下一个宏任务；</li>
-</ul>
-<p>   <strong>执行宏任务 ===&gt; 执行微任务 ===&gt; 执行另一个宏任务 ===&gt; 不断循环</strong><br>   <img src="https://images2018.cnblogs.com/blog/1053223/201808/1053223-20180831162350437-143973108.png" alt="avatar"></p>
-<p>   重新分析：</p>
-<ul>
-<li>首先执行script底下的宏任务，遇到setTimout,首先是异步任务，将其放入宏任务队列中</li>
-<li>遇到Promise函数，由于是同步任务直接运行，然后遇到then，这是异步任务,同时也是微任务，放入微任务队列中</li>
-<li>然后执行同步任务，打印“代码执行结束”</li>
-<li>本轮宏任务结束,查看本轮的微任务,发现有个then函数，执行then函数</li>
-<li>下一轮循环中，先找是否有宏任务，发现在宏任务队列中有个setTimout函数，开始执行</li>
-</ul>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  console.log(&apos;1&apos;);</span><br><span class="line"> </span><br><span class="line">setTimeout(function() &#123;</span><br><span class="line">    console.log(&apos;2&apos;);</span><br><span class="line">    process.nextTick(function() &#123;</span><br><span class="line">        console.log(&apos;3&apos;);</span><br><span class="line">    &#125;)</span><br><span class="line">    new Promise(function(resolve) &#123;</span><br><span class="line">        console.log(&apos;4&apos;);</span><br><span class="line">        resolve();</span><br><span class="line">    &#125;).then(function() &#123;</span><br><span class="line">        console.log(&apos;5&apos;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line">process.nextTick(function() &#123;</span><br><span class="line">    console.log(&apos;6&apos;);</span><br><span class="line">&#125;)</span><br><span class="line">new Promise(function(resolve) &#123;</span><br><span class="line">    console.log(&apos;7&apos;);</span><br><span class="line">    resolve();</span><br><span class="line">&#125;).then(function() &#123;</span><br><span class="line">    console.log(&apos;8&apos;)</span><br><span class="line">&#125;)</span><br><span class="line"> </span><br><span class="line">setTimeout(function() &#123;</span><br><span class="line">    console.log(&apos;9&apos;);</span><br><span class="line">    process.nextTick(function() &#123;</span><br><span class="line">        console.log(&apos;10&apos;);</span><br><span class="line">    &#125;)</span><br><span class="line">    new Promise(function(resolve) &#123;</span><br><span class="line">        console.log(&apos;11&apos;);</span><br><span class="line">        resolve();</span><br><span class="line">    &#125;).then(function() &#123;</span><br><span class="line">        console.log(&apos;12&apos;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>解释：<br>   1、 第一轮事件循环流程分析如下：<br>    整体script作为第一个宏任务进入主线程，遇到console.log，输出1。<br>    遇到setTimeout，其回调函数被分发到宏任务Event Queue中。我们暂且记为setTimeout1。<br>    遇到process.nextTick()，其回调函数被分发到微任务Event Queue中。我们记为process1。<br>    遇到Promise，new Promise直接执行，输出7。then被分发到微任务Event Queue中。我们记为then1。<br>    又遇到了setTimeout，其回调函数被分发到宏任务Event Queue中，我们记为setTimeout2。</p>
-<pre><code>宏任务Event Queue   微任务Event Queue
-setTimeout1         process1
-setTimeout2         then1
-
-上表是第一轮事件循环宏任务结束时各Event Queue的情况，此时已经输出了1和7。
-我们发现了process1和then1两个微任务。
-执行process1,输出6。
-执行then1，输出8。
-
-好了，第一轮事件循环正式结束，这一轮的结果是输出1，7，6，8。</code></pre><p>2、 那么第二轮时间循环从setTimeout1宏任务开始：</p>
-<pre><code>首先输出2。接下来遇到了process.nextTick()，同样将其分发到微任务Event Queue中，</code></pre><p>记为process2。new Promise立即执行输出4，then也分发到微任务Event Queue中，记为then2。</p>
-<pre><code>宏任务Event Queue     微任务Event Queue
-setTimeout2           process2
-                      then2
-
-第二轮事件循环宏任务结束，我们发现有process2和then2两个微任务可以执行。
-    输出3。
-    输出5。
-    第二轮事件循环结束，第二轮输出2，4，3，5。</code></pre><p>3、 第三轮事件循环开始，此时只剩setTimeout2了，执行。<br>        直接输出9。<br>        将process.nextTick()分发到微任务Event Queue中。记为process3。<br>        直接执行new Promise，输出11。<br>        将then分发到微任务Event Queue中，记为then3。</p>
-<pre><code>宏任务Event Queue     微任务Event Queue
-                        process3
-                        then3     
-第三轮事件循环宏任务执行结束，执行两个微任务process3和then3。
-    输出10。
-    输出12。
-    第三轮事件循环结束，第三轮输出9，11，10，12。
-
-整段代码，共进行了三次事件循环，完整的输出为1，7，6，8，2，4，3，5，9，11，10，12。</code></pre>]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS之闭包理解</title>
-    <url>/2020/06/01/JS%E9%97%AD%E5%8C%85/</url>
-    <content><![CDATA[<h3 id="JS闭包理解"><a href="#JS闭包理解" class="headerlink" title="JS闭包理解"></a>JS闭包理解</h3><h4 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a>立即执行函数</h4><p>作用： 创建一个独立的作用域。这个作用域的变量外面访问不到（避免变量污染）</p>
-<ol>
-<li><p><code>(function foo(){}())</code><br>如果直接写function foo(){}()解释器会报错。<em>立即执行函数的调用方式是将函数表达式、调用操作符、分组操作符放到一个括号内，来告诉解释器这里有一个需要解释器立即执行的函数</em>。否则通常情况下，解析器遇到function关键子，都会把它当成一个函数声明，而不是个函数表达式</p>
-<ul>
-<li>立即执行函数的写法</li>
-<li>相当于 function foo(){};foo();</li>
-<li>相当于先定义一个函数，然后调用执行它</li>
-<li>在最后面的括号里面可以直接写传递的参数<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function foo(n1,n2)&#123;</span><br><span class="line">    console.log(n1+n2);</span><br><span class="line">&#125;(3,5));  //8</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p><code>(function foo(){})()</code><br>总的语法和上面的一致</p>
-<blockquote>
-<p>注意：当在不需要表达式的场景下，就不需要用括号括起来了</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void function foo()&#123;&#125;()</span><br><span class="line">var foo =function()&#123;&#125;();</span><br><span class="line">true &amp;&amp; function()&#123;&#125;();</span><br><span class="line">0,function()&#123;&#125;();</span><br><span class="line">//以上都是作为函数表达式，所以不需要用括号括起来了</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<blockquote>
-<p>对于立即执行函数，也可以给他们传入参数，在最后一个括号里传</p>
-</blockquote>
-<ol start="3">
-<li>像常见的<code>(function($){}(jQuery))</code>;就是将实参jQuery作为实参传入到函数function($){}中，通过形参$接受</li>
-<li><code>$(function(){})</code><ul>
-<li>需要引入jQuery包</li>
-<li>是$(document).ready(function(){})的简写，两者效果完全一样</li>
-</ul>
-</li>
-<li>可以在function(){}()的前面加上!、+、-、~也可以使变成函数表达式，变成立即执行函数</li>
-</ol>
-<h4 id="是时候理解一波了"><a href="#是时候理解一波了" class="headerlink" title="是时候理解一波了"></a>是时候理解一波了</h4><p>我的理解：</p>
-<ul>
-<li>js中函数内部可以读取到全局变量，而函数外部不能读取函数内部的局部变量。此时闭包就是为了能使得从外部访问函数内部的变量。</li>
-<li>为了让某些变量始终保持在内存中，但同时也可能导致内存消耗的问题</li>
-<li>方便调用上下文的局部变量，利于代码封装<br>两个方面：<ol>
-<li>函数作为返回值<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> function a()&#123;</span><br><span class="line">  var name=&apos;hh&apos;;</span><br><span class="line">  return function()&#123;</span><br><span class="line">      return name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">var b=a();</span><br><span class="line">//将返回的匿名函数赋值给b，此时b相当于a内部的匿名函数，可以访问到a内部的变量</span><br><span class="line">console.log(b());</span><br><span class="line"> //通过b(),执行a内部的匿名函数，最后返回a函数内部的变量</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-</li>
-</ul>
-<blockquote>
-<p>这段代码实现了全局变量b可以获取到a方法下的局部变量name的值<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   function f1()&#123;</span><br><span class="line">    var num=12;</span><br><span class="line">    return function()&#123;</span><br><span class="line">        var n=0;</span><br><span class="line">        console.log(++num);</span><br><span class="line">        console.log(++n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var fn=f1();</span><br><span class="line">fn();  //13 1</span><br><span class="line">//第一次调用f1里的匿名函数</span><br><span class="line">fn();  //14 1</span><br><span class="line">//第二次调用f1里的匿名函数</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>上述代码中在fn执行完后，就应该连同它里面的变量以同销毁，但在此case中，匿名函数作为f1的返回值被赋给了fn，这时候就相当于fn=function(var n=0;…){},并且匿名函数内部引用这f1里面的变量num，所以变量num无法被销毁，但每次每次n是重新创建的，这里就产生了内存消耗的问题（num）<br>再来一个case:依次输出1到5<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> (function()&#123;</span><br><span class="line">var i=1;</span><br><span class="line">for(i=0;i&lt;5;i++)&#123;</span><br><span class="line">    setTimeout(function()&#123;</span><br><span class="line">     console.log(i);</span><br><span class="line">    &#125;,100)</span><br><span class="line">&#125;</span><br><span class="line">&#125;());  //5，5，5，5，5</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>这是会发现出现了5个5，与预期不同。我们来分析一下，首先由于js是单线程语言，遇到setTimeout函数，这是一个异步函数，将之放入异步函数队列，等到主线程运行完。好！主线程运行完了，即5个循环运行结束，这是的i为5。此时运行异步队列中的线程，此时i为5，所以打印的都是5。我们可以采用一下立即执行函数来解决这个问题<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line"> var i=0;</span><br><span class="line"> for(i=0;i&lt;5;++i)&#123;</span><br><span class="line">     (function(i)&#123;</span><br><span class="line">         setTimeout(function()&#123;</span><br><span class="line">             console.log(i);</span><br><span class="line">            &#125;,100)</span><br><span class="line">     &#125;(i));</span><br><span class="line"> &#125;</span><br><span class="line">&#125;()); //0,1,2,3,4</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>此时已完成预期效果。这里通过闭包来保存变量i，将setTimeout函数放入立即执行函数中，将for循环中的i作为参数传递，通过立即执行函数，相当于将i固定保存在匿名函数中（这就是立即执行函数的魅力），100毫秒后打印出0、1、2、3、4<br>    若要在隔100毫秒在输出，可以<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line"> var i=0;</span><br><span class="line"> for(i=0;i&lt;5;++i)&#123;</span><br><span class="line">     (function(i)&#123;</span><br><span class="line">         setTimeout(function()&#123;</span><br><span class="line">             console.log(i);</span><br><span class="line">            &#125;,i*100)</span><br><span class="line">     &#125;(i));</span><br><span class="line"> &#125;</span><br><span class="line">&#125;()); //0,1,2,3,4</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<ol start="2">
-<li><p>闭包作为参数传递<br>将(function(){}()) 中最后一个括号里面传函数</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   var num = 15</span><br><span class="line">var f1=function(x)&#123;</span><br><span class="line">  if(x&gt; num)&#123;</span><br><span class="line">      console.log(x);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 加上void 变成立即执行函数</span><br><span class="line">void function(fn)&#123;</span><br><span class="line"> var num=100;</span><br><span class="line"> fn(30)</span><br><span class="line">&#125;(f1)    //30</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>解释：这里首先有一个立即执行函数，直接执行，实参为f1对应的匿名方法，将之传给fn，在执行这个匿名函数，在执行这个匿名函数时，访问的num就是最上面的全局变量num（15）了</p>
-</blockquote>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>博客Markdown的写法</title>
     <url>/2020/01/17/my-second-blog/</url>
     <content><![CDATA[<h4 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h4><pre><code># 一级标题
@@ -393,106 +393,6 @@ setTimeout2           process2
       <tags>
         <tag>技术</tag>
         <tag>方法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Vue之样式</title>
-    <url>/2020/06/03/vue2node/</url>
-    <content><![CDATA[<p>[TOC]</p>
-<h3 id="Vue中使用样式"><a href="#Vue中使用样式" class="headerlink" title="Vue中使用样式"></a>Vue中使用样式</h3><h4 id="使用class样式"><a href="#使用class样式" class="headerlink" title="使用class样式"></a>使用class样式</h4><ol>
-<li><p>数组 直接传递数组 （了解就行）</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; &lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;]&quot;&gt;这是一个标题&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意：使用数组时，要用v-bind绑定class并且在class里面的数组，必须用字符串包裹起来，这时不需要在Vue中有data</p>
-</blockquote>
-</li>
-<li><p>在数组里面使用三元表达式（在Vue中需要声明数据）</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; .active &#123;letter-spacing: 0.5em&#125;&lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;,flag?&apos;active&apos;:&apos;&apos;]&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  var vm =new Vue(&#123;</span><br><span class="line">     el:&quot;#app&quot;,</span><br><span class="line">     data:&#123;</span><br><span class="line">         flag:true</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>此时的三元表达式可以借用data中的数据进行，但还是需要将class绑定属性 v-bind</p>
-</blockquote>
-</li>
-<li><p>在数组里面使用对象可以代替三元表达式 例如：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; .active &#123;letter-spacing: 0.5em&#125;&lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;,&#123;&apos;active&apos;:flag&#125;]&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  var vm =new Vue(&#123;</span><br><span class="line">     el:&quot;#app&quot;,</span><br><span class="line">     data:&#123;</span><br><span class="line">         flag:true</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>直接使用对象（前提是使用v-bind绑定class属性对象的属性可以带引号也可不带，属性的值是一个标识符） 例如：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; .active &#123;letter-spacing: 0.5em&#125;&lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;&#123;red: true, active: false&#125;&quot;&gt;这是一个标题&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<blockquote>
-<p>注意：直接使用对象时，:class={} 这里是对象的括号，且里面可用字符串包裹，也可不用</p>
-</blockquote>
-</li>
-</ol>
-<h4 id="Vue中绑定内联样式（style）"><a href="#Vue中绑定内联样式（style）" class="headerlink" title="Vue中绑定内联样式（style）"></a>Vue中绑定内联样式（style）</h4><ol>
-<li><p>直接通过v-bind绑定style</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;h1 :style=&quot;&#123;color:&apos;red&apos;,&apos;font-size&apos;:200px&#125;&quot;&gt;这是一个标题&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将样式对像，定义到data中，并直接应用到:style中</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;h1 :style=&quot;Objstyle&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  data:&#123;Objstyle:&#123;color:&apos;red&apos;,&apos;font-size&apos;:200px&#125;</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Vue简介</title>
-    <url>/2019/07/19/vue%E7%AE%80%E4%BB%8B%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>[TOC]</p>
-<h3 id="什么是Vue-js"><a href="#什么是Vue-js" class="headerlink" title="什么是Vue.js"></a>什么是Vue.js</h3><ul>
-<li>Vue.js是目前最火的前端框架，react是最流行的前端框架</li>
-<li>Vue.js是一套构建用户界面的框架，<strong>只关注视图层</strong>，它不仅易于上手，还便于和第三当库或既有项目整合。（Vue有配套的第三方类库，可以整合起来做大型项目的开发）</li>
-<li>在vue中核心的概念是让用户不再操作DOM元素，解放了用户的双手，让程序员关注业务逻辑</li>
-</ul>
-<h3 id="框架和库的区别"><a href="#框架和库的区别" class="headerlink" title="框架和库的区别"></a>框架和库的区别</h3><ul>
-<li>框架是一套完整的解决方案；对项目的侵入性较大；项目若要更换框架，则需要重新构建整个项目。<ul>
-<li>node中的express1</li>
-</ul>
-</li>
-<li>库也可以成为插件（提供的是一个小功能），对项目的侵入性校，如果某个库无法完成某些需求，可以很容易切换到其他库实现需求。<h3 id="Node（后端）中的mvc与前端中的mccm之间的区别"><a href="#Node（后端）中的mvc与前端中的mccm之间的区别" class="headerlink" title="Node（后端）中的mvc与前端中的mccm之间的区别"></a>Node（后端）中的mvc与前端中的mccm之间的区别</h3></li>
-</ul>
-<ul>
-<li><p>mvc是后端的分层开发概念</p>
-</li>
-<li><p>MVVM是前端视图层的概念，主要关注视图层的分离，mvvm把前端的视图层分为了三部分：<code>Model</code>、<code>View</code>、<code>VM ViewModel</code></p>
-</li>
-<li><p>为什么有了MVC还要有MVVM</p>
-</li>
-<li><p><strong>MVC结构</strong>：第一：app.js(项目的入口地址，一切的请求，都要先进入这里进行处理。注意：app.js没有路由分发的功能，需要调用router.js模块进行路由分发)；第二：router.js(功能单一，只负责分发路由，不负责具体逻辑业务的处理)；第三：Controller(业务处理层，功能单一，只负责处理业务，不负责处理数据的CRUD)；第四：Model（职能单一，只负责操作数据库，执行sql语句，运行数据的CRUD）</p>
-<ul>
-<li>通过View视图层给app.js(每当用户操作了界面，若需要进行业务的请求，就会通过网络请求，发送给后端的服务器，此时，我们这个请求，就会被后端的App.js监听到)</li>
-</ul>
-</li>
-<li><p><strong>MVVM结构</strong>：是在前端的View视图层进行划分的。将每个页面都分为M、V和VM。其中，VM是整个MVVM的核心，应为VM是V和M见的调度者。</p>
-<ol>
-<li>M中保存的是每个页面中单独的数据</li>
-<li>V中页面中静态的HTML结构</li>
-<li>VM是一个调度者，分割了V和M；V中想要存取数据，通过VM来得到；M中想存取<br>数据，只能通过VM</li>
-<li>前端页面中使用MVVM的思想，是为了让我们开发更加方便，<strong>MVVM提供的数据的双向绑定</strong>，这是由VM提供的<blockquote>
-<p>涵哥说过：你真棒</p>
-</blockquote>
-</li>
-</ol>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>vue</tag>
       </tags>
   </entry>
   <entry>
@@ -640,58 +540,103 @@ setTimeout2           process2
       </tags>
   </entry>
   <entry>
-    <title>位运算小技巧</title>
-    <url>/2020/07/31/%E4%BD%8D%E8%BF%90%E7%AE%97/</url>
-    <content><![CDATA[<h3 id="位运算小技巧"><a href="#位运算小技巧" class="headerlink" title="位运算小技巧"></a>位运算小技巧</h3><p>   js中有一个著名bug，0.1+0.2 ！== 0.3,因为精度的问题，导致所有的浮点运算都是不安全的。<br>   js中完全套用了java的位运算符，包括按位与<code>&amp;</code>、按位或<code>|</code>、按位异或<code>^</code>、按位非<code>~</code>、左移<code>&lt;&lt;</code>、带符号的右移<code>&gt;&gt;</code>和用<code>0</code>补足的右移<code>&gt;&gt;&gt;</code>。这套运算符争对的是整数，但在js内部，所有的数字都是以双精度浮点数进行保存。<br>如果要使用位运算符，js会将数字先转为整数再进行运算，这样就降低了运算速度</p>
-<h4 id="1-使用左移运算符迅速得出2的次方"><a href="#1-使用左移运算符迅速得出2的次方" class="headerlink" title="1. 使用左移运算符迅速得出2的次方"></a>1. 使用左移运算符迅速得出2的次方</h4><pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1 &lt;&lt; 2  //4 ,即1乘2的2次方</span><br><span class="line">1 &lt;&lt; 10  //1024</span><br></pre></td></tr></table></figure></code></pre><h4 id="2-使用-切换变量0或1（异或规则：相同为0，相异为1）"><a href="#2-使用-切换变量0或1（异或规则：相同为0，相异为1）" class="headerlink" title="2. 使用^切换变量0或1（异或规则：相同为0，相异为1）"></a>2. 使用<code>^</code>切换变量0或1（异或规则：相同为0，相异为1）</h4><pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var toggle=0;</span><br><span class="line">toggle ^=1; //1,当toggle为1时，变为0</span><br></pre></td></tr></table></figure></code></pre><h4 id="3-使用-amp-判断奇偶性"><a href="#3-使用-amp-判断奇偶性" class="headerlink" title="3. 使用&amp;判断奇偶性"></a>3. 使用<code>&amp;</code>判断奇偶性</h4><ul>
-<li><p>偶数 &amp; 1 =0</p>
-</li>
-<li><p>奇数 &amp; 1 =1</p>
-<h4 id="4-使用-将一个值转化为布尔值"><a href="#4-使用-将一个值转化为布尔值" class="headerlink" title="4. 使用!!将一个值转化为布尔值"></a>4. 使用<code>!!</code>将一个值转化为布尔值</h4><h4 id="5-使用-、-gt-gt-、-lt-lt-、-gt-gt-gt-、-来取整"><a href="#5-使用-、-gt-gt-、-lt-lt-、-gt-gt-gt-、-来取整" class="headerlink" title="5. 使用~、&gt;&gt;、&lt;&lt;、&gt;&gt;&gt;、| 来取整"></a>5. 使用~、&gt;&gt;、&lt;&lt;、&gt;&gt;&gt;、| 来取整</h4></li>
-<li><p>相当于使用了Math.floor()，向下取整</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">~~11.71   //11</span><br><span class="line">11.71 &gt;&gt; 0 //11</span><br><span class="line">11.71 &lt;&lt; 0 //11</span><br><span class="line">11.71 | 0 //11</span><br><span class="line">11.71 &gt;&gt;&gt; 0 //11</span><br></pre></td></tr></table></figure>
+    <title>Vue之样式</title>
+    <url>/2020/06/03/vue2node/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h3 id="Vue中使用样式"><a href="#Vue中使用样式" class="headerlink" title="Vue中使用样式"></a>Vue中使用样式</h3><h4 id="使用class样式"><a href="#使用class样式" class="headerlink" title="使用class样式"></a>使用class样式</h4><ol>
+<li><p>数组 直接传递数组 （了解就行）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; &lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;]&quot;&gt;这是一个标题&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>js引擎察觉到使用位运算，会将浮点型转换为整型;&gt;&gt;&gt; 不可以对负数取整;Math.round()为四舍五入</p>
+<p>注意：使用数组时，要用v-bind绑定class并且在class里面的数组，必须用字符串包裹起来，这时不需要在Vue中有data</p>
 </blockquote>
-<h4 id="6-使用-完成值交换"><a href="#6-使用-完成值交换" class="headerlink" title="6. 使用^完成值交换"></a>6. 使用^完成值交换</h4><p>在es6的解构赋值出来之前，这种当时会更快（但必须是整数）</p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//before</span><br><span class="line">let a=7, b=1;</span><br><span class="line">let temp=a;a=b;b=temp;    //借助临时变量</span><br><span class="line">b=[a,a=b][0];             //借助数组</span><br><span class="line">&#123;                         //借助数轴，即两数之间的距离进行交换</span><br><span class="line">  a=a-b;</span><br><span class="line">  b=a+b;</span><br><span class="line">  a=b-a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//after</span><br><span class="line">let a=7,b=1;</span><br><span class="line">a^=b;</span><br><span class="line">b^=a;</span><br><span class="line">a^=b;                    //a=1,b=7</span><br><span class="line">//es6</span><br><span class="line">[a,b]=[b,a];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在数组里面使用三元表达式（在Vue中需要声明数据）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; .active &#123;letter-spacing: 0.5em&#125;&lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;,flag?&apos;active&apos;:&apos;&apos;]&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  var vm =new Vue(&#123;</span><br><span class="line">     el:&quot;#app&quot;,</span><br><span class="line">     data:&#123;</span><br><span class="line">         flag:true</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
 
-<h4 id="7-使用-判断符号是否相等"><a href="#7-使用-判断符号是否相等" class="headerlink" title="7. 使用^判断符号是否相等"></a>7. 使用^判断符号是否相等</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(a^b)&gt;=0;   //true为相同符号，false为相反符号</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>此时的三元表达式可以借用data中的数据进行，但还是需要将class绑定属性 v-bind</p>
+</blockquote>
+</li>
+<li><p>在数组里面使用对象可以代替三元表达式 例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; .active &#123;letter-spacing: 0.5em&#125;&lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;,&#123;&apos;active&apos;:flag&#125;]&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  var vm =new Vue(&#123;</span><br><span class="line">     el:&quot;#app&quot;,</span><br><span class="line">     data:&#123;</span><br><span class="line">         flag:true</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li><p>因为两数进行异或，最高位是符号位，相同为0，相异为1，所以相同的话，结果为正数，相反的，结果为负数</p>
-<h4 id="8-使用-来检查数字是否不相等"><a href="#8-使用-来检查数字是否不相等" class="headerlink" title="8. 使用^来检查数字是否不相等"></a>8. 使用^来检查数字是否不相等</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//before</span><br><span class="line">if(a!==3)&#123;&#125; </span><br><span class="line">//after</span><br><span class="line">if(a^3)&#123;&#125;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>直接使用对象（前提是使用v-bind绑定class属性对象的属性可以带引号也可不带，属性的值是一个标识符） 例如：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; .active &#123;letter-spacing: 0.5em&#125;&lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;&#123;red: true, active: false&#125;&quot;&gt;这是一个标题&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
+
 </li>
-<li><p>原理：如果两数不相等，那么总会有一个位不同，结果就不会是0</p>
-<h4 id="9-使用-amp-来判断一个数是否为2的整数幂（6不是，8是）"><a href="#9-使用-amp-来判断一个数是否为2的整数幂（6不是，8是）" class="headerlink" title="9. 使用&amp;来判断一个数是否为2的整数幂（6不是，8是）"></a>9. 使用&amp;来判断一个数是否为2的整数幂（6不是，8是）</h4></li>
-<li><p>n &amp; (n-1) ,若结果是0，则是整数幂，反之则不是</p>
+</ol>
+<blockquote>
+<p>注意：直接使用对象时，:class={} 这里是对象的括号，且里面可用字符串包裹，也可不用</p>
+</blockquote>
 </li>
-<li><p>解析： 若一个数是整数次幂，则写成二进制会是，只有一个位置上有1（设为index），其他位置都为0，<br>此时n-1的二进制则是index-1的位置到第一位都是1，此时按位&amp;，所有位置都为0，结果就为0</p>
+</ol>
+<h4 id="Vue中绑定内联样式（style）"><a href="#Vue中绑定内联样式（style）" class="headerlink" title="Vue中绑定内联样式（style）"></a>Vue中绑定内联样式（style）</h4><ol>
+<li><p>直接通过v-bind绑定style</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;h1 :style=&quot;&#123;color:&apos;red&apos;,&apos;font-size&apos;:200px&#125;&quot;&gt;这是一个标题&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
+<li><p>将样式对像，定义到data中，并直接应用到:style中</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;h1 :style=&quot;Objstyle&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  data:&#123;Objstyle:&#123;color:&apos;red&apos;,&apos;font-size&apos;:200px&#125;</span><br></pre></td></tr></table></figure>
+
+
 </li>
-</ul>
+</ol>
 ]]></content>
-      <categories>
-        <category>技巧</category>
-      </categories>
-      <tags>
-        <tag>技巧</tag>
-        <tag>位运算</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS之对象说明符</title>
-    <url>/2020/06/02/%E5%AF%B9%E8%B1%A1%E8%AF%B4%E6%98%8E%E7%AC%A6/</url>
-    <content><![CDATA[<h3 id="对象说明符（ES6中可以理解为结构解析）"><a href="#对象说明符（ES6中可以理解为结构解析）" class="headerlink" title="对象说明符（ES6中可以理解为结构解析）"></a>对象说明符（ES6中可以理解为结构解析）</h3><p>有时候函数中需要传的参数过多，容易在调用时搞混这些参数的顺序，这时候就可以时使用对象说明符来解决。将形参写成一个对象的形式，实参叶根据这个形式进行传参</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var foo=function(&#123;</span><br><span class="line">  &apos;firststr&apos;:str,</span><br><span class="line">  &apos;secondstr&apos;:name</span><br><span class="line">&#125;)&#123;</span><br><span class="line">  console.log(str+ &quot;-----&quot;+ name );</span><br><span class="line">&#125;</span><br><span class="line">foo(&#123;&apos;firststr&apos;:&quot;你好啊&quot;,&apos;secondstr&apos;:&apos;JS&apos;&#125;);  //你好啊-----JS</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>前端</category>
       </categories>
       <tags>
         <tag>前端</tag>
-        <tag>JS</tag>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue简介</title>
+    <url>/2019/07/19/vue%E7%AE%80%E4%BB%8B%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h3 id="什么是Vue-js"><a href="#什么是Vue-js" class="headerlink" title="什么是Vue.js"></a>什么是Vue.js</h3><ul>
+<li>Vue.js是目前最火的前端框架，react是最流行的前端框架</li>
+<li>Vue.js是一套构建用户界面的框架，<strong>只关注视图层</strong>，它不仅易于上手，还便于和第三当库或既有项目整合。（Vue有配套的第三方类库，可以整合起来做大型项目的开发）</li>
+<li>在vue中核心的概念是让用户不再操作DOM元素，解放了用户的双手，让程序员关注业务逻辑</li>
+</ul>
+<h3 id="框架和库的区别"><a href="#框架和库的区别" class="headerlink" title="框架和库的区别"></a>框架和库的区别</h3><ul>
+<li>框架是一套完整的解决方案；对项目的侵入性较大；项目若要更换框架，则需要重新构建整个项目。<ul>
+<li>node中的express1</li>
+</ul>
+</li>
+<li>库也可以成为插件（提供的是一个小功能），对项目的侵入性校，如果某个库无法完成某些需求，可以很容易切换到其他库实现需求。<h3 id="Node（后端）中的mvc与前端中的mccm之间的区别"><a href="#Node（后端）中的mvc与前端中的mccm之间的区别" class="headerlink" title="Node（后端）中的mvc与前端中的mccm之间的区别"></a>Node（后端）中的mvc与前端中的mccm之间的区别</h3></li>
+</ul>
+<ul>
+<li><p>mvc是后端的分层开发概念</p>
+</li>
+<li><p>MVVM是前端视图层的概念，主要关注视图层的分离，mvvm把前端的视图层分为了三部分：<code>Model</code>、<code>View</code>、<code>VM ViewModel</code></p>
+</li>
+<li><p>为什么有了MVC还要有MVVM</p>
+</li>
+<li><p><strong>MVC结构</strong>：第一：app.js(项目的入口地址，一切的请求，都要先进入这里进行处理。注意：app.js没有路由分发的功能，需要调用router.js模块进行路由分发)；第二：router.js(功能单一，只负责分发路由，不负责具体逻辑业务的处理)；第三：Controller(业务处理层，功能单一，只负责处理业务，不负责处理数据的CRUD)；第四：Model（职能单一，只负责操作数据库，执行sql语句，运行数据的CRUD）</p>
+<ul>
+<li>通过View视图层给app.js(每当用户操作了界面，若需要进行业务的请求，就会通过网络请求，发送给后端的服务器，此时，我们这个请求，就会被后端的App.js监听到)</li>
+</ul>
+</li>
+<li><p><strong>MVVM结构</strong>：是在前端的View视图层进行划分的。将每个页面都分为M、V和VM。其中，VM是整个MVVM的核心，应为VM是V和M见的调度者。</p>
+<ol>
+<li>M中保存的是每个页面中单独的数据</li>
+<li>V中页面中静态的HTML结构</li>
+<li>VM是一个调度者，分割了V和M；V中想要存取数据，通过VM来得到；M中想存取<br>数据，只能通过VM</li>
+<li>前端页面中使用MVVM的思想，是为了让我们开发更加方便，<strong>MVVM提供的数据的双向绑定</strong>，这是由VM提供的<blockquote>
+<p>涵哥说过：你真棒</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>vue</tag>
       </tags>
   </entry>
   <entry>
@@ -813,26 +758,58 @@ setTimeout2           process2
       </tags>
   </entry>
   <entry>
-    <title>JS之number</title>
-    <url>/2020/06/02/%E6%95%B0%E5%AD%97%E7%B1%BB%E5%9E%8Bnumber/</url>
-    <content><![CDATA[<h3 id="number一些方法"><a href="#number一些方法" class="headerlink" title="number一些方法"></a>number一些方法</h3><ul>
-<li><p><code>number.toExponential()</code>方法：将这个number转换为一个指数形式的字符串，参数items是控制其小数点后的数字位数，这个值必须在0~20之内</p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var x=Math.PI;</span><br><span class="line">console.log(x.toExponential(30)); //3.142e+0</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>number.x.toFixed()</code>方法：将number转换为一个十进制形式的字符串，可选参数控制其小数点都的数字位数，默认为0，这个值必须在0~20之内</p>
-</li>
-<li><p><code>number.toPrecision()</code>方法：将number转换为一个十进制数子形式的字符串，可选参数控制数字的精度，表示的是所有数字的个数，这个值必须在0~21之内</p>
-</li>
-<li><p><code>number.toString()</code>方法：将number转换为一个字符串，可选参数表示几进制，默认是10</p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var x=Math.PI;</span><br><span class="line">console.log(x.toString(8)); //3.1103755242102643</span><br><span class="line">console.log(x.toString(16)); //3.243f6a8885a3</span><br><span class="line">console.log(x.toString()); //3.141592653589793</span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
+    <title>JS之对象说明符</title>
+    <url>/2020/06/02/%E5%AF%B9%E8%B1%A1%E8%AF%B4%E6%98%8E%E7%AC%A6/</url>
+    <content><![CDATA[<h3 id="对象说明符（ES6中可以理解为结构解析）"><a href="#对象说明符（ES6中可以理解为结构解析）" class="headerlink" title="对象说明符（ES6中可以理解为结构解析）"></a>对象说明符（ES6中可以理解为结构解析）</h3><p>有时候函数中需要传的参数过多，容易在调用时搞混这些参数的顺序，这时候就可以时使用对象说明符来解决。将形参写成一个对象的形式，实参叶根据这个形式进行传参</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var foo=function(&#123;</span><br><span class="line">  &apos;firststr&apos;:str,</span><br><span class="line">  &apos;secondstr&apos;:name</span><br><span class="line">&#125;)&#123;</span><br><span class="line">  console.log(str+ &quot;-----&quot;+ name );</span><br><span class="line">&#125;</span><br><span class="line">foo(&#123;&apos;firststr&apos;:&quot;你好啊&quot;,&apos;secondstr&apos;:&apos;JS&apos;&#125;);  //你好啊-----JS</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>前端</category>
       </categories>
       <tags>
         <tag>前端</tag>
         <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>位运算小技巧</title>
+    <url>/2020/07/31/%E4%BD%8D%E8%BF%90%E7%AE%97/</url>
+    <content><![CDATA[<h3 id="位运算小技巧"><a href="#位运算小技巧" class="headerlink" title="位运算小技巧"></a>位运算小技巧</h3><p>   js中有一个著名bug，0.1+0.2 ！== 0.3,因为精度的问题，导致所有的浮点运算都是不安全的。<br>   js中完全套用了java的位运算符，包括按位与<code>&amp;</code>、按位或<code>|</code>、按位异或<code>^</code>、按位非<code>~</code>、左移<code>&lt;&lt;</code>、带符号的右移<code>&gt;&gt;</code>和用<code>0</code>补足的右移<code>&gt;&gt;&gt;</code>。这套运算符争对的是整数，但在js内部，所有的数字都是以双精度浮点数进行保存。<br>如果要使用位运算符，js会将数字先转为整数再进行运算，这样就降低了运算速度</p>
+<h4 id="1-使用左移运算符迅速得出2的次方"><a href="#1-使用左移运算符迅速得出2的次方" class="headerlink" title="1. 使用左移运算符迅速得出2的次方"></a>1. 使用左移运算符迅速得出2的次方</h4><pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1 &lt;&lt; 2  //4 ,即1乘2的2次方</span><br><span class="line">1 &lt;&lt; 10  //1024</span><br></pre></td></tr></table></figure></code></pre><h4 id="2-使用-切换变量0或1（异或规则：相同为0，相异为1）"><a href="#2-使用-切换变量0或1（异或规则：相同为0，相异为1）" class="headerlink" title="2. 使用^切换变量0或1（异或规则：相同为0，相异为1）"></a>2. 使用<code>^</code>切换变量0或1（异或规则：相同为0，相异为1）</h4><pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var toggle=0;</span><br><span class="line">toggle ^=1; //1,当toggle为1时，变为0</span><br></pre></td></tr></table></figure></code></pre><h4 id="3-使用-amp-判断奇偶性"><a href="#3-使用-amp-判断奇偶性" class="headerlink" title="3. 使用&amp;判断奇偶性"></a>3. 使用<code>&amp;</code>判断奇偶性</h4><ul>
+<li><p>偶数 &amp; 1 =0</p>
+</li>
+<li><p>奇数 &amp; 1 =1</p>
+<h4 id="4-使用-将一个值转化为布尔值"><a href="#4-使用-将一个值转化为布尔值" class="headerlink" title="4. 使用!!将一个值转化为布尔值"></a>4. 使用<code>!!</code>将一个值转化为布尔值</h4><h4 id="5-使用-、-gt-gt-、-lt-lt-、-gt-gt-gt-、-来取整"><a href="#5-使用-、-gt-gt-、-lt-lt-、-gt-gt-gt-、-来取整" class="headerlink" title="5. 使用~、&gt;&gt;、&lt;&lt;、&gt;&gt;&gt;、| 来取整"></a>5. 使用~、&gt;&gt;、&lt;&lt;、&gt;&gt;&gt;、| 来取整</h4></li>
+<li><p>相当于使用了Math.floor()，向下取整</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">~~11.71   //11</span><br><span class="line">11.71 &gt;&gt; 0 //11</span><br><span class="line">11.71 &lt;&lt; 0 //11</span><br><span class="line">11.71 | 0 //11</span><br><span class="line">11.71 &gt;&gt;&gt; 0 //11</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>js引擎察觉到使用位运算，会将浮点型转换为整型;&gt;&gt;&gt; 不可以对负数取整;Math.round()为四舍五入</p>
+</blockquote>
+<h4 id="6-使用-完成值交换"><a href="#6-使用-完成值交换" class="headerlink" title="6. 使用^完成值交换"></a>6. 使用^完成值交换</h4><p>在es6的解构赋值出来之前，这种当时会更快（但必须是整数）</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//before</span><br><span class="line">let a=7, b=1;</span><br><span class="line">let temp=a;a=b;b=temp;    //借助临时变量</span><br><span class="line">b=[a,a=b][0];             //借助数组</span><br><span class="line">&#123;                         //借助数轴，即两数之间的距离进行交换</span><br><span class="line">  a=a-b;</span><br><span class="line">  b=a+b;</span><br><span class="line">  a=b-a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//after</span><br><span class="line">let a=7,b=1;</span><br><span class="line">a^=b;</span><br><span class="line">b^=a;</span><br><span class="line">a^=b;                    //a=1,b=7</span><br><span class="line">//es6</span><br><span class="line">[a,b]=[b,a];</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-使用-判断符号是否相等"><a href="#7-使用-判断符号是否相等" class="headerlink" title="7. 使用^判断符号是否相等"></a>7. 使用^判断符号是否相等</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(a^b)&gt;=0;   //true为相同符号，false为相反符号</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>因为两数进行异或，最高位是符号位，相同为0，相异为1，所以相同的话，结果为正数，相反的，结果为负数</p>
+<h4 id="8-使用-来检查数字是否不相等"><a href="#8-使用-来检查数字是否不相等" class="headerlink" title="8. 使用^来检查数字是否不相等"></a>8. 使用^来检查数字是否不相等</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//before</span><br><span class="line">if(a!==3)&#123;&#125; </span><br><span class="line">//after</span><br><span class="line">if(a^3)&#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>原理：如果两数不相等，那么总会有一个位不同，结果就不会是0</p>
+<h4 id="9-使用-amp-来判断一个数是否为2的整数幂（6不是，8是）"><a href="#9-使用-amp-来判断一个数是否为2的整数幂（6不是，8是）" class="headerlink" title="9. 使用&amp;来判断一个数是否为2的整数幂（6不是，8是）"></a>9. 使用&amp;来判断一个数是否为2的整数幂（6不是，8是）</h4></li>
+<li><p>n &amp; (n-1) ,若结果是0，则是整数幂，反之则不是</p>
+</li>
+<li><p>解析： 若一个数是整数次幂，则写成二进制会是，只有一个位置上有1（设为index），其他位置都为0，<br>此时n-1的二进制则是index-1的位置到第一位都是1，此时按位&amp;，所有位置都为0，结果就为0</p>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>技巧</category>
+      </categories>
+      <tags>
+        <tag>技巧</tag>
+        <tag>位运算</tag>
       </tags>
   </entry>
   <entry>
@@ -964,6 +941,70 @@ setTimeout2           process2
       </tags>
   </entry>
   <entry>
+    <title>JS之number</title>
+    <url>/2020/06/02/%E6%95%B0%E5%AD%97%E7%B1%BB%E5%9E%8Bnumber/</url>
+    <content><![CDATA[<h3 id="number一些方法"><a href="#number一些方法" class="headerlink" title="number一些方法"></a>number一些方法</h3><ul>
+<li><p><code>number.toExponential()</code>方法：将这个number转换为一个指数形式的字符串，参数items是控制其小数点后的数字位数，这个值必须在0~20之内</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var x=Math.PI;</span><br><span class="line">console.log(x.toExponential(30)); //3.142e+0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>number.x.toFixed()</code>方法：将number转换为一个十进制形式的字符串，可选参数控制其小数点都的数字位数，默认为0，这个值必须在0~20之内</p>
+</li>
+<li><p><code>number.toPrecision()</code>方法：将number转换为一个十进制数子形式的字符串，可选参数控制数字的精度，表示的是所有数字的个数，这个值必须在0~21之内</p>
+</li>
+<li><p><code>number.toString()</code>方法：将number转换为一个字符串，可选参数表示几进制，默认是10</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var x=Math.PI;</span><br><span class="line">console.log(x.toString(8)); //3.1103755242102643</span><br><span class="line">console.log(x.toString(16)); //3.243f6a8885a3</span><br><span class="line">console.log(x.toString()); //3.141592653589793</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS之等号</title>
+    <url>/2020/06/03/%E7%AD%89%E5%8F%B7/</url>
+    <content><![CDATA[<h4 id="相等（-），严格相等（-）"><a href="#相等（-），严格相等（-）" class="headerlink" title="相等（==），严格相等（===）"></a>相等（==），严格相等（===）</h4><ul>
+<li>在进行相等（==）时，如果一边是字符，一边是数字，会将字符串转换为数字再进行比较</li>
+<li>在进行严格相等（===）运算时，不会进行类型的转换，会直接先判断类型是否相同，不相同时，直接为false</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在使用Vue-resource时出现的跨域问题</title>
+    <url>/2020/08/18/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h3 id="在使用Vue-resource时出现的跨域问题"><a href="#在使用Vue-resource时出现的跨域问题" class="headerlink" title="在使用Vue-resource时出现的跨域问题"></a>在使用Vue-resource时出现的跨域问题</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">me.$http.get(<span class="string">"http://localhost:8080/luckymoney/list"</span>).then(<span class="function"><span class="params">data</span>=&gt;</span>&#123;</span><br><span class="line">               <span class="built_in">console</span>.log(data);</span><br><span class="line">              &#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>单独访问<a href="http://localhost:8080/luckymoney/list时，数据访问正常，而在页面中调用此函数时，浏览器上出现了bug，" target="_blank" rel="noopener">http://localhost:8080/luckymoney/list时，数据访问正常，而在页面中调用此函数时，浏览器上出现了bug，</a></p>
+</blockquote>
+<p>(<img src="https://i.loli.net/2020/08/16/eobW9F6RmtnyGTh.png" alt>)<br>这时我到处查资料，了解这是一个跨域问题.<br>在前端和后台联合开发时，在局域网内，浏览器访问别人的地址可以获取数据，但是通过接口请求，就会跨域</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"/list"</span>)</span><br><span class="line">     <span class="function"><span class="keyword">public</span> List&lt;Luckymoney&gt; <span class="title">list</span><span class="params">(HttpServletResponse response)</span></span>&#123;</span><br><span class="line">         response.setHeader(<span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"*"</span>);</span><br><span class="line">         response.setHeader(<span class="string">"Cache-Control"</span>,<span class="string">"no-cache"</span>);</span><br><span class="line">         <span class="keyword">return</span> luckymonyRepository.findAll();</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>通过设置了两个头的信息，才能正式获取到</p>
+</blockquote>
+<p>或者当使用了spring-boot时，可以直接在Controller层中加上注解<code>@CrossOrigin</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@CrossOrigin</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LuckymoneyController</span> </span>&#123;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>前端</category>
+        <category>网络</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>跨域</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>搭建hexo博客</title>
     <url>/2019/07/19/%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h3 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h3><h4 id="步骤1-搭建各种电脑环境"><a href="#步骤1-搭建各种电脑环境" class="headerlink" title="*步骤1 搭建各种电脑环境"></a>*步骤1 搭建各种电脑环境</h4><blockquote>
@@ -1002,46 +1043,6 @@ setTimeout2           process2
       <tags>
         <tag>think</tag>
         <tag>idea</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS之等号</title>
-    <url>/2020/06/03/%E7%AD%89%E5%8F%B7/</url>
-    <content><![CDATA[<h4 id="相等（-），严格相等（-）"><a href="#相等（-），严格相等（-）" class="headerlink" title="相等（==），严格相等（===）"></a>相等（==），严格相等（===）</h4><ul>
-<li>在进行相等（==）时，如果一边是字符，一边是数字，会将字符串转换为数字再进行比较</li>
-<li>在进行严格相等（===）运算时，不会进行类型的转换，会直接先判断类型是否相同，不相同时，直接为false</li>
-</ul>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在使用Vue-resource时出现的跨域问题</title>
-    <url>/2020/08/18/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<h3 id="在使用Vue-resource时出现的跨域问题"><a href="#在使用Vue-resource时出现的跨域问题" class="headerlink" title="在使用Vue-resource时出现的跨域问题"></a>在使用Vue-resource时出现的跨域问题</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">me.$http.get(<span class="string">"http://localhost:8080/luckymoney/list"</span>).then(<span class="function"><span class="params">data</span>=&gt;</span>&#123;</span><br><span class="line">               <span class="built_in">console</span>.log(data);</span><br><span class="line">              &#125;)</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>单独访问<a href="http://localhost:8080/luckymoney/list时，数据访问正常，而在页面中调用此函数时，浏览器上出现了bug，" target="_blank" rel="noopener">http://localhost:8080/luckymoney/list时，数据访问正常，而在页面中调用此函数时，浏览器上出现了bug，</a></p>
-</blockquote>
-<p>(<img src="https://i.loli.net/2020/08/16/eobW9F6RmtnyGTh.png" alt>)<br>这时我到处查资料，了解这是一个跨域问题.<br>在前端和后台联合开发时，在局域网内，浏览器访问别人的地址可以获取数据，但是通过接口请求，就会跨域</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"/list"</span>)</span><br><span class="line">     <span class="function"><span class="keyword">public</span> List&lt;Luckymoney&gt; <span class="title">list</span><span class="params">(HttpServletResponse response)</span></span>&#123;</span><br><span class="line">         response.setHeader(<span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"*"</span>);</span><br><span class="line">         response.setHeader(<span class="string">"Cache-Control"</span>,<span class="string">"no-cache"</span>);</span><br><span class="line">         <span class="keyword">return</span> luckymonyRepository.findAll();</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>通过设置了两个头的信息，才能正式获取到</p>
-</blockquote>
-<p>或者当使用了spring-boot时，可以直接在Controller层中加上注解<code>@CrossOrigin</code></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@CrossOrigin</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LuckymoneyController</span> </span>&#123;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>前端、网络</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>跨域</tag>
       </tags>
   </entry>
   <entry>
@@ -1480,75 +1481,6 @@ setTimeout2           process2
       <tags>
         <tag>前端</tag>
         <tag>JS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>春节越南行</title>
-    <url>/2017/01/28/%E6%98%A5%E8%8A%82%E8%B6%8A%E5%8D%97%E8%A1%8C/</url>
-    <content><![CDATA[<h2 id="我的所爱，在海云之间。"><a href="#我的所爱，在海云之间。" class="headerlink" title="我的所爱，在海云之间。"></a>我的所爱，在海云之间。</h2><blockquote>
-<p>最喜欢骑着摩托在海云岭上拉到最大马力的感觉~</p>
-</blockquote>
-<p>刚开始想去越南只是听朋友说物价便宜，人美景也美，尤其是有海滩，决定下来之后就开始查很多网友的攻略，后来发现看攻略根本记不住啥，说来说去都是这么几个注意点。上班的时候就没啥心思了，很期待这场旅行，本来假期就不多，春节正好可以躲避寒冬，于是约了个好友一起去，人均花费在4000左右吧，要是平时去估计能便宜一半。我选择了在年三十就出发，即使是这样，我们真正玩的时间也只有三天，有大半时间都浪费在了路上，不过这一路上的经历回想起来也挺有意思的。在此还是强烈推荐平时淡季去，春节机票贵，火车票又一票难求，如果是淡季去的话直飞是最爽快的了。</p>
-<a id="more"></a>
-
-
-<p>我先是提前一个月抢到了从杭州到南宁的火车票，后来因为退票了只能去桂林中转，南宁到河内嘉林火车站的票也是提前2个星期在淘宝买的，签证淘宝只要240，3天就能出签还包邮。因为是春节，所有票都只能在网上买，机票啥的要比平时贵一半都不止。所以这次唯一的遗憾是没有提前抢好廉价机票。我推荐大家最好是提前抢好国内直飞岘港的廉价往返机票，这样可以省去好多时间。</p>
-<p>至于旅行的路线，我觉得一个岘港就已经够了，去很多城市首先是累，再者浪费时间，因为越南的交通条件本身就不发达，一般距离较远的两个城市之间都是飞机或火车或sleeping bus，后面两个交通工具太慢了，春节期间的机票还死贵，所以我觉得玩一个岘港就足够了。我们在路上遇到的驴友也和我一样的观点，岘港有山有水有海滩，其他城市有的它都有，其他城市没有的它也有，所以好好的玩一个岘港，比在河内西贡芽庄美奈大叻岘港之间奔波要好得多。</p>
-<p>要带的衣物不多，就一套短袖和一套长袖，还有穿去的一套厚的登山服，一路慢慢脱。签证、护照、充电器、充电宝这是必不可少的，除此之外带着足够的钱就可以了，转接插头也不用带，那边的两项插孔是完全兼容国内的插头的。</p>
-<hr>
-<h2 id="南宁——秀美的省会城市"><a href="#南宁——秀美的省会城市" class="headerlink" title="南宁——秀美的省会城市"></a>南宁——秀美的省会城市</h2><p>先是杭州东站坐火车到桂林，到桂林是第二天凌晨5点，还来不及看看漓江就坐上动车去南宁了，到南宁是第二天的中午，吃了碗米粉，比杭州的正宗，但比较脏，没有杭州的干净。接着去华夏银行换美元，发现银行的营业厅关门，然后我又跑了好几家，最后绝望的发现南宁市里所有银行正月初一都是休息的，只好在ATM自助机上取了1500人民币（不过后来根本没用到这些钱）。南宁给我的印象就是静静的，我最喜爱的是邕江。因为南宁到河内是晚上6点的火车，所以我下午打了辆的士决定去江滨公园逛逛，当开过邕江大桥的时候，第一眼就被它碧绿澄澈的水吸引了，这么干净的水在我们江浙一带是很少见的，它在阳光的照耀下波光粼粼，江边还有不少钓鱼的老头，游泳的小孩，散步的情侣。这一切构成了一副很安静闲适的画面，我当即拍下了这张照片。</p>
-<p><img src="https://c4-q.mafengwo.net/s10/M00/4B/F1/wKgBZ1iW2qyAJbXHAAxupxS_7Ec88.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt="南宁·邕江"></p>
-<hr>
-<h2 id="嘉林——体验了国际列车"><a href="#嘉林——体验了国际列车" class="headerlink" title="嘉林——体验了国际列车"></a>嘉林——体验了国际列车</h2><p>在邕江逛到下午4点，就打车回火车站，坐上了去河内嘉林的火车。这趟国际列车和国内的绿皮火车一样，不过都是软卧，有隔开的包厢，还可以关门，睡着挺舒服，不过半夜要起来两次去过境边检，所以只能过了同登边检才能安心睡觉。</p>
-<p><img src="https://a1-q.mafengwo.net/s10/M00/4E/19/wKgBZ1iW3R2ARuBWAADEfDnL5PI03.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt="越南的同登边检站"></p>
-<p>到同登边检站是十分激动的，毕竟千里迢迢的终于到越南了，为了到嘉林不至于没钱打车，我在这个入境边检的地方换了100元，汇率是3150，比河内市里ATM机取的汇率要低。火车凌晨5点多到嘉林，嘉林火车站很小很破，出来之后有卖手机卡和换钱的小店，我们好多人在这里买手机卡又被坑了，包括我，花了150k买的Viettel卡以为是无限流量，结果只有200m流量，用完之后又要花钱充值的。所以大家千万别急着买手机卡和换钱，如果不是很急的话还是建议到河内市里去买，另外手机卡先问清楚流量再买，我后来又花100k买了张3GB流量的卡，2号回来的时候还有2个G多出来。换越盾可以网上先查一下不收手续费的本地银行，华夏银行每月有一笔境外取现是免费的，就算有手续费也不会很多，不论何时何地，ATM机里取钱汇率都是最划算的。河内街上到处都是带着银联标志的ATM机，只要带着银行卡，不用担心没地方取越盾。</p>
-<hr>
-<h2 id="河内——值得品味的老街"><a href="#河内——值得品味的老街" class="headerlink" title="河内——值得品味的老街"></a>河内——值得品味的老街</h2><p>到河内是1月29号凌晨5点多，之后我们打车去了圣约瑟夫大教堂，从大教堂一路在巷子中绕来绕去，先在路边摊吃了碗米粉，那个米粉的味道真的超级好，第一口汤汁我就爱上它了，之后在岘港我也吃了好几碗米粉，但味道都没有河内的好。越南的店铺都有小的青柠檬和朝天椒作为调味料，在米粉中挤点柠檬汁，再放点辣椒酱，味道比国内任何面啊粉啊都要好吃。吃完后我们走到还剑湖边，我在ATM机取了921人民币，300万越盾，那一刻确实有一种变身百万富翁的错觉哈哈。算了一下汇率有3257，比任何地方换都要高了。</p>
-<p><img src="https://c2-q.mafengwo.net/s10/M00/58/89/wKgBZ1iW6N2Ac-wmACjdycIr2tw34.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt="圣约瑟夫大教堂"><br><img src="https://a3-q.mafengwo.net/s10/M00/58/BD/wKgBZ1iW6SKAD2w6AAtG6K1I6U081.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt="取了300万越盾"><br><img src="https://b2-q.mafengwo.net/s10/M00/58/8A/wKgBZ1iW6N2Aa2_bAAHETHlPzHE68.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt><br><img src="https://n1-q.mafengwo.net/s10/M00/58/8B/wKgBZ1iW6N-ATOdJAAF43uhSluU64.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></p>
-<p>换好钱我们在还剑湖周边的大街小巷乱逛了一通，体验了一下越南的风土人情。越南的建筑都很有特色，毕竟曾是法国的殖民地，所以大到大教堂，小到小酒馆，都很有法式风情。越南的贫富差距严重，大多数人都骑摩托车，街上还停着不少限量豪车。其他我感触最深的一点就是，街上太乱了！！连河内这个首都也很少有红绿灯，放眼望去，基本都是摩托车，在大街上走你千万不能玩手机或者左顾右盼，要快速地小跑而过。街边乱停乱放的现象也十分普遍，除非有撞伤人了，不然根本没有交警会来管。有些撞人事故也是自己处理的，我在路上就正好遇到一个被撞的妇女，本来以为会有交警来处理，结果那女的和司机都拍拍屁股就走了，好像什么事情都没发生过一样。</p>
-<p><img src="https://p1-q.mafengwo.net/s10/M00/59/20/wKgBZ1iW6X2AZVGpAAHzR3F-svk23.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt><br><img src="https://p1-q.mafengwo.net/s10/M00/59/21/wKgBZ1iW6X6AWXRXAAKeZ8G7Oqs80.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt><br><img src="https://a4-q.mafengwo.net/s10/M00/59/23/wKgBZ1iW6X6AE5VgAAJVPwZB_YY44.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt><br><img src="https://c1-q.mafengwo.net/s10/M00/59/24/wKgBZ1iW6X-AOGbCAAJ0TdZSsPY36.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></p>
-<p>因为正好是春节，所以还剑湖周边都很有节日气氛，不同国籍的人坐在咖啡馆晒着太阳听着歌闲聊，街上吆喝的小贩，湖边摩肩接踵的人流，这些都比国内要热闹不少。</p>
-<p><img src="https://c4-q.mafengwo.net/s10/M00/5A/FD/wKgBZ1iW65qAJl0sAA0B0cSXsfo35.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt><br><img src="https://b3-q.mafengwo.net/s10/M00/5B/00/wKgBZ1iW65-ABvbcACR3CtgCRTg92.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt><br><img src="https://a4-q.mafengwo.net/s10/M00/5B/AF/wKgBZ1iW7EuAL6LzACZ4gt7X6As85.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></p>
-<p>我们在还剑湖边上的一个旅行社买了晚上去岘港的sleeping bus汽车票，后来才知道260元人民币的价格买贵了，网上查的新咖啡也只要100多就行了。所以最好是去open bus的官网预定好。越南的open bus有好几家，我们坐的是camel bus，设施还算干净，只是旁边过道上也有人睡，味道难闻。</p>
-<p><img src="https://a3-q.mafengwo.net/s10/M00/C9/A5/wKgBZ1iX2giALQ4fAAoAt49H0jg81.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></p>
-<p>晚上6点我们就坐上这个bus，第二天凌晨5点到了顺化，我们决定提前下车了，一是因为实在呆不下去，二是因为想看看顺化到岘港那段火车沿途的美景。这个sleeping bus根本无法sleep，不同国籍的人脱了鞋子挤在一个车厢里，味道真是酸爽，巴士开得还摇摇晃晃的，晚上我是一刻都没睡着。</p>
-<p>凌晨我们在下车的旅行社遇到了几个也打算坐火车去岘港的中国小伙伴，跟着他们走到火车站买了票，因为网上都说顺化没啥好看的，所以我们没在顺化停留。</p>
-<hr>
-<h2 id="岘港——惊艳于海云之间"><a href="#岘港——惊艳于海云之间" class="headerlink" title="岘港——惊艳于海云之间"></a>岘港——惊艳于海云之间</h2><p>火车去岘港的途中一路美景，灵姑湾到海云岭的这一段山路被National Geographic票选为人生必去的50景之一。我们去的那天正好阳光明媚，一路的海边公路上骑摩托的人，海水在阳光照耀下波光粼粼，简直是美cry！</p>
-<p><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/184997183.html" target="_blank" rel="noopener"><img src="https://b2-q.mafengwo.net/s10/M00/CC/41/wKgBZ1iX3daASfWOAAimiGs_hvw90.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/184997184.html" target="_blank" rel="noopener"><img src="https://c1-q.mafengwo.net/s10/M00/CC/42/wKgBZ1iX3diAZl3gAAePlb4Dds416.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/184997185.html" target="_blank" rel="noopener"><img src="https://c2-q.mafengwo.net/s10/M00/CC/43/wKgBZ1iX3dmALjoWAAZk2ErMMvw09.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/184997186.html" target="_blank" rel="noopener"><img src="https://n4-q.mafengwo.net/s10/M00/CC/44/wKgBZ1iX3dqAOTFeAAeF-OppZ0c49.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/184997187.html" target="_blank" rel="noopener"><img src="https://b3-q.mafengwo.net/s10/M00/CC/44/wKgBZ1iX3duATxlVAAWF8R9O2gE54.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a></p>
-<p>这段路真的是这段旅行中最最让我觉得惊艳的，当时完全不顾手机容量够不够，只管一直按拍照键，回到宾馆一看，每一张都是美景。</p>
-<p>到了岘港后，我们就找了个sea view的宾馆先放行李，450k，其实只看得到一点点海，因为没有visa的卡，所以无法在booking上预定，只能一家家走过去问价格，真正的海景房一般都要800k+，很多还没房间了。</p>
-<p><img src="https://c3-q.mafengwo.net/s10/M00/D2/8E/wKgBZ1iX5pCARx3xAAigLdtkjvY23.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></p>
-<p>因为在sleeping bus上根本没睡着过，我到了宾馆洗了个澡倒头就睡，小伙伴自己去玩了，醒来是傍晚6点了，下楼花150k租了一辆motorbike，很多好看的摩托已经被租掉了，只能选了辆外观一般的。摩托店的老板不错，还手把手教我怎么打火熄火，发着后要一点点给油才不至于熄火，还告诉我哪些按钮对应哪些灯。自动挡的摩托车还是挺简单的，唯一的难点是打火，打着后就和电瓶车差不多，而且越南的摩托开起来很爽，不断给油可以跑得比汽车还快，加速也很快，超车啥的最爽，减油后停得也很快，所以开习惯之后还是挺安全的。</p>
-<p>我适应了一会儿马上就掌握了要领，问了路边的一个小哥加油站的位置，花了60k加满油，这还是挺划算的，折合人民币20元，能开一天。我晚上从美溪沙滩开到乐天超市一个来回，第二天又去海云关一个来回，回来油箱还有的剩下。</p>
-<p>加完油我按着地图的指示去了乐天超市买了一双人字拖，买了点酸奶喝，还买了几盒咖啡打算带回去。在这里提一下越南的物价吧，越南的物价比国内普遍要便宜30%左右，酸奶很正宗，而且比国内便宜一半都不止，咖啡也很正宗，很多咖啡都停止出口到中国了，但在这里的超市都买得到。</p>
-<p><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185017920.html" target="_blank" rel="noopener"><img src="https://a1-q.mafengwo.net/s10/M00/DA/79/wKgBZ1iX70uAUwAfAAlgigScCmE00.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a></p>
-<p>超市的停车场都是摩托，却鲜有汽车，进去门卫会给你个号码，出来后再把号码还给他，在越南停车都是免费的。<br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185017921.html" target="_blank" rel="noopener"><img src="https://b2-q.mafengwo.net/s10/M00/DA/7B/wKgBZ1iX70yAU-RcAAmdDtqnyOg65.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185017922.html" target="_blank" rel="noopener"><img src="https://p4-q.mafengwo.net/s10/M00/DA/7C/wKgBZ1iX702APYdkAAO0Tw0EWGw57.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a></p>
-<p>在超市买完东西，我又骑着摩托沿着美溪海岸开了一圈，美溪沙滩人很少，海水还算干净，浪有点大，适合冲浪，不过我没敢下水，海风吹着脸庞，听浪潮拍打的声音，感觉超级relax。</p>
-<p><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185019577.html" target="_blank" rel="noopener"><img src="https://a1-q.mafengwo.net/s10/M00/DB/98/wKgBZ1iX8MSAOJSbAAqU4qXFPIs14.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185019578.html" target="_blank" rel="noopener"><img src="https://n2-q.mafengwo.net/s10/M00/DB/9C/wKgBZ1iX8MmAPl_yACFh-RELFmw33.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a></p>
-<p>回宾馆又是倒头就睡，之前听朋友说去海云关骑摩托很爽，所以第二天开着摩托沿着岘港的海岸公路，去海云关和灵姑湾溜达了一圈，大晴天的在海岸线上开摩托车真是超级爽，可惜后来到海云关就下毛毛雨了，山上很冷，想去的朋友一定要提前带件外套，我在回来之后头都被冻得很晕，要不是及时洗个热水澡吃了点辣椒驱寒，肯定会发烧。海云关是我在岘港玩得最high的一个地方，沿着盘山公路开上去，可以开得比汽车还快，旁边就是一望无际的大海。一下子就感觉好自由，所有烦恼都没有，心胸也一下子开阔了。</p>
-<p><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024127.html" target="_blank" rel="noopener"><img src="https://p3-q.mafengwo.net/s10/M00/DE/A6/wKgBZ1iX9LmAYeQsAAp08TAF1Qg47.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br>早晨来到美溪沙滩拍了张全景照<br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024128.html" target="_blank" rel="noopener"><img src="https://b3-q.mafengwo.net/s10/M00/DE/B0/wKgBZ1iX9MqAbqPPAApGGJTrFfo41.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br>岘港的dragon bridge<br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024129.html" target="_blank" rel="noopener"><img src="https://a3-q.mafengwo.net/s10/M00/DE/B2/wKgBZ1iX9MuAAsqCAAlqVX6e8Po61.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024130.html" target="_blank" rel="noopener"><img src="https://n4-q.mafengwo.net/s10/M00/DE/B4/wKgBZ1iX9M2ARSf9AAkjcJmSQIs35.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br>海云关上还是有不少中国人的，在此一个河南大哥帮我拍了一张。<br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024131.html" target="_blank" rel="noopener"><img src="https://a2-q.mafengwo.net/s10/M00/DE/B6/wKgBZ1iX9M-ASnxgAApYyaYClnc47.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024132.html" target="_blank" rel="noopener"><img src="https://n2-q.mafengwo.net/s10/M00/DE/B6/wKgBZ1iX9NCAQ91CAAcXnUb6k_U71.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024133.html" target="_blank" rel="noopener"><img src="https://c2-q.mafengwo.net/s10/M00/DE/B8/wKgBZ1iX9NGARO4GAAhjCoHTLx400.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024134.html" target="_blank" rel="noopener"><img src="https://c4-q.mafengwo.net/s10/M00/DE/B8/wKgBZ1iX9NKABs3RAAdjtb56m8g17.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185024135.html" target="_blank" rel="noopener"><img src="https://n2-q.mafengwo.net/s10/M00/DE/BA/wKgBZ1iX9NSAUDtdAAhjsfdEQ7k80.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a></p>
-<hr>
-<h2 id="会安——灯火阑珊的古镇"><a href="#会安——灯火阑珊的古镇" class="headerlink" title="会安——灯火阑珊的古镇"></a>会安——灯火阑珊的古镇</h2><p>在岘港玩了一天，傍晚我被朋友拉着去了会安，在印象里，会安古镇只有晚上几盏灯笼比较好看，除此之外还有一个占婆岛值得一玩。但这次去，我感到遗憾的是，到会安的那天正好下雨，所以只能在会安古镇的小餐馆喝喝咖啡吃点米粉，去占婆岛潜水的计划完全泡汤了。不过会安古镇热闹繁华的夜晚还是给我留下了深刻的印象，路边有很多各种好吃的小吃，抬头一望总能看到五颜六色的灯笼，旁边还时而走过几个美女，视觉和味觉都能得到很好的满足。会安的很多hotel都有小泳池，可以惬意的游一圈，但天气有点冷，再加上那天受凉了，所以没下水。价格比岘港只多了50k，却是3星级的，设施环境啥的都比较好。</p>
-<p><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185041518.html" target="_blank" rel="noopener"><img src="https://c2-q.mafengwo.net/s10/M00/EA/2A/wKgBZ1iYBYyASDa4AAkPoKEePmE02.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185041519.html" target="_blank" rel="noopener"><img src="https://b4-q.mafengwo.net/s10/M00/EA/2C/wKgBZ1iYBY2AVEa1AAhxlrPQwrs36.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185041520.html" target="_blank" rel="noopener"><img src="https://a4-q.mafengwo.net/s10/M00/EA/2D/wKgBZ1iYBY-AT0hmAAmBZUKRxSM81.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185041521.html" target="_blank" rel="noopener"><img src="https://n2-q.mafengwo.net/s10/M00/EA/32/wKgBZ1iYBZSAbdY2ACpC77g4x2Q72.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185041522.html" target="_blank" rel="noopener"><img src="https://a1-q.mafengwo.net/s10/M00/EA/35/wKgBZ1iYBZmAFNH_AB4P44TMjGI14.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185041523.html" target="_blank" rel="noopener"><img src="https://n1-q.mafengwo.net/s10/M00/EA/36/wKgBZ1iYBZyAVoMiAB9Vd-jmWDE82.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185041524.html" target="_blank" rel="noopener"><img src="https://n4-q.mafengwo.net/s10/M00/EA/3A/wKgBZ1iYBaGAYdFCACVFLc6_RY898.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a></p>
-<p>逛完会安古镇，回到宾馆洗个热水澡，出了一身汗，第二天就没受凉头晕的感觉了，本来想去占婆岛，不过天公不作美，只能在古镇到处走走。找了个小咖啡馆喝滴壶咖啡喝到下午，打算回岘港，不过出租车都要100人民币的样子，网上查了一下有巴士直接到岘港的，是黄色车身的大巴，具体是在下面地图的黄色标注位置。</p>
-<p><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185043864.html" target="_blank" rel="noopener"><img src="https://b1-q.mafengwo.net/s10/M00/EB/B2/wKgBZ1iYB72ARXtDAAEb9YzA23045.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br>下面是一些雨天在会安街上闲逛时拍的风景。<br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185045047.html" target="_blank" rel="noopener"><img src="https://a1-q.mafengwo.net/s10/M00/EC/84/wKgBZ1iYCMKAbU0KABF_a_6TfIw03.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br>这好像是一所大学，具体叫什么名字我不认识，大门开着我就进去了，后来又被里面的员工赶出来了。里面风景还是不错的，教学楼一律是古黄色，凳子，不知名的植物，在下雨天中别有一番味道。<br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185045048.html" target="_blank" rel="noopener"><img src="https://n3-q.mafengwo.net/s10/M00/EC/86/wKgBZ1iYCMWAZ9C4AA0mmLM-Hfw64.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185045049.html" target="_blank" rel="noopener"><img src="https://b1-q.mafengwo.net/s10/M00/EC/89/wKgBZ1iYCMiAHDJBAAs1NL-4YSg76.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185045050.html" target="_blank" rel="noopener"><img src="https://a1-q.mafengwo.net/s10/M00/EC/8B/wKgBZ1iYCMqAJsWIAAs-uHEZGbE81.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185045051.html" target="_blank" rel="noopener"><img src="https://p2-q.mafengwo.net/s10/M00/EC/8B/wKgBZ1iYCMyATL_QAAk--L0zFrE95.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185045052.html" target="_blank" rel="noopener"><img src="https://c4-q.mafengwo.net/s10/M00/EC/8D/wKgBZ1iYCM-AKPlnAAclnnZdiOY64.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a></p>
-<p>从会安回岘港的巴士上又是一段值得回忆的经历。我首先向旁边一个老外打了招呼，问他这辆车到岘港的哪里，然后我俩就聊起来了，后来得知他是从澳大利亚移民到越南的，再然后，我们互相吐槽中国和澳大利亚的房价和物价高，赞越南的物价和女人，他说在澳大利亚他有big house和nice car，但是not happy，从刚到越南至现在的6年里，他找回了自己，他每天都过得开心。在得知我要找个靠近机场的旅馆后，还热心的打算帮我安排住处，到岘港后，我跟着他来到他妻子的家里，把我介绍给了他的越南家人，让他的Vietnamese Lady帮我找了个靠近机场的旅馆。</p>
-<p>晚上出去逛了一圈，还交了几个当地的朋友，我的感觉是，越南年轻人对国人还是挺友好的，他们对我们就像是我们对日本人，有敬畏也有崇拜，或许也有一点敌视吧，但我这次旅行接触的当地人对我都挺友好，他们请我一起喝啤酒，虽然我们语言不通，但翻译软件的帮助下还是可以勉强交流的，最后还互相加了facebook。</p>
-<p><img src="https://c3-q.mafengwo.net/s10/M00/F7/2A/wKgBZ1iYFjuACZkdABholsWqTjY97.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></p>
-<hr>
-<h2 id="爱上岘港，爱上越南"><a href="#爱上岘港，爱上越南" class="headerlink" title="爱上岘港，爱上越南"></a>爱上岘港，爱上越南</h2><p>在岘港和会安玩了2天，越南之旅也算是到尾声了，离开前的一早我还在街边吃了本趟越南之行的最后一碗米粉，出奇的好吃，比河内的还要好吃，折成人民币才5元，搞得我更加舍不得岘港这座城市了。</p>
-<p><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185070222.html" target="_blank" rel="noopener"><img src="https://a3-q.mafengwo.net/s10/M00/F8/B5/wKgBZ1iYF-qAerrEAAfmafIhVeE78.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185070223.html" target="_blank" rel="noopener"><img src="https://a3-q.mafengwo.net/s10/M00/F8/BA/wKgBZ1iYF-2ALAaBAAc_UDQzs6g78.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a><br><a href="http://www.mafengwo.cn/photo/10180/scenery_6631157/185070224.html" target="_blank" rel="noopener"><img src="https://n1-q.mafengwo.net/s10/M00/F8/BC/wKgBZ1iYF-6ARlXCAAVw4Xok3BY34.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90" alt></a></p>
-<p>从岘港回河内说什么也不能再坐sleeping bus了，飞机虽然花了我560元，加上托运费360k，加起来将近700（这也是没提前做好安排的代价），但飞机的好处是快，不会那么累。</p>
-<p>回到河内才下午3点，离晚上嘉林回南宁火车的发车时间还有好几个小时，就趁机场大巴在乐天停下的时候提早下车了，买了不少路上吃的零食，买了些干米粉带给家人，河内的乐天超市物价比岘港还要便宜，小包的咖啡才20k都不到，小瓶的可乐折算成人民币才1块多。购物完毕我们就打车去了嘉林火车站，在此提醒大家，绿色的taxi跳表是最快的，也是最贵的，我们从长钱商场到嘉林火车站就要90k越盾，原先我们以为越盾会多出来，还打算换成人民币，最后发现不够打的，正好在嘉林火车站门口的小店里碰到几个要换越盾的妹子，就又换了100k越盾，剩下的越盾回家留着做纪念。</p>
-<p>我感到奇怪的是，河内回南宁的火车上并没什么人，但淘宝上问了好几家都说没票了，估计是被黄牛搞的。第二天回杭州的火车是11点在南宁站发车，之前还担心河内到南宁的火车会晚点，但后来问了列车上的工作人员，事实也证明，这趟国际列车很少会发生晚点。</p>
-]]></content>
-      <categories>
-        <category>旅行</category>
-      </categories>
-      <tags>
-        <tag>旅行</tag>
-        <tag>东南亚</tag>
       </tags>
   </entry>
 </search>
