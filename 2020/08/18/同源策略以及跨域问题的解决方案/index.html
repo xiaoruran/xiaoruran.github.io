@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    位运算小技巧 |  曹涵的个人博客
+    同源策略以及跨域问题的解决方案 |  曹涵的个人博客
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -39,7 +39,7 @@
   <div id="app">
     <main class="content on">
       <section class="outer">
-  <article id="post-位运算" class="article article-type-post" itemscope
+  <article id="post-同源策略以及跨域问题的解决方案" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -47,7 +47,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  位运算小技巧
+  同源策略以及跨域问题的解决方案
 </h1>
  
 
@@ -56,12 +56,12 @@
 
     
     <div class="article-meta">
-      <a href="/2020/07/31/位运算/" class="article-date">
-  <time datetime="2020-07-30T20:38:32.000Z" itemprop="datePublished">2020-07-30</time>
+      <a href="/2020/08/18/同源策略以及跨域问题的解决方案/" class="article-date">
+  <time datetime="2020-08-18T08:04:50.000Z" itemprop="datePublished">2020-08-18</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/技巧/">技巧</a>
+    <a class="article-category-link" href="/categories/前端/">前端</a>
   </div>
 
       
@@ -71,7 +71,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">685</span>
+            <span class="post-count">1.1k</span>
         </span>
     </span>
 
@@ -80,7 +80,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">2 min</span>
+            <span class="post-count">4 min</span>
         </span>
     </span>
 </div>
@@ -105,36 +105,112 @@
       
 
       
-      <h3 id="位运算小技巧"><a href="#位运算小技巧" class="headerlink" title="位运算小技巧"></a>位运算小技巧</h3><p>   js中有一个著名bug，0.1+0.2 ！== 0.3,因为精度的问题，导致所有的浮点运算都是不安全的。<br>   js中完全套用了java的位运算符，包括按位与<code>&amp;</code>、按位或<code>|</code>、按位异或<code>^</code>、按位非<code>~</code>、左移<code>&lt;&lt;</code>、带符号的右移<code>&gt;&gt;</code>和用<code>0</code>补足的右移<code>&gt;&gt;&gt;</code>。这套运算符争对的是整数，但在js内部，所有的数字都是以双精度浮点数进行保存。<br>如果要使用位运算符，js会将数字先转为整数再进行运算，这样就降低了运算速度</p>
-<h4 id="1-使用左移运算符迅速得出2的次方"><a href="#1-使用左移运算符迅速得出2的次方" class="headerlink" title="1. 使用左移运算符迅速得出2的次方"></a>1. 使用左移运算符迅速得出2的次方</h4><pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1 &lt;&lt; 2  //4 ,即1乘2的2次方</span><br><span class="line">1 &lt;&lt; 10  //1024</span><br></pre></td></tr></table></figure></code></pre><h4 id="2-使用-切换变量0或1（异或规则：相同为0，相异为1）"><a href="#2-使用-切换变量0或1（异或规则：相同为0，相异为1）" class="headerlink" title="2. 使用^切换变量0或1（异或规则：相同为0，相异为1）"></a>2. 使用<code>^</code>切换变量0或1（异或规则：相同为0，相异为1）</h4><pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var toggle=0;</span><br><span class="line">toggle ^=1; //1,当toggle为1时，变为0</span><br></pre></td></tr></table></figure></code></pre><h4 id="3-使用-amp-判断奇偶性"><a href="#3-使用-amp-判断奇偶性" class="headerlink" title="3. 使用&amp;判断奇偶性"></a>3. 使用<code>&amp;</code>判断奇偶性</h4><ul>
-<li><p>偶数 &amp; 1 =0</p>
+      <h3 id="同源策略以及跨域问题的解决方案"><a href="#同源策略以及跨域问题的解决方案" class="headerlink" title="同源策略以及跨域问题的解决方案"></a>同源策略以及跨域问题的解决方案</h3><p>同源策略时互联网安全的重要基础，目的是为了保证用户信息的安全，防止恶意网站窃取数据。</p>
+<p>同源策略会阻止非同源的内容交互（比如你浏览一个网站，同时打开了另一个不相干的网站，但那个网站像访问你的这个网站的Cookie等相关信息，你说可不可怕），所以同源策略是浏览器最核心也最基本的安全功能。</p>
+<p>同源的具体表现</p>
+<ol>
+<li>同一个协议</li>
+<li>同一个域名</li>
+<li>同一个端口号<br>有一个不同，就算跨域</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>当前页面url</th>
+<th>被请求页面url</th>
+<th>是否跨域</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>http://www.test.com/</code></td>
+<td><code>http://www.test.com/index.html</code></td>
+<td>否</td>
+<td>同源（协议、域名、端口号相同）</td>
+</tr>
+<tr>
+<td><code>http://www.test.com/</code></td>
+<td><code>https://www.test.com/index.html</code></td>
+<td>跨域</td>
+<td>协议不同（http/https）</td>
+</tr>
+<tr>
+<td><code>http://www.test.com/</code></td>
+<td><code>http://www.baidu.com/</code></td>
+<td>跨域</td>
+<td>主域名不同（test/baidu）</td>
+</tr>
+<tr>
+<td><code>http://www.test.com/</code></td>
+<td><code>http://blog.test.com/</code></td>
+<td>跨域</td>
+<td>子域名不同（www/blog）</td>
+</tr>
+<tr>
+<td><code>http://www.test.com:8080/</code></td>
+<td><code>http://www.test.com:7001</code>/</td>
+<td>跨域</td>
+<td>端口号不同（8080/7001）</td>
+</tr>
+</tbody></table>
+<p>非同源的限制</p>
+<ol>
+<li>不能读取非同源网页的Cookie、LocalStorage、IndexedDB</li>
+<li>不能接触非同源网页的DOM</li>
+<li>不能向非同源地址发送AJAX请求</li>
+</ol>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><ol>
+<li><code>JSONP</code>(json with padding)<br>JSONP原理： 首先不同源的网站可以访问script标签中的src属性，所以JSONP利用这个特性开发出来可以跨域的方式。<br>利用<code>script</code>元素的开放策略，网页可以得到从其他来源动态产生的JSON数据。<br>服务器接受到请求后，将数据放在一个指定名字的回调函数的参数位置传回来，这个步骤需要服务器的支持<br>使用JSONP模式请求数据的时候返回的是一段可执行的JS代码<blockquote>
+<p>由于JSONP是将信息包装到src，通过资源访问来进行跨域，它的信息都在发送头中，所以JSONP只支持get请求</p>
+</blockquote>
 </li>
-<li><p>奇数 &amp; 1 =1</p>
-<h4 id="4-使用-将一个值转化为布尔值"><a href="#4-使用-将一个值转化为布尔值" class="headerlink" title="4. 使用!!将一个值转化为布尔值"></a>4. 使用<code>!!</code>将一个值转化为布尔值</h4><h4 id="5-使用-、-gt-gt-、-lt-lt-、-gt-gt-gt-、-来取整"><a href="#5-使用-、-gt-gt-、-lt-lt-、-gt-gt-gt-、-来取整" class="headerlink" title="5. 使用~、&gt;&gt;、&lt;&lt;、&gt;&gt;&gt;、| 来取整"></a>5. 使用~、&gt;&gt;、&lt;&lt;、&gt;&gt;&gt;、| 来取整</h4></li>
-<li><p>相当于使用了Math.floor()，向下取整</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">~~11.71   //11</span><br><span class="line">11.71 &gt;&gt; 0 //11</span><br><span class="line">11.71 &lt;&lt; 0 //11</span><br><span class="line">11.71 | 0 //11</span><br><span class="line">11.71 &gt;&gt;&gt; 0 //11</span><br></pre></td></tr></table></figure>
+</ol>
+<p>原生JS</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"http://test.com/getdata?callback=fn"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="comment">//向服务器test.com发出请求，该请求的查询字符串有一个callback参数，用来指定回调函数的名字</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//处理服务器返回回调函数的数据</span></span><br><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;     </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">data</span>) </span>&#123;        </span><br><span class="line">         alert(data.msg);     </span><br><span class="line">    &#125; </span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>js引擎察觉到使用位运算，会将浮点型转换为整型;&gt;&gt;&gt; 不可以对负数取整;Math.round()为四舍五入</p>
+<p>fn是客户端注册的回调函数，目的是获取跨域服务器上的json数据后，对数据进行在处理</p>
 </blockquote>
-<h4 id="6-使用-完成值交换"><a href="#6-使用-完成值交换" class="headerlink" title="6. 使用^完成值交换"></a>6. 使用^完成值交换</h4><p>在es6的解构赋值出来之前，这种当时会更快（但必须是整数）</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//before</span><br><span class="line">let a=7, b=1;</span><br><span class="line">let temp=a;a=b;b=temp;    //借助临时变量</span><br><span class="line">b=[a,a=b][0];             //借助数组</span><br><span class="line">&#123;                         //借助数轴，即两数之间的距离进行交换</span><br><span class="line">  a=a-b;</span><br><span class="line">  b=a+b;</span><br><span class="line">  a=b-a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//after</span><br><span class="line">let a=7,b=1;</span><br><span class="line">a^=b;</span><br><span class="line">b^=a;</span><br><span class="line">a^=b;                    //a=1,b=7</span><br><span class="line">//es6</span><br><span class="line">[a,b]=[b,a];</span><br></pre></td></tr></table></figure>
+<p>jQuery ajax</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    url: <span class="string">'http://www.test.com:8080/getdata'</span>,</span><br><span class="line">    type: <span class="string">'get'</span>,</span><br><span class="line">    dataType: <span class="string">'jsonp'</span>,  <span class="comment">// 请求方式为jsonp</span></span><br><span class="line">    jsonpCallback: <span class="string">"handleCallback"</span>,    <span class="comment">// 自定义回调函数名</span></span><br><span class="line">    data: &#123;&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<h4 id="7-使用-判断符号是否相等"><a href="#7-使用-判断符号是否相等" class="headerlink" title="7. 使用^判断符号是否相等"></a>7. 使用^判断符号是否相等</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(a^b)&gt;=0;   //true为相同符号，false为相反符号</span><br></pre></td></tr></table></figure>
+<p>Vue</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$http.jsonp(<span class="string">'http://www.domain2.com:8080/getdata'</span>, &#123;</span><br><span class="line">    params: &#123;&#125;,</span><br><span class="line">    jsonp: <span class="string">'handleCallback'</span></span><br><span class="line">&#125;).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res); </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li><p>因为两数进行异或，最高位是符号位，相同为0，相异为1，所以相同的话，结果为正数，相反的，结果为负数</p>
-<h4 id="8-使用-来检查数字是否不相等"><a href="#8-使用-来检查数字是否不相等" class="headerlink" title="8. 使用^来检查数字是否不相等"></a>8. 使用^来检查数字是否不相等</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//before</span><br><span class="line">if(a!==3)&#123;&#125; </span><br><span class="line">//after</span><br><span class="line">if(a^3)&#123;&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>原理：如果两数不相等，那么总会有一个位不同，结果就不会是0</p>
-<h4 id="9-使用-amp-来判断一个数是否为2的整数幂（6不是，8是）"><a href="#9-使用-amp-来判断一个数是否为2的整数幂（6不是，8是）" class="headerlink" title="9. 使用&amp;来判断一个数是否为2的整数幂（6不是，8是）"></a>9. 使用&amp;来判断一个数是否为2的整数幂（6不是，8是）</h4></li>
-<li><p>n &amp; (n-1) ,若结果是0，则是整数幂，反之则不是</p>
-</li>
-<li><p>解析： 若一个数是整数次幂，则写成二进制会是，只有一个位置上有1（设为index），其他位置都为0，<br>此时n-1的二进制则是index-1的位置到第一位都是1，此时按位&amp;，所有位置都为0，结果就为0</p>
-</li>
+<blockquote>
+<p>至今还是没搞明白如何在服务器端配合客户端</p>
+</blockquote>
+<p>参考以下代码（后端配合）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//后端</span></span><br><span class="line">String jsonpCallback = request.getParameter(<span class="string">"jsonp"</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">//构造回调函数格式jsonp(数据)</span></span><br><span class="line">resp.getWriter().println(jsonp+<span class="string">"("</span>+jsonObject.toJSONString()+<span class="string">")"</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>只知道后端要返回一个类似于 callback([{“id”:1,”money”:100.00,”producer”:”caohan”,”consumer”:”曹涵”},{“id”:8,”money”:520.00,”producer”:null,”consumer”:”曹涵”},{“id”:9,”money”:1314.00,”producer”:null,”consumer”:”曹涵”}])</p>
+</blockquote>
+<ol start="2">
+<li><code>CORS</code><br>CORS(Cross-Origin Resource Sharing)是跨域资源分享，是<strong>解决跨域ajax的根本解决方案</strong><ul>
+<li><strong>普通跨域请求：只需前端设置Access-Control-Allow-Origin</strong></li>
+<li><strong>带有cookie的跨域请求：前后端都需要进行设置</strong></li>
 </ul>
 </li>
-</ul>
+</ol>
+<p>【前端设置】<br>原生</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest(); <span class="comment">// IE8/9需用window.XDomainRequest兼容</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 前端设置是否带cookie</span></span><br><span class="line">xhr.withCredentials = <span class="literal">true</span>;</span><br><span class="line"> </span><br><span class="line">xhr.open(<span class="string">'post'</span>, <span class="string">'http://www.domain2.com:8080/login'</span>, <span class="literal">true</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">'Content-Type'</span>, <span class="string">'application/x-www-form-urlencoded'</span>);</span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (xhr.readyState == <span class="number">4</span> &amp;&amp; xhr.status == <span class="number">200</span>) &#123;</span><br><span class="line">        alert(xhr.responseText);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>jQuery</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">   url: <span class="string">'http://www.test.com:8080/login'</span>,</span><br><span class="line">   type: <span class="string">'get'</span>,</span><br><span class="line">   data: &#123;&#125;,</span><br><span class="line">   xhrFields: &#123;</span><br><span class="line">       withCredentials: <span class="literal">true</span>    <span class="comment">// 前端设置是否带cookie</span></span><br><span class="line">   &#125;,</span><br><span class="line">   crossDomain: <span class="literal">true</span>,   <span class="comment">// 会让请求头中包含跨域的额外信息，但不会含cookie</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>vue-resource</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue.http.options.credentials = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>axios</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">axios.defaults.withCredentials = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>【服务器端设置】<br>服务器端对于CORS的支持，主要是通过设置Access-Control-Allow-Origin来进行的。如果浏览器检测到相应的设置，就可以允许Ajax进行跨域的访问。<br>java后台</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"/list"</span>)</span><br><span class="line">     <span class="function"><span class="keyword">public</span> List&lt;Luckymoney&gt; <span class="title">list</span><span class="params">(HttpServletResponse response)</span></span>&#123;</span><br><span class="line">         response.setHeader(<span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"*"</span>);</span><br><span class="line">         <span class="keyword">return</span> luckymonyRepository.findAll();</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+
+<p>springboot</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@CrossOrigin</span> <span class="comment">//直接加入注解</span></span><br></pre></td></tr></table></figure>
+
 
       
       <!-- reward -->
@@ -203,14 +279,14 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/07/31/位运算/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/08/18/同源策略以及跨域问题的解决方案/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/位运算/">位运算</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技巧/">技巧</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/跨域/">跨域</a></li></ul>
 
 
     </footer>
@@ -221,19 +297,10 @@
   
   <nav class="article-nav">
     
+    
       <a href="/2020/08/18/跨域问题/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            在使用Vue-resource时出现的跨域问题
-          
-        </div>
-      </a>
-    
-    
-      <a href="/2020/06/03/JS基础/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">JS之基础</div>
+        <div class="article-nav-title">在使用Vue-resource时出现的跨域问题</div>
       </a>
     
   </nav>
