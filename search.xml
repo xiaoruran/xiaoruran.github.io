@@ -14,30 +14,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JS之JSON</title>
-    <url>/2020/06/03/JSON/</url>
-    <content><![CDATA[<h3 id="JSON-JavaScript对象表示法"><a href="#JSON-JavaScript对象表示法" class="headerlink" title="JSON(JavaScript对象表示法)"></a>JSON(JavaScript对象表示法)</h3><p>这是一种轻量级的数据交换格式。基于JavaScript对象字面量表示法，那是JS最精华的部分之一。尽管只是JS的一个子集，但与语言无关。<br>现代编程语言写的程序，都可以用它来交换数据。它是一种文本格式，所以可以被人和机器阅读。<br>它易于实现且易于使用</p>
-<h4 id="JSON语法"><a href="#JSON语法" class="headerlink" title="JSON语法"></a>JSON语法</h4><ul>
-<li>JSON对象是一个相当于”key-value”的无序集合。名字可以是任何字符串，值可以是任何类型的JSON值，包括数组和对象</li>
-<li>JSON有六种类型的值：对象、数组、字符串、布尔类型、数字、和特殊值null</li>
-<li>JSON数字与JS数字类似，整数的首位不允许为0，因为一些语言用它来表示八进制数<h4 id="安全的使用JSON"><a href="#安全的使用JSON" class="headerlink" title="安全的使用JSON"></a>安全的使用JSON</h4></li>
-<li>使用eval函数可以把一段JSON文本转换为一个有用的数据结构，但是eval函数有着极其可怕的安全问题。</li>
-<li>可以使用<code>JSON.parse()</code>方法代替eval函数，能避免危险。如果文本中包含任何危险数据JSON.parse()会抛出一个异常，为防止服务器出现漏洞，建议总是用JSON.parse代替eval。</li>
-<li>在外部数据与innerHTML进行交互式还存在另一种危险。一种常见的Ajax模式是把服务器端发送过来的一个HTML文本赋值给某个HTML元素的innerHTML属性。这是一个非常糟糕的习观，如果这个HTML中包含一个&lt;\script&gt;标签或者其等价物，那么一个恶意脚本将被执行，这也可以是因为服务器端存在漏洞<blockquote>
-<p>如果一个恶意脚本在你的页面上被运行，它就有权访问这个页面的所有状态和执行该页面能做的所有操作.他能与服务器进行交互，而服务器并不能区分恶意请求。恶意脚本还能访问全局对象，这使得它有权访问用户能看到的一切，这个恶意脚本还拥有和用户对话的能力。document对象还能给该恶意脚本授权访问网络，允许它下载更多的恶意脚本，或者是在你的防火墙内探测站点，或者是把它已经窃取的隐私内容发送给世界上的任何一个服务器。这是JS全局变量的一个直接后果。</p>
-</blockquote>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JS之原型链理解</title>
     <url>/2020/06/03/JS%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%90%86%E8%A7%A3/</url>
     <content><![CDATA[<p>###JS原型及原型链<br>JavaScript中没有子类和父类的概念，也没有类和实例（instance）的区分,全靠一种称为”原型(prototype)链”的模式，来实现继承</p>
@@ -93,113 +69,20 @@
       </tags>
   </entry>
   <entry>
-    <title>博客Markdown的写法</title>
-    <url>/2020/01/17/my-second-blog/</url>
-    <content><![CDATA[<h4 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h4><pre><code># 一级标题
-## 二级标题
-### 三级标题
-#### 四级标题
-##### 五级标题
-注意：#后面要加空格 一级标题下面有一条横线 正常是需要闭合的这些标签</code></pre><h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><ul>
-<li><p>无序列表</p>
-<blockquote>
-<p>* 1<br>* 2<br>* 3<br>* 4</p>
-<blockquote>
-<p>注意 在*后面也要一个空格 用在线编辑器看实际上是转换承了 ul&gt;li</p>
+    <title>JS之JSON</title>
+    <url>/2020/06/03/JSON/</url>
+    <content><![CDATA[<h3 id="JSON-JavaScript对象表示法"><a href="#JSON-JavaScript对象表示法" class="headerlink" title="JSON(JavaScript对象表示法)"></a>JSON(JavaScript对象表示法)</h3><p>这是一种轻量级的数据交换格式。基于JavaScript对象字面量表示法，那是JS最精华的部分之一。尽管只是JS的一个子集，但与语言无关。<br>现代编程语言写的程序，都可以用它来交换数据。它是一种文本格式，所以可以被人和机器阅读。<br>它易于实现且易于使用</p>
+<h4 id="JSON语法"><a href="#JSON语法" class="headerlink" title="JSON语法"></a>JSON语法</h4><ul>
+<li>JSON对象是一个相当于”key-value”的无序集合。名字可以是任何字符串，值可以是任何类型的JSON值，包括数组和对象</li>
+<li>JSON有六种类型的值：对象、数组、字符串、布尔类型、数字、和特殊值null</li>
+<li>JSON数字与JS数字类似，整数的首位不允许为0，因为一些语言用它来表示八进制数<h4 id="安全的使用JSON"><a href="#安全的使用JSON" class="headerlink" title="安全的使用JSON"></a>安全的使用JSON</h4></li>
+<li>使用eval函数可以把一段JSON文本转换为一个有用的数据结构，但是eval函数有着极其可怕的安全问题。</li>
+<li>可以使用<code>JSON.parse()</code>方法代替eval函数，能避免危险。如果文本中包含任何危险数据JSON.parse()会抛出一个异常，为防止服务器出现漏洞，建议总是用JSON.parse代替eval。</li>
+<li>在外部数据与innerHTML进行交互式还存在另一种危险。一种常见的Ajax模式是把服务器端发送过来的一个HTML文本赋值给某个HTML元素的innerHTML属性。这是一个非常糟糕的习观，如果这个HTML中包含一个&lt;\script&gt;标签或者其等价物，那么一个恶意脚本将被执行，这也可以是因为服务器端存在漏洞<blockquote>
+<p>如果一个恶意脚本在你的页面上被运行，它就有权访问这个页面的所有状态和执行该页面能做的所有操作.他能与服务器进行交互，而服务器并不能区分恶意请求。恶意脚本还能访问全局对象，这使得它有权访问用户能看到的一切，这个恶意脚本还拥有和用户对话的能力。document对象还能给该恶意脚本授权访问网络，允许它下载更多的恶意脚本，或者是在你的防火墙内探测站点，或者是把它已经窃取的隐私内容发送给世界上的任何一个服务器。这是JS全局变量的一个直接后果。</p>
 </blockquote>
-</blockquote>
-</li>
-<li><p>有序列表</p>
-<blockquote>
-<ol>
-<li>列表一</li>
-<li>列表二</li>
-<li>列表三<blockquote>
-<p>注意：数字后面必须是英文的点，有序列表的序号是根据第一行列表的数字顺序来的</p>
-</blockquote>
-</li>
-</ol>
-</blockquote>
-<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p>比如说，你想对某个部分的内容做一些说明或者引用等，可以使用&gt;<br>‘&gt;’</p>
-<h4 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h4><p>使用四个缩进空格 表示代码块</p>
-<h4 id="加强的代码块"><a href="#加强的代码块" class="headerlink" title="加强的代码块"></a>加强的代码块</h4><p>支持四十一种编程语言的语法高亮显示，行号显示，使用&lt;!–￼0–&gt;</p>
 </li>
 </ul>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>技术</tag>
-        <tag>方法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS之闭包理解</title>
-    <url>/2020/06/01/JS%E9%97%AD%E5%8C%85/</url>
-    <content><![CDATA[<h3 id="JS闭包理解"><a href="#JS闭包理解" class="headerlink" title="JS闭包理解"></a>JS闭包理解</h3><h4 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a>立即执行函数</h4><p>作用： 创建一个独立的作用域。这个作用域的变量外面访问不到（避免变量污染）</p>
-<ol>
-<li><p><code>(function foo(){}())</code><br>如果直接写function foo(){}()解释器会报错。<em>立即执行函数的调用方式是将函数表达式、调用操作符、分组操作符放到一个括号内，来告诉解释器这里有一个需要解释器立即执行的函数</em>。否则通常情况下，解析器遇到function关键子，都会把它当成一个函数声明，而不是个函数表达式</p>
-<ul>
-<li>立即执行函数的写法</li>
-<li>相当于 function foo(){};foo();</li>
-<li>相当于先定义一个函数，然后调用执行它</li>
-<li>在最后面的括号里面可以直接写传递的参数<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function foo(n1,n2)&#123;</span><br><span class="line">    console.log(n1+n2);</span><br><span class="line">&#125;(3,5));  //8</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p><code>(function foo(){})()</code><br>总的语法和上面的一致</p>
-<blockquote>
-<p>注意：当在不需要表达式的场景下，就不需要用括号括起来了</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void function foo()&#123;&#125;()</span><br><span class="line">var foo =function()&#123;&#125;();</span><br><span class="line">true &amp;&amp; function()&#123;&#125;();</span><br><span class="line">0,function()&#123;&#125;();</span><br><span class="line">//以上都是作为函数表达式，所以不需要用括号括起来了</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<blockquote>
-<p>对于立即执行函数，也可以给他们传入参数，在最后一个括号里传</p>
-</blockquote>
-<ol start="3">
-<li>像常见的<code>(function($){}(jQuery))</code>;就是将实参jQuery作为实参传入到函数function($){}中，通过形参$接受</li>
-<li><code>$(function(){})</code><ul>
-<li>需要引入jQuery包</li>
-<li>是$(document).ready(function(){})的简写，两者效果完全一样</li>
-</ul>
-</li>
-<li>可以在function(){}()的前面加上!、+、-、~也可以使变成函数表达式，变成立即执行函数</li>
-</ol>
-<h4 id="是时候理解一波了"><a href="#是时候理解一波了" class="headerlink" title="是时候理解一波了"></a>是时候理解一波了</h4><p>我的理解：</p>
-<ul>
-<li>js中函数内部可以读取到全局变量，而函数外部不能读取函数内部的局部变量。此时闭包就是为了能使得从外部访问函数内部的变量。</li>
-<li>为了让某些变量始终保持在内存中，但同时也可能导致内存消耗的问题</li>
-<li>方便调用上下文的局部变量，利于代码封装<br>两个方面：<ol>
-<li>函数作为返回值<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> function a()&#123;</span><br><span class="line">  var name=&apos;hh&apos;;</span><br><span class="line">  return function()&#123;</span><br><span class="line">      return name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">var b=a();</span><br><span class="line">//将返回的匿名函数赋值给b，此时b相当于a内部的匿名函数，可以访问到a内部的变量</span><br><span class="line">console.log(b());</span><br><span class="line"> //通过b(),执行a内部的匿名函数，最后返回a函数内部的变量</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-</li>
-</ul>
-<blockquote>
-<p>这段代码实现了全局变量b可以获取到a方法下的局部变量name的值<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   function f1()&#123;</span><br><span class="line">    var num=12;</span><br><span class="line">    return function()&#123;</span><br><span class="line">        var n=0;</span><br><span class="line">        console.log(++num);</span><br><span class="line">        console.log(++n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var fn=f1();</span><br><span class="line">fn();  //13 1</span><br><span class="line">//第一次调用f1里的匿名函数</span><br><span class="line">fn();  //14 1</span><br><span class="line">//第二次调用f1里的匿名函数</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>上述代码中在fn执行完后，就应该连同它里面的变量以同销毁，但在此case中，匿名函数作为f1的返回值被赋给了fn，这时候就相当于fn=function(var n=0;…){},并且匿名函数内部引用这f1里面的变量num，所以变量num无法被销毁，但每次每次n是重新创建的，这里就产生了内存消耗的问题（num）<br>再来一个case:依次输出1到5<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> (function()&#123;</span><br><span class="line">var i=1;</span><br><span class="line">for(i=0;i&lt;5;i++)&#123;</span><br><span class="line">    setTimeout(function()&#123;</span><br><span class="line">     console.log(i);</span><br><span class="line">    &#125;,100)</span><br><span class="line">&#125;</span><br><span class="line">&#125;());  //5，5，5，5，5</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>这是会发现出现了5个5，与预期不同。我们来分析一下，首先由于js是单线程语言，遇到setTimeout函数，这是一个异步函数，将之放入异步函数队列，等到主线程运行完。好！主线程运行完了，即5个循环运行结束，这是的i为5。此时运行异步队列中的线程，此时i为5，所以打印的都是5。我们可以采用一下立即执行函数来解决这个问题<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line"> var i=0;</span><br><span class="line"> for(i=0;i&lt;5;++i)&#123;</span><br><span class="line">     (function(i)&#123;</span><br><span class="line">         setTimeout(function()&#123;</span><br><span class="line">             console.log(i);</span><br><span class="line">            &#125;,100)</span><br><span class="line">     &#125;(i));</span><br><span class="line"> &#125;</span><br><span class="line">&#125;()); //0,1,2,3,4</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>此时已完成预期效果。这里通过闭包来保存变量i，将setTimeout函数放入立即执行函数中，将for循环中的i作为参数传递，通过立即执行函数，相当于将i固定保存在匿名函数中（这就是立即执行函数的魅力），100毫秒后打印出0、1、2、3、4<br>    若要在隔100毫秒在输出，可以<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line"> var i=0;</span><br><span class="line"> for(i=0;i&lt;5;++i)&#123;</span><br><span class="line">     (function(i)&#123;</span><br><span class="line">         setTimeout(function()&#123;</span><br><span class="line">             console.log(i);</span><br><span class="line">            &#125;,i*100)</span><br><span class="line">     &#125;(i));</span><br><span class="line"> &#125;</span><br><span class="line">&#125;()); //0,1,2,3,4</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<ol start="2">
-<li><p>闭包作为参数传递<br>将(function(){}()) 中最后一个括号里面传函数</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   var num = 15</span><br><span class="line">var f1=function(x)&#123;</span><br><span class="line">  if(x&gt; num)&#123;</span><br><span class="line">      console.log(x);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 加上void 变成立即执行函数</span><br><span class="line">void function(fn)&#123;</span><br><span class="line"> var num=100;</span><br><span class="line"> fn(30)</span><br><span class="line">&#125;(f1)    //30</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>解释：这里首先有一个立即执行函数，直接执行，实参为f1对应的匿名方法，将之传给fn，在执行这个匿名函数，在执行这个匿名函数时，访问的num就是最上面的全局变量num（15）了</p>
-</blockquote>
-</li>
-</ol>
 ]]></content>
       <categories>
         <category>前端</category>
@@ -292,6 +175,23 @@
       </tags>
   </entry>
   <entry>
+    <title>About Me</title>
+    <url>/2020/06/03/about/</url>
+    <content><![CDATA[<blockquote>
+<p>A Student, Now live in Nanning, China.</p>
+</blockquote>
+<p>姓名：曹涵<br>现居：暂时没有<br>GitHub: <a href="https://github.com/xiaoruran/xiaoruran.github.io" target="_blank" rel="noopener">Cao_Han</a><br>QQ: 3314508022<br>微信: ch18325622987</p>
+<a id="more"></a>
+
+<!-- ![avatar.jpg](https://i.loli.net/2019/12/02/Hw5WJIMKzi1YrU8.jpg) -->
+
+<img src="https://pic.downk.cc/item/5e739676e83c3a1e3ab4b361.jpg" alt="avatar" width="300" style="border-radius:50%">
+]]></content>
+      <tags>
+        <tag>自我介绍</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JS之事件执行机制</title>
     <url>/2020/06/03/JS%E5%BC%95%E6%93%8E%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6/</url>
     <content><![CDATA[<h3 id="JS引擎事件执行机制"><a href="#JS引擎事件执行机制" class="headerlink" title="JS引擎事件执行机制"></a>JS引擎事件执行机制</h3><h4 id="JS执行机制"><a href="#JS执行机制" class="headerlink" title="JS执行机制"></a>JS执行机制</h4><ol>
@@ -379,167 +279,71 @@ setTimeout2           process2
       </tags>
   </entry>
   <entry>
-    <title>About Me</title>
-    <url>/2020/06/03/about/</url>
-    <content><![CDATA[<blockquote>
-<p>A Student, Now live in Nanning, China.</p>
-</blockquote>
-<p>姓名：曹涵<br>现居：暂时没有<br>GitHub: <a href="https://github.com/xiaoruran/xiaoruran.github.io" target="_blank" rel="noopener">Cao_Han</a><br>QQ: 3314508022<br>微信: ch18325622987</p>
-<a id="more"></a>
-
-<!-- ![avatar.jpg](https://i.loli.net/2019/12/02/Hw5WJIMKzi1YrU8.jpg) -->
-
-<img src="https://pic.downk.cc/item/5e739676e83c3a1e3ab4b361.jpg" alt="avatar" width="300" style="border-radius:50%">
-]]></content>
-      <tags>
-        <tag>自我介绍</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS之对象说明符</title>
-    <url>/2020/06/02/%E5%AF%B9%E8%B1%A1%E8%AF%B4%E6%98%8E%E7%AC%A6/</url>
-    <content><![CDATA[<h3 id="对象说明符（ES6中可以理解为结构解析）"><a href="#对象说明符（ES6中可以理解为结构解析）" class="headerlink" title="对象说明符（ES6中可以理解为结构解析）"></a>对象说明符（ES6中可以理解为结构解析）</h3><p>有时候函数中需要传的参数过多，容易在调用时搞混这些参数的顺序，这时候就可以时使用对象说明符来解决。将形参写成一个对象的形式，实参叶根据这个形式进行传参</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var foo=function(&#123;</span><br><span class="line">  &apos;firststr&apos;:str,</span><br><span class="line">  &apos;secondstr&apos;:name</span><br><span class="line">&#125;)&#123;</span><br><span class="line">  console.log(str+ &quot;-----&quot;+ name );</span><br><span class="line">&#125;</span><br><span class="line">foo(&#123;&apos;firststr&apos;:&quot;你好啊&quot;,&apos;secondstr&apos;:&apos;JS&apos;&#125;);  //你好啊-----JS</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>同源策略以及跨域问题的解决方案</title>
-    <url>/2020/08/18/%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5%E4%BB%A5%E5%8F%8A%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</url>
-    <content><![CDATA[<h3 id="同源策略以及跨域问题的解决方案"><a href="#同源策略以及跨域问题的解决方案" class="headerlink" title="同源策略以及跨域问题的解决方案"></a>同源策略以及跨域问题的解决方案</h3><p>同源策略时互联网安全的重要基础，目的是为了保证用户信息的安全，防止恶意网站窃取数据。</p>
-<p>同源策略会阻止非同源的内容交互（比如你浏览一个网站，同时打开了另一个不相干的网站，但那个网站像访问你的这个网站的Cookie等相关信息，你说可不可怕），所以同源策略是浏览器最核心也最基本的安全功能。</p>
-<p>同源的具体表现</p>
+    <title>JS之闭包理解</title>
+    <url>/2020/06/01/JS%E9%97%AD%E5%8C%85/</url>
+    <content><![CDATA[<h3 id="JS闭包理解"><a href="#JS闭包理解" class="headerlink" title="JS闭包理解"></a>JS闭包理解</h3><h4 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a>立即执行函数</h4><p>作用： 创建一个独立的作用域。这个作用域的变量外面访问不到（避免变量污染）</p>
 <ol>
-<li>同一个协议</li>
-<li>同一个域名</li>
-<li>同一个端口号<br>有一个不同，就算跨域</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>当前页面url</th>
-<th>被请求页面url</th>
-<th>是否跨域</th>
-<th>原因</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>http://www.test.com/</code></td>
-<td><code>http://www.test.com/index.html</code></td>
-<td>否</td>
-<td>同源（协议、域名、端口号相同）</td>
-</tr>
-<tr>
-<td><code>http://www.test.com/</code></td>
-<td><code>https://www.test.com/index.html</code></td>
-<td>跨域</td>
-<td>协议不同（http/https）</td>
-</tr>
-<tr>
-<td><code>http://www.test.com/</code></td>
-<td><code>http://www.baidu.com/</code></td>
-<td>跨域</td>
-<td>主域名不同（test/baidu）</td>
-</tr>
-<tr>
-<td><code>http://www.test.com/</code></td>
-<td><code>http://blog.test.com/</code></td>
-<td>跨域</td>
-<td>子域名不同（www/blog）</td>
-</tr>
-<tr>
-<td><code>http://www.test.com:8080/</code></td>
-<td><code>http://www.test.com:7001</code>/</td>
-<td>跨域</td>
-<td>端口号不同（8080/7001）</td>
-</tr>
-</tbody></table>
-<p>非同源的限制</p>
-<ol>
-<li>不能读取非同源网页的Cookie、LocalStorage、IndexedDB</li>
-<li>不能接触非同源网页的DOM</li>
-<li>不能向非同源地址发送AJAX请求</li>
-</ol>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><ol>
-<li><code>JSONP</code>(json with padding)<br>JSONP原理： 首先不同源的网站可以访问script标签中的src属性，所以JSONP利用这个特性开发出来可以跨域的方式。<br>利用<code>script</code>元素的开放策略，网页可以得到从其他来源动态产生的JSON数据。<br>服务器接受到请求后，将数据放在一个指定名字的回调函数的参数位置传回来，这个步骤需要服务器的支持<br>使用JSONP模式请求数据的时候返回的是一段可执行的JS代码<blockquote>
-<p>由于JSONP是将信息包装到src，通过资源访问来进行跨域，它的信息都在发送头中，所以JSONP只支持get请求</p>
+<li><p><code>(function foo(){}())</code><br>如果直接写function foo(){}()解释器会报错。<em>立即执行函数的调用方式是将函数表达式、调用操作符、分组操作符放到一个括号内，来告诉解释器这里有一个需要解释器立即执行的函数</em>。否则通常情况下，解析器遇到function关键子，都会把它当成一个函数声明，而不是个函数表达式</p>
+<ul>
+<li>立即执行函数的写法</li>
+<li>相当于 function foo(){};foo();</li>
+<li>相当于先定义一个函数，然后调用执行它</li>
+<li>在最后面的括号里面可以直接写传递的参数<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function foo(n1,n2)&#123;</span><br><span class="line">    console.log(n1+n2);</span><br><span class="line">&#125;(3,5));  //8</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><code>(function foo(){})()</code><br>总的语法和上面的一致</p>
+<blockquote>
+<p>注意：当在不需要表达式的场景下，就不需要用括号括起来了</p>
 </blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void function foo()&#123;&#125;()</span><br><span class="line">var foo =function()&#123;&#125;();</span><br><span class="line">true &amp;&amp; function()&#123;&#125;();</span><br><span class="line">0,function()&#123;&#125;();</span><br><span class="line">//以上都是作为函数表达式，所以不需要用括号括起来了</span><br></pre></td></tr></table></figure>
+
 </li>
 </ol>
-<p>原生JS</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"http://test.com/getdata?callback=fn"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="comment">//向服务器test.com发出请求，该请求的查询字符串有一个callback参数，用来指定回调函数的名字</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//处理服务器返回回调函数的数据</span></span><br><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;     </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">data</span>) </span>&#123;        </span><br><span class="line">         alert(data.msg);     </span><br><span class="line">    &#125; </span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
 <blockquote>
-<p>fn是客户端注册的回调函数，目的是获取跨域服务器上的json数据后，对数据进行在处理</p>
+<p>对于立即执行函数，也可以给他们传入参数，在最后一个括号里传</p>
 </blockquote>
-<p>jQuery ajax</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    url: <span class="string">'http://www.test.com:8080/getdata'</span>,</span><br><span class="line">    type: <span class="string">'get'</span>,</span><br><span class="line">    dataType: <span class="string">'jsonp'</span>,  <span class="comment">// 请求方式为jsonp</span></span><br><span class="line">    jsonpCallback: <span class="string">"handleCallback"</span>,    <span class="comment">// 自定义回调函数名</span></span><br><span class="line">    data: &#123;&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>像常见的<code>(function($){}(jQuery))</code>;就是将实参jQuery作为实参传入到函数function($){}中，通过形参$接受</li>
+<li><code>$(function(){})</code><ul>
+<li>需要引入jQuery包</li>
+<li>是$(document).ready(function(){})的简写，两者效果完全一样</li>
+</ul>
+</li>
+<li>可以在function(){}()的前面加上!、+、-、~也可以使变成函数表达式，变成立即执行函数</li>
+</ol>
+<h4 id="是时候理解一波了"><a href="#是时候理解一波了" class="headerlink" title="是时候理解一波了"></a>是时候理解一波了</h4><p>我的理解：</p>
+<ul>
+<li>js中函数内部可以读取到全局变量，而函数外部不能读取函数内部的局部变量。此时闭包就是为了能使得从外部访问函数内部的变量。</li>
+<li>为了让某些变量始终保持在内存中，但同时也可能导致内存消耗的问题</li>
+<li>方便调用上下文的局部变量，利于代码封装<br>两个方面：<ol>
+<li>函数作为返回值<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> function a()&#123;</span><br><span class="line">  var name=&apos;hh&apos;;</span><br><span class="line">  return function()&#123;</span><br><span class="line">      return name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">var b=a();</span><br><span class="line">//将返回的匿名函数赋值给b，此时b相当于a内部的匿名函数，可以访问到a内部的变量</span><br><span class="line">console.log(b());</span><br><span class="line"> //通过b(),执行a内部的匿名函数，最后返回a函数内部的变量</span><br></pre></td></tr></table></figure>
 
-<p>Vue</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$http.jsonp(<span class="string">'http://www.domain2.com:8080/getdata'</span>, &#123;</span><br><span class="line">    params: &#123;&#125;,</span><br><span class="line">    jsonp: <span class="string">'handleCallback'</span></span><br><span class="line">&#125;).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res); </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
+</li>
+</ol>
+</li>
+</ul>
 <blockquote>
-<p>至今还是没搞明白如何在服务器端配合客户端</p>
+<p>这段代码实现了全局变量b可以获取到a方法下的局部变量name的值<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   function f1()&#123;</span><br><span class="line">    var num=12;</span><br><span class="line">    return function()&#123;</span><br><span class="line">        var n=0;</span><br><span class="line">        console.log(++num);</span><br><span class="line">        console.log(++n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var fn=f1();</span><br><span class="line">fn();  //13 1</span><br><span class="line">//第一次调用f1里的匿名函数</span><br><span class="line">fn();  //14 1</span><br><span class="line">//第二次调用f1里的匿名函数</span><br></pre></td></tr></table></figure></p>
 </blockquote>
-<p>参考以下代码（后端配合）</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//后端</span></span><br><span class="line">String jsonpCallback = request.getParameter(<span class="string">"jsonp"</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">//构造回调函数格式jsonp(数据)</span></span><br><span class="line">resp.getWriter().println(jsonp+<span class="string">"("</span>+jsonObject.toJSONString()+<span class="string">")"</span>);</span><br></pre></td></tr></table></figure>
-
 <blockquote>
-<p>只知道后端要返回一个类似于 callback([{“id”:1,”money”:100.00,”producer”:”caohan”,”consumer”:”曹涵”},{“id”:8,”money”:520.00,”producer”:null,”consumer”:”曹涵”},{“id”:9,”money”:1314.00,”producer”:null,”consumer”:”曹涵”}])</p>
+<p>上述代码中在fn执行完后，就应该连同它里面的变量以同销毁，但在此case中，匿名函数作为f1的返回值被赋给了fn，这时候就相当于fn=function(var n=0;…){},并且匿名函数内部引用这f1里面的变量num，所以变量num无法被销毁，但每次每次n是重新创建的，这里就产生了内存消耗的问题（num）<br>再来一个case:依次输出1到5<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> (function()&#123;</span><br><span class="line">var i=1;</span><br><span class="line">for(i=0;i&lt;5;i++)&#123;</span><br><span class="line">    setTimeout(function()&#123;</span><br><span class="line">     console.log(i);</span><br><span class="line">    &#125;,100)</span><br><span class="line">&#125;</span><br><span class="line">&#125;());  //5，5，5，5，5</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>这是会发现出现了5个5，与预期不同。我们来分析一下，首先由于js是单线程语言，遇到setTimeout函数，这是一个异步函数，将之放入异步函数队列，等到主线程运行完。好！主线程运行完了，即5个循环运行结束，这是的i为5。此时运行异步队列中的线程，此时i为5，所以打印的都是5。我们可以采用一下立即执行函数来解决这个问题<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line"> var i=0;</span><br><span class="line"> for(i=0;i&lt;5;++i)&#123;</span><br><span class="line">     (function(i)&#123;</span><br><span class="line">         setTimeout(function()&#123;</span><br><span class="line">             console.log(i);</span><br><span class="line">            &#125;,100)</span><br><span class="line">     &#125;(i));</span><br><span class="line"> &#125;</span><br><span class="line">&#125;()); //0,1,2,3,4</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>此时已完成预期效果。这里通过闭包来保存变量i，将setTimeout函数放入立即执行函数中，将for循环中的i作为参数传递，通过立即执行函数，相当于将i固定保存在匿名函数中（这就是立即执行函数的魅力），100毫秒后打印出0、1、2、3、4<br>    若要在隔100毫秒在输出，可以<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line"> var i=0;</span><br><span class="line"> for(i=0;i&lt;5;++i)&#123;</span><br><span class="line">     (function(i)&#123;</span><br><span class="line">         setTimeout(function()&#123;</span><br><span class="line">             console.log(i);</span><br><span class="line">            &#125;,i*100)</span><br><span class="line">     &#125;(i));</span><br><span class="line"> &#125;</span><br><span class="line">&#125;()); //0,1,2,3,4</span><br></pre></td></tr></table></figure></p>
 </blockquote>
 <ol start="2">
-<li><code>CORS</code><br>CORS(Cross-Origin Resource Sharing)是跨域资源分享，是<strong>解决跨域ajax的根本解决方案</strong><ul>
-<li><strong>普通跨域请求：只需前端设置Access-Control-Allow-Origin</strong></li>
-<li><strong>带有cookie的跨域请求：前后端都需要进行设置</strong></li>
-</ul>
+<li><p>闭包作为参数传递<br>将(function(){}()) 中最后一个括号里面传函数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   var num = 15</span><br><span class="line">var f1=function(x)&#123;</span><br><span class="line">  if(x&gt; num)&#123;</span><br><span class="line">      console.log(x);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 加上void 变成立即执行函数</span><br><span class="line">void function(fn)&#123;</span><br><span class="line"> var num=100;</span><br><span class="line"> fn(30)</span><br><span class="line">&#125;(f1)    //30</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>解释：这里首先有一个立即执行函数，直接执行，实参为f1对应的匿名方法，将之传给fn，在执行这个匿名函数，在执行这个匿名函数时，访问的num就是最上面的全局变量num（15）了</p>
+</blockquote>
 </li>
 </ol>
-<p>【前端设置】<br>原生</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest(); <span class="comment">// IE8/9需用window.XDomainRequest兼容</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 前端设置是否带cookie</span></span><br><span class="line">xhr.withCredentials = <span class="literal">true</span>;</span><br><span class="line"> </span><br><span class="line">xhr.open(<span class="string">'post'</span>, <span class="string">'http://www.domain2.com:8080/login'</span>, <span class="literal">true</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">'Content-Type'</span>, <span class="string">'application/x-www-form-urlencoded'</span>);</span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (xhr.readyState == <span class="number">4</span> &amp;&amp; xhr.status == <span class="number">200</span>) &#123;</span><br><span class="line">        alert(xhr.responseText);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>jQuery</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">   url: <span class="string">'http://www.test.com:8080/login'</span>,</span><br><span class="line">   type: <span class="string">'get'</span>,</span><br><span class="line">   data: &#123;&#125;,</span><br><span class="line">   xhrFields: &#123;</span><br><span class="line">       withCredentials: <span class="literal">true</span>    <span class="comment">// 前端设置是否带cookie</span></span><br><span class="line">   &#125;,</span><br><span class="line">   crossDomain: <span class="literal">true</span>,   <span class="comment">// 会让请求头中包含跨域的额外信息，但不会含cookie</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>vue-resource</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Vue.http.options.credentials = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<p>axios</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">axios.defaults.withCredentials = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<p>【服务器端设置】<br>服务器端对于CORS的支持，主要是通过设置Access-Control-Allow-Origin来进行的。如果浏览器检测到相应的设置，就可以允许Ajax进行跨域的访问。<br>java后台</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"/list"</span>)</span><br><span class="line">     <span class="function"><span class="keyword">public</span> List&lt;Luckymoney&gt; <span class="title">list</span><span class="params">(HttpServletResponse response)</span></span>&#123;</span><br><span class="line">         response.setHeader(<span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"*"</span>);</span><br><span class="line">         <span class="keyword">return</span> luckymonyRepository.findAll();</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
-
-<p>springboot</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@CrossOrigin</span> <span class="comment">//直接加入注解</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>跨域</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS之number</title>
-    <url>/2020/06/02/%E6%95%B0%E5%AD%97%E7%B1%BB%E5%9E%8Bnumber/</url>
-    <content><![CDATA[<h3 id="number一些方法"><a href="#number一些方法" class="headerlink" title="number一些方法"></a>number一些方法</h3><ul>
-<li><p><code>number.toExponential()</code>方法：将这个number转换为一个指数形式的字符串，参数items是控制其小数点后的数字位数，这个值必须在0~20之内</p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var x=Math.PI;</span><br><span class="line">console.log(x.toExponential(30)); //3.142e+0</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>number.x.toFixed()</code>方法：将number转换为一个十进制形式的字符串，可选参数控制其小数点都的数字位数，默认为0，这个值必须在0~20之内</p>
-</li>
-<li><p><code>number.toPrecision()</code>方法：将number转换为一个十进制数子形式的字符串，可选参数控制数字的精度，表示的是所有数字的个数，这个值必须在0~21之内</p>
-</li>
-<li><p><code>number.toString()</code>方法：将number转换为一个字符串，可选参数表示几进制，默认是10</p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var x=Math.PI;</span><br><span class="line">console.log(x.toString(8)); //3.1103755242102643</span><br><span class="line">console.log(x.toString(16)); //3.243f6a8885a3</span><br><span class="line">console.log(x.toString()); //3.141592653589793</span><br></pre></td></tr></table></figure></li>
-</ul>
 ]]></content>
       <categories>
         <category>前端</category>
@@ -547,6 +351,99 @@ setTimeout2           process2
       <tags>
         <tag>前端</tag>
         <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>博客Markdown的写法</title>
+    <url>/2020/01/17/my-second-blog/</url>
+    <content><![CDATA[<h4 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h4><pre><code># 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+注意：#后面要加空格 一级标题下面有一条横线 正常是需要闭合的这些标签</code></pre><h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><ul>
+<li><p>无序列表</p>
+<blockquote>
+<p>* 1<br>* 2<br>* 3<br>* 4</p>
+<blockquote>
+<p>注意 在*后面也要一个空格 用在线编辑器看实际上是转换承了 ul&gt;li</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p>有序列表</p>
+<blockquote>
+<ol>
+<li>列表一</li>
+<li>列表二</li>
+<li>列表三<blockquote>
+<p>注意：数字后面必须是英文的点，有序列表的序号是根据第一行列表的数字顺序来的</p>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p>比如说，你想对某个部分的内容做一些说明或者引用等，可以使用&gt;<br>‘&gt;’</p>
+<h4 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h4><p>使用四个缩进空格 表示代码块</p>
+<h4 id="加强的代码块"><a href="#加强的代码块" class="headerlink" title="加强的代码块"></a>加强的代码块</h4><p>支持四十一种编程语言的语法高亮显示，行号显示，使用&lt;!–￼0–&gt;</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
+        <tag>方法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue之样式</title>
+    <url>/2020/06/03/vue2node/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h3 id="Vue中使用样式"><a href="#Vue中使用样式" class="headerlink" title="Vue中使用样式"></a>Vue中使用样式</h3><h4 id="使用class样式"><a href="#使用class样式" class="headerlink" title="使用class样式"></a>使用class样式</h4><ol>
+<li><p>数组 直接传递数组 （了解就行）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; &lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;]&quot;&gt;这是一个标题&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：使用数组时，要用v-bind绑定class并且在class里面的数组，必须用字符串包裹起来，这时不需要在Vue中有data</p>
+</blockquote>
+</li>
+<li><p>在数组里面使用三元表达式（在Vue中需要声明数据）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; .active &#123;letter-spacing: 0.5em&#125;&lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;,flag?&apos;active&apos;:&apos;&apos;]&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  var vm =new Vue(&#123;</span><br><span class="line">     el:&quot;#app&quot;,</span><br><span class="line">     data:&#123;</span><br><span class="line">         flag:true</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>此时的三元表达式可以借用data中的数据进行，但还是需要将class绑定属性 v-bind</p>
+</blockquote>
+</li>
+<li><p>在数组里面使用对象可以代替三元表达式 例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; .active &#123;letter-spacing: 0.5em&#125;&lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;,&#123;&apos;active&apos;:flag&#125;]&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  var vm =new Vue(&#123;</span><br><span class="line">     el:&quot;#app&quot;,</span><br><span class="line">     data:&#123;</span><br><span class="line">         flag:true</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>直接使用对象（前提是使用v-bind绑定class属性对象的属性可以带引号也可不带，属性的值是一个标识符） 例如：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; .active &#123;letter-spacing: 0.5em&#125;&lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;&#123;red: true, active: false&#125;&quot;&gt;这是一个标题&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<blockquote>
+<p>注意：直接使用对象时，:class={} 这里是对象的括号，且里面可用字符串包裹，也可不用</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="Vue中绑定内联样式（style）"><a href="#Vue中绑定内联样式（style）" class="headerlink" title="Vue中绑定内联样式（style）"></a>Vue中绑定内联样式（style）</h4><ol>
+<li><p>直接通过v-bind绑定style</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;h1 :style=&quot;&#123;color:&apos;red&apos;,&apos;font-size&apos;:200px&#125;&quot;&gt;这是一个标题&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将样式对像，定义到data中，并直接应用到:style中</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;h1 :style=&quot;Objstyle&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  data:&#123;Objstyle:&#123;color:&apos;red&apos;,&apos;font-size&apos;:200px&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>vue</tag>
       </tags>
   </entry>
   <entry>
@@ -743,13 +640,52 @@ setTimeout2           process2
       </tags>
   </entry>
   <entry>
-    <title>JS之等号</title>
-    <url>/2020/06/03/%E7%AD%89%E5%8F%B7/</url>
-    <content><![CDATA[<h4 id="相等（-），严格相等（-）"><a href="#相等（-），严格相等（-）" class="headerlink" title="相等（==），严格相等（===）"></a>相等（==），严格相等（===）</h4><ul>
-<li>在进行相等（==）时，如果一边是字符，一边是数字，会将字符串转换为数字再进行比较</li>
-<li>在进行严格相等（===）运算时，不会进行类型的转换，会直接先判断类型是否相同，不相同时，直接为false</li>
+    <title>位运算小技巧</title>
+    <url>/2020/07/31/%E4%BD%8D%E8%BF%90%E7%AE%97/</url>
+    <content><![CDATA[<h3 id="位运算小技巧"><a href="#位运算小技巧" class="headerlink" title="位运算小技巧"></a>位运算小技巧</h3><p>   js中有一个著名bug，0.1+0.2 ！== 0.3,因为精度的问题，导致所有的浮点运算都是不安全的。<br>   js中完全套用了java的位运算符，包括按位与<code>&amp;</code>、按位或<code>|</code>、按位异或<code>^</code>、按位非<code>~</code>、左移<code>&lt;&lt;</code>、带符号的右移<code>&gt;&gt;</code>和用<code>0</code>补足的右移<code>&gt;&gt;&gt;</code>。这套运算符争对的是整数，但在js内部，所有的数字都是以双精度浮点数进行保存。<br>如果要使用位运算符，js会将数字先转为整数再进行运算，这样就降低了运算速度</p>
+<h4 id="1-使用左移运算符迅速得出2的次方"><a href="#1-使用左移运算符迅速得出2的次方" class="headerlink" title="1. 使用左移运算符迅速得出2的次方"></a>1. 使用左移运算符迅速得出2的次方</h4><pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1 &lt;&lt; 2  //4 ,即1乘2的2次方</span><br><span class="line">1 &lt;&lt; 10  //1024</span><br></pre></td></tr></table></figure></code></pre><h4 id="2-使用-切换变量0或1（异或规则：相同为0，相异为1）"><a href="#2-使用-切换变量0或1（异或规则：相同为0，相异为1）" class="headerlink" title="2. 使用^切换变量0或1（异或规则：相同为0，相异为1）"></a>2. 使用<code>^</code>切换变量0或1（异或规则：相同为0，相异为1）</h4><pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var toggle=0;</span><br><span class="line">toggle ^=1; //1,当toggle为1时，变为0</span><br></pre></td></tr></table></figure></code></pre><h4 id="3-使用-amp-判断奇偶性"><a href="#3-使用-amp-判断奇偶性" class="headerlink" title="3. 使用&amp;判断奇偶性"></a>3. 使用<code>&amp;</code>判断奇偶性</h4><ul>
+<li><p>偶数 &amp; 1 =0</p>
+</li>
+<li><p>奇数 &amp; 1 =1</p>
+<h4 id="4-使用-将一个值转化为布尔值"><a href="#4-使用-将一个值转化为布尔值" class="headerlink" title="4. 使用!!将一个值转化为布尔值"></a>4. 使用<code>!!</code>将一个值转化为布尔值</h4><h4 id="5-使用-、-gt-gt-、-lt-lt-、-gt-gt-gt-、-来取整"><a href="#5-使用-、-gt-gt-、-lt-lt-、-gt-gt-gt-、-来取整" class="headerlink" title="5. 使用~、&gt;&gt;、&lt;&lt;、&gt;&gt;&gt;、| 来取整"></a>5. 使用~、&gt;&gt;、&lt;&lt;、&gt;&gt;&gt;、| 来取整</h4></li>
+<li><p>相当于使用了Math.floor()，向下取整</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">~~11.71   //11</span><br><span class="line">11.71 &gt;&gt; 0 //11</span><br><span class="line">11.71 &lt;&lt; 0 //11</span><br><span class="line">11.71 | 0 //11</span><br><span class="line">11.71 &gt;&gt;&gt; 0 //11</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>js引擎察觉到使用位运算，会将浮点型转换为整型;&gt;&gt;&gt; 不可以对负数取整;Math.round()为四舍五入</p>
+</blockquote>
+<h4 id="6-使用-完成值交换"><a href="#6-使用-完成值交换" class="headerlink" title="6. 使用^完成值交换"></a>6. 使用^完成值交换</h4><p>在es6的解构赋值出来之前，这种当时会更快（但必须是整数）</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//before</span><br><span class="line">let a=7, b=1;</span><br><span class="line">let temp=a;a=b;b=temp;    //借助临时变量</span><br><span class="line">b=[a,a=b][0];             //借助数组</span><br><span class="line">&#123;                         //借助数轴，即两数之间的距离进行交换</span><br><span class="line">  a=a-b;</span><br><span class="line">  b=a+b;</span><br><span class="line">  a=b-a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//after</span><br><span class="line">let a=7,b=1;</span><br><span class="line">a^=b;</span><br><span class="line">b^=a;</span><br><span class="line">a^=b;                    //a=1,b=7</span><br><span class="line">//es6</span><br><span class="line">[a,b]=[b,a];</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-使用-判断符号是否相等"><a href="#7-使用-判断符号是否相等" class="headerlink" title="7. 使用^判断符号是否相等"></a>7. 使用^判断符号是否相等</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(a^b)&gt;=0;   //true为相同符号，false为相反符号</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>因为两数进行异或，最高位是符号位，相同为0，相异为1，所以相同的话，结果为正数，相反的，结果为负数</p>
+<h4 id="8-使用-来检查数字是否不相等"><a href="#8-使用-来检查数字是否不相等" class="headerlink" title="8. 使用^来检查数字是否不相等"></a>8. 使用^来检查数字是否不相等</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//before</span><br><span class="line">if(a!==3)&#123;&#125; </span><br><span class="line">//after</span><br><span class="line">if(a^3)&#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>原理：如果两数不相等，那么总会有一个位不同，结果就不会是0</p>
+<h4 id="9-使用-amp-来判断一个数是否为2的整数幂（6不是，8是）"><a href="#9-使用-amp-来判断一个数是否为2的整数幂（6不是，8是）" class="headerlink" title="9. 使用&amp;来判断一个数是否为2的整数幂（6不是，8是）"></a>9. 使用&amp;来判断一个数是否为2的整数幂（6不是，8是）</h4></li>
+<li><p>n &amp; (n-1) ,若结果是0，则是整数幂，反之则不是</p>
+</li>
+<li><p>解析： 若一个数是整数次幂，则写成二进制会是，只有一个位置上有1（设为index），其他位置都为0，<br>此时n-1的二进制则是index-1的位置到第一位都是1，此时按位&amp;，所有位置都为0，结果就为0</p>
+</li>
+</ul>
+</li>
 </ul>
 ]]></content>
+      <categories>
+        <category>技巧</category>
+      </categories>
+      <tags>
+        <tag>技巧</tag>
+        <tag>位运算</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS之对象说明符</title>
+    <url>/2020/06/02/%E5%AF%B9%E8%B1%A1%E8%AF%B4%E6%98%8E%E7%AC%A6/</url>
+    <content><![CDATA[<h3 id="对象说明符（ES6中可以理解为结构解析）"><a href="#对象说明符（ES6中可以理解为结构解析）" class="headerlink" title="对象说明符（ES6中可以理解为结构解析）"></a>对象说明符（ES6中可以理解为结构解析）</h3><p>有时候函数中需要传的参数过多，容易在调用时搞混这些参数的顺序，这时候就可以时使用对象说明符来解决。将形参写成一个对象的形式，实参叶根据这个形式进行传参</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var foo=function(&#123;</span><br><span class="line">  &apos;firststr&apos;:str,</span><br><span class="line">  &apos;secondstr&apos;:name</span><br><span class="line">&#125;)&#123;</span><br><span class="line">  console.log(str+ &quot;-----&quot;+ name );</span><br><span class="line">&#125;</span><br><span class="line">foo(&#123;&apos;firststr&apos;:&quot;你好啊&quot;,&apos;secondstr&apos;:&apos;JS&apos;&#125;);  //你好啊-----JS</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>前端</category>
       </categories>
@@ -759,23 +695,117 @@ setTimeout2           process2
       </tags>
   </entry>
   <entry>
-    <title>在使用Vue-resource时出现的跨域问题</title>
-    <url>/2020/08/18/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<h3 id="在使用Vue-resource时出现的跨域问题"><a href="#在使用Vue-resource时出现的跨域问题" class="headerlink" title="在使用Vue-resource时出现的跨域问题"></a>在使用Vue-resource时出现的跨域问题</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">me.$http.get(<span class="string">"http://localhost:8080/luckymoney/list"</span>).then(<span class="function"><span class="params">data</span>=&gt;</span>&#123;</span><br><span class="line">               <span class="built_in">console</span>.log(data);</span><br><span class="line">              &#125;)</span><br></pre></td></tr></table></figure>
+    <title>同源策略以及跨域问题的解决方案</title>
+    <url>/2020/08/18/%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5%E4%BB%A5%E5%8F%8A%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</url>
+    <content><![CDATA[<h3 id="同源策略以及跨域问题的解决方案"><a href="#同源策略以及跨域问题的解决方案" class="headerlink" title="同源策略以及跨域问题的解决方案"></a>同源策略以及跨域问题的解决方案</h3><p>同源策略时互联网安全的重要基础，目的是为了保证用户信息的安全，防止恶意网站窃取数据。</p>
+<p>同源策略会阻止非同源的内容交互（比如你浏览一个网站，同时打开了另一个不相干的网站，但那个网站像访问你的这个网站的Cookie等相关信息，你说可不可怕），所以同源策略是浏览器最核心也最基本的安全功能。</p>
+<p>同源的具体表现</p>
+<ol>
+<li>同一个协议</li>
+<li>同一个域名</li>
+<li>同一个端口号<br>有一个不同，就算跨域</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>当前页面url</th>
+<th>被请求页面url</th>
+<th>是否跨域</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>http://www.test.com/</code></td>
+<td><code>http://www.test.com/index.html</code></td>
+<td>否</td>
+<td>同源（协议、域名、端口号相同）</td>
+</tr>
+<tr>
+<td><code>http://www.test.com/</code></td>
+<td><code>https://www.test.com/index.html</code></td>
+<td>跨域</td>
+<td>协议不同（http/https）</td>
+</tr>
+<tr>
+<td><code>http://www.test.com/</code></td>
+<td><code>http://www.baidu.com/</code></td>
+<td>跨域</td>
+<td>主域名不同（test/baidu）</td>
+</tr>
+<tr>
+<td><code>http://www.test.com/</code></td>
+<td><code>http://blog.test.com/</code></td>
+<td>跨域</td>
+<td>子域名不同（www/blog）</td>
+</tr>
+<tr>
+<td><code>http://www.test.com:8080/</code></td>
+<td><code>http://www.test.com:7001</code>/</td>
+<td>跨域</td>
+<td>端口号不同（8080/7001）</td>
+</tr>
+</tbody></table>
+<p>非同源的限制</p>
+<ol>
+<li>不能读取非同源网页的Cookie、LocalStorage、IndexedDB</li>
+<li>不能接触非同源网页的DOM</li>
+<li>不能向非同源地址发送AJAX请求</li>
+</ol>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><ol>
+<li><code>JSONP</code>(json with padding)<br>JSONP原理： 首先不同源的网站可以访问script标签中的src属性，所以JSONP利用这个特性开发出来可以跨域的方式。<br>利用<code>script</code>元素的开放策略，网页可以得到从其他来源动态产生的JSON数据。<br>服务器接受到请求后，将数据放在一个指定名字的回调函数的参数位置传回来，这个步骤需要服务器的支持<br>使用JSONP模式请求数据的时候返回的是一段可执行的JS代码<blockquote>
+<p>由于JSONP是将信息包装到src，通过资源访问来进行跨域，它的信息都在发送头中，所以JSONP只支持get请求</p>
+</blockquote>
+</li>
+</ol>
+<p>原生JS</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"http://test.com/getdata?callback=fn"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="comment">//向服务器test.com发出请求，该请求的查询字符串有一个callback参数，用来指定回调函数的名字</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//处理服务器返回回调函数的数据</span></span><br><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;     </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">data</span>) </span>&#123;        </span><br><span class="line">         alert(data.msg);     </span><br><span class="line">    &#125; </span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>单独访问<a href="http://localhost:8080/luckymoney/list时，数据访问正常，而在页面中调用此函数时，浏览器上出现了bug，" target="_blank" rel="noopener">http://localhost:8080/luckymoney/list时，数据访问正常，而在页面中调用此函数时，浏览器上出现了bug，</a></p>
+<p>fn是客户端注册的回调函数，目的是获取跨域服务器上的json数据后，对数据进行在处理</p>
 </blockquote>
-<p>(<img src="https://i.loli.net/2020/08/16/eobW9F6RmtnyGTh.png" alt>)<br>这时我到处查资料，了解这是一个跨域问题.<br>在前端和后台联合开发时，在局域网内，浏览器访问别人的地址可以获取数据，但是通过接口请求，就会跨域</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"/list"</span>)</span><br><span class="line">     <span class="function"><span class="keyword">public</span> List&lt;Luckymoney&gt; <span class="title">list</span><span class="params">(HttpServletResponse response)</span></span>&#123;</span><br><span class="line">         response.setHeader(<span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"*"</span>);</span><br><span class="line">         response.setHeader(<span class="string">"Cache-Control"</span>,<span class="string">"no-cache"</span>);</span><br><span class="line">         <span class="keyword">return</span> luckymonyRepository.findAll();</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+<p>jQuery ajax</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    url: <span class="string">'http://www.test.com:8080/getdata'</span>,</span><br><span class="line">    type: <span class="string">'get'</span>,</span><br><span class="line">    dataType: <span class="string">'jsonp'</span>,  <span class="comment">// 请求方式为jsonp</span></span><br><span class="line">    jsonpCallback: <span class="string">"handleCallback"</span>,    <span class="comment">// 自定义回调函数名</span></span><br><span class="line">    data: &#123;&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Vue</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$http.jsonp(<span class="string">'http://www.domain2.com:8080/getdata'</span>, &#123;</span><br><span class="line">    params: &#123;&#125;,</span><br><span class="line">    jsonp: <span class="string">'handleCallback'</span></span><br><span class="line">&#125;).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res); </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>通过设置了两个头的信息，才能正式获取到</p>
+<p>至今还是没搞明白如何在服务器端配合客户端</p>
 </blockquote>
-<p>或者当使用了spring-boot时，可以直接在Controller层中加上注解<code>@CrossOrigin</code></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@CrossOrigin</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LuckymoneyController</span> </span>&#123;</span><br></pre></td></tr></table></figure>]]></content>
+<p>参考以下代码（后端配合）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//后端</span></span><br><span class="line">String jsonpCallback = request.getParameter(<span class="string">"jsonp"</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">//构造回调函数格式jsonp(数据)</span></span><br><span class="line">resp.getWriter().println(jsonp+<span class="string">"("</span>+jsonObject.toJSONString()+<span class="string">")"</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>只知道后端要返回一个类似于 callback([{“id”:1,”money”:100.00,”producer”:”caohan”,”consumer”:”曹涵”},{“id”:8,”money”:520.00,”producer”:null,”consumer”:”曹涵”},{“id”:9,”money”:1314.00,”producer”:null,”consumer”:”曹涵”}])</p>
+</blockquote>
+<ol start="2">
+<li><code>CORS</code><br>CORS(Cross-Origin Resource Sharing)是跨域资源分享，是<strong>解决跨域ajax的根本解决方案</strong><ul>
+<li><strong>普通跨域请求：只需前端设置Access-Control-Allow-Origin</strong></li>
+<li><strong>带有cookie的跨域请求：前后端都需要进行设置</strong></li>
+</ul>
+</li>
+</ol>
+<p>【前端设置】<br>原生</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest(); <span class="comment">// IE8/9需用window.XDomainRequest兼容</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 前端设置是否带cookie</span></span><br><span class="line">xhr.withCredentials = <span class="literal">true</span>;</span><br><span class="line"> </span><br><span class="line">xhr.open(<span class="string">'post'</span>, <span class="string">'http://www.domain2.com:8080/login'</span>, <span class="literal">true</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">'Content-Type'</span>, <span class="string">'application/x-www-form-urlencoded'</span>);</span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (xhr.readyState == <span class="number">4</span> &amp;&amp; xhr.status == <span class="number">200</span>) &#123;</span><br><span class="line">        alert(xhr.responseText);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>jQuery</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">   url: <span class="string">'http://www.test.com:8080/login'</span>,</span><br><span class="line">   type: <span class="string">'get'</span>,</span><br><span class="line">   data: &#123;&#125;,</span><br><span class="line">   xhrFields: &#123;</span><br><span class="line">       withCredentials: <span class="literal">true</span>    <span class="comment">// 前端设置是否带cookie</span></span><br><span class="line">   &#125;,</span><br><span class="line">   crossDomain: <span class="literal">true</span>,   <span class="comment">// 会让请求头中包含跨域的额外信息，但不会含cookie</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>vue-resource</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Vue.http.options.credentials = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>axios</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">axios.defaults.withCredentials = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>【服务器端设置】<br>服务器端对于CORS的支持，主要是通过设置Access-Control-Allow-Origin来进行的。如果浏览器检测到相应的设置，就可以允许Ajax进行跨域的访问。<br>java后台</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"/list"</span>)</span><br><span class="line">     <span class="function"><span class="keyword">public</span> List&lt;Luckymoney&gt; <span class="title">list</span><span class="params">(HttpServletResponse response)</span></span>&#123;</span><br><span class="line">         response.setHeader(<span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"*"</span>);</span><br><span class="line">         <span class="keyword">return</span> luckymonyRepository.findAll();</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+
+<p>springboot</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@CrossOrigin</span> <span class="comment">//直接加入注解</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
       <categories>
-        <category>前端</category>
+        <category>前端、网络</category>
       </categories>
       <tags>
         <tag>前端</tag>
@@ -783,54 +813,26 @@ setTimeout2           process2
       </tags>
   </entry>
   <entry>
-    <title>Vue之样式</title>
-    <url>/2020/06/03/vue2node/</url>
-    <content><![CDATA[<p>[TOC]</p>
-<h3 id="Vue中使用样式"><a href="#Vue中使用样式" class="headerlink" title="Vue中使用样式"></a>Vue中使用样式</h3><h4 id="使用class样式"><a href="#使用class样式" class="headerlink" title="使用class样式"></a>使用class样式</h4><ol>
-<li><p>数组 直接传递数组 （了解就行）</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; &lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;]&quot;&gt;这是一个标题&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意：使用数组时，要用v-bind绑定class并且在class里面的数组，必须用字符串包裹起来，这时不需要在Vue中有data</p>
-</blockquote>
+    <title>JS之number</title>
+    <url>/2020/06/02/%E6%95%B0%E5%AD%97%E7%B1%BB%E5%9E%8Bnumber/</url>
+    <content><![CDATA[<h3 id="number一些方法"><a href="#number一些方法" class="headerlink" title="number一些方法"></a>number一些方法</h3><ul>
+<li><p><code>number.toExponential()</code>方法：将这个number转换为一个指数形式的字符串，参数items是控制其小数点后的数字位数，这个值必须在0~20之内</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var x=Math.PI;</span><br><span class="line">console.log(x.toExponential(30)); //3.142e+0</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>在数组里面使用三元表达式（在Vue中需要声明数据）</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; .active &#123;letter-spacing: 0.5em&#125;&lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;,flag?&apos;active&apos;:&apos;&apos;]&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  var vm =new Vue(&#123;</span><br><span class="line">     el:&quot;#app&quot;,</span><br><span class="line">     data:&#123;</span><br><span class="line">         flag:true</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>此时的三元表达式可以借用data中的数据进行，但还是需要将class绑定属性 v-bind</p>
-</blockquote>
+<li><p><code>number.x.toFixed()</code>方法：将number转换为一个十进制形式的字符串，可选参数控制其小数点都的数字位数，默认为0，这个值必须在0~20之内</p>
 </li>
-<li><p>在数组里面使用对象可以代替三元表达式 例如：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; .active &#123;letter-spacing: 0.5em&#125;&lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;[&apos;red&apos;,&#123;&apos;active&apos;:flag&#125;]&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  var vm =new Vue(&#123;</span><br><span class="line">     el:&quot;#app&quot;,</span><br><span class="line">     data:&#123;</span><br><span class="line">         flag:true</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>直接使用对象（前提是使用v-bind绑定class属性对象的属性可以带引号也可不带，属性的值是一个标识符） 例如：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;.red &#123;color:red&#125; .active &#123;letter-spacing: 0.5em&#125;&lt;style&gt;</span><br><span class="line">&lt;h1 :class=&quot;&#123;red: true, active: false&#125;&quot;&gt;这是一个标题&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
-
+<li><p><code>number.toPrecision()</code>方法：将number转换为一个十进制数子形式的字符串，可选参数控制数字的精度，表示的是所有数字的个数，这个值必须在0~21之内</p>
 </li>
-</ol>
-<blockquote>
-<p>注意：直接使用对象时，:class={} 这里是对象的括号，且里面可用字符串包裹，也可不用</p>
-</blockquote>
-</li>
-</ol>
-<h4 id="Vue中绑定内联样式（style）"><a href="#Vue中绑定内联样式（style）" class="headerlink" title="Vue中绑定内联样式（style）"></a>Vue中绑定内联样式（style）</h4><ol>
-<li><p>直接通过v-bind绑定style</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;h1 :style=&quot;&#123;color:&apos;red&apos;,&apos;font-size&apos;:200px&#125;&quot;&gt;这是一个标题&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将样式对像，定义到data中，并直接应用到:style中</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;h1 :style=&quot;Objstyle&quot;&gt;这是一个标题&lt;/h1&gt;</span><br><span class="line">  data:&#123;Objstyle:&#123;color:&apos;red&apos;,&apos;font-size&apos;:200px&#125;</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ol>
+<li><p><code>number.toString()</code>方法：将number转换为一个字符串，可选参数表示几进制，默认是10</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var x=Math.PI;</span><br><span class="line">console.log(x.toString(8)); //3.1103755242102643</span><br><span class="line">console.log(x.toString(16)); //3.243f6a8885a3</span><br><span class="line">console.log(x.toString()); //3.141592653589793</span><br></pre></td></tr></table></figure></li>
+</ul>
 ]]></content>
       <categories>
         <category>前端</category>
       </categories>
       <tags>
         <tag>前端</tag>
-        <tag>vue</tag>
+        <tag>JS</tag>
       </tags>
   </entry>
   <entry>
@@ -959,6 +961,87 @@ setTimeout2           process2
       <tags>
         <tag>前端</tag>
         <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>搭建hexo博客</title>
+    <url>/2019/07/19/%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h3 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h3><h4 id="步骤1-搭建各种电脑环境"><a href="#步骤1-搭建各种电脑环境" class="headerlink" title="*步骤1 搭建各种电脑环境"></a>*步骤1 搭建各种电脑环境</h4><blockquote>
+<p>第一步<br>   <strong>* 1 下载nodejs 可能会添加环境变量<br>第二步<br>   *</strong> 2 下载git 并搭建git环境（并将git的bin加入环境变量path中）</p>
+</blockquote>
+<blockquote>
+<p>第三步<br>   *** 3 创建github账户 并创建一个仓库 并命名为自己的 用户名+github.io（必须要这个名字）</p>
+</blockquote>
+<blockquote>
+<p>第四步<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd ~/.ssh #检查本机已存在的ssh密钥</span><br><span class="line"> 如果提示No such file or directory 说明是第一次用git</span><br><span class="line">  ssh-keygen -t rsa -C &quot;邮件地址&quot;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>   连续三次回车 会生成 </p>
+<blockquote>
+<p>C:\Users\ASUS.ssh\id_rsa.pub<br>   打开这个文件 复制全部内容<br>第五步<br>打开github主页 在右上方找到setting，在其中找到SSH and GPG keys -&gt; New SSH key，将内容复制进去<br>第六步（测试是否成功）<br> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com <span class="comment"># 注意邮箱地址不用改</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p> 若提示—&gt; Hi xiaoruran! You’ve successfully authenticated, but GitHub does not provide shell access. 说明SSH配置成功</p>
+<blockquote>
+<p>第七步（配置git的个人信息）<br>  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">"xiaoruran"</span>// 你的github用户名，非昵称</span><br><span class="line">git config --global user.email  <span class="string">"xxx@qq.com"</span>// 填写你的github注册邮箱</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>第八步 hexo的相关操作<br>   ***下载hexo </p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo</span><br></pre></td></tr></table></figure>
+
+<p> *** 初始化<br>   在电脑中创建一个目录 作为你的站点目录<br>   <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo init</span><br><span class="line">hexo g <span class="comment">#生成</span></span><br><span class="line">hexo s <span class="comment">#启动服务（一般默认是4000端口）</span></span><br><span class="line">hexo s -p 5000 <span class="comment">#将默认端口改为5000</span></span><br></pre></td></tr></table></figure></p>
+<p> ***上传到github<br>  配置主目录底下的_config.yml中的deploy部分<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repository: git@github.com:xiaoruran/xiaoruran.github.io.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure></p>
+<p>  ***可能要下载一个插件<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>第九步 （写自己的博客）<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new &apos;my-first-blog&apos;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>第十步 （修改配置文件 达到自己的效果 也可以更换主题）</p>
+</blockquote>
+<p>[参考链接]<br>（<a href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html" target="_blank" rel="noopener">https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html</a> ）<br>（<a href="https://blog.csdn.net/gsl9d1p04f6x2ts3c9/article/details/81024330" target="_blank" rel="noopener">https://blog.csdn.net/gsl9d1p04f6x2ts3c9/article/details/81024330</a> ）<br>（<a href="https://www.cnblogs.com/trista222/p/8017300.html）" target="_blank" rel="noopener">https://www.cnblogs.com/trista222/p/8017300.html）</a></p>
+]]></content>
+      <tags>
+        <tag>think</tag>
+        <tag>idea</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS之等号</title>
+    <url>/2020/06/03/%E7%AD%89%E5%8F%B7/</url>
+    <content><![CDATA[<h4 id="相等（-），严格相等（-）"><a href="#相等（-），严格相等（-）" class="headerlink" title="相等（==），严格相等（===）"></a>相等（==），严格相等（===）</h4><ul>
+<li>在进行相等（==）时，如果一边是字符，一边是数字，会将字符串转换为数字再进行比较</li>
+<li>在进行严格相等（===）运算时，不会进行类型的转换，会直接先判断类型是否相同，不相同时，直接为false</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在使用Vue-resource时出现的跨域问题</title>
+    <url>/2020/08/18/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h3 id="在使用Vue-resource时出现的跨域问题"><a href="#在使用Vue-resource时出现的跨域问题" class="headerlink" title="在使用Vue-resource时出现的跨域问题"></a>在使用Vue-resource时出现的跨域问题</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">me.$http.get(<span class="string">"http://localhost:8080/luckymoney/list"</span>).then(<span class="function"><span class="params">data</span>=&gt;</span>&#123;</span><br><span class="line">               <span class="built_in">console</span>.log(data);</span><br><span class="line">              &#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>单独访问<a href="http://localhost:8080/luckymoney/list时，数据访问正常，而在页面中调用此函数时，浏览器上出现了bug，" target="_blank" rel="noopener">http://localhost:8080/luckymoney/list时，数据访问正常，而在页面中调用此函数时，浏览器上出现了bug，</a></p>
+</blockquote>
+<p>(<img src="https://i.loli.net/2020/08/16/eobW9F6RmtnyGTh.png" alt>)<br>这时我到处查资料，了解这是一个跨域问题.<br>在前端和后台联合开发时，在局域网内，浏览器访问别人的地址可以获取数据，但是通过接口请求，就会跨域</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"/list"</span>)</span><br><span class="line">     <span class="function"><span class="keyword">public</span> List&lt;Luckymoney&gt; <span class="title">list</span><span class="params">(HttpServletResponse response)</span></span>&#123;</span><br><span class="line">         response.setHeader(<span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"*"</span>);</span><br><span class="line">         response.setHeader(<span class="string">"Cache-Control"</span>,<span class="string">"no-cache"</span>);</span><br><span class="line">         <span class="keyword">return</span> luckymonyRepository.findAll();</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>通过设置了两个头的信息，才能正式获取到</p>
+</blockquote>
+<p>或者当使用了spring-boot时，可以直接在Controller层中加上注解<code>@CrossOrigin</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@CrossOrigin</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LuckymoneyController</span> </span>&#123;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>前端、网络</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>跨域</tag>
       </tags>
   </entry>
   <entry>
@@ -1134,89 +1217,6 @@ setTimeout2           process2
       <tags>
         <tag>前端</tag>
         <tag>vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>搭建hexo博客</title>
-    <url>/2019/07/19/%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h3 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h3><h4 id="步骤1-搭建各种电脑环境"><a href="#步骤1-搭建各种电脑环境" class="headerlink" title="*步骤1 搭建各种电脑环境"></a>*步骤1 搭建各种电脑环境</h4><blockquote>
-<p>第一步<br>   <strong>* 1 下载nodejs 可能会添加环境变量<br>第二步<br>   *</strong> 2 下载git 并搭建git环境（并将git的bin加入环境变量path中）</p>
-</blockquote>
-<blockquote>
-<p>第三步<br>   *** 3 创建github账户 并创建一个仓库 并命名为自己的 用户名+github.io（必须要这个名字）</p>
-</blockquote>
-<blockquote>
-<p>第四步<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd ~/.ssh #检查本机已存在的ssh密钥</span><br><span class="line"> 如果提示No such file or directory 说明是第一次用git</span><br><span class="line">  ssh-keygen -t rsa -C &quot;邮件地址&quot;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>   连续三次回车 会生成 </p>
-<blockquote>
-<p>C:\Users\ASUS.ssh\id_rsa.pub<br>   打开这个文件 复制全部内容<br>第五步<br>打开github主页 在右上方找到setting，在其中找到SSH and GPG keys -&gt; New SSH key，将内容复制进去<br>第六步（测试是否成功）<br> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com <span class="comment"># 注意邮箱地址不用改</span></span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p> 若提示—&gt; Hi xiaoruran! You’ve successfully authenticated, but GitHub does not provide shell access. 说明SSH配置成功</p>
-<blockquote>
-<p>第七步（配置git的个人信息）<br>  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">"xiaoruran"</span>// 你的github用户名，非昵称</span><br><span class="line">git config --global user.email  <span class="string">"xxx@qq.com"</span>// 填写你的github注册邮箱</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>第八步 hexo的相关操作<br>   ***下载hexo </p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo</span><br></pre></td></tr></table></figure>
-
-<p> *** 初始化<br>   在电脑中创建一个目录 作为你的站点目录<br>   <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo init</span><br><span class="line">hexo g <span class="comment">#生成</span></span><br><span class="line">hexo s <span class="comment">#启动服务（一般默认是4000端口）</span></span><br><span class="line">hexo s -p 5000 <span class="comment">#将默认端口改为5000</span></span><br></pre></td></tr></table></figure></p>
-<p> ***上传到github<br>  配置主目录底下的_config.yml中的deploy部分<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repository: git@github.com:xiaoruran/xiaoruran.github.io.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure></p>
-<p>  ***可能要下载一个插件<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>第九步 （写自己的博客）<br>   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new &apos;my-first-blog&apos;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>第十步 （修改配置文件 达到自己的效果 也可以更换主题）</p>
-</blockquote>
-<p>[参考链接]<br>（<a href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html" target="_blank" rel="noopener">https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html</a> ）<br>（<a href="https://blog.csdn.net/gsl9d1p04f6x2ts3c9/article/details/81024330" target="_blank" rel="noopener">https://blog.csdn.net/gsl9d1p04f6x2ts3c9/article/details/81024330</a> ）<br>（<a href="https://www.cnblogs.com/trista222/p/8017300.html）" target="_blank" rel="noopener">https://www.cnblogs.com/trista222/p/8017300.html）</a></p>
-]]></content>
-      <tags>
-        <tag>think</tag>
-        <tag>idea</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>位运算小技巧</title>
-    <url>/2020/07/31/%E4%BD%8D%E8%BF%90%E7%AE%97/</url>
-    <content><![CDATA[<h3 id="位运算小技巧"><a href="#位运算小技巧" class="headerlink" title="位运算小技巧"></a>位运算小技巧</h3><p>   js中有一个著名bug，0.1+0.2 ！== 0.3,因为精度的问题，导致所有的浮点运算都是不安全的。<br>   js中完全套用了java的位运算符，包括按位与<code>&amp;</code>、按位或<code>|</code>、按位异或<code>^</code>、按位非<code>~</code>、左移<code>&lt;&lt;</code>、带符号的右移<code>&gt;&gt;</code>和用<code>0</code>补足的右移<code>&gt;&gt;&gt;</code>。这套运算符争对的是整数，但在js内部，所有的数字都是以双精度浮点数进行保存。<br>如果要使用位运算符，js会将数字先转为整数再进行运算，这样就降低了运算速度</p>
-<h4 id="1-使用左移运算符迅速得出2的次方"><a href="#1-使用左移运算符迅速得出2的次方" class="headerlink" title="1. 使用左移运算符迅速得出2的次方"></a>1. 使用左移运算符迅速得出2的次方</h4><pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1 &lt;&lt; 2  //4 ,即1乘2的2次方</span><br><span class="line">1 &lt;&lt; 10  //1024</span><br></pre></td></tr></table></figure></code></pre><h4 id="2-使用-切换变量0或1（异或规则：相同为0，相异为1）"><a href="#2-使用-切换变量0或1（异或规则：相同为0，相异为1）" class="headerlink" title="2. 使用^切换变量0或1（异或规则：相同为0，相异为1）"></a>2. 使用<code>^</code>切换变量0或1（异或规则：相同为0，相异为1）</h4><pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var toggle=0;</span><br><span class="line">toggle ^=1; //1,当toggle为1时，变为0</span><br></pre></td></tr></table></figure></code></pre><h4 id="3-使用-amp-判断奇偶性"><a href="#3-使用-amp-判断奇偶性" class="headerlink" title="3. 使用&amp;判断奇偶性"></a>3. 使用<code>&amp;</code>判断奇偶性</h4><ul>
-<li><p>偶数 &amp; 1 =0</p>
-</li>
-<li><p>奇数 &amp; 1 =1</p>
-<h4 id="4-使用-将一个值转化为布尔值"><a href="#4-使用-将一个值转化为布尔值" class="headerlink" title="4. 使用!!将一个值转化为布尔值"></a>4. 使用<code>!!</code>将一个值转化为布尔值</h4><h4 id="5-使用-、-gt-gt-、-lt-lt-、-gt-gt-gt-、-来取整"><a href="#5-使用-、-gt-gt-、-lt-lt-、-gt-gt-gt-、-来取整" class="headerlink" title="5. 使用~、&gt;&gt;、&lt;&lt;、&gt;&gt;&gt;、| 来取整"></a>5. 使用~、&gt;&gt;、&lt;&lt;、&gt;&gt;&gt;、| 来取整</h4></li>
-<li><p>相当于使用了Math.floor()，向下取整</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">~~11.71   //11</span><br><span class="line">11.71 &gt;&gt; 0 //11</span><br><span class="line">11.71 &lt;&lt; 0 //11</span><br><span class="line">11.71 | 0 //11</span><br><span class="line">11.71 &gt;&gt;&gt; 0 //11</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>js引擎察觉到使用位运算，会将浮点型转换为整型;&gt;&gt;&gt; 不可以对负数取整;Math.round()为四舍五入</p>
-</blockquote>
-<h4 id="6-使用-完成值交换"><a href="#6-使用-完成值交换" class="headerlink" title="6. 使用^完成值交换"></a>6. 使用^完成值交换</h4><p>在es6的解构赋值出来之前，这种当时会更快（但必须是整数）</p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//before</span><br><span class="line">let a=7, b=1;</span><br><span class="line">let temp=a;a=b;b=temp;    //借助临时变量</span><br><span class="line">b=[a,a=b][0];             //借助数组</span><br><span class="line">&#123;                         //借助数轴，即两数之间的距离进行交换</span><br><span class="line">  a=a-b;</span><br><span class="line">  b=a+b;</span><br><span class="line">  a=b-a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//after</span><br><span class="line">let a=7,b=1;</span><br><span class="line">a^=b;</span><br><span class="line">b^=a;</span><br><span class="line">a^=b;                    //a=1,b=7</span><br><span class="line">//es6</span><br><span class="line">[a,b]=[b,a];</span><br></pre></td></tr></table></figure>
-
-<h4 id="7-使用-判断符号是否相等"><a href="#7-使用-判断符号是否相等" class="headerlink" title="7. 使用^判断符号是否相等"></a>7. 使用^判断符号是否相等</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(a^b)&gt;=0;   //true为相同符号，false为相反符号</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>因为两数进行异或，最高位是符号位，相同为0，相异为1，所以相同的话，结果为正数，相反的，结果为负数</p>
-<h4 id="8-使用-来检查数字是否不相等"><a href="#8-使用-来检查数字是否不相等" class="headerlink" title="8. 使用^来检查数字是否不相等"></a>8. 使用^来检查数字是否不相等</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//before</span><br><span class="line">if(a!==3)&#123;&#125; </span><br><span class="line">//after</span><br><span class="line">if(a^3)&#123;&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>原理：如果两数不相等，那么总会有一个位不同，结果就不会是0</p>
-<h4 id="9-使用-amp-来判断一个数是否为2的整数幂（6不是，8是）"><a href="#9-使用-amp-来判断一个数是否为2的整数幂（6不是，8是）" class="headerlink" title="9. 使用&amp;来判断一个数是否为2的整数幂（6不是，8是）"></a>9. 使用&amp;来判断一个数是否为2的整数幂（6不是，8是）</h4></li>
-<li><p>n &amp; (n-1) ,若结果是0，则是整数幂，反之则不是</p>
-</li>
-<li><p>解析： 若一个数是整数次幂，则写成二进制会是，只有一个位置上有1（设为index），其他位置都为0，<br>此时n-1的二进制则是index-1的位置到第一位都是1，此时按位&amp;，所有位置都为0，结果就为0</p>
-</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>技巧</category>
-      </categories>
-      <tags>
-        <tag>技巧</tag>
-        <tag>位运算</tag>
       </tags>
   </entry>
   <entry>
