@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    JS之正则表达式 |  曹涵的个人博客
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="曹涵的个人博客" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  
+  <canvas width="1777" height="841"
+    style="position: fixed; left: 0px; top: 0px; z-index: 999; pointer-events: none;"></canvas>
+  
+  
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-正则表达式" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  JS之正则表达式
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/05/13/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="article-date">
+  <time datetime="2020-05-13T13:52:32.000Z" itemprop="datePublished">2020-05-13</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.9k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">7 min</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h2 id="正则表达式学习"><a href="#正则表达式学习" class="headerlink" title="正则表达式学习"></a>正则表达式学习</h2><p>  正则表达式是一个帮助处理和<strong>匹配复杂字符串</strong>的工具,regular expression(RegEx)</p>
+<h4 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h4><ol>
+<li>灵活，逻辑性和功能性非常强</li>
+<li>可以迅速用极简单的方式做到字符串的复杂控制</li>
+<li>对初学者不友好，比较晦涩难懂</li>
+</ol>
+<h4 id="常见用法："><a href="#常见用法：" class="headerlink" title="常见用法："></a>常见用法：</h4><ol>
+<li>邮箱验证</li>
+<li>密码强度验证</li>
+<li>身份证号验证</li>
+<li>用户名验证</li>
+<li>提取数字</li>
+</ol>
+<h4 id="字符集合"><a href="#字符集合" class="headerlink" title="字符集合[]"></a>字符集合[]</h4><p> 集合set是一对方括号[]内的一组字符，用来代表整个字符中的任意一个<br> 例如：</p>
+<blockquote>
+<p><code>[abc]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 指定字符（a，b或c）之一<br><code>[a-z]</code>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表示任何一个小写字母<br><code>[^abc]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^ 表示否的意思，表达了除a，b，c外的任意字符<br><code>[0246]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;代表 0，2，4，6的任意一个<br><code>[0-9]</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 代表 0到9的任意一个数字<br><code>[a-zA-Z]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;任何一个大小写字母<br><code>[+]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在集合中 +、*、|、()、$、{}都没有特殊含义，仅代表普通字符匹配<br><code>[0-9]+</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 这里的加代表连续多个</p>
+</blockquote>
+<h4 id="常见通配符（核心）"><a href="#常见通配符（核心）" class="headerlink" title="常见通配符（核心）"></a>常见通配符（核心）</h4><p>通配符是一种特殊字符，一般指的是反斜杠\后面紧跟的一些特殊标识符，用来<strong>指代某些字符集合</strong></p>
+<ul>
+<li><code>\d</code>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;代表阿拉伯数字（只能匹配一个字符）</li>
+<li><code>\D</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;代表除了阿拉伯数字外的所有字符，可以理解为[^\d]</li>
+<li><code>\s</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;空白字符</li>
+<li><code>\S</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;除空白字符外的所有字符</li>
+<li><code>\w</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;任何单词字符（字母、数字、汉字、下划线_字符）</li>
+<li><code>\W</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回一个匹配项，其中字符串不包含任何单词字符<br><strong>不常用：</strong><ul>
+<li><code>\A</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字符串的开头</li>
+<li><code>\Z</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字符串的末尾</li>
+<li><code>\b</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回指定字符位于单词的开头或者末尾的匹配项</li>
+<li><code>\B</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不在单词的开头和结尾处</li>
+</ul>
+</li>
+</ul>
+<h4 id="元字符（复杂重要）"><a href="#元字符（复杂重要）" class="headerlink" title="元字符（复杂重要）"></a>元字符（复杂重要）</h4><p> 在正则表达式中具有特殊含义的字符，具有<strong>很高的优先级</strong>。例如<code>[]</code>、<code>\</code>、<code>+</code>都是元字符<br> 在<strong>元字符中<code>\</code>的优先级最高</strong>,其次为各种括号</p>
+<ul>
+<li><p><code>\</code> 代表对随后的通配符进行转义，因此需要用<code>\\</code>表示<code>\</code>本身</p>
+<blockquote>
+<p>若反斜杠后面没有通配符，则反斜杠原样输出，就不再转义</p>
+</blockquote>
+</li>
+<li><p><code>[]</code> 用于限定字符集合</p>
+<blockquote>
+<p>注意：使用<code>[]</code>时，再[]中间的特殊字符如.+?*:-等等都是看作普通字符，但若要将\[]看作普通字符，需要进行转义，即使用\\表示\，使用\[来表示[</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[\w,]+</span><br><span class="line">//代表检索所有连续的单词字符或者连续的,  在[]中只能匹配一个字符</span><br></pre></td></tr></table></figure></li>
+<li><p><code>.</code> 英文的小数点，表示除换行符之外的<strong>任何一个字符</strong></p>
+</li>
+<li><p><code>*</code> 代表前面的字符可以出现0次或多次</p>
+</li>
+<li><p><code>+</code> 代表一个或多个<strong>连续</strong>匹配的字符</p>
+</li>
+<li><p><code>?</code> 非贪婪模式，表示匹配前面的字符0次或一次</p>
+</li>
+<li><p><code>+?</code> 将搜索模式从贪婪模式改为非贪婪模式</p>
+<blockquote>
+<p>如果能匹配到，则匹配一个，不会匹配多个</p>
+</blockquote>
+</li>
+<li><p><code>&#123;&#125;</code> 表示的是前面表达式的确切的出现次数</p>
+<blockquote>
+<p>\d{2} 表示 匹配两个数字<br>\d{2,4} 表示 匹配2-4个数字，2，3，4个<br>\d{2,} 表示2位到无限位</p>
+</blockquote>
+</li>
+<li><p><code>|</code> 管道符 代表选择其中一个，一般按顺序选择，若前面的已被匹配，就不会匹配后面的</p>
+</li>
+<li><p><code>()</code> 捕获和分组</p>
+<blockquote>
+<p>括号内的字符串将会作为捕获的结果进行输出,<strong>只会输出括号内的匹配字符串</strong></p>
+</blockquote>
+</li>
+<li><p><code>^</code> 代表字符串的开始</p>
+</li>
+<li><p><code>$</code> 代表字符串的结束</p>
+</li>
+<li><p><code>?:</code> 表示非捕获分组，匹配冒号后的内容抄但不获取匹配结果，不进行存储供以后使用。</p>
+</li>
+</ul>
+<h4 id="密码强度验证"><a href="#密码强度验证" class="headerlink" title="密码强度验证"></a>密码强度验证</h4><p> 使用正则表达式来进行密码强度验证，一般密码由数字、字母和特殊字符组成，若由一连串的数字或字母或特殊字符，这种密码的安全性不高，而由其中两种组成密码强度一般,用户密码包含的字符种类越多，密码的安全性越高</p>
+<ol>
+<li>只有数字验证（安全性较低）（六位以上的数字密码）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\d&#123;6,&#125;</span><br></pre></td></tr></table></figure></li>
+<li>只有字母验证（六位以上的字母密码）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[a-zA-Z]&#123;6,&#125;</span><br><span class="line">```   </span><br><span class="line">3. 只有特殊字符的密码（六位以上的特殊字符密码）</span><br></pre></td></tr></table></figure>
+[.-+?\[]`/;‘@#$%^&amp;*():&lt;&gt;=~]{6,}<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 注意：在集合中写[]和\时需要进行转义，因为这两个时元字符，优先级较[]来说更高</span><br><span class="line">4. 数字与字母混合使用密码</span><br></pre></td></tr></table></figure>
+[\da-zA-Z]<em>\d+[a-zA-Z]+[\da-zA-Z]</em><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">**解释：**</span><br><span class="line">&gt;[\da-zA-Z]* &amp;nbsp;&amp;nbsp;表示匹配空字符串，或长度至少为1的由数字和字母组成的字符串</span><br><span class="line">    \d+[a-zA-Z]+&amp;nbsp;&amp;nbsp;表示1个或多个连续数字和1个或多个连续字母组成的字符串</span><br><span class="line">    连起来就可以匹配一系列数字和字母组成的字符串</span><br><span class="line"></span><br><span class="line">5. 数字和特殊字符串混合使用</span><br></pre></td></tr></table></figure>
+[\d.-+?\[]<code>/;&#39;@#$%^&amp;*():&lt;&gt;=~]*\d+[.-+?\\\[\]</code>/;‘@#$%^&amp;<em>():&lt;&gt;=~]+[\d.-+?\[]`/;‘@#$%^&amp;</em>():&lt;&gt;=~]*<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">6. 三种字符混合使用（密码强度比较高）</span><br></pre></td></tr></table></figure>
+[\da-zA-Z.-+?\[]<code>/;&#39;@#$%^&amp;*():&lt;&gt;=~]*  #0个或多个数字、字母和特殊字符的混合字符串
+((\d+[a-zA-Z]+[.-+?\\\[\]</code>/;‘@#$%^&amp;<em>():&lt;&gt;=~]+)|  #数字开头<br>(\d+[.-+?\[]`/;‘@#$%^&amp;</em>():&lt;&gt;=<del>]+[a-zA-Z]+)| #数字开头<br>([a-zA-Z]+\d+[.-+?\[]`/;‘@#$%^&amp;*():&lt;&gt;=</del>]+)| #字母开头<br>([a-zA-Z]+[.-+?\[]<code>/;&#39;@#$%^&amp;*():&lt;&gt;=~]+\d+)| #字母开头
+([.-+?\\\[\]</code>/;‘@#$%^&amp;<em>():&lt;&gt;=~]+\d+[a-zA-Z]+)| #特殊字符开头<br>([.-+?\[]`/;‘@#$%^&amp;</em>():&lt;&gt;=<del>]+[a-zA-Z]+\d+)| #特殊字符开头<br>)[\da-zA-Z.-+?\[]`/;‘@#$%^&amp;*():&lt;&gt;=</del>]* <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 邮箱验证</span><br><span class="line">一般邮箱在@前面会是数字和字母的混合,在其中间可能会混有`_`、`-`、`.`、`+`,在@后面可能会带有字母和数字然后.加上顶级域名或者会有两个域名</span><br></pre></td></tr></table></figure>
+^[\da-zA-Z.-<em>+]+@[\da-zA-Z</em>.-+]+[.][\da-zA-Z]{2,4}$<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; 注意：想表示字符.时一定要加上[.],因为普通的.代表的是任意字符，而[.]代表的是字符.</span><br><span class="line"></span><br><span class="line">#### 身份证号验证</span><br><span class="line">身份证号由六位数字地址码,八位数字出生日期码，三位数字顺序码和一位数字校验码组成</span><br><span class="line">   1. 地址码规则</span><br><span class="line">   以数字1-9开始，剩下的5位数字为0-9</span><br></pre></td></tr></table></figure>
+[1-9]\d{5}<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2. 年份码规则</span><br><span class="line">年份码为4位，按现实情况来说现在只有18、19、20开头的</span><br></pre></td></tr></table></figure>
+(18|19|20)\d{2}<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">3. 月份码规则</span><br><span class="line">由两位数字组成，第一位若为0，则第二位是1-9；第一位若为1，则第二位为0、1或2</span><br><span class="line">(0[1-9])|(1[0-2])</span><br><span class="line">4. 日期码规则</span><br><span class="line">若第一位取1-2，第二位可以取0-9；若第一位取0，则第二位取1-9，若第一位取3，则第二位可以取0-1</span><br></pre></td></tr></table></figure>
+([1-2][0-9])|(0[1-9])|(3[0-1])<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5. 顺序码规则</span><br><span class="line">顺序码为三位</span><br></pre></td></tr></table></figure>
+\d{3}<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">6. 校验码规则</span><br><span class="line">校验码长一位，可以是数字可以是X或者x</span><br></pre></td></tr></table></figure>
+[\dXx]<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7. 总结</span><br></pre></td></tr></table></figure>
+^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([1-2][0-9])|(0[1-9])|(3[0-1]))\d{3}[\dXx]$<pre><code>
+
+
+
+
+</code></pre></li>
+</ol>
+
+      
+      <!-- reward -->
+      
+      <div id="reward-btn">
+        Donate
+      </div>
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>Copyright： </strong>
+              Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/05/13/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/06/01/JS%E9%97%AD%E5%8C%85/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            JS之闭包理解
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/01/17/my-second-blog/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">博客Markdown的写法</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: false,
+        verify: false,
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2022
+        <i class="ri-heart-fill heart_icon"></i> 曹涵
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="曹涵的个人博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="http://ruran12138.lofter.com">摄影</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Subtitle -->
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['面朝大海，春暖花开', '愿你一生努力，一生被爱', '想要的都拥有，得不到的都释怀'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+    console.log(err)
+  }
+</script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom -->
+
+
+<script src="/js/clickBoom.js"></script>
+
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>

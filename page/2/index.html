@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+     曹涵的个人博客
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="曹涵的个人博客" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  
+  <canvas width="1777" height="841"
+    style="position: fixed; left: 0px; top: 0px; z-index: 999; pointer-events: none;"></canvas>
+  
+  
+  <div id="app">
+    <main class="content on">
+      
+<section class="cover">
+    
+      
+      <a class="forkMe" href="https://github.com/Shen-Yu/hexo-theme-ayer"
+        target="_blank"><img width="149" height="149" src="/images/forkme.png"
+          class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+    
+  <div class="cover-frame">
+    <div class="bg-box">
+      <img src="/images/cover5.jpg" alt="image frame" />
+    </div>
+    <div class="cover-inner text-center text-white">
+      <h1><a href="/">曹涵的个人博客</a></h1>
+      <div id="subtitle-box">
+        
+        <span id="subtitle"></span>
+        
+      </div>
+      <div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="cover-learn-more">
+    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
+  </div>
+</section>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script>
+
+<div id="main">
+  <section class="outer">
+  <article class="articles">
+    
+    
+    
+    
+    <article id="post-JSON" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/06/03/JSON/"
+    >JS之JSON</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/06/03/JSON/" class="article-date">
+  <time datetime="2020-06-02T19:45:23.000Z" itemprop="datePublished">2020-06-02</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h3 id="JSON-JavaScript对象表示法"><a href="#JSON-JavaScript对象表示法" class="headerlink" title="JSON(JavaScript对象表示法)"></a>JSON(JavaScript对象表示法)</h3><p>这是一种轻量级的数据交换格式。基于JavaScript对象字面量表示法，那是JS最精华的部分之一。尽管只是JS的一个子集，但与语言无关。<br>现代编程语言写的程序，都可以用它来交换数据。它是一种文本格式，所以可以被人和机器阅读。<br>它易于实现且易于使用</p>
+<h4 id="JSON语法"><a href="#JSON语法" class="headerlink" title="JSON语法"></a>JSON语法</h4><ul>
+<li>JSON对象是一个相当于”key-value”的无序集合。名字可以是任何字符串，值可以是任何类型的JSON值，包括数组和对象</li>
+<li>JSON有六种类型的值：对象、数组、字符串、布尔类型、数字、和特殊值null</li>
+<li>JSON数字与JS数字类似，整数的首位不允许为0，因为一些语言用它来表示八进制数<h4 id="安全的使用JSON"><a href="#安全的使用JSON" class="headerlink" title="安全的使用JSON"></a>安全的使用JSON</h4></li>
+<li>使用eval函数可以把一段JSON文本转换为一个有用的数据结构，但是eval函数有着极其可怕的安全问题。</li>
+<li>可以使用<code>JSON.parse()</code>方法代替eval函数，能避免危险。如果文本中包含任何危险数据JSON.parse()会抛出一个异常，为防止服务器出现漏洞，建议总是用JSON.parse代替eval。</li>
+<li>在外部数据与innerHTML进行交互式还存在另一种危险。一种常见的Ajax模式是把服务器端发送过来的一个HTML文本赋值给某个HTML元素的innerHTML属性。这是一个非常糟糕的习观，如果这个HTML中包含一个&lt;\script&gt;标签或者其等价物，那么一个恶意脚本将被执行，这也可以是因为服务器端存在漏洞<blockquote>
+<p>如果一个恶意脚本在你的页面上被运行，它就有权访问这个页面的所有状态和执行该页面能做的所有操作.他能与服务器进行交互，而服务器并不能区分恶意请求。恶意脚本还能访问全局对象，这使得它有权访问用户能看到的一切，这个恶意脚本还拥有和用户对话的能力。document对象还能给该恶意脚本授权访问网络，允许它下载更多的恶意脚本，或者是在你的防火墙内探测站点，或者是把它已经窃取的隐私内容发送给世界上的任何一个服务器。这是JS全局变量的一个直接后果。</p>
+</blockquote>
+</li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-JSLint" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/06/03/JSLint/"
+    >JS之JSLint</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/06/03/JSLint/" class="article-date">
+  <time datetime="2020-06-02T16:25:55.000Z" itemprop="datePublished">2020-06-02</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h3 id="JSLint"><a href="#JSLint" class="headerlink" title="JSLint"></a>JSLint</h3><p>JS是一门能力很强的语言，现在已经被应用与一些大型项目中。但对于大型项目而言，很多本意事希望提高这门语言易用性的特性却成了麻烦。于时催生出一个针对JS的lint:JSLint,一个JS语法检查器和校验器<br>它是JS的一个代码质量工具。它读取源文本并进行扫描，如果发现问题，会返回一个消息描述该问题并指明该问题在源文件中的大概位置</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-等号" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/06/03/%E7%AD%89%E5%8F%B7/"
+    >JS之等号</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/06/03/%E7%AD%89%E5%8F%B7/" class="article-date">
+  <time datetime="2020-06-02T16:24:45.000Z" itemprop="datePublished">2020-06-02</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h4 id="相等（-），严格相等（-）"><a href="#相等（-），严格相等（-）" class="headerlink" title="相等（==），严格相等（===）"></a>相等（==），严格相等（===）</h4><ul>
+<li>在进行相等（==）时，如果一边是字符，一边是数字，会将字符串转换为数字再进行比较</li>
+<li>在进行严格相等（===）运算时，不会进行类型的转换，会直接先判断类型是否相同，不相同时，直接为false</li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-jS缺点" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/06/03/jS%E7%BC%BA%E7%82%B9/"
+    >JS之毒瘤</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/06/03/jS%E7%BC%BA%E7%82%B9/" class="article-date">
+  <time datetime="2020-06-02T16:21:50.000Z" itemprop="datePublished">2020-06-02</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h3 id="JS毒瘤"><a href="#JS毒瘤" class="headerlink" title="JS毒瘤"></a>JS毒瘤</h3><ul>
+<li><p><strong>全局变量</strong>:应尽可能的少用和不用全局变量，全局变量很难以管理，因为它可以在任何时间在程序的任意部分进行修改，降低了程序的可靠性</p>
+</li>
+<li><p><strong>作用域</strong>：js中代码块中变量作用域不止作用在此代码块中，这是一个极其危险的特性</p>
+</li>
+<li><p><strong>自动插入分号</strong>： JS有一个自动修复机制，它试图通过自动插入分号来修正有缺损的程序。但是，千万别指望它，它可能会掩盖/导致更严重的错误</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">return </span><br><span class="line">&#123;</span><br><span class="line">    status:ture;</span><br><span class="line">&#125;;</span><br><span class="line">//看去来是要返回一个包含status属性的对象，但自动插入分号会让它变成返回undefined</span><br><span class="line">//改正</span><br><span class="line">return&#123;</span><br><span class="line">     status:ture;</span><br><span class="line">&#125;</span><br><span class="line">//最好将&#123;写到最好一句的最后</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>typeof运算符</strong> 返回一个识别其类型的字符串</p>
+<ol>
+<li><code>typeof null</code> 返回的是’object’,typeof不能检测除null，只能通过一些辅助手段判断<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">myval=null;</span><br><span class="line">if (myval &amp;&amp; typeof myval === &#x27;object&#x27;)&#123;&#125;//..</span><br><span class="line">//或者</span><br><span class="line">if(myval === null)&#123;&#125;</span><br></pre></td></tr></table></figure></li>
+<li><code>typeof array</code> 返回的是’object’,不是数组类型<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//通过构造函数</span><br><span class="line">if(array.constructor.toString().indexOf(&quot;Array&quot;) !== -1)</span><br><span class="line">//通过数组方法</span><br><span class="line">Array.isArray(array);</span><br><span class="line">//通过原型prototype+isPrototypeOf()</span><br><span class="line">Array.prototype.isPrototypeOf(array)</span><br><span class="line">//isPrototypeOf()函数：用于指示对象是否存在一个对象的原型链中。如果存在则返回true。该方法属于Object对象，由于所有的对象都继承了Object的对象实例。因此几乎所有的实例方法都可以使用该方法。如果array的原型链中存在Array对象，就会返回true，也就说明array属于数组类型</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p><code>parseInt()</code> 将字符串转为整数的方法</p>
+<ol>
+<li>遇到非数字时会停止解析 parseInt(“16”)和parseInt(“16 xx”)返回结果都是number型的16</li>
+<li>但是如果字符串的第一个字符是0，那么该字符串会基于八进制而非十进制来求值。在八进制中8和9不是数字，所以解析到8和9时会停止解析。<br>parseInt(“08”)和parseInt(“09”)都是返回0，这种错误会导致解析日期和时间时出现问题，可以在parseInt(),加上第二个参数parseInt(“08”，10)，这样可以解决问题<blockquote>
+<p>建议总是加上这个参数</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li><p><code>+</code>运算符</p>
+<ol>
+<li>如果两边都是字符串，会连接起来</li>
+<li>若一边是空字符串，一边是数字，则会把数字转换为字符串进行连接</li>
+<li>若想要做加法运算，请保证两个运算数都是number</li>
+</ol>
+</li>
+<li><p>浮点数</p>
+<ul>
+<li>0.1+0.2不等于0.3</li>
+</ul>
+</li>
+<li><p><code>NaN</code> 不是一个数字的意思</p>
+<ul>
+<li>typeof NaN === ‘number’ //true</li>
+<li><code>isNaN()</code> 可以判断是否是NaN</li>
+<li>判断一个值是否可以用作数字的最好方法就是<code>isFinite()</code>函数,因为它会筛出NaN和Infinity，但它会试图把运算数转为一个数字。可以自定一个函数判断是否是一个数字<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var isNumber=function(value)&#123;</span><br><span class="line">   return typeof value === &#x27;number&#x27; &amp;&amp; isFinite(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>伪数组</p>
+<ul>
+<li>JS中的数组不是真正的数组</li>
+<li>typeof不能判定是数组还是对象</li>
+<li>判断是一个数组的方法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//通过构造函数</span><br><span class="line">if(array.constructor.toString().indexOf(&quot;Array&quot;) !== -1)</span><br><span class="line">//通过数组方法</span><br><span class="line">Array.isArray(array);</span><br><span class="line">//通过原型prototype+isPrototypeOf()</span><br><span class="line">Array.prototype.isPrototypeOf(array)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>isPrototypeOf()</code>函数：用于指示对象是否存在一个对象的原型链中。如果存在则返回true。该方法属于Object对象，由于所有的对象都继承了Object的对象实例。因此几乎所有的实例方法都可以使用该方法。如果array的原型链中存在Array对象，就会返回true，也就说明array属于数组类型</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>假值（可以当成false的值）</p>
+<ol>
+<li>0（Number）</li>
+<li>NaN（Number）</li>
+<li>‘’(String)</li>
+<li>false(Boolean)</li>
+<li>null(Object)</li>
+<li>undefined(Undefined)</li>
+</ol>
+</li>
+<li><p><code>hasOwnProperty()</code></p>
+<ul>
+<li>hasOwnProperty方法可以用来做成一个过滤器去避开for in语句的一个隐患。但这是一个方法，不是一个运算符，在任何对象中都可以进行赋值<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var name;</span><br><span class="line">var obj.hasOwnProperty=null;  //地雷</span><br><span class="line">for(name in obj)&#123;</span><br><span class="line">    if (obj.hasOwnProperty(name))&#123;  //踩雷</span><br><span class="line">        console.log(name+&quot;:&quot;+obj[name]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="JS糟粕"><a href="#JS糟粕" class="headerlink" title="JS糟粕"></a>JS糟粕</h3></li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>永远不要使用<code>==</code>和<code>!=</code>,必须使用<code>===</code>和<code>!==</code><ul>
+<li>因为使用==时可能进行类型强转，由于==还具有传递性（x==y,y==z =&gt;x==z）<h4 id="介绍eval-函数"><a href="#介绍eval-函数" class="headerlink" title="介绍eval()函数"></a>介绍eval()函数</h4>eval函数就是通过解析参数，进而通过JS编译器，来执行解析后的语句。相当于一个js语言的执行器，能把其中的参数按照JS的语法进行解析并执行</li>
+</ul>
+</li>
+<li><code>eval(s)</code></li>
+<li>当参数时数字或者Function类型时，直接返回该数字和该Function</li>
+<li>当参数时字符串时，JS会解析该字符串，并转换为相应的JS代码，执行该代码，并返回执行结果</li>
+<li>若参数是JSON格式（此时的JSON外面要加一对小括号），该方法返回该JSON</li>
+<li>如果参数s是字符串，并且字符串中是语句或语句块，则eval()方法会执行该语句或语句块，并且返回undefined</li>
+<li>如果试图覆盖eval属性或将eval()方法赋给另外一个属性，并通过该属性调用它，会出现EvalError 异常</li>
+<li>给了被求值的文本太多的权力，降低了语言的性能</li>
+</ol>
+<h4 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h4><ul>
+<li>JS中，代码块并没有作用域</li>
+<li>JSLint期望只有function、if、switch、while、for、do、和try语句使用代码块，有一个例外就是在else或for in语句中的if语句可以不使用代码块<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var i=0;</span><br><span class="line">for(i=0;i&lt;5;i++)&#123;</span><br><span class="line">var x=8;</span><br><span class="line">&#125;</span><br><span class="line">console.log(x); //8</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>像for这样的代码块中声明的变量在其它地方也能调用，没有属于自己的作用</p>
+</blockquote>
+</li>
+<li><strong>最好不要使用++（递增）和–（递减），这是导致病毒和其它安全威胁的第二大元凶（第一个是架构缺陷）</strong></li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-对象说明符" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/06/02/%E5%AF%B9%E8%B1%A1%E8%AF%B4%E6%98%8E%E7%AC%A6/"
+    >JS之对象说明符</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/06/02/%E5%AF%B9%E8%B1%A1%E8%AF%B4%E6%98%8E%E7%AC%A6/" class="article-date">
+  <time datetime="2020-06-02T12:35:50.000Z" itemprop="datePublished">2020-06-02</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h3 id="对象说明符（ES6中可以理解为结构解析）"><a href="#对象说明符（ES6中可以理解为结构解析）" class="headerlink" title="对象说明符（ES6中可以理解为结构解析）"></a>对象说明符（ES6中可以理解为结构解析）</h3><p>有时候函数中需要传的参数过多，容易在调用时搞混这些参数的顺序，这时候就可以时使用对象说明符来解决。将形参写成一个对象的形式，实参叶根据这个形式进行传参</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var foo=function(&#123;</span><br><span class="line">  &#x27;firststr&#x27;:str,</span><br><span class="line">  &#x27;secondstr&#x27;:name</span><br><span class="line">&#125;)&#123;</span><br><span class="line">  console.log(str+ &quot;-----&quot;+ name );</span><br><span class="line">&#125;</span><br><span class="line">foo(&#123;&#x27;firststr&#x27;:&quot;你好啊&quot;,&#x27;secondstr&#x27;:&#x27;JS&#x27;&#125;);  //你好啊-----JS</span><br></pre></td></tr></table></figure>
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-数字类型number" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/06/02/%E6%95%B0%E5%AD%97%E7%B1%BB%E5%9E%8Bnumber/"
+    >JS之number</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/06/02/%E6%95%B0%E5%AD%97%E7%B1%BB%E5%9E%8Bnumber/" class="article-date">
+  <time datetime="2020-06-02T11:50:50.000Z" itemprop="datePublished">2020-06-02</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h3 id="number一些方法"><a href="#number一些方法" class="headerlink" title="number一些方法"></a>number一些方法</h3><ul>
+<li><code>number.toExponential()</code>方法：将这个number转换为一个指数形式的字符串，参数items是控制其小数点后的数字位数，这个值必须在0~20之内 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var x=Math.PI;</span><br><span class="line">console.log(x.toExponential(30)); //3.142e+0</span><br></pre></td></tr></table></figure></li>
+<li><code>number.x.toFixed()</code>方法：将number转换为一个十进制形式的字符串，可选参数控制其小数点都的数字位数，默认为0，这个值必须在0~20之内</li>
+<li><code>number.toPrecision()</code>方法：将number转换为一个十进制数子形式的字符串，可选参数控制数字的精度，表示的是所有数字的个数，这个值必须在0~21之内</li>
+<li><code>number.toString()</code>方法：将number转换为一个字符串，可选参数表示几进制，默认是10 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var x=Math.PI;</span><br><span class="line">console.log(x.toString(8)); //3.1103755242102643</span><br><span class="line">console.log(x.toString(16)); //3.243f6a8885a3</span><br><span class="line">console.log(x.toString()); //3.141592653589793</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-JS闭包" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/06/01/JS%E9%97%AD%E5%8C%85/"
+    >JS之闭包理解</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/06/01/JS%E9%97%AD%E5%8C%85/" class="article-date">
+  <time datetime="2020-06-01T13:50:50.000Z" itemprop="datePublished">2020-06-01</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h3 id="JS闭包理解"><a href="#JS闭包理解" class="headerlink" title="JS闭包理解"></a>JS闭包理解</h3><h4 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a>立即执行函数</h4><p>作用： 创建一个独立的作用域。这个作用域的变量外面访问不到（避免变量污染）</p>
+<ol>
+<li><p><code>(function foo()&#123;&#125;())</code><br>如果直接写function foo(){}()解释器会报错。<em>立即执行函数的调用方式是将函数表达式、调用操作符、分组操作符放到一个括号内，来告诉解释器这里有一个需要解释器立即执行的函数</em>。否则通常情况下，解析器遇到function关键子，都会把它当成一个函数声明，而不是个函数表达式</p>
+<ul>
+<li>立即执行函数的写法</li>
+<li>相当于 function foo(){};foo();</li>
+<li>相当于先定义一个函数，然后调用执行它</li>
+<li>在最后面的括号里面可以直接写传递的参数<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(function foo(n1,n2)&#123;</span><br><span class="line">    console.log(n1+n2);</span><br><span class="line">&#125;(3,5));  //8</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><code>(function foo()&#123;&#125;)()</code><br>总的语法和上面的一致</p>
+<blockquote>
+<p>注意：当在不需要表达式的场景下，就不需要用括号括起来了</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">void function foo()&#123;&#125;()</span><br><span class="line">var foo =function()&#123;&#125;();</span><br><span class="line">true &amp;&amp; function()&#123;&#125;();</span><br><span class="line">0,function()&#123;&#125;();</span><br><span class="line">//以上都是作为函数表达式，所以不需要用括号括起来了</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>对于立即执行函数，也可以给他们传入参数，在最后一个括号里传</p>
+</blockquote>
+</li>
+<li><p>像常见的<code>(function($)&#123;&#125;(jQuery))</code>;就是将实参jQuery作为实参传入到函数function($){}中，通过形参$接受</p>
+</li>
+<li><p><code>$(function()&#123;&#125;)</code></p>
+<ul>
+<li>需要引入jQuery包</li>
+<li>是$(document).ready(function(){})的简写，两者效果完全一样</li>
+</ul>
+</li>
+<li><p>可以在function(){}()的前面加上!、+、-、~也可以使变成函数表达式，变成立即执行函数</p>
+</li>
+</ol>
+<h4 id="是时候理解一波了"><a href="#是时候理解一波了" class="headerlink" title="是时候理解一波了"></a>是时候理解一波了</h4><p>我的理解：</p>
+<ul>
+<li>js中函数内部可以读取到全局变量，而函数外部不能读取函数内部的局部变量。此时闭包就是为了能使得从外部访问函数内部的变量。</li>
+<li>为了让某些变量始终保持在内存中，但同时也可能导致内存消耗的问题</li>
+<li>方便调用上下文的局部变量，利于代码封装<br>两个方面：<ol>
+<li>函数作为返回值<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> function a()&#123;</span><br><span class="line">  var name=&#x27;hh&#x27;;</span><br><span class="line">  return function()&#123;</span><br><span class="line">      return name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">var b=a();</span><br><span class="line">//将返回的匿名函数赋值给b，此时b相当于a内部的匿名函数，可以访问到a内部的变量</span><br><span class="line">console.log(b());</span><br><span class="line"> //通过b(),执行a内部的匿名函数，最后返回a函数内部的变量</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这段代码实现了全局变量b可以获取到a方法下的局部变量name的值</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">   function f1()&#123;</span><br><span class="line">    var num=12;</span><br><span class="line">    return function()&#123;</span><br><span class="line">        var n=0;</span><br><span class="line">        console.log(++num);</span><br><span class="line">        console.log(++n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var fn=f1();</span><br><span class="line">fn();  //13 1</span><br><span class="line">//第一次调用f1里的匿名函数</span><br><span class="line">fn();  //14 1</span><br><span class="line">//第二次调用f1里的匿名函数</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>上述代码中在fn执行完后，就应该连同它里面的变量以同销毁，但在此case中，匿名函数作为f1的返回值被赋给了fn，这时候就相当于fn=function(var n=0;…){},并且匿名函数内部引用这f1里面的变量num，所以变量num无法被销毁，但每次每次n是重新创建的，这里就产生了内存消耗的问题（num）<br>再来一个case:依次输出1到5</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> (function()&#123;</span><br><span class="line">var i=1;</span><br><span class="line">for(i=0;i&lt;5;i++)&#123;</span><br><span class="line">    setTimeout(function()&#123;</span><br><span class="line">     console.log(i);</span><br><span class="line">    &#125;,100)</span><br><span class="line">&#125;</span><br><span class="line">&#125;());  //5，5，5，5，5</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这是会发现出现了5个5，与预期不同。我们来分析一下，首先由于js是单线程语言，遇到setTimeout函数，这是一个异步函数，将之放入异步函数队列，等到主线程运行完。好！主线程运行完了，即5个循环运行结束，这是的i为5。此时运行异步队列中的线程，此时i为5，所以打印的都是5。我们可以采用一下立即执行函数来解决这个问题</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line"> var i=0;</span><br><span class="line"> for(i=0;i&lt;5;++i)&#123;</span><br><span class="line">     (function(i)&#123;</span><br><span class="line">         setTimeout(function()&#123;</span><br><span class="line">             console.log(i);</span><br><span class="line">            &#125;,100)</span><br><span class="line">     &#125;(i));</span><br><span class="line"> &#125;</span><br><span class="line">&#125;()); //0,1,2,3,4</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>此时已完成预期效果。这里通过闭包来保存变量i，将setTimeout函数放入立即执行函数中，将for循环中的i作为参数传递，通过立即执行函数，相当于将i固定保存在匿名函数中（这就是立即执行函数的魅力），100毫秒后打印出0、1、2、3、4<br>若要在隔100毫秒在输出，可以</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line"> var i=0;</span><br><span class="line"> for(i=0;i&lt;5;++i)&#123;</span><br><span class="line">     (function(i)&#123;</span><br><span class="line">         setTimeout(function()&#123;</span><br><span class="line">             console.log(i);</span><br><span class="line">            &#125;,i*100)</span><br><span class="line">     &#125;(i));</span><br><span class="line"> &#125;</span><br><span class="line">&#125;()); //0,1,2,3,4</span><br></pre></td></tr></table></figure></li>
+<li>闭包作为参数传递<br>将(function(){}()) 中最后一个括号里面传函数<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">   var num = 15</span><br><span class="line">var f1=function(x)&#123;</span><br><span class="line">  if(x&gt; num)&#123;</span><br><span class="line">      console.log(x);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 加上void 变成立即执行函数</span><br><span class="line">void function(fn)&#123;</span><br><span class="line"> var num=100;</span><br><span class="line"> fn(30)</span><br><span class="line">&#125;(f1)    //30</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>解释：这里首先有一个立即执行函数，直接执行，实参为f1对应的匿名方法，将之传给fn，在执行这个匿名函数，在执行这个匿名函数时，访问的num就是最上面的全局变量num（15）了</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-正则表达式" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/05/13/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"
+    >JS之正则表达式</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/05/13/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="article-date">
+  <time datetime="2020-05-13T13:52:32.000Z" itemprop="datePublished">2020-05-13</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h2 id="正则表达式学习"><a href="#正则表达式学习" class="headerlink" title="正则表达式学习"></a>正则表达式学习</h2><p>  正则表达式是一个帮助处理和<strong>匹配复杂字符串</strong>的工具,regular expression(RegEx)</p>
+<h4 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h4><ol>
+<li>灵活，逻辑性和功能性非常强</li>
+<li>可以迅速用极简单的方式做到字符串的复杂控制</li>
+<li>对初学者不友好，比较晦涩难懂</li>
+</ol>
+<h4 id="常见用法："><a href="#常见用法：" class="headerlink" title="常见用法："></a>常见用法：</h4><ol>
+<li>邮箱验证</li>
+<li>密码强度验证</li>
+<li>身份证号验证</li>
+<li>用户名验证</li>
+<li>提取数字</li>
+</ol>
+<h4 id="字符集合"><a href="#字符集合" class="headerlink" title="字符集合[]"></a>字符集合[]</h4><p> 集合set是一对方括号[]内的一组字符，用来代表整个字符中的任意一个<br> 例如：</p>
+<blockquote>
+<p><code>[abc]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 指定字符（a，b或c）之一<br><code>[a-z]</code>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表示任何一个小写字母<br><code>[^abc]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^ 表示否的意思，表达了除a，b，c外的任意字符<br><code>[0246]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;代表 0，2，4，6的任意一个<br><code>[0-9]</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 代表 0到9的任意一个数字<br><code>[a-zA-Z]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;任何一个大小写字母<br><code>[+]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在集合中 +、*、|、()、$、{}都没有特殊含义，仅代表普通字符匹配<br><code>[0-9]+</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 这里的加代表连续多个</p>
+</blockquote>
+<h4 id="常见通配符（核心）"><a href="#常见通配符（核心）" class="headerlink" title="常见通配符（核心）"></a>常见通配符（核心）</h4><p>通配符是一种特殊字符，一般指的是反斜杠\后面紧跟的一些特殊标识符，用来<strong>指代某些字符集合</strong></p>
+<ul>
+<li><code>\d</code>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;代表阿拉伯数字（只能匹配一个字符）</li>
+<li><code>\D</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;代表除了阿拉伯数字外的所有字符，可以理解为[^\d]</li>
+<li><code>\s</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;空白字符</li>
+<li><code>\S</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;除空白字符外的所有字符</li>
+<li><code>\w</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;任何单词字符（字母、数字、汉字、下划线_字符）</li>
+<li><code>\W</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回一个匹配项，其中字符串不包含任何单词字符<br><strong>不常用：</strong><ul>
+<li><code>\A</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字符串的开头</li>
+<li><code>\Z</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字符串的末尾</li>
+<li><code>\b</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回指定字符位于单词的开头或者末尾的匹配项</li>
+<li><code>\B</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不在单词的开头和结尾处</li>
+</ul>
+</li>
+</ul>
+<h4 id="元字符（复杂重要）"><a href="#元字符（复杂重要）" class="headerlink" title="元字符（复杂重要）"></a>元字符（复杂重要）</h4><p> 在正则表达式中具有特殊含义的字符，具有<strong>很高的优先级</strong>。例如<code>[]</code>、<code>\</code>、<code>+</code>都是元字符<br> 在<strong>元字符中<code>\</code>的优先级最高</strong>,其次为各种括号</p>
+<ul>
+<li><p><code>\</code> 代表对随后的通配符进行转义，因此需要用<code>\\</code>表示<code>\</code>本身</p>
+<blockquote>
+<p>若反斜杠后面没有通配符，则反斜杠原样输出，就不再转义</p>
+</blockquote>
+</li>
+<li><p><code>[]</code> 用于限定字符集合</p>
+<blockquote>
+<p>注意：使用<code>[]</code>时，再[]中间的特殊字符如.+?*:-等等都是看作普通字符，但若要将\[]看作普通字符，需要进行转义，即使用\\表示\，使用\[来表示[</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[\w,]+</span><br><span class="line">//代表检索所有连续的单词字符或者连续的,  在[]中只能匹配一个字符</span><br></pre></td></tr></table></figure></li>
+<li><p><code>.</code> 英文的小数点，表示除换行符之外的<strong>任何一个字符</strong></p>
+</li>
+<li><p><code>*</code> 代表前面的字符可以出现0次或多次</p>
+</li>
+<li><p><code>+</code> 代表一个或多个<strong>连续</strong>匹配的字符</p>
+</li>
+<li><p><code>?</code> 非贪婪模式，表示匹配前面的字符0次或一次</p>
+</li>
+<li><p><code>+?</code> 将搜索模式从贪婪模式改为非贪婪模式</p>
+<blockquote>
+<p>如果能匹配到，则匹配一个，不会匹配多个</p>
+</blockquote>
+</li>
+<li><p><code>&#123;&#125;</code> 表示的是前面表达式的确切的出现次数</p>
+<blockquote>
+<p>\d{2} 表示 匹配两个数字<br>\d{2,4} 表示 匹配2-4个数字，2，3，4个<br>\d{2,} 表示2位到无限位</p>
+</blockquote>
+</li>
+<li><p><code>|</code> 管道符 代表选择其中一个，一般按顺序选择，若前面的已被匹配，就不会匹配后面的</p>
+</li>
+<li><p><code>()</code> 捕获和分组</p>
+<blockquote>
+<p>括号内的字符串将会作为捕获的结果进行输出,<strong>只会输出括号内的匹配字符串</strong></p>
+</blockquote>
+</li>
+<li><p><code>^</code> 代表字符串的开始</p>
+</li>
+<li><p><code>$</code> 代表字符串的结束</p>
+</li>
+<li><p><code>?:</code> 表示非捕获分组，匹配冒号后的内容抄但不获取匹配结果，不进行存储供以后使用。</p>
+</li>
+</ul>
+<h4 id="密码强度验证"><a href="#密码强度验证" class="headerlink" title="密码强度验证"></a>密码强度验证</h4><p> 使用正则表达式来进行密码强度验证，一般密码由数字、字母和特殊字符组成，若由一连串的数字或字母或特殊字符，这种密码的安全性不高，而由其中两种组成密码强度一般,用户密码包含的字符种类越多，密码的安全性越高</p>
+<ol>
+<li>只有数字验证（安全性较低）（六位以上的数字密码）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\d&#123;6,&#125;</span><br></pre></td></tr></table></figure></li>
+<li>只有字母验证（六位以上的字母密码）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[a-zA-Z]&#123;6,&#125;</span><br><span class="line">```   </span><br><span class="line">3. 只有特殊字符的密码（六位以上的特殊字符密码）</span><br></pre></td></tr></table></figure>
+[.-+?\[]`/;‘@#$%^&amp;*():&lt;&gt;=~]{6,}<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 注意：在集合中写[]和\时需要进行转义，因为这两个时元字符，优先级较[]来说更高</span><br><span class="line">4. 数字与字母混合使用密码</span><br></pre></td></tr></table></figure>
+[\da-zA-Z]<em>\d+[a-zA-Z]+[\da-zA-Z]</em><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">**解释：**</span><br><span class="line">&gt;[\da-zA-Z]* &amp;nbsp;&amp;nbsp;表示匹配空字符串，或长度至少为1的由数字和字母组成的字符串</span><br><span class="line">    \d+[a-zA-Z]+&amp;nbsp;&amp;nbsp;表示1个或多个连续数字和1个或多个连续字母组成的字符串</span><br><span class="line">    连起来就可以匹配一系列数字和字母组成的字符串</span><br><span class="line"></span><br><span class="line">5. 数字和特殊字符串混合使用</span><br></pre></td></tr></table></figure>
+[\d.-+?\[]<code>/;&#39;@#$%^&amp;*():&lt;&gt;=~]*\d+[.-+?\\\[\]</code>/;‘@#$%^&amp;<em>():&lt;&gt;=~]+[\d.-+?\[]`/;‘@#$%^&amp;</em>():&lt;&gt;=~]*<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">6. 三种字符混合使用（密码强度比较高）</span><br></pre></td></tr></table></figure>
+[\da-zA-Z.-+?\[]<code>/;&#39;@#$%^&amp;*():&lt;&gt;=~]*  #0个或多个数字、字母和特殊字符的混合字符串
+((\d+[a-zA-Z]+[.-+?\\\[\]</code>/;‘@#$%^&amp;<em>():&lt;&gt;=~]+)|  #数字开头<br>(\d+[.-+?\[]`/;‘@#$%^&amp;</em>():&lt;&gt;=<del>]+[a-zA-Z]+)| #数字开头<br>([a-zA-Z]+\d+[.-+?\[]`/;‘@#$%^&amp;*():&lt;&gt;=</del>]+)| #字母开头<br>([a-zA-Z]+[.-+?\[]<code>/;&#39;@#$%^&amp;*():&lt;&gt;=~]+\d+)| #字母开头
+([.-+?\\\[\]</code>/;‘@#$%^&amp;<em>():&lt;&gt;=~]+\d+[a-zA-Z]+)| #特殊字符开头<br>([.-+?\[]`/;‘@#$%^&amp;</em>():&lt;&gt;=<del>]+[a-zA-Z]+\d+)| #特殊字符开头<br>)[\da-zA-Z.-+?\[]`/;‘@#$%^&amp;*():&lt;&gt;=</del>]* <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 邮箱验证</span><br><span class="line">一般邮箱在@前面会是数字和字母的混合,在其中间可能会混有`_`、`-`、`.`、`+`,在@后面可能会带有字母和数字然后.加上顶级域名或者会有两个域名</span><br></pre></td></tr></table></figure>
+^[\da-zA-Z.-<em>+]+@[\da-zA-Z</em>.-+]+[.][\da-zA-Z]{2,4}$<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; 注意：想表示字符.时一定要加上[.],因为普通的.代表的是任意字符，而[.]代表的是字符.</span><br><span class="line"></span><br><span class="line">#### 身份证号验证</span><br><span class="line">身份证号由六位数字地址码,八位数字出生日期码，三位数字顺序码和一位数字校验码组成</span><br><span class="line">   1. 地址码规则</span><br><span class="line">   以数字1-9开始，剩下的5位数字为0-9</span><br></pre></td></tr></table></figure>
+[1-9]\d{5}<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2. 年份码规则</span><br><span class="line">年份码为4位，按现实情况来说现在只有18、19、20开头的</span><br></pre></td></tr></table></figure>
+(18|19|20)\d{2}<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">3. 月份码规则</span><br><span class="line">由两位数字组成，第一位若为0，则第二位是1-9；第一位若为1，则第二位为0、1或2</span><br><span class="line">(0[1-9])|(1[0-2])</span><br><span class="line">4. 日期码规则</span><br><span class="line">若第一位取1-2，第二位可以取0-9；若第一位取0，则第二位取1-9，若第一位取3，则第二位可以取0-1</span><br></pre></td></tr></table></figure>
+([1-2][0-9])|(0[1-9])|(3[0-1])<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5. 顺序码规则</span><br><span class="line">顺序码为三位</span><br></pre></td></tr></table></figure>
+\d{3}<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">6. 校验码规则</span><br><span class="line">校验码长一位，可以是数字可以是X或者x</span><br></pre></td></tr></table></figure>
+[\dXx]<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7. 总结</span><br></pre></td></tr></table></figure>
+^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([1-2][0-9])|(0[1-9])|(3[0-1]))\d{3}[\dXx]$<pre><code>
+
+
+
+
+</code></pre></li>
+</ol>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-my-second-blog" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/01/17/my-second-blog/"
+    >博客Markdown的写法</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/01/17/my-second-blog/" class="article-date">
+  <time datetime="2020-01-17T09:40:14.000Z" itemprop="datePublished">2020-01-17</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h4 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h4><pre><code># 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+注意：#后面要加空格 一级标题下面有一条横线 正常是需要闭合的这些标签</code></pre><h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><ul>
+<li><p>无序列表</p>
+<blockquote>
+<p>* 1<br>* 2<br>* 3<br>* 4</p>
+<blockquote>
+<p>注意 在*后面也要一个空格 用在线编辑器看实际上是转换承了 ul&gt;li</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p>有序列表</p>
+<blockquote>
+<ol>
+<li>列表一</li>
+<li>列表二</li>
+<li>列表三<blockquote>
+<p>注意：数字后面必须是英文的点，有序列表的序号是根据第一行列表的数字顺序来的</p>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p>比如说，你想对某个部分的内容做一些说明或者引用等，可以使用&gt;<br>‘&gt;’</p>
+<h4 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h4><p>使用四个缩进空格 表示代码块</p>
+<h4 id="加强的代码块"><a href="#加强的代码块" class="headerlink" title="加强的代码块"></a>加强的代码块</h4><p>支持四十一种编程语言的语法高亮显示，行号显示，使用``` ``` 例如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"> @requires_authorization</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">somefunc</span>(<span class="params">param1=<span class="string">&#x27;&#x27;</span>, param2=<span class="number">0</span></span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;A docstring&#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> param1 &gt; param2: <span class="comment"># interesting</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&#x27;Greater&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> (param2 - param1 + <span class="number">1</span>) <span class="keyword">or</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SomeClass</span>:</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>message = <span class="string">&#x27;&#x27;&#x27;interpreter</span></span><br><span class="line"><span class="string"><span class="meta">... </span>prompt&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B9%E6%B3%95/" rel="tag">方法</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-vue简介笔记" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2019/07/19/vue%E7%AE%80%E4%BB%8B%E7%AC%94%E8%AE%B0/"
+    >Vue简介</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2019/07/19/vue%E7%AE%80%E4%BB%8B%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time datetime="2019-07-18T20:19:27.000Z" itemprop="datePublished">2019-07-18</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>[TOC]</p>
+<h3 id="什么是Vue-js"><a href="#什么是Vue-js" class="headerlink" title="什么是Vue.js"></a>什么是Vue.js</h3><ul>
+<li>Vue.js是目前最火的前端框架，react是最流行的前端框架</li>
+<li>Vue.js是一套构建用户界面的框架，<strong>只关注视图层</strong>，它不仅易于上手，还便于和第三当库或既有项目整合。（Vue有配套的第三方类库，可以整合起来做大型项目的开发）</li>
+<li>在vue中核心的概念是让用户不再操作DOM元素，解放了用户的双手，让程序员关注业务逻辑</li>
+</ul>
+<h3 id="框架和库的区别"><a href="#框架和库的区别" class="headerlink" title="框架和库的区别"></a>框架和库的区别</h3><ul>
+<li>框架是一套完整的解决方案；对项目的侵入性较大；项目若要更换框架，则需要重新构建整个项目。<ul>
+<li>node中的express1</li>
+</ul>
+</li>
+<li>库也可以成为插件（提供的是一个小功能），对项目的侵入性校，如果某个库无法完成某些需求，可以很容易切换到其他库实现需求。<h3 id="Node（后端）中的mvc与前端中的mccm之间的区别"><a href="#Node（后端）中的mvc与前端中的mccm之间的区别" class="headerlink" title="Node（后端）中的mvc与前端中的mccm之间的区别"></a>Node（后端）中的mvc与前端中的mccm之间的区别</h3></li>
+</ul>
+<ul>
+<li><p>mvc是后端的分层开发概念</p>
+</li>
+<li><p>MVVM是前端视图层的概念，主要关注视图层的分离，mvvm把前端的视图层分为了三部分：<code>Model</code>、<code>View</code>、<code>VM ViewModel</code></p>
+</li>
+<li><p>为什么有了MVC还要有MVVM</p>
+</li>
+<li><p><strong>MVC结构</strong>：第一：app.js(项目的入口地址，一切的请求，都要先进入这里进行处理。注意：app.js没有路由分发的功能，需要调用router.js模块进行路由分发)；第二：router.js(功能单一，只负责分发路由，不负责具体逻辑业务的处理)；第三：Controller(业务处理层，功能单一，只负责处理业务，不负责处理数据的CRUD)；第四：Model（职能单一，只负责操作数据库，执行sql语句，运行数据的CRUD）</p>
+<ul>
+<li>通过View视图层给app.js(每当用户操作了界面，若需要进行业务的请求，就会通过网络请求，发送给后端的服务器，此时，我们这个请求，就会被后端的App.js监听到)</li>
+</ul>
+</li>
+<li><p><strong>MVVM结构</strong>：是在前端的View视图层进行划分的。将每个页面都分为M、V和VM。其中，VM是整个MVVM的核心，应为VM是V和M见的调度者。</p>
+<ol>
+<li>M中保存的是每个页面中单独的数据</li>
+<li>V中页面中静态的HTML结构</li>
+<li>VM是一个调度者，分割了V和M；V中想要存取数据，通过VM来得到；M中想存取<br>数据，只能通过VM</li>
+<li>前端页面中使用MVVM的思想，是为了让我们开发更加方便，<strong>MVVM提供的数据的双向绑定</strong>，这是由VM提供的<blockquote>
+<p>涵哥说过：你真棒</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+  
+  
+
+</article>
+    
+  </article>
+  
+
+  
+  <nav class="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
+  </nav>
+  
+</section>
+</div>
+
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2022
+        <i class="ri-heart-fill heart_icon"></i> 曹涵
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="曹涵的个人博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="http://ruran12138.lofter.com">摄影</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Subtitle -->
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['面朝大海，春暖花开', '愿你一生努力，一生被爱', '想要的都拥有，得不到的都释怀'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+    console.log(err)
+  }
+</script>
+
+<!-- Tocbot -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom -->
+
+
+<script src="/js/clickBoom.js"></script>
+
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>

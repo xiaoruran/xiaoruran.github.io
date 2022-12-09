@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    JS之基础 |  曹涵的个人博客
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="曹涵的个人博客" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  
+  <canvas width="1777" height="841"
+    style="position: fixed; left: 0px; top: 0px; z-index: 999; pointer-events: none;"></canvas>
+  
+  
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-JS基础" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  JS之基础
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/06/03/JS%E5%9F%BA%E7%A1%80/" class="article-date">
+  <time datetime="2020-06-03T14:02:50.000Z" itemprop="datePublished">2020-06-03</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">4.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">15 min</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h3 id="JS语言介绍"><a href="#JS语言介绍" class="headerlink" title="JS语言介绍"></a>JS语言介绍</h3><ul>
+<li>JS是基于ES的语法规范加上WEB API所集成的一门解释型语言</li>
+<li>JS是以弱类型为主的语言，不强调编译时检查错误，无需简历复杂的类层次，永远不用做强制类型转换，也不用疲于应付系统以得到想要的行为</li>
+<li>对象字面表示法，通过列出对象的组成成分，就能被简单的创建出来，这种表示法时JSON的灵感来源</li>
+<li>尽管jS有很多缺陷，但它即轻量又富有表现力</li>
+<li>函数式编程</li>
+</ul>
+<h4 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h4><ul>
+<li>由字母开头 （不像java）后面可接上字母、数字、下划线，但不可使用保留字做变量名</li>
+<li>标识符可用作语句、变量、参数、属性名、运算符和标记</li>
+</ul>
+<h4 id="数值"><a href="#数值" class="headerlink" title="数值"></a>数值</h4><ul>
+<li>只有一种数字类型，在计算机内部存储微64位</li>
+<li>没有分离出整数类型，1和1.0的值相同</li>
+<li>完全避免了短整型的溢出问题，避免了一大堆因为数字类型导致的错误</li>
+<li>1e2就相当于1乘以10的2次方</li>
+<li>负数直接在数字前面加上-号</li>
+<li><code>NaN</code>表示非正常的处理结果，不等于任何值，可以使用isNaN(number)来检测</li>
+<li><code>Infinity</code> 可以无限大的值，其实是所有大于 1.79e+308的值<blockquote>
+<p>Js中由一个对象Math,其中有很多关与数值的操作</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><ul>
+<li>使用<code>Unicode</code>编码，所以所有的字符类型都是16位</li>
+<li>特殊字符可使用\来进行转义</li>
+<li>\u约定用来指订数字字符编码</li>
+<li>字符串是不可变的，一旦字符串被创建，就无法改变它，但可以通过+ 运算符的连接来创建新的字符串</li>
+</ul>
+<h4 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h4><ul>
+<li><p>顺序，选择，循环语句</p>
+</li>
+<li><p>一个编译单元包含一组可执行的语句。在浏览器中，script标签提供一个被编译且立即执行的编译单元。</p>
+</li>
+<li><p>由于缺少链接器，js将它们一起抛到一个公共的全局命名空间中</p>
+</li>
+<li><p>在JS中 false、null、undefined、空字符串、数字0、数字 NaN都被当成假，其它所有的值都是真的，包括true,’false’,以及所有的对象</p>
+</li>
+<li><p>注意:<code>for</code>语句</p>
+<ol>
+<li>一种是常见的三个参数（初始化从句、条件从句、增量从句）</li>
+<li>另一种形式是<code>for in</code>语句，枚举一个对象的所有属性名，每次循环后，object的下一个属性名字符串会赋给variable<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for(attr in obj)&#123;</span><br><span class="line"> if(obj.hasOwnProperty(attr))&#123;</span><br><span class="line"> </span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<blockquote>
+<p>一般需要通过检测obj.hasOwnProperty(attr)来判断这个属性名是这个对象的成员，还是来自<strong>原型链</strong></p>
+</blockquote>
+</li>
+<li><p>try语句</p>
+<ol>
+<li>try语句执行一个代码块，并捕获该代码块抛出的任何异常。</li>
+<li>catch从句定义一个新的变量variable来接受抛出的异常对象</li>
+<li>throw语句抛出一个异常，若该语句在try代码块中，控制流将会跳转到catch从句中。若throw语句在函数中，则该函数调用被放弃，控制流调用该函数的try语句中的catch从句</li>
+</ol>
+</li>
+</ul>
+<h4 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h4><ul>
+<li>最简单的表达式时字面量值（比如字符串或数字）、变量、内置的值（true、false、null、undefined、NaN和Infinity）、以new开头的调用表达式、以delete开头的属性提取表达式、包在圆括号内的表达式…</li>
+<li>运算符优先级<ol>
+<li><code>.</code> <code>[]</code> <code>()</code> 提取属性与调用函数</li>
+<li><code>delete</code> <code>new</code> <code>typeof</code> <code>+</code> <code>-</code> <code>!</code> 一元运算符</li>
+<li><code>*</code> <code>/</code> <code>%</code> 乘法、除法、求余</li>
+<li><code>+</code> <code>-</code> 加法、减法</li>
+<li><code>&lt;==</code> <code>&gt;==</code> <code>&gt;</code> <code>&lt;</code>关系运算符，不等式运算符</li>
+<li><code>===</code> <code>!==</code> 等式运算符</li>
+<li><code>&amp;&amp;</code> 逻辑与</li>
+<li><code>||</code> 逻辑或</li>
+<li><code>? :</code> 三元运算符<blockquote>
+<p>&amp;&amp; 与&amp;的区别： 两种都能用作逻辑与，&amp;是当两边的表达式为真时，才能为真。&amp;&amp;是短路测试，当前面的表达式为假时，不需要测试后面的表达式</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li><code>typedef</code>语句<ul>
+<li>用typedef运算符产生的值有<code>number</code> <code>string</code> <code>boolean</code> <code>undefined</code> <code>function</code> <code>object</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="字面量"><a href="#字面量" class="headerlink" title="字面量"></a>字面量</h4><ol>
+<li>对象字面量</li>
+<li>数组字面量</li>
+<li>函数字面量</li>
+</ol>
+<h3 id="对象（key-value）"><a href="#对象（key-value）" class="headerlink" title="对象（key-value）"></a>对象（key-value）</h3><p> JavaScript中的简单数据类型包括数字、字符串、布尔值、null和undefined值，其他的所有制都是对象。数字、字符串、布尔值貌似对象，因为他们拥有方法，但他们不可变。</p>
+<p> 数组是对象，函数是对象，正则表达式是对象。</p>
+<ul>
+<li>对象是属性的容器，其中每个属性都有自己的名字和值。属性名是包含空字符串在内的任意字符串。属性值可以是出undefined值之外的任何值</li>
+<li>JS中的对象是无类型的，对属性名和值没有限制。</li>
+<li><strong>JS包含一种原型链的特征，允许对象继承另一个对象的属性。正确的使用能减少对象初始化时消耗的内存与时间</strong></li>
+</ul>
+<h3 id="JS函数"><a href="#JS函数" class="headerlink" title="JS函数"></a>JS函数</h3><ul>
+<li><p>函数就是对象。对象是“key-value”对的集合并拥有一个连到原型对象的隐藏连接。对象字面量产生的对象连接到Object.prototype。函数对象连接到Function.prototype（该原型对象本身连接到Object.prototype）。</p>
+</li>
+<li><p>每个函数在创建时会附加两个隐藏属性：函数的上下文（也可以理解为call和apply方法，在Function.prototype中定义）和实现函数行为的代码</p>
+</li>
+</ul>
+<h4 id="函数字面量"><a href="#函数字面量" class="headerlink" title="函数字面量"></a>函数字面量</h4><ul>
+<li>函数通过函数字面量来创建<ol>
+<li>第一部分为保留字 <code>function</code></li>
+<li>第二部分时函数名，可以省略，这样的话就是匿名函数（anonymous）</li>
+<li>第三部分时包围在圆括号内的一组参数，<strong>javascript不对参数列表做强匹配，当实参少于形参，剩下形参的值就为undefined，当实参多余形参个数时，只会匹配前几个实参，剩下多余的实参会直接忽略，任何类型的值可以被传递给任何参数</strong></li>
+<li>第四部分为包围在花括号的一组语句，这是函数的主题，在函数被调用时执行</li>
+</ol>
+</li>
+</ul>
+<h4 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h4><p>在调用函数时，每个函数会接受两个附加的参数：<code>this</code>和<code>arguments</code>，参数this在面向对象编程时非常重要，<strong>this的值取决于调用的模式</strong></p>
+<h4 id="函数调用模式"><a href="#函数调用模式" class="headerlink" title="函数调用模式"></a>函数调用模式</h4><ol>
+<li>方法调用模式<br>此模式主要是指：当函数声明在一个对象之中，这个函数属于对象的一个方法，此时函数内部的this属性被绑定到该对象中，这是this可以访问自己所属的对象<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var myObject=&#123;</span><br><span class="line">    value: 0,</span><br><span class="line">    add : function(el)&#123;</span><br><span class="line">       this.value += typeof el===&quot;number&quot; ?el:1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">myObject.add(2);</span><br><span class="line">console.log(myObject.value)  // 2</span><br><span class="line">myObject.add();</span><br><span class="line">console.log(myObject.value)  // 3</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这里的this是访问myObject对象，它能从对象中取值或对对象进行修改。通过this可以取得所属对象的上下文的方法称为公共方法</p>
+</blockquote>
+</li>
+<li>函数调用模式<br>当一个函数并非一个对象的属性时，那么它就是被当作一个函数来调用的<ul>
+<li>以此模式调用函数时，this会绑定到全局对象。不能利用内部函数来帮助它工作。但可以定义一个变量并给他赋值为this，则内部函数就可以通过那个变量访问到this<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function foo()&#123;</span><br><span class="line">    console.log(this);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo();   //this指的是全局对象window</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var myObject=&#123;</span><br><span class="line">    value: 1,</span><br><span class="line">    add : function(el)&#123;</span><br><span class="line">     this.value += typeof el===&quot;number&quot; ?el:1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">myObject.double=function()&#123;</span><br><span class="line">    var that=this;</span><br><span class="line">    //定义一个函数，这个helper函数中的this是全局对象window</span><br><span class="line">    var helper=function()&#123;</span><br><span class="line">      that.value+=that.value</span><br><span class="line"> &#125;</span><br><span class="line">    helper();</span><br><span class="line">&#125;</span><br><span class="line">myObject.double();</span><br><span class="line">console.log(myObject.value)   //2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>此时可以通过that访问到myObject对象</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>构造器调用模式<br>javascript是基于原型继承的语言<ul>
+<li>提供了一套与基于类的语言（java）类似的对象构建语法。</li>
+<li>若在一个函数前面加上<code>new</code>来调用，那么背地里会创建一个连接到该函数的<code>prototype</code>成员的新对象，<strong>同时this会被绑定到这个新对象上</strong>。</li>
+<li><code>new</code> 前缀会改变return语句的行为</li>
+<li><strong>通过prototype来创建的方法或属性，是为所有的new实例所共有的</strong><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var newObject=function(str)&#123;</span><br><span class="line">this.value=str;</span><br><span class="line">&#125;</span><br><span class="line">//通过prototype 创建属于所有实例的新方法或者属性</span><br><span class="line">newObject.prototype.getValue=function()&#123;</span><br><span class="line">    return this.value;</span><br><span class="line">&#125;</span><br><span class="line"> //通过new来创建实例</span><br><span class="line"> var obj=new newObject(&quot;hhhh&quot;)</span><br><span class="line">console.log(obj.getValue());</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>若一个函数通过new来调用，则称之为<em>构造器函数</em></p>
+</blockquote>
+</li>
+<li>这里不推荐使用此模式来调用函数</li>
+</ul>
+</li>
+<li>上下文调用模式（apply/call调用模式）<br>JavaScript是一门函数式的面向对象编程语言，函数可以拥有方法<ul>
+<li>上下文模式：根据用户传递的参数，指定函数内部不同的this的值</li>
+<li>核心形式： 以call/apply方法来调用某个函数</li>
+<li>call/apply方法定义在Function.prototype对象中，每个函数都能访问到这两个方法</li>
+<li>function fn(){}<br>fn—&gt;fn._<em>proto_</em>(Function.prototype)–&gt;fn._<em>proto_</em>._<em>proto_</em>(Object.prototype)<ul>
+<li>语法形式<ul>
+<li>函数名.call(…)</li>
+<li>函数名.apply(…)<br>这两种形式功能一样，唯一不同的就是参数的形式</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>apply时，第一个参数要么是对象，要么是null。如果是null/undefined就是函数调用，如果是对象，则是对象的方法调用。后面的参数是一个数组参数，将函数的参数依次放在数组中  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function up(str)&#123;</span><br><span class="line">  console.log(this);</span><br><span class="line">&#125;</span><br><span class="line">var obj=&#123;</span><br><span class="line">    name: &quot;hhh&quot;,</span><br><span class="line">    age: 10</span><br><span class="line">&#125;</span><br><span class="line">up.apply(obj);  // &#123;name: &quot;hhh&quot;, age: 10&#125;</span><br><span class="line">//此时的this指的是obj</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> function up(str)&#123;</span><br><span class="line">  console.log(this);</span><br><span class="line"> &#125;</span><br><span class="line"> var obj=&#123;</span><br><span class="line">  name: &quot;hhh&quot;,</span><br><span class="line">  age: 10</span><br><span class="line"> &#125;</span><br><span class="line">up.apply(null);  // window</span><br><span class="line">//此时的this指的是window</span><br></pre></td></tr></table></figure></li>
+<li>call时，其他与apply相同，只是参数列表可以不用数组，可以直接使用，，这样的形式</li>
+</ul>
+<h4 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h4><p>当函数被调用时，会得到一个免费配送的参数，那就是<code>arguments</code>数组，这并不是一个严格的数组，只是一个类似数组的对象，拥有一个length的属性，没有任何数组的方法<br>   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function arg()&#123;</span><br><span class="line">var i=0;</span><br><span class="line">var sum=0;</span><br><span class="line">for(i=0;i&lt;arguments.length;i++)&#123;</span><br><span class="line">   sum+=arguments[i];</span><br><span class="line">&#125; </span><br><span class="line">return sum;</span><br><span class="line">&#125;</span><br><span class="line">var sum=arg(1,2,3,4);</span><br><span class="line">console.log(sum);  //10</span><br></pre></td></tr></table></figure></p>
+<h4 id="返回"><a href="#返回" class="headerlink" title="返回"></a>返回</h4><p>一个函数总会返回一个值。如果没有指定返回值，则返回undefined。<br>如果函数调用时在前面加上了new前缀，且返回值不是一个对象，则返回this（该新对象）</p>
+<h4 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h4>   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function exe(a,b)&#123;</span><br><span class="line">    try&#123;</span><br><span class="line">    if(typeof a !== &quot;number&quot; || typeof b !== &quot;number&quot;)&#123;</span><br><span class="line">        //抛出一个Error实例,第一个参数为name,第二个参数为message,也可以自定义其他的参数，可以在catch方法参数e对象中获取</span><br><span class="line">        throw new Error(&quot;typeError&quot;,&quot;类型不是number&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;catch(e)&#123;</span><br><span class="line">    console.log(e.name+ &quot;---&quot;+ e.message);</span><br><span class="line">    return undefined;</span><br><span class="line">&#125;</span><br><span class="line">    return a+b;</span><br><span class="line">&#125;</span><br><span class="line">var x=exe(2,&quot;dd&quot;); //Error---typeError undefined</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="扩充类型的功能"><a href="#扩充类型的功能" class="headerlink" title="扩充类型的功能"></a>扩充类型的功能</h3><p>JS中可以给语言的基本类型扩充功能。可以给Object.prototype添加方法，可以让该方法对所有对象都可用。<br>这样的方式对函数、数组、字符串、布尔、数字、正则表达式都适用</p>
+<ol>
+<li>首先可以给Function.prototype增加方法来使得该方法对所有函数可用：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//通过增加一个method方法，便于下次给对象增加方法时就不必键入prototype，省掉一些麻烦</span><br><span class="line">Function.prototype.method=function(name,func)&#123;</span><br><span class="line">    //由于相当于在对象里面增加方法，所以此时this指代的是Function</span><br><span class="line">    this.prototype[name]=func;</span><br><span class="line">    return this;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>接下来就可以给基本数据类型增加方法了<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//给String类型增加方法</span><br><span class="line">String.method(&quot;addstr&quot;,function()&#123;</span><br><span class="line">    return this+&quot;addstr&quot;;</span><br><span class="line">&#125;)</span><br><span class="line">console.log(&quot;xixixi&quot;.addstr()); //&quot;xixixiaddstr&quot;</span><br></pre></td></tr></table></figure></li>
+<li>基本类型的原型是公用结构，在类库混用时一定要无比小心。一个保险的做法就是只在确定没有该方法时才添加它</li>
+</ol>
+<p>理解：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Function.prototype.method=function(fulname,val)&#123;</span><br><span class="line">  if(!this.prototype[fulname])&#123;</span><br><span class="line">    this.prototype[fulname]=val;</span><br><span class="line">  &#125;</span><br><span class="line">  return this;</span><br><span class="line">&#125;</span><br><span class="line">Function.method(&#x27;bind&#x27;,function(_arg)&#123;</span><br><span class="line">  var met=this; //这个this应该是bind此方法</span><br><span class="line">  console.log(this);</span><br><span class="line">  var slice=Array.prototype.slice;</span><br><span class="line">  var args=slice.apply(arguments,[1]); //argguments指的是bing方法所带的参数</span><br><span class="line">  return function()&#123;</span><br><span class="line">    return met.apply(_arg,args.concat(slice.apply(arguments,[0])));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">var x=function()&#123;</span><br><span class="line">  return this.value;</span><br><span class="line">&#125;.bind(&#123;value:11&#125;);</span><br><span class="line">console.log(x());   //11</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="JS数组"><a href="#JS数组" class="headerlink" title="JS数组"></a>JS数组</h3><p>数组是一段线性分配的内存，它通过整数计算偏移来访问其中的元素。JavaScript没有像此类数组一样的数据结构。<br>它拥有一种类数组（array-like）特性的对象。它把数组的下表转换为字符串，用其作为属性，它比真正的数组慢，它的属性的检索和更新的方式与对象一摸一样。</p>
+<ul>
+<li><p>js中的数组不必要求类型一致</p>
+</li>
+<li><p>长度： js中数组的length属性是没有上界的</p>
+</li>
+<li><p>可以直接设置length的值，设置更大的length并不会给数组分配更多的空间。但将length设置小会导致所有下标大于新的length的属性将被删除</p>
+</li>
+<li><p>删除：</p>
+<ul>
+<li><p><code>splice</code>方法:该方法会改变原来的数组，它可以删除元素，可以替换元素，可以在数组的指定位置插入（添加）元素</p>
+<ol>
+<li>splice(2,1) 则是在索引为2的位置删除一个元素，若果是删除元素，则返回的是含有被删除元素的数组</li>
+<li>splice(2,0,1) 则是在索引为2的位置插入1这个元素</li>
+</ol>
+</li>
+<li><p><code>slice()</code>方法：此方法是用来从数组中提取指定元素，不会改变原有数组，将截取到的元素封装到一个新的数组中返回</p>
+<ol>
+<li>语法：annayObject.slice(start,end); 前闭后开 </li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>遍历</p>
+<ol>
+<li>使用for in 语句来遍历一个数组的所有属性，但无法保证属性的顺序<blockquote>
+<p>并且此方法可能会从原型链中得到意外属性</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for (const key in object) &#123;</span><br><span class="line">    if (object.hasOwnProperty(key)) &#123;</span><br><span class="line">      const element = object[key];&#125;</span><br><span class="line">       &#125;</span><br><span class="line">       //避免遍历继承属性</span><br></pre></td></tr></table></figure></li>
+<li>常规的for语句可以避免这些问题</li>
+</ol>
+</li>
+<li><p>使用typeof判断数组会出现’object’</p>
+</li>
+<li><p>判断一个对象是否为数组</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var is_arrry=function(val)&#123;</span><br><span class="line">return val &amp;&amp; typeof val ===&#x27;object&#x27; &amp;&amp; val.constructor === Array</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">   //由于原型链的存在，使得扩充方法更加简单</span><br><span class="line">   Object.prototype.method=function(funname,val)&#123;</span><br><span class="line"> if(!this.prototype[funname])&#123;</span><br><span class="line">   this.prototype[funname]=val;</span><br><span class="line"> &#125;</span><br><span class="line"> return this;</span><br><span class="line">&#125;</span><br><span class="line">Array.method(&#x27;reduce&#x27;,function(f,value)&#123;</span><br><span class="line">  var i;</span><br><span class="line">  for(i=0;i&lt;this.length;i++)&#123;</span><br><span class="line">    value=f(this[i],value);</span><br><span class="line">  &#125;</span><br><span class="line">  return value;</span><br><span class="line">&#125;) </span><br><span class="line">var date=[1,2,3,4];</span><br><span class="line">var add=function(a,b)&#123;</span><br><span class="line">   return a+b;</span><br><span class="line">&#125;</span><br><span class="line">var sum=date.reduce(add,0);</span><br><span class="line">console.log(sum);  //10</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>concat()</code>方法<ol>
+<li>产生一个新数组，包含一份原数组的浅复制，并把一个或多个参数item附在其后面，如果参数item是一个数组，那么它的每个元素被分别添加</li>
+<li>var a=[1,2,3],b=[4,5,6]; var c=a.concat(b,true);此时的c为[1,2,3,4,5,6,true];</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><code>array.join()</code>方法:主要用来将数组构造成一个字符串，通过参数的形式来进行连接，默认的参数为逗号<code>,</code>.</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a=[&#x27;1&#x27;,3,4];</span><br><span class="line">var c=a.join(&quot;、&quot;);</span><br><span class="line">var d=a.join();</span><br><span class="line">console.log(c);// 1、3、4</span><br><span class="line">console.log(d); // 1,3,4</span><br></pre></td></tr></table></figure></li>
+<li><p><code>array.pop()</code>方法 ：使得数组可以像堆栈那样工作。pop方法移除array中的最后一个元素并返回该元素，如果array是empty，则返回undefined。</p>
+</li>
+<li><p><code>array.push()</code>方法：该方法将一个或多个参数附加到array的尾部。如果item是一个数组，会把整个数组作为单个元素添加进去，并返回这个array的最新长度值</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a=[1,3,4];</span><br><span class="line">var b=[true,&quot;hh&quot;];</span><br><span class="line">var c=a.push(b);//此时a=[[1,3,4,[true,&quot;hh&quot;]]</span><br><span class="line">var d=c.join();</span><br><span class="line">console.log(c);//4</span><br><span class="line">console.log(d);//1,3,4,true,hh</span><br></pre></td></tr></table></figure></li>
+<li><p><code>array.reverse()</code>方法：该方法反转array里的元素的顺序，并返回array本身；</p>
+</li>
+<li><p><code>array.shift()</code>方法：该方法移除array中的第一个元素并返回该元素</p>
+<ol>
+<li>若数组是空的，则返回undefined;</li>
+<li>shift通常比pop慢很多</li>
+</ol>
+</li>
+<li><p><code>array.unshift()</code>方法：与push方法一样，用于把元素添加到数组中去，但它是吧item插入到array的<em>开始部分</em>，返回array的新length</p>
+</li>
+</ul>
+
+      
+      <!-- reward -->
+      
+      <div id="reward-btn">
+        Donate
+      </div>
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>Copyright： </strong>
+              Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/06/03/JS%E5%9F%BA%E7%A1%80/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/07/31/%E4%BD%8D%E8%BF%90%E7%AE%97/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            位运算小技巧
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/06/03/JS%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%90%86%E8%A7%A3/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">JS之原型链理解</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: false,
+        verify: false,
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2022
+        <i class="ri-heart-fill heart_icon"></i> 曹涵
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="曹涵的个人博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="http://ruran12138.lofter.com">摄影</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Subtitle -->
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['面朝大海，春暖花开', '愿你一生努力，一生被爱', '想要的都拥有，得不到的都释怀'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+    console.log(err)
+  }
+</script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom -->
+
+
+<script src="/js/clickBoom.js"></script>
+
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>
